@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class TurnManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -13,6 +13,4 @@ public class PlayerMovement : MonoBehaviour {
 	void Update () {
 		
 	}
-
-    
 }
