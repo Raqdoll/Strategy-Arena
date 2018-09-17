@@ -110,7 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locX: 0
   locZ: 0
-  ShootThroughBlockMaterial: {fileID: 2100000, guid: cc9cf4e81dbe79c449bfb617016782f7,
+  ShootThroughBlockMaterial: {fileID: 2100000, guid: 909af5987cbc9854a903e54cf8a545f4,
     type: 2}
   BlockyBlockMaterial: {fileID: 2100000, guid: dc995b59ddaec564e897f342f45f321c, type: 2}
   isFree: 1
