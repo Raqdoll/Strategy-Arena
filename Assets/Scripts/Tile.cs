@@ -12,9 +12,9 @@ public class Tile : MonoBehaviour {
     private Material thisMaterial;
 
     public bool isFree = true;
-    private bool ShootThrough;
-    private bool Targetable;
-    private bool WalkThrough;
+    public bool ShootThrough;
+    public bool Targetable;
+    public bool WalkThrough;
     public enum BlockType { BaseBlock, ShootThroughBlock, BlockyBlock, StartA, StartB};
     public BlockType myType;
 
@@ -37,8 +37,8 @@ public class Tile : MonoBehaviour {
                 ShootThrough = true;
                 Targetable = false;
                 WalkThrough = false;
-                //thisMaterial.color =  ShootThroughBlockMaterial.color;
-                GetComponent<Renderer>().gameObject.SetActive(false);
+                thisMaterial.color =  ShootThroughBlockMaterial.color;
+                //GetComponent<Renderer>().gameObject.SetActive(false);
             break;
 
             case BlockType.BlockyBlock:
