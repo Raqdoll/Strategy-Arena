@@ -17,6 +17,13 @@ public class PlayerMovement : MonoBehaviour {
     public List<Tile> TilesInRange(Tile startTile, int movementPoints)
     {
         throw new NotImplementedException();
+        //for(int i = 1; i <= movementPoints; i++)
+        //{
+        //    for (int j = 1; j <= movementPoints; j++)
+        //    {
+
+        //    }
+        //}
     }
 
     /// <summary>

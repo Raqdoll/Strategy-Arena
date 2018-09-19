@@ -66,6 +66,7 @@ public bool LoSCheck(Tile startpos, Tile target)
         //    }
         //    return true;
         //}
+        //return false;
 
         
         for (int i = 1; i <= 200; i++)
@@ -74,26 +75,7 @@ public bool LoSCheck(Tile startpos, Tile target)
             {
                 return false;
             }
-
         }
         return true;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        return false;
-    }
-
-    
+    } 
 }
