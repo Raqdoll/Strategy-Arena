@@ -10,7 +10,7 @@ using UnityEngine;
     [RequireComponent(typeof(PlayerMovement), typeof(PlayerActions), typeof(Abilities))]
 public class PlayerBehaviour : MonoBehaviour {
 
-    public enum CharacterClass { Tank1, Healer1, Support1, DmgDealer1 };
+    public enum CharacterClass { Tank1, Healer1, Support1, DmgDealer1 }; // Put Classes Here 
     public bool moving;  //e.g. Hover to get movement range vs ability range
     public CharacterClass myCharClass;
     public int maxHP;
@@ -20,9 +20,9 @@ public class PlayerBehaviour : MonoBehaviour {
     public int currentAp;
     public int currentMp;
     public double damageChange;
-    // Use this for initialization
+
     void Start () {
-		//initalize abilitylist in abilities script
+		// Put Information Of classes Here
         switch (myCharClass)
         {
             case CharacterClass.Tank1:
@@ -63,7 +63,6 @@ public class PlayerBehaviour : MonoBehaviour {
                 break;
         }
 	}
-	// Update is called once per frame
 	void Update () {
 		
 	}

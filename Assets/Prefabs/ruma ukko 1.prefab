@@ -103,7 +103,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1853389657857954}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9, y: 0, z: 6}
+  m_LocalPosition: {x: 6, y: 0, z: 7}
   m_LocalScale: {x: 0.8, y: 0.1, z: 0.8}
   m_Children:
   - {fileID: 4509539470191186}
@@ -265,6 +265,25 @@ MonoBehaviour:
   spellButton4: {fileID: 0}
   spellButton5: {fileID: 0}
   spellButton6: {fileID: 0}
+  mySpellClass: 0
+  mySpellAreaType: 0
+  mySpellRangeType: 0
+  spellDamageMin: 0
+  spellDamageMax: 0
+  spellRangeMin: 0
+  spellRangeMax: 0
+  spellCooldown: 0
+  spellCastPerturn: 0
+  castPerTarget: 0
+  spellInitialCooldown: 0
+  spellApCost: 0
+  spellPushback: 0
+  spellPull: 0
+  areaRange: 0
+  spellSlotNumber: 0
+  spellCooldownLeft: 0
+  needLineOfSight: 0
+  spellOpen: 0
 --- !u!114 &114430614813003586
 MonoBehaviour:
   m_ObjectHideFlags: 1
