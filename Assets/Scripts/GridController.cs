@@ -24,15 +24,10 @@ public class GridController : MonoBehaviour {
             }
             tileGrid.Add(tempList);
         }
-        Debug.Log(tileGrid.Count + "  " + tileGrid[0].Count);
         for (int i = 0; i < tileList.Length; i++)
         {
-            Debug.Log(tileList[i].locX + "  " + tileList[i].locZ);
             tileGrid[tileList[i].locX - 1][tileList[i].locZ - 1] = tileList[i];
         }
-
-        GetTile(3, 4).transform.position += new Vector3(0, 2f, 0);
-
     }
     //USE THIS TO CALL GRID!
     public Tile GetTile(int xCord, int zCord) {
