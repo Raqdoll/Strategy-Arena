@@ -10,6 +10,13 @@ public class Tile : MonoBehaviour {
     public Material ShootThroughBlockMaterial;
     public Material BlockyBlockMaterial;
     private Material thisMaterial;
+    public Material GridHoverMaterial;
+    public Material BaseMaterial;
+    public Material TargetMaterial;
+    public Material RangeMaterial;
+    public Material MovementMaterial;
+    GridController gridController;
+    Abilities testAbility;
 
     public bool isFree = true;
     public bool ShootThrough;
@@ -20,7 +27,8 @@ public class Tile : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+        testAbility = GameController.activePlayer.GetComponent<Abilities>();
+        gridController = GetComponent<GridController>();
         locX = (int)transform.localPosition.x;
         locZ = (int)transform.localPosition.z;
         thisMaterial = GetComponent<Renderer>().material;
@@ -56,5 +64,34 @@ public class Tile : MonoBehaviour {
 	void Update () {
 		
 	}
+    void OnMouseOver()
+    {
+        if (myType == BlockType.BaseBlock)
+        {
+            if (Abilities.spellOpen == true)
+            {
+                List<Tile> tiles = Abilities.Area();
+                foreach (var tile in tiles)
+                {
+                    tile.thisMaterial = 
+                    thisMaterial.color = .color;
+                }
+            }
+            else
+            {
+                thisMaterial.color = GridHoverMaterial.color;
+            }
+            gridController.hoverTile = this;
+        }
+    }
 
+    void OnMouseExit()
+    {
+        if (myType == BlockType.BaseBlock)
+        {
+            thisMaterial.color = BaseMaterial.color;
+            Abilities.targetTiles.Clear();
+            gridController.hoverTile = null;
+        }
+    }
 }

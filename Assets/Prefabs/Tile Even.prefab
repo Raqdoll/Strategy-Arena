@@ -113,5 +113,13 @@ MonoBehaviour:
   ShootThroughBlockMaterial: {fileID: 2100000, guid: 909af5987cbc9854a903e54cf8a545f4,
     type: 2}
   BlockyBlockMaterial: {fileID: 2100000, guid: dc995b59ddaec564e897f342f45f321c, type: 2}
+  GridHoverMaterial: {fileID: 2100000, guid: 4f15f06eff248f348967ec6b42905c3f, type: 2}
+  BaseMaterial: {fileID: 2100000, guid: 80d2526f748a6bc41a8ba2632a3373dc, type: 2}
+  TargetMaterial: {fileID: 0}
+  RangeMaterial: {fileID: 0}
+  MovementMaterial: {fileID: 0}
   isFree: 1
+  ShootThrough: 0
+  Targetable: 0
+  WalkThrough: 0
   myType: 1
