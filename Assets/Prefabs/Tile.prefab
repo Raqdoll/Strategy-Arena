@@ -108,6 +108,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1ee825309f21dc489ced7f4aa326a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoveryTile: {fileID: 1444777974735880, guid: 7f562a72397b6394eba414e6eda1e714, type: 2}
+  targetyTile: {fileID: 1910546462751128, guid: 5834955f5fdb24f43b55be539c1f2519,
+    type: 2}
   locX: 0
   locZ: 0
   ShootThroughBlockMaterial: {fileID: 2100000, guid: 909af5987cbc9854a903e54cf8a545f4,
@@ -115,9 +118,9 @@ MonoBehaviour:
   BlockyBlockMaterial: {fileID: 2100000, guid: dc995b59ddaec564e897f342f45f321c, type: 2}
   GridHoverMaterial: {fileID: 2100000, guid: 4f15f06eff248f348967ec6b42905c3f, type: 2}
   BaseMaterial: {fileID: 2100000, guid: dfae7f6cb762462449d290ec5de798af, type: 2}
-  TargetMaterial: {fileID: 0}
-  RangeMaterial: {fileID: 0}
-  MovementMaterial: {fileID: 0}
+  TargetMaterial: {fileID: 2100000, guid: 527d095c83b5343448969d36e70de58e, type: 2}
+  RangeMaterial: {fileID: 2100000, guid: 8db0a574684bf5c4a920798b6bc0cc64, type: 2}
+  MovementMaterial: {fileID: 2100000, guid: 77f1923c6ed7e844faffedabda2864ea, type: 2}
   isFree: 1
   ShootThrough: 0
   Targetable: 0

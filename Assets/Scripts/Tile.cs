@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tile : MonoBehaviour {
 
+[RequireComponent(typeof(Abilities))]
+
+public class Tile : MonoBehaviour {
+    public GameObject hoveryTile;
+    public GameObject targetyTile;
     public int locX;
     public int locZ;
 
@@ -16,7 +20,8 @@ public class Tile : MonoBehaviour {
     public Material RangeMaterial;
     public Material MovementMaterial;
     GridController gridController;
-    Abilities testAbility;
+    List<Tile> tileList;
+    Abilities abilities;
 
     public bool isFree = true;
     public bool ShootThrough;
@@ -27,7 +32,6 @@ public class Tile : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        testAbility = GameController.activePlayer.GetComponent<Abilities>();
         gridController = GetComponent<GridController>();
         locX = (int)transform.localPosition.x;
         locZ = (int)transform.localPosition.z;
@@ -66,22 +70,30 @@ public class Tile : MonoBehaviour {
 	}
     void OnMouseOver()
     {
-        if (myType == BlockType.BaseBlock)
+        if (myType == BlockType.BaseBlock/* && gridController != null*/)
         {
+            //Instantiate(hoveryTile ,new Vector3(this.locX, 0f, this.locZ),Quaternion.identity);
+           // GridController.FindObjectOfType<GridController>().hoverTile = this;
+
             if (Abilities.spellOpen == true)
             {
-                List<Tile> tiles = Abilities.Area();
-                foreach (var tile in tiles)
+                //gridController.hoverTile = gridController.GetTile(this.locX, this.locZ);
+                //gridController.hoverTile.locZ = (int)transform.localPosition.x;
+                //gridController.hoverTile.locX = (int)transform.localPosition.z;
+                //Debug.Log(gridController.hoverTile.locX);
+                //Debug.Log(gridController.hoverTile.locZ);
+                abilities.AreaType(); //updateen
+                tileList = abilities.AreaType();
+                foreach (var tile in tileList)
                 {
-                    tile.thisMaterial = 
-                    thisMaterial.color = .color;
+                    GetComponent<MeshRenderer>().material = TargetMaterial;
                 }
             }
             else
             {
-                thisMaterial.color = GridHoverMaterial.color;
+                GetComponent<MeshRenderer>().material = GridHoverMaterial;
             }
-            gridController.hoverTile = this;
+
         }
     }
 
@@ -89,9 +101,10 @@ public class Tile : MonoBehaviour {
     {
         if (myType == BlockType.BaseBlock)
         {
-            thisMaterial.color = BaseMaterial.color;
-            Abilities.targetTiles.Clear();
-            gridController.hoverTile = null;
+            
+            GetComponent<MeshRenderer>().material = BaseMaterial;
+            //tileList.Clear();
+            //gridController.hoverTile = null;
         }
     }
 }

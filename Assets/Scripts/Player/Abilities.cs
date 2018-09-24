@@ -8,7 +8,7 @@ using UnityEngine.UI;
 /// Lists abilities for the attached player. Generates the list using a class enum.
 /// Stores the patterns used in different abilites.
 /// </summary>
-[RequireComponent(typeof(PlayerBehaviour), typeof(PlayerActions), typeof(Abilities))]
+[RequireComponent(typeof(PlayerBehaviour), typeof(PlayerActions), typeof(Tile))]
 
 public class Abilities : MonoBehaviour {
 
@@ -32,11 +32,15 @@ public class Abilities : MonoBehaviour {
     public int areaRange;
     public int spellSlotNumber;
     public int spellCooldownLeft;
-    public bool needLineOfSight;
-    static public bool spellOpen;
+    public int trueDamage;
+    public bool needLineOfSight = false;
+    public bool spellLaunched = false;
+    static public bool spellOpen = false;
     public string spellName;
-
     GridController gridController;
+    Tile tilescripts;
+
+
 
     void Start () {
         Button cast1 = spellButton1.GetComponent<Button>();
@@ -45,9 +49,8 @@ public class Abilities : MonoBehaviour {
         Button cast4 = spellButton4.GetComponent<Button>();
         Button cast5 = spellButton5.GetComponent<Button>();
         Button cast6 = spellButton6.GetComponent<Button>();
-
         gridController = GetComponent<GridController>();
-
+        tilescripts = GetComponent<Tile>();
         // Put Classes Here and Add spell functions to the class
         switch (mySpellClass)
         {
@@ -78,26 +81,40 @@ public class Abilities : MonoBehaviour {
         }
     }
 	
+
+
+
+
 	void Update () {
 
         // this is used to cancel Spell
 		if(spellOpen == true)
         {
+            Debug.Log("Spelll Open");
+            RangeType();
+            foreach (var tile in RangeType())
+            {
+                tile.GetComponent<Renderer>().material.color = tilescripts.RangeMaterial.color;
+            }
             if (Input.GetMouseButtonDown(1))
             {
+                foreach (var tile in RangeType())
+                {
+                    tile.GetComponent<Renderer>().material.color = tilescripts.BaseMaterial.color;
+                }
                 SpellCancel();
             }
-            if (Input.GetMouseButtonDown(0))
-            {
-                LaunchSpell();
-            }
+            //if (Input.GetMouseButtonDown(0))
+            //{
+            //    LaunchSpell();
+            //}
         }
 	}
 
-    /// <summary>
-    /// Tämä on metodikohtaisen summaryn esimerkki, poista!
-    /// </summary>
-    /// 
+
+
+
+
    public List<Tile> AreaType()
     {
         List<Tile> targetTiles = new List<Tile>();
@@ -137,8 +154,6 @@ public class Abilities : MonoBehaviour {
                     targetTiles.Add(gridController.GetTile(gridController.hoverTile.locX, gridController.hoverTile.locZ - i));
                     targetTiles.Add(gridController.GetTile(gridController.hoverTile.locX - i, gridController.hoverTile.locZ));
                 }
-
-
                 break;
             case SpellAreaType.Diagonal:
                 targetTiles.Add(gridController.hoverTile);
@@ -203,8 +218,6 @@ public class Abilities : MonoBehaviour {
                         }
                     }
                 }
-
-
                 break;
             case SpellAreaType.Square:
                 for (int i = 0 - areaRange; i <= areaRange; i++)
@@ -218,26 +231,80 @@ public class Abilities : MonoBehaviour {
         }
         return targetTiles;
     }
-    void RangeType()
+
+
+
+
+
+    public List<Tile> RangeType()
     {
+        List<Tile> rangetiles = new List<Tile>();
         switch (mySpellRangeType)
         {
             case SpellRangeType.Diagonal:
-
+                if(needLineOfSight == false)
+                {
+                    rangetiles.Add(gridController.GetTile(gridController.playerTile.locX, gridController.playerTile.locZ));
+                    for (int i = spellRangeMin + 1; i <= spellRangeMax; i++)
+                        {
+                            rangetiles.Add(gridController.GetTile(gridController.playerTile.locX + i, gridController.playerTile.locZ + i));
+                            rangetiles.Add(gridController.GetTile(gridController.playerTile.locX + i, gridController.playerTile.locZ - i));
+                            rangetiles.Add(gridController.GetTile(gridController.playerTile.locX - i, gridController.playerTile.locZ + i));
+                            rangetiles.Add(gridController.GetTile(gridController.playerTile.locX - i, gridController.playerTile.locZ - i));
+                        }
+                }
                 break;
             case SpellRangeType.Linear:
-
+                if (needLineOfSight == true)
+                {
+                    rangetiles.Add(gridController.GetTile(gridController.playerTile.locX, gridController.playerTile.locZ));
+                    for (int i = spellRangeMin +1; i <= spellRangeMax; i++)
+                    {
+                            rangetiles.Add(gridController.GetTile(gridController.playerTile.locX, gridController.playerTile.locZ + i));
+                            rangetiles.Add(gridController.GetTile(gridController.playerTile.locX + i, gridController.playerTile.locZ));
+                            rangetiles.Add(gridController.GetTile(gridController.playerTile.locX, gridController.playerTile.locZ - i));
+                            rangetiles.Add(gridController.GetTile(gridController.playerTile.locX - i, gridController.playerTile.locZ));
+                    }
+                }
                 break;
             case SpellRangeType.Normal:
-
+                if (needLineOfSight == false)
+                {
+                    for (int i = spellRangeMin - spellRangeMax; i <= spellRangeMax; i++)
+                    {
+                        for (int j = 0 - spellRangeMax; j <= spellRangeMax; j++)
+                        {
+                            if (Mathf.Abs(i) + Mathf.Abs(j) <= areaRange)
+                            {                           
+                                rangetiles.Add(gridController.GetTile(gridController.playerTile.locX + j, gridController.playerTile.locZ + i));
+                            }
+                        }
+                    }
+                }
                 break;
         }
+        foreach (var tile in rangetiles)
+        {
+            if (tile.myType != Tile.BlockType.BaseBlock)
+            {
+                rangetiles.Remove(tile);
+            }
+        }
+        return rangetiles;
     }
+
+
+
+
     void DamageCalculator(Tile targetTile)
     {
 
 
     }
+
+
+
+
     void LaunchSpell(List<Tile> targetTiles)
     {
         targetTiles.Clear();
@@ -248,6 +315,10 @@ public class Abilities : MonoBehaviour {
         }
         targetTiles.Clear();
     }
+
+
+
+
 
     // This Spell serves as a Base for other Spells
     void SpellBase()
@@ -272,10 +343,14 @@ public class Abilities : MonoBehaviour {
         spellOpen = true;
         spellCooldownLeft = 0;
 
-        RangeType(); //updateen
+
         AreaType(); // updateen
-        
+        Debug.Log("BaseSpell Selected");
 }
+
+
+
+
     void SpellCancel()
     {
         spellName = "";
@@ -295,10 +370,6 @@ public class Abilities : MonoBehaviour {
         needLineOfSight = false;
         spellOpen = false;
         spellCooldownLeft = 0;
-
-        RangeType(); //updateen
-        AreaType(); // updateen
-
+        Debug.Log("Spell Is Off");
     }
-
 }

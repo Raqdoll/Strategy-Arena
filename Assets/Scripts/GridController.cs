@@ -15,6 +15,7 @@ public class GridController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+
         tileList = tiles.GetComponentsInChildren<Tile>();
         tileGrid = new List<List<Tile>>(); // Initialize overlist
         for (int j = 0; j < 24; j++)
@@ -30,6 +31,9 @@ public class GridController : MonoBehaviour {
         {
             tileGrid[tileList[i].locX - 1][tileList[i].locZ - 1] = tileList[i];
         }
+
+        playerTile = GetTile(8, 15);
+        playerTile.transform.position += new Vector3(0, 2f, 0);
     }
     //USE THIS TO CALL GRID!
     public Tile GetTile(int xCord, int zCord) {
@@ -40,4 +44,8 @@ public class GridController : MonoBehaviour {
 	void Update () {
 		
 	}
+    //public void setHovertile()
+    //{
+    //    hoverTile = x;
+    //}
 }
