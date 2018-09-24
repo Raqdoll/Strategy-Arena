@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TurnManager : MonoBehaviour {
 
+    public GameObject activePlayer;
+
 	// Use this for initialization
 	void Start () {
 		
