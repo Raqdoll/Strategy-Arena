@@ -77,22 +77,6 @@ public bool LoSCheck(Tile startpos, Tile target)
 
         }
         return true;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        return false;
     }
 
     
