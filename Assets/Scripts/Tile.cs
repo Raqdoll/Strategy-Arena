@@ -36,6 +36,7 @@ public class Tile : MonoBehaviour {
         locX = (int)transform.localPosition.x;
         locZ = (int)transform.localPosition.z;
         thisMaterial = GetComponent<Renderer>().material;
+        BaseMaterial = GetComponent<Renderer>().material;
 
         switch (myType)
         {
