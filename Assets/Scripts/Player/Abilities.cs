@@ -8,16 +8,17 @@ using UnityEngine.UI;
 /// Lists abilities for the attached player. Generates the list using a class enum.
 /// Stores the patterns used in different abilites.
 /// </summary>
-[RequireComponent(typeof(PlayerBehaviour), typeof(PlayerActions), typeof(Tile))]
 
 public class Abilities : MonoBehaviour {
-
+    public Button spellButton;
     public enum SpellAreaType { Cross, Line, Normal, Square, Cone, Diagonal}; // Different types of AoE
-    public enum SpellRangeType { Linear, Diagonal, Normal} // How Player Targets the spell
-    public Button spellButton1, spellButton2, spellButton3, spellButton4, spellButton5, spellButton6;
-    public PlayerBehaviour.CharacterClass mySpellClass;
+    public enum SpellRangeType { Linear, Diagonal, Normal}; // How Player Targets the spell
+    public enum SpellName { baseSpell, other, other2};
     public SpellAreaType mySpellAreaType;
     public SpellRangeType mySpellRangeType;
+    public SpellName mySpellName;
+    public int spellInitialCooldown;
+
     public int spellDamageMin;
     public int spellDamageMax;
     public int spellRangeMin;
@@ -25,57 +26,72 @@ public class Abilities : MonoBehaviour {
     public int spellCooldown;
     public int spellCastPerturn;
     public int castPerTarget;
-    public int spellInitialCooldown;
+
     public int spellApCost;
     public int spellPushback;
     public int spellPull;
     public int areaRange;
-    public int spellSlotNumber;
     public int spellCooldownLeft;
     public int trueDamage;
+    public bool healsAlly = false;
+    public bool hurtsAlly = false;
     public bool needLineOfSight = false;
     public bool spellLaunched = false;
-    static public bool spellOpen = false;
+    public bool inCooldown = false;
+
+
     public string spellName;
     GridController gridController;
+    PlayerBehaviour playerBehaviour;
     Tile tilescripts;
 
 
 
     void Start () {
-        Button cast1 = spellButton1.GetComponent<Button>();
-        Button cast2 = spellButton2.GetComponent<Button>();
-        Button cast3 = spellButton3.GetComponent<Button>();
-        Button cast4 = spellButton4.GetComponent<Button>();
-        Button cast5 = spellButton5.GetComponent<Button>();
-        Button cast6 = spellButton6.GetComponent<Button>();
-        gridController = GetComponent<GridController>();
+
+        gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
+        if (!gridController)
+            Debug.LogWarning("Gridcontroller is null!");
         tilescripts = GetComponent<Tile>();
-        // Put Classes Here and Add spell functions to the class
-        switch (mySpellClass)
+        Button cast = spellButton.GetComponent<Button>();
+
+
+        switch (mySpellName)
         {
-            case PlayerBehaviour.CharacterClass.Tank1:
-                cast1.onClick.AddListener(SpellBase); // Adds Spell to Button
-                cast1.GetComponentInChildren<Text>().text = "SpellBase"; // Add Spell Name Manually
-                cast2.onClick.AddListener(SpellBase);
-                cast2.GetComponentInChildren<Text>().text = "SpellBase";
-                cast3.onClick.AddListener(SpellBase);
-                cast3.GetComponentInChildren<Text>().text = "SpellBase";
-                cast4.onClick.AddListener(SpellBase);
-                cast4.GetComponentInChildren<Text>().text = "SpellBase";
-                cast5.onClick.AddListener(SpellBase);
-                cast5.GetComponentInChildren<Text>().text = "SpellBase";
-                cast6.onClick.AddListener(SpellBase);
-                cast6.GetComponentInChildren<Text>().text = "SpellBase";
+            case SpellName.baseSpell:
+                spellName = "test Spell";
+                mySpellAreaType = SpellAreaType.Normal;
+                mySpellRangeType = SpellRangeType.Normal;
+                areaRange = 1;
+                spellDamageMin = 210;
+                spellDamageMax = 240;
+                spellRangeMin = 1;
+                spellRangeMax = 7;
+                spellCooldown = 1;
+                spellCastPerturn = 3;
+                castPerTarget = 2;
+                spellInitialCooldown = 0;
+                spellApCost = 3;
+                spellPushback = 0;
+                spellPull = 0;
+                needLineOfSight = false;
+                inCooldown = false;
+                healsAlly = false;
+                hurtsAlly = false;
+                spellCooldownLeft = 0;
+
+                AreaType(); // updateen
+                Debug.Log("BaseSpell Selected");
+                //cast.onClick.AddListener(DamageCalculator());
+                cast.GetComponentInChildren<Text>().text = "SpellBase";
+                break;
+            case SpellName.other:
 
                 break;
-            case PlayerBehaviour.CharacterClass.DmgDealer1:
+            case SpellName.other2:
 
                 break;
-            case PlayerBehaviour.CharacterClass.Healer1:
-
-                break;
-            case PlayerBehaviour.CharacterClass.Support1:
+            default:
 
                 break;
         }
@@ -88,27 +104,7 @@ public class Abilities : MonoBehaviour {
 	void Update () {
 
         // this is used to cancel Spell
-		if(spellOpen == true)
-        {
-            Debug.Log("Spelll Open");
-            RangeType();
-            foreach (var tile in RangeType())
-            {
-                tile.GetComponent<Renderer>().material.color = tilescripts.RangeMaterial.color;
-            }
-            if (Input.GetMouseButtonDown(1))
-            {
-                foreach (var tile in RangeType())
-                {
-                    tile.GetComponent<Renderer>().material.color = tilescripts.BaseMaterial.color;
-                }
-                SpellCancel();
-            }
-            //if (Input.GetMouseButtonDown(0))
-            //{
-            //    LaunchSpell();
-            //}
-        }
+
 	}
 
 
@@ -282,6 +278,8 @@ public class Abilities : MonoBehaviour {
                     }
                 }
                 break;
+            default:
+                break;
         }
         foreach (var tile in rangetiles)
         {
@@ -298,7 +296,12 @@ public class Abilities : MonoBehaviour {
 
     void DamageCalculator(Tile targetTile)
     {
+        if(spellLaunched == true){
+           
+        }
+        else{
 
+        }
 
     }
 
@@ -321,37 +324,33 @@ public class Abilities : MonoBehaviour {
 
 
     // This Spell serves as a Base for other Spells
-    void SpellBase()
+    void SpellBaseCast()
     {
-        spellName = "test Spell";
-        mySpellAreaType = SpellAreaType.Normal;
-        mySpellRangeType = SpellRangeType.Normal;
-        areaRange = 1;
-        spellDamageMin = 210;
-        spellDamageMax = 240;
-        spellRangeMin = 1;
-        spellRangeMax = 7;
-        spellCooldown = 1;
-        spellCastPerturn = 3;
-        castPerTarget = 2;
+        spellDamageMin = 0;
+        spellDamageMax = 0;
+        spellRangeMin = 0;
+        spellRangeMax = 0;
+        spellCooldown = 0;
+        spellCastPerturn = 0;
+        castPerTarget = 0;
         spellInitialCooldown = 0;
-        spellApCost = 3;
+        spellApCost = 0;
         spellPushback = 0;
         spellPull = 0;
-        spellSlotNumber = 1;
         needLineOfSight = false;
-        spellOpen = true;
+        inCooldown = false;
+        healsAlly = false;
+        hurtsAlly = false;
         spellCooldownLeft = 0;
-
-
         AreaType(); // updateen
-        Debug.Log("BaseSpell Selected");
-}
+        Debug.Log("BaseSpell Selected cast");
+
+    }
 
 
 
 
-    void SpellCancel()
+    public void SpellCancel()
     {
         spellName = "";
         areaRange = 0;
@@ -366,9 +365,8 @@ public class Abilities : MonoBehaviour {
         spellApCost = 0;
         spellPushback = 0;
         spellPull = 0;
-        spellSlotNumber = 0;
         needLineOfSight = false;
-        spellOpen = false;
+        playerBehaviour.spellOpen = false;
         spellCooldownLeft = 0;
         Debug.Log("Spell Is Off");
     }

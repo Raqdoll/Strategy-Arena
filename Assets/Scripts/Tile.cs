@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[RequireComponent(typeof(Abilities))]
-
 public class Tile : MonoBehaviour {
-    public GameObject hoveryTile;
+    public Tile hoveryTile;
     public GameObject targetyTile;
     public int locX;
     public int locZ;
@@ -22,6 +20,7 @@ public class Tile : MonoBehaviour {
     GridController gridController;
     List<Tile> tileList;
     Abilities abilities;
+    PlayerBehaviour playerBehaviour;
 
     public bool isFree = true;
     public bool ShootThrough;
@@ -32,6 +31,7 @@ public class Tile : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+       hoveryTile = GridController.FindObjectOfType<GridController>().hoverTile;
         gridController = GetComponent<GridController>();
         locX = (int)transform.localPosition.x;
         locZ = (int)transform.localPosition.z;
@@ -73,16 +73,16 @@ public class Tile : MonoBehaviour {
         if (myType == BlockType.BaseBlock/* && gridController != null*/)
         {
             //Instantiate(hoveryTile ,new Vector3(this.locX, 0f, this.locZ),Quaternion.identity);
-           // GridController.FindObjectOfType<GridController>().hoverTile = this;
+            hoveryTile = this;
 
-            if (Abilities.spellOpen == true)
+            if (playerBehaviour.spellOpen == true)
             {
                 //gridController.hoverTile = gridController.GetTile(this.locX, this.locZ);
                 //gridController.hoverTile.locZ = (int)transform.localPosition.x;
                 //gridController.hoverTile.locX = (int)transform.localPosition.z;
                 //Debug.Log(gridController.hoverTile.locX);
                 //Debug.Log(gridController.hoverTile.locZ);
-                abilities.AreaType(); //updateen
+                //abilities.AreaType();
                 tileList = abilities.AreaType();
                 foreach (var tile in tileList)
                 {

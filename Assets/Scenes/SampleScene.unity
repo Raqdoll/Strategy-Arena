@@ -11081,7 +11081,8 @@ Transform:
   m_LocalRotation: {x: -0.43733355, y: 0.34654906, z: -0.18747766, w: -0.80839056}
   m_LocalPosition: {x: 24.45391, y: 17.382019, z: 1.0860462}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2031842474}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
@@ -18036,36 +18037,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114171458671917464, guid: 18266ece44db10747be94281c3ca1fc7,
-        type: 2}
-      propertyPath: spellButton1
-      value: 
-      objectReference: {fileID: 494348911}
-    - target: {fileID: 114171458671917464, guid: 18266ece44db10747be94281c3ca1fc7,
-        type: 2}
-      propertyPath: spellButton2
-      value: 
-      objectReference: {fileID: 327183327}
-    - target: {fileID: 114171458671917464, guid: 18266ece44db10747be94281c3ca1fc7,
-        type: 2}
-      propertyPath: spellButton3
-      value: 
-      objectReference: {fileID: 1964446425}
-    - target: {fileID: 114171458671917464, guid: 18266ece44db10747be94281c3ca1fc7,
-        type: 2}
-      propertyPath: spellButton4
-      value: 
-      objectReference: {fileID: 778657789}
-    - target: {fileID: 114171458671917464, guid: 18266ece44db10747be94281c3ca1fc7,
-        type: 2}
-      propertyPath: spellButton5
-      value: 
-      objectReference: {fileID: 1618998156}
-    - target: {fileID: 114171458671917464, guid: 18266ece44db10747be94281c3ca1fc7,
-        type: 2}
-      propertyPath: spellButton6
-      value: 
-      objectReference: {fileID: 726286367}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18266ece44db10747be94281c3ca1fc7, type: 2}
   m_IsPrefabAsset: 0
@@ -23836,7 +23807,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1339532753
 Transform:
   m_ObjectHideFlags: 0
@@ -23861,6 +23832,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f621907296b716b47b0a675f2178e81f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selected: {fileID: 0}
+  hitObject: {fileID: 0}
 --- !u!1001 &1340336816
 Prefab:
   m_ObjectHideFlags: 0
@@ -34933,6 +34906,48 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4646803612744470, guid: 5ed1fab2dd9260d42ac7ba751537ce55,
     type: 2}
   m_PrefabInternal: {fileID: 2027286335}
+--- !u!1 &2031842472
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2031842474}
+  - component: {fileID: 2031842473}
+  m_Layer: 0
+  m_Name: MouseManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &2031842473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2031842472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f621907296b716b47b0a675f2178e81f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selected: {fileID: 0}
+  hitObject: {fileID: 0}
+--- !u!4 &2031842474
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2031842472}
+  m_LocalRotation: {x: 0.43733355, y: -0.34654906, z: 0.18747766, w: -0.80839056}
+  m_LocalPosition: {x: -17.647772, y: 4.6866436, z: 23.830639}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 534669905}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2044104081
 Prefab:
   m_ObjectHideFlags: 0
