@@ -55,19 +55,6 @@ public class Abilities : MonoBehaviour {
         switch (mySpellClass)
         {
             case PlayerBehaviour.CharacterClass.Tank1:
-                cast1.onClick.AddListener(SpellBase); // Adds Spell to Button
-                cast1.GetComponentInChildren<Text>().text = "SpellBase"; // Add Spell Name Manually
-                cast2.onClick.AddListener(SpellBase);
-                cast2.GetComponentInChildren<Text>().text = "SpellBase";
-                cast3.onClick.AddListener(SpellBase);
-                cast3.GetComponentInChildren<Text>().text = "SpellBase";
-                cast4.onClick.AddListener(SpellBase);
-                cast4.GetComponentInChildren<Text>().text = "SpellBase";
-                cast5.onClick.AddListener(SpellBase);
-                cast5.GetComponentInChildren<Text>().text = "SpellBase";
-                cast6.onClick.AddListener(SpellBase);
-                cast6.GetComponentInChildren<Text>().text = "SpellBase";
-
                 break;
             case PlayerBehaviour.CharacterClass.DmgDealer1:
 
