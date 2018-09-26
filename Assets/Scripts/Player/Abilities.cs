@@ -43,17 +43,18 @@ public class Abilities : MonoBehaviour {
     public string spellName;
     GridController gridController;
     PlayerBehaviour playerBehaviour;
+    MouseController mouseController;
     Tile tilescripts;
 
 
 
     void Start () {
-
+        mouseController = mouseController.GetComponent<MouseController>();
         gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
         if (!gridController)
             Debug.LogWarning("Gridcontroller is null!");
         tilescripts = GetComponent<Tile>();
-        Button cast = spellButton.GetComponent<Button>();
+       // Button cast = spellButton.GetComponent<Button>();
 
 
         switch (mySpellName)
@@ -83,7 +84,7 @@ public class Abilities : MonoBehaviour {
                 AreaType(); // updateen
                 Debug.Log("BaseSpell Selected");
                 //cast.onClick.AddListener(DamageCalculator());
-                cast.GetComponentInChildren<Text>().text = "SpellBase";
+                //cast.GetComponentInChildren<Text>().text = "SpellBase";
                 break;
             case SpellName.other:
 
@@ -167,7 +168,7 @@ public class Abilities : MonoBehaviour {
                     for (int j = 0 - areaRange; j <= areaRange; j++)
                     {
                         if (Mathf.Abs(i) + Mathf.Abs(j) <= areaRange) {
-                            targetTiles.Add(gridController.GetTile(gridController.hoverTile.locX + j, gridController.hoverTile.locZ + i));
+                            targetTiles.Add(gridController.GetTile(mouseController.selected.locX + j, mouseController.selected.locZ + i));
                         }
                     }
                 }
