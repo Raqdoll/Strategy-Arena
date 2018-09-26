@@ -69,43 +69,43 @@ public class Tile : MonoBehaviour {
 	void Update () {
 		
 	}
-    void OnMouseOver()
-    {
-        if (myType == BlockType.BaseBlock/* && gridController != null*/)
-        {
-            //Instantiate(hoveryTile ,new Vector3(this.locX, 0f, this.locZ),Quaternion.identity);
-            hoveryTile = this;
+    //void OnMouseOver()
+    //{
+    //    if (myType == BlockType.BaseBlock/* && gridController != null*/)
+    //    {
+    //        //Instantiate(hoveryTile ,new Vector3(this.locX, 0f, this.locZ),Quaternion.identity);
+    //        hoveryTile = this;
 
-            if (playerBehaviour.spellOpen == true)
-            {
-                //gridController.hoverTile = gridController.GetTile(this.locX, this.locZ);
-                //gridController.hoverTile.locZ = (int)transform.localPosition.x;
-                //gridController.hoverTile.locX = (int)transform.localPosition.z;
-                //Debug.Log(gridController.hoverTile.locX);
-                //Debug.Log(gridController.hoverTile.locZ);
-                //abilities.AreaType();
-                tileList = abilities.AreaType();
-                foreach (var tile in tileList)
-                {
-                    GetComponent<MeshRenderer>().material = TargetMaterial;
-                }
-            }
-            else
-            {
-                GetComponent<MeshRenderer>().material = GridHoverMaterial;
-            }
+    //        //if (playerBehaviour.spellOpen == true)
+    //        //{
+    //        //    //gridController.hoverTile = gridController.GetTile(this.locX, this.locZ);
+    //        //    //gridController.hoverTile.locZ = (int)transform.localPosition.x;
+    //        //    //gridController.hoverTile.locX = (int)transform.localPosition.z;
+    //        //    //Debug.Log(gridController.hoverTile.locX);
+    //        //    //Debug.Log(gridController.hoverTile.locZ);
+    //        //    //abilities.AreaType();
+    //        //    tileList = abilities.AreaType();
+    //        //    foreach (var tile in tileList)
+    //        //    {
+    //        //        GetComponent<MeshRenderer>().material = TargetMaterial;
+    //        //    }
+    //        //}
+    //        //else
+    //        //{
+    //        //    GetComponent<MeshRenderer>().material = GridHoverMaterial;
+    //        //}
 
-        }
-    }
+    //    }
+    //}
 
-    void OnMouseExit()
-    {
-        if (myType == BlockType.BaseBlock)
-        {
+    //void OnMouseExit()
+    //{
+    //    if (myType == BlockType.BaseBlock)
+    //    {
             
-            GetComponent<MeshRenderer>().material = BaseMaterial;
-            //tileList.Clear();
-            //gridController.hoverTile = null;
-        }
-    }
+    //        GetComponent<MeshRenderer>().material = BaseMaterial;
+    //        //tileList.Clear();
+    //        //gridController.hoverTile = null;
+    //    }
+    //}
 }

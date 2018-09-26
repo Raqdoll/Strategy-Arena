@@ -5,16 +5,19 @@ using UnityEngine;
 public class MouseController : MonoBehaviour
 {
 
-    public Tile selected;
+    public Tile selected; // <- This is hover tile
     List<Tile> tileList;
     public GameObject hitObject;
     Abilities abilities;
     Tile tile;
     GridController gridController;
     PlayerBehaviour playerBehaviour;
+    public Material hovermaterial;
+    private Tile previousTile;
 
     void Start()
     {
+
     }
 
 
@@ -33,32 +36,26 @@ public class MouseController : MonoBehaviour
 
             if (hitObject.CompareTag("Tile"))
             {
+                //if (selected)
+                //    selected.GetComponent<Renderer>().material = selected.BaseMaterial;
                 selected = hitObject.gameObject.GetComponent<Tile>();
-                if (selected.myType == Tile.BlockType.BaseBlock/* && gridController != null*/)
+                
+                if (selected.myType == Tile.BlockType.BaseBlock && selected != previousTile)
                 {
-                    //Instantiate(hoveryTile ,new Vector3(this.locX, 0f, this.locZ),Quaternion.identity);
-                    // GridController.FindObjectOfType<GridController>().hoverTile = this;
                     Debug.Log("Tämä on baseblock");
-                    if (playerBehaviour.spellOpen == true)
+                    if (previousTile)
                     {
+                        Renderer pr = previousTile.GetComponent<Renderer>();
+                        pr.material = previousTile.GetComponent<Tile>().BaseMaterial;
+                        previousTile = null;
+                    }
+                        
+                    previousTile = selected;
+                    Renderer sr = selected.GetComponent<Renderer>();
+                    sr.material = hovermaterial;
 
-                        gridController.hoverTile = gridController.GetTile(selected.locX, selected.locZ);
-                        //gridController.hoverTile.locZ = (int)transform.localPosition.x;
-                        //gridController.hoverTile.locX = (int)transform.localPosition.z;
-                        Debug.Log(gridController.hoverTile.locX);
-                        Debug.Log(gridController.hoverTile.locZ);
-                        //abilities.AreaType();
-                        tileList = abilities.AreaType();
-                        foreach (var tile in tileList)
-                        {
-                            GetComponent<MeshRenderer>().material = tile.TargetMaterial;
-                        }
-                    }
-                    else
-                    {
-                        GetComponent<MeshRenderer>().material = tile.GridHoverMaterial;
-                    }
                 }
+                
             }
         }
 
