@@ -57,6 +57,16 @@ public class MouseController : MonoBehaviour
                 }
                 
             }
+            //Jos hovertile on jotain muuta, resettaa hovertilet
+            if(!hitObject.CompareTag("Tile") || (hitObject.CompareTag("Tile") && selected.myType != Tile.BlockType.BaseBlock))
+            {
+                if (previousTile)
+                {
+                    Renderer pr = previousTile.GetComponent<Renderer>();
+                    pr.material = previousTile.GetComponent<Tile>().BaseMaterial;
+                    previousTile = null;
+                }
+            }
         }
 
     }

@@ -48,7 +48,7 @@ public class Abilities : MonoBehaviour {
 
 
     void Start () {
-        mouseController = mouseController.GetComponent<MouseController>();
+        mouseController = GameObject.FindGameObjectWithTag("MouseManager").GetComponent<MouseController>();
         gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
         if (!gridController)
             Debug.LogWarning("Gridcontroller is null!");

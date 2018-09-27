@@ -13,6 +13,7 @@ TagManager:
   - spell4
   - spell5
   - spell6
+  - MouseManager
   layers:
   - Default
   - TransparentFX
