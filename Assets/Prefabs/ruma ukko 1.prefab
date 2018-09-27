@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114172909891316772}
   m_Layer: 0
   m_Name: spell4
-  m_TagString: Untagged
+  m_TagString: spell4
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 114915649993643790}
   m_Layer: 0
   m_Name: spell2
-  m_TagString: Untagged
+  m_TagString: spell2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 114262227729926706}
   m_Layer: 0
   m_Name: spell3
-  m_TagString: Untagged
+  m_TagString: spell3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 114597125945884578}
   m_Layer: 0
   m_Name: spell5
-  m_TagString: Untagged
+  m_TagString: spell5
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 114515325236404248}
   m_Layer: 0
   m_Name: spell1
-  m_TagString: Untagged
+  m_TagString: spell1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 114022686224245902}
   m_Layer: 0
   m_Name: spell6
-  m_TagString: Untagged
+  m_TagString: spell6
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -438,9 +438,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc7f8fa981faa9f4cb8adb2c56bf9676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellButton: {fileID: 0}
   mySpellAreaType: 0
   mySpellRangeType: 0
   mySpellName: 0
+  spellInitialCooldown: 0
   spellDamageMin: 0
   spellDamageMax: 0
   spellRangeMin: 0
@@ -448,12 +450,10 @@ MonoBehaviour:
   spellCooldown: 0
   spellCastPerturn: 0
   castPerTarget: 0
-  spellInitialCooldown: 0
   spellApCost: 0
   spellPushback: 0
   spellPull: 0
   areaRange: 0
-  spellSlotNumber: 0
   spellCooldownLeft: 0
   trueDamage: 0
   healsAlly: 0
@@ -473,9 +473,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc7f8fa981faa9f4cb8adb2c56bf9676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellButton: {fileID: 0}
   mySpellAreaType: 0
   mySpellRangeType: 0
   mySpellName: 0
+  spellInitialCooldown: 0
   spellDamageMin: 0
   spellDamageMax: 0
   spellRangeMin: 0
@@ -483,12 +485,10 @@ MonoBehaviour:
   spellCooldown: 0
   spellCastPerturn: 0
   castPerTarget: 0
-  spellInitialCooldown: 0
   spellApCost: 0
   spellPushback: 0
   spellPull: 0
   areaRange: 0
-  spellSlotNumber: 0
   spellCooldownLeft: 0
   trueDamage: 0
   healsAlly: 0
@@ -508,9 +508,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc7f8fa981faa9f4cb8adb2c56bf9676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellButton: {fileID: 0}
   mySpellAreaType: 0
   mySpellRangeType: 0
   mySpellName: 0
+  spellInitialCooldown: 0
   spellDamageMin: 0
   spellDamageMax: 0
   spellRangeMin: 0
@@ -518,12 +520,10 @@ MonoBehaviour:
   spellCooldown: 0
   spellCastPerturn: 0
   castPerTarget: 0
-  spellInitialCooldown: 0
   spellApCost: 0
   spellPushback: 0
   spellPull: 0
   areaRange: 0
-  spellSlotNumber: 0
   spellCooldownLeft: 0
   trueDamage: 0
   healsAlly: 0
@@ -554,9 +554,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc7f8fa981faa9f4cb8adb2c56bf9676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellButton: {fileID: 0}
   mySpellAreaType: 2
   mySpellRangeType: 1
   mySpellName: 0
+  spellInitialCooldown: 0
   spellDamageMin: 0
   spellDamageMax: 0
   spellRangeMin: 0
@@ -564,12 +566,10 @@ MonoBehaviour:
   spellCooldown: 676
   spellCastPerturn: 0
   castPerTarget: 35
-  spellInitialCooldown: 0
   spellApCost: 0
   spellPushback: 5
   spellPull: 0
   areaRange: 0
-  spellSlotNumber: 0
   spellCooldownLeft: 0
   trueDamage: 0
   healsAlly: 0
@@ -589,12 +589,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54ce12f4f118c074e8524815cad4d480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellButton1: {fileID: 0}
-  spellButton2: {fileID: 0}
-  spellButton3: {fileID: 0}
-  spellButton4: {fileID: 0}
-  spellButton5: {fileID: 0}
-  spellButton6: {fileID: 0}
   moving: 0
   myCharClass: 0
   maxHP: 0
@@ -616,9 +610,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc7f8fa981faa9f4cb8adb2c56bf9676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellButton: {fileID: 0}
   mySpellAreaType: 0
   mySpellRangeType: 0
   mySpellName: 0
+  spellInitialCooldown: 0
   spellDamageMin: 0
   spellDamageMax: 0
   spellRangeMin: 0
@@ -626,12 +622,10 @@ MonoBehaviour:
   spellCooldown: 0
   spellCastPerturn: 0
   castPerTarget: 0
-  spellInitialCooldown: 0
   spellApCost: 0
   spellPushback: 0
   spellPull: 0
   areaRange: 0
-  spellSlotNumber: 0
   spellCooldownLeft: 0
   trueDamage: 0
   healsAlly: 0
@@ -662,9 +656,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc7f8fa981faa9f4cb8adb2c56bf9676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellButton: {fileID: 0}
   mySpellAreaType: 0
   mySpellRangeType: 0
   mySpellName: 0
+  spellInitialCooldown: 0
   spellDamageMin: 0
   spellDamageMax: 0
   spellRangeMin: 0
@@ -672,12 +668,10 @@ MonoBehaviour:
   spellCooldown: 0
   spellCastPerturn: 0
   castPerTarget: 0
-  spellInitialCooldown: 0
   spellApCost: 0
   spellPushback: 0
   spellPull: 0
   areaRange: 0
-  spellSlotNumber: 0
   spellCooldownLeft: 0
   trueDamage: 0
   healsAlly: 0

@@ -7,6 +7,12 @@ TagManager:
   - Tile
   - hovertile
   - targettile
+  - spell1
+  - spell2
+  - spell3
+  - spell4
+  - spell5
+  - spell6
   layers:
   - Default
   - TransparentFX

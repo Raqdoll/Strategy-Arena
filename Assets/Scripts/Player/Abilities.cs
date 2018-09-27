@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//Muokka summarya vapaasti :)
+//Muokka summarya vapaasti 
 /// <summary>
 /// Lists abilities for the attached player. Generates the list using a class enum.
 /// Stores the patterns used in different abilites.
@@ -26,7 +26,6 @@ public class Abilities : MonoBehaviour {
     public int spellCooldown;
     public int spellCastPerturn;
     public int castPerTarget;
-
     public int spellApCost;
     public int spellPushback;
     public int spellPull;
@@ -35,6 +34,7 @@ public class Abilities : MonoBehaviour {
     public int trueDamage;
     public bool healsAlly = false;
     public bool hurtsAlly = false;
+    public bool spellOpen = false;
     public bool needLineOfSight = false;
     public bool spellLaunched = false;
     public bool inCooldown = false;
@@ -45,7 +45,6 @@ public class Abilities : MonoBehaviour {
     PlayerBehaviour playerBehaviour;
     MouseController mouseController;
     Tile tilescripts;
-
 
 
     void Start () {
@@ -81,7 +80,8 @@ public class Abilities : MonoBehaviour {
                 hurtsAlly = false;
                 spellCooldownLeft = 0;
 
-                AreaType(); // updateen
+                Button cast = spellButton.GetComponent<Button>();
+                //cast.onClick.AddListener(LaunchSpell());
                 Debug.Log("BaseSpell Selected");
                 //cast.onClick.AddListener(DamageCalculator());
                 //cast.GetComponentInChildren<Text>().text = "SpellBase";
@@ -99,17 +99,30 @@ public class Abilities : MonoBehaviour {
     }
 	
 
-
-
-
-	void Update () {
-
-        // this is used to cancel Spell
-
-	}
-
-
-
+	void Update ()
+    {
+        if (spellOpen == true)
+        {
+            Debug.Log("Spelll Open");
+            RangeType();
+            foreach (var tile in RangeType())
+            {
+                tile.GetComponent<Renderer>().material.color = tilescripts.RangeMaterial.color;
+            }
+            if (Input.GetMouseButtonDown(1))
+            {
+                foreach (var tile in RangeType())
+                {
+                    tile.GetComponent<Renderer>().material.color = tilescripts.BaseMaterial.color;
+                }
+                SpellCancel();
+            }
+            if (Input.GetMouseButtonDown(0) && playerBehaviour.currentAp >= spellApCost)
+            {
+                //LaunchSpell();
+            }
+        }
+    }
 
 
    public List<Tile> AreaType()
@@ -230,9 +243,6 @@ public class Abilities : MonoBehaviour {
     }
 
 
-
-
-
     public List<Tile> RangeType()
     {
         List<Tile> rangetiles = new List<Tile>();
@@ -293,82 +303,76 @@ public class Abilities : MonoBehaviour {
     }
 
 
-
-
-    void DamageCalculator(Tile targetTile)
+    public int MinDamCacl()
     {
-        if(spellLaunched == true){
-           
-        }
-        else{
+        int tempdamage = Mathf.RoundToInt(spellDamageMin * (1 + playerBehaviour.damageChange) + playerBehaviour.damagePlus);
 
-        }
-
+        return tempdamage;
     }
-
-
-
-
-    void LaunchSpell(List<Tile> targetTiles)
+    public int MaxDamCacl()
     {
-        targetTiles.Clear();
-        AreaType();
-        foreach (var tile in targetTiles)
-        {
-            DamageCalculator(tile);
-        }
-        targetTiles.Clear();
+        int tempdamage = Mathf.RoundToInt(spellDamageMax * (1 + playerBehaviour.damageChange) + playerBehaviour.damagePlus);
+
+        return tempdamage;
     }
+    public int TrueDamageCalculator(int damMax, int damMin, float damChange, int damPlus)
+    {
+        int tempdamageMin = Mathf.RoundToInt(damMin * (1 + damChange) + damPlus);
+        int tempdamageMax = Mathf.RoundToInt(damMax * (1 + damChange) + damPlus);
+        int trueDamage = Random.Range(tempdamageMin, tempdamageMax);
 
-
-
-
+        return trueDamage;
+    }
+    //void LaunchSpell(List<Tile> targetTiles)
+    //{
+    //    targetTiles.Clear();
+    //    AreaType();
+    //    foreach (var tile in targetTiles)
+    //    {
+    //        TrueDamageCalculator();
+    //    }
+    //    targetTiles.Clear();
+    //}
 
     // This Spell serves as a Base for other Spells
     void SpellBaseCast()
     {
-        spellDamageMin = 0;
-        spellDamageMax = 0;
-        spellRangeMin = 0;
-        spellRangeMax = 0;
-        spellCooldown = 0;
-        spellCastPerturn = 0;
-        castPerTarget = 0;
-        spellInitialCooldown = 0;
-        spellApCost = 0;
-        spellPushback = 0;
-        spellPull = 0;
-        needLineOfSight = false;
-        inCooldown = false;
-        healsAlly = false;
-        hurtsAlly = false;
-        spellCooldownLeft = 0;
-        AreaType(); // updateen
+        SpellRangeType spellMyRange = mySpellRangeType;
+        SpellAreaType spellMyArea = mySpellAreaType;
+        int spellAreaRange = areaRange = 1;
+        int damageMyMin = spellDamageMin;
+        int damageMyMax = spellDamageMax;
+        int myRangeMin =  spellRangeMin;
+        int myRangeMax = spellRangeMax;
+        int myCooldown = spellCooldown;
+        float myDamageChange = playerBehaviour.damageChange;
+        int myDamagePlus = playerBehaviour.damagePlus;
+        int myCastPerTurn = spellCastPerturn;
+        int myCastPerTarget = castPerTarget;
+        int myApCost = spellApCost;
+        int myPushBack = spellPushback;
+        int myPull = spellPull;
+        bool myLineOfsight = needLineOfSight;
+        bool myInCooldown = inCooldown;
+        bool myHealsAlly = healsAlly;
+        bool myHurtsAlly = hurtsAlly;
+        int myCooldownLeft = spellCooldownLeft;
+
+        RangeType();
+        AreaType();
+        foreach(var tile in AreaType())
+        {
+            TrueDamageCalculator(damageMyMin,damageMyMax,myDamageChange,myDamagePlus);
+        }
+        playerBehaviour.currentAp = playerBehaviour.currentAp - myApCost;
+
+
         Debug.Log("BaseSpell Selected cast");
 
     }
 
-
-
-
     public void SpellCancel()
     {
-        spellName = "";
-        areaRange = 0;
-        spellDamageMin = 0;
-        spellDamageMax = 0;
-        spellRangeMin = 0;
-        spellRangeMax = 0;
-        spellCooldown = 0;
-        spellCastPerturn = 0;
-        castPerTarget = 0;
-        spellInitialCooldown = 0;
-        spellApCost = 0;
-        spellPushback = 0;
-        spellPull = 0;
-        needLineOfSight = false;
-        playerBehaviour.spellOpen = false;
-        spellCooldownLeft = 0;
-        Debug.Log("Spell Is Off");
+
     }
 }
