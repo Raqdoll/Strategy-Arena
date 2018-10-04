@@ -64,9 +64,77 @@ public class Tile : MonoBehaviour {
                 break;
         }
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    /// <summary>
+    /// No diagonal movement, so cardinal distance is more useful gamewise
+    /// </summary>
+
+    public int GetCardinalDistance(Tile other)
+    {
+        int differencex = Mathf.Abs(other.locX - locX);
+        int diffenercez = Mathf.Abs(other.locZ - locZ);
+        return differencex + diffenercez;
+    }
+
+    /// <summary>
+    /// Used for astar
+    /// </summary>
+
+    private float GetRealDistance(Tile other)
+    {
+        int differencex = Mathf.Abs(other.locX - locX);
+        int diffenercez = Mathf.Abs(other.locZ - locZ);
+        return Mathf.Sqrt(differencex^2 + diffenercez^2);
+    }
+
+    public List<Tile> GetRoute(Tile other)
+    {
+        int maxDistance = GetCardinalDistance(other);
+        List<Tile> route = new List<Tile>();
+        return route;
+    }
+
+    public Tile GetOneCloserBruteForce(Tile other, bool checkIfAvailable)
+    {
+        Tile bestTile = null;
+        float shortestDistance = 999;
+        for (int i = -1 ; i <= 1; i++)
+        {
+            for (int j = -1; j <= 1; j++)
+            {
+                Tile testTile = gridController.GetTile(locX + i, locZ + j);
+                if (testTile == null)
+                    continue;  //skips iteration, as such tile is out of bounds
+                if (testTile.CheckAvailability())
+
+                if (bestTile != null)
+                {
+                    float temp = testTile.GetRealDistance(other);
+                    if (temp < shortestDistance)
+                    {
+                        shortestDistance = temp;
+                        bestTile = testTile;
+                    }
+                }
+                else
+                {
+                    bestTile = testTile;
+                    shortestDistance = testTile.GetRealDistance(other);
+                }
+            }
+        }
+        return bestTile;
+    }
+
+    public bool CheckAvailability()
+    {
+        if (WalkThrough && isFree)
+            return true;
+        return false;
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
     //void OnMouseOver()
