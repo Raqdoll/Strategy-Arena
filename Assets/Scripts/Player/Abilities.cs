@@ -47,10 +47,8 @@ public class Abilities : MonoBehaviour {
     Tile tilescripts;
 
 
-    void Start (){
-
-
-        mouseController = mouseController.GetComponent<MouseController>();
+    void Start () {
+        mouseController = GameObject.FindGameObjectWithTag("MouseManager").GetComponent<MouseController>();
         gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
         if (!gridController)
             Debug.LogWarning("Gridcontroller is null!");

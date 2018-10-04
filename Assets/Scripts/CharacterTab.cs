@@ -15,9 +15,9 @@ public class CharacterTab : MonoBehaviour {
     public Image characterIcon;
 
 
-    public void updateHp(int HP)
+    public void updateHp(int minHP, int maxHP)
     {
-        tHealth.text ="HP: " + HP.ToString();
+        tHealth.text ="HP: " + minHP.ToString() + " / " + maxHP.ToString();
     }
 
     public void updateAp(int AP)
