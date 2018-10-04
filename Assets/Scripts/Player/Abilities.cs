@@ -107,6 +107,7 @@ public class Abilities : MonoBehaviour {
             RangeType();
             foreach (var tile in RangeType())
             {
+
                 tile.GetComponent<Renderer>().material.color = tilescripts.RangeMaterial.color;
             }
             if (Input.GetMouseButtonDown(1))
@@ -119,7 +120,20 @@ public class Abilities : MonoBehaviour {
             }
             if (Input.GetMouseButtonDown(0) && playerBehaviour.currentAp >= spellApCost)
             {
-                //LaunchSpell();
+                foreach(var tile in RangeType())
+                {
+                    if(mouseController.selected == gridController.GetTile(tile.locX, tile.locZ))
+                    {
+                        foreach(var tilt in AreaType())
+                        {
+
+                        }
+                    }
+                    else
+                    {
+
+                    }
+                }
             }
         }
     }
@@ -303,13 +317,13 @@ public class Abilities : MonoBehaviour {
     }
 
 
-    public int MinDamCacl()
+    public int MinDamCacl(int damMax, float damChange, int damPlus)
     {
         int tempdamage = Mathf.RoundToInt(spellDamageMin * (1 + playerBehaviour.damageChange) + playerBehaviour.damagePlus);
 
         return tempdamage;
     }
-    public int MaxDamCacl()
+    public int MaxDamCacl(int damMax, float damChange, int damPlus)
     {
         int tempdamage = Mathf.RoundToInt(spellDamageMax * (1 + playerBehaviour.damageChange) + playerBehaviour.damagePlus);
 
@@ -365,10 +379,7 @@ public class Abilities : MonoBehaviour {
             TrueDamageCalculator(damageMyMin,damageMyMax,myDamageChange,myDamagePlus);
         }
         playerBehaviour.currentAp = playerBehaviour.currentAp - myApCost;
-
-
         Debug.Log("BaseSpell Selected cast");
-
     }
 
     public void SpellCancel()
