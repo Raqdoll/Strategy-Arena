@@ -22,11 +22,12 @@ public class PlayerBehaviour : MonoBehaviour {
     public int playerNum;
     public float damageChange;
     public int damagePlus;
-    public bool playerSide;
+    public Tile currentTile;
+
     GridController gridController;
     Abilities abilities;
 
-    Tile tilescripts;
+    Tile tilescripts;  
 
     void Start () {
 
@@ -34,6 +35,7 @@ public class PlayerBehaviour : MonoBehaviour {
         if (!gridController)
             Debug.LogWarning("Gridcontroller is null!");
         tilescripts = GetComponent<Tile>();
+        currentTile = gridController.GetTile((int)transform.localPosition.x, (int)transform.localPosition.z);
 
 
         // Put Information Of classes Here

@@ -32,7 +32,8 @@ public class Tile : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
        hoveryTile = GridController.FindObjectOfType<GridController>().hoverTile;
-        gridController = GetComponent<GridController>();
+        //gridController = GetComponent<GridController>();
+        gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
         locX = (int)transform.localPosition.x;
         locZ = (int)transform.localPosition.z;
         thisMaterial = GetComponent<Renderer>().material;

@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class TurnManager : MonoBehaviour {
 
-    public GameObject activePlayer;
-    public int activePlayers;
     public int turnNumber;
     public delegate void PlayerEvent(PlayerBehaviour player);
     public PlayerEvent TurnChange;
@@ -16,7 +14,6 @@ public class TurnManager : MonoBehaviour {
     {
         if (newPlayer)
         {
-            activePlayer = newPlayer;
             PlayerBehaviour temp = newPlayer.GetComponent<PlayerBehaviour>();
             if (TurnChange != null && temp != null)
             {
