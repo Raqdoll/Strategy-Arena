@@ -42,6 +42,7 @@ public class Abilities : MonoBehaviour {
 
     public string spellName;
     GridController gridController;
+    TeamManager teamManager;
     PlayerBehaviour playerBehaviour;
     MouseController mouseController;
     Tile tilescripts;
@@ -52,6 +53,7 @@ public class Abilities : MonoBehaviour {
         gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
         if (!gridController)
             Debug.LogWarning("Gridcontroller is null!");
+        teamManager = gridController.gameObject.GetComponent<TeamManager>();
         tilescripts = GetComponent<Tile>();
        // Button cast = spellButton.GetComponent<Button>();
 
@@ -145,19 +147,19 @@ public class Abilities : MonoBehaviour {
         switch (mySpellAreaType)
         {
             case SpellAreaType.Line:
-                if (gridController.playerTile.locZ <= gridController.hoverTile.locZ)
+                if (teamManager.activePlayer.currentTile.locZ <= gridController.hoverTile.locZ)
                 {
                     for (int i = 1; i <= areaRange; i++)
                     {
                         targetTiles.Add(gridController.GetTile(gridController.hoverTile.locX, gridController.hoverTile.locZ + i));
                     }
                 }
-                else if (gridController.playerTile.locZ >= gridController.hoverTile.locZ)
+                else if (teamManager.activePlayer.currentTile.locZ >= gridController.hoverTile.locZ)
                     for (int i = 1; i <= areaRange; i++)
                     {
                         targetTiles.Add(gridController.GetTile(gridController.hoverTile.locX + i, gridController.hoverTile.locZ));
                     }
-                else if (gridController.playerTile.locX >= gridController.hoverTile.locX)
+                else if (teamManager.activePlayer.currentTile.locX >= gridController.hoverTile.locX)
                     for (int i = 1; i <= areaRange; i++)
                     {
                         targetTiles.Add(gridController.GetTile(gridController.hoverTile.locX, gridController.hoverTile.locZ - i));
@@ -201,7 +203,7 @@ public class Abilities : MonoBehaviour {
                 }
                 break;
             case SpellAreaType.Cone:
-                if (gridController.playerTile.locZ <= gridController.hoverTile.locZ)
+                if (teamManager.activePlayer.currentTile.locZ <= gridController.hoverTile.locZ)
                 {
                     for (int i = 0; i <= areaRange; i++)
                     {
@@ -211,7 +213,7 @@ public class Abilities : MonoBehaviour {
                         }
                     }
                 }
-                else if (gridController.playerTile.locZ >= gridController.hoverTile.locZ)
+                else if (teamManager.activePlayer.currentTile.locZ >= gridController.hoverTile.locZ)
                 {
                     for (int i = 0; i <= areaRange; i++)
                     {
@@ -221,7 +223,7 @@ public class Abilities : MonoBehaviour {
                         }
                     }
                 }
-                else if (gridController.playerTile.locX >= gridController.hoverTile.locX)
+                else if (teamManager.activePlayer.currentTile.locX >= gridController.hoverTile.locX)
                 { 
 
                     for (int i = 0; i <= areaRange; i++)
@@ -265,26 +267,26 @@ public class Abilities : MonoBehaviour {
             case SpellRangeType.Diagonal:
                 if(needLineOfSight == false)
                 {
-                    rangetiles.Add(gridController.GetTile(gridController.playerTile.locX, gridController.playerTile.locZ));
+                    rangetiles.Add(gridController.GetTile(teamManager.activePlayer.currentTile.locX, teamManager.activePlayer.currentTile.locZ));
                     for (int i = spellRangeMin + 1; i <= spellRangeMax; i++)
                         {
-                            rangetiles.Add(gridController.GetTile(gridController.playerTile.locX + i, gridController.playerTile.locZ + i));
-                            rangetiles.Add(gridController.GetTile(gridController.playerTile.locX + i, gridController.playerTile.locZ - i));
-                            rangetiles.Add(gridController.GetTile(gridController.playerTile.locX - i, gridController.playerTile.locZ + i));
-                            rangetiles.Add(gridController.GetTile(gridController.playerTile.locX - i, gridController.playerTile.locZ - i));
+                            rangetiles.Add(gridController.GetTile(teamManager.activePlayer.currentTile.locX + i, teamManager.activePlayer.currentTile.locZ + i));
+                            rangetiles.Add(gridController.GetTile(teamManager.activePlayer.currentTile.locX + i, teamManager.activePlayer.currentTile.locZ - i));
+                            rangetiles.Add(gridController.GetTile(teamManager.activePlayer.currentTile.locX - i, teamManager.activePlayer.currentTile.locZ + i));
+                            rangetiles.Add(gridController.GetTile(teamManager.activePlayer.currentTile.locX - i, teamManager.activePlayer.currentTile.locZ - i));
                         }
                 }
                 break;
             case SpellRangeType.Linear:
                 if (needLineOfSight == true)
                 {
-                    rangetiles.Add(gridController.GetTile(gridController.playerTile.locX, gridController.playerTile.locZ));
+                    rangetiles.Add(gridController.GetTile(teamManager.activePlayer.currentTile.locX, teamManager.activePlayer.currentTile.locZ));
                     for (int i = spellRangeMin +1; i <= spellRangeMax; i++)
                     {
-                            rangetiles.Add(gridController.GetTile(gridController.playerTile.locX, gridController.playerTile.locZ + i));
-                            rangetiles.Add(gridController.GetTile(gridController.playerTile.locX + i, gridController.playerTile.locZ));
-                            rangetiles.Add(gridController.GetTile(gridController.playerTile.locX, gridController.playerTile.locZ - i));
-                            rangetiles.Add(gridController.GetTile(gridController.playerTile.locX - i, gridController.playerTile.locZ));
+                            rangetiles.Add(gridController.GetTile(teamManager.activePlayer.currentTile.locX, teamManager.activePlayer.currentTile.locZ + i));
+                            rangetiles.Add(gridController.GetTile(teamManager.activePlayer.currentTile.locX + i, teamManager.activePlayer.currentTile.locZ));
+                            rangetiles.Add(gridController.GetTile(teamManager.activePlayer.currentTile.locX, teamManager.activePlayer.currentTile.locZ - i));
+                            rangetiles.Add(gridController.GetTile(teamManager.activePlayer.currentTile.locX - i, teamManager.activePlayer.currentTile.locZ));
                     }
                 }
                 break;
@@ -297,7 +299,7 @@ public class Abilities : MonoBehaviour {
                         {
                             if (Mathf.Abs(i) + Mathf.Abs(j) <= areaRange)
                             {                           
-                                rangetiles.Add(gridController.GetTile(gridController.playerTile.locX + j, gridController.playerTile.locZ + i));
+                                rangetiles.Add(gridController.GetTile(teamManager.activePlayer.currentTile.locX + j, teamManager.activePlayer.currentTile.locZ + i));
                             }
                         }
                     }
