@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +14,41 @@ public class CharacterTab : MonoBehaviour {
     public GameObject spells;
     public GameObject effects;
     public Image characterIcon;
+    PlayerBehaviour _player;
+    bool isMyPlayerActive;
 
+    private void Start()
+    {
+        Subscribe();
+    }
+
+    private void OnDestroy()
+    {
+        SubscribeOff();
+    }
+
+    private void Subscribe()
+    {
+        GameObject GC = GameObject.FindGameObjectWithTag("GameController");
+        TurnManager TM = GC.GetComponent<TurnManager>();
+        TM.TurnChange += handleTurnChange;
+    }
+
+    //Voi laittaa myös pelaajan kuoleman kohdalle
+    private void SubscribeOff()
+    {
+        GameObject GC = GameObject.FindGameObjectWithTag("GameController");
+        TurnManager TM = GC.GetComponent<TurnManager>();
+        TM.TurnChange -= handleTurnChange;
+    }
+
+    private void handleTurnChange(PlayerBehaviour player)
+    {
+        if (_player == player)
+            isMyPlayerActive = true;
+        else
+            isMyPlayerActive = false;
+    }
 
     public void updateHp(int minHP, int maxHP)
     {

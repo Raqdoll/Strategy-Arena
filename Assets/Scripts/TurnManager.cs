@@ -2,9 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class TurnManager : MonoBehaviour {
 
     public GameObject activePlayer;
+    public int activePlayers;
+    public int turnNumber;
+    public delegate void PlayerEvent(PlayerBehaviour player);
+    public PlayerEvent TurnChange;
+
+
+    public void AnnounceTurnChange(GameObject newPlayer)
+    {
+        if (newPlayer)
+        {
+            activePlayer = newPlayer;
+            PlayerBehaviour temp = newPlayer.GetComponent<PlayerBehaviour>();
+            if (TurnChange != null && temp != null)
+            {
+                TurnChange(temp);
+            }
+        }
+    }
 
 	// Use this for initialization
 	void Start () {
