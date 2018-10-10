@@ -50,22 +50,22 @@ public class CharacterTab : MonoBehaviour {
             isMyPlayerActive = false;
     }
 
-    public void updateHp(int minHP, int maxHP)
+    public void UpdateHp(int minHP, int maxHP)
     {
         tHealth.text ="HP: " + minHP.ToString() + " / " + maxHP.ToString();
     }
 
-    public void updateAp(int AP)
+    public void UpdateAp(int AP)
     {
         tAp.text = "AP: " + AP.ToString();
     }
 
-    public void updateMp(int MP)
+    public void UpdateMp(int MP)
     {
         tMp.text = "MP: " + MP.ToString();
     }
 
-    public void updateName(string name)
+    public void UpdateName(string name)
     {
         tName.text = name;
     }
