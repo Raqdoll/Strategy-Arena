@@ -16,6 +16,7 @@ public class GridController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        playerTile = GetTile(5, 5);
 
 
         tileList = tiles.GetComponentsInChildren<Tile>();
