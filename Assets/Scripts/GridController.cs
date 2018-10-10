@@ -8,6 +8,7 @@ public class GridController : MonoBehaviour {
     public GameObject tiles;
     public Tile hoverTile;
     public Tile playerTile;
+    public Tile characterTile;
     private Tile[] tileList;
     private List<List<Tile>> tileGrid;
 
@@ -15,6 +16,7 @@ public class GridController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+
 
         tileList = tiles.GetComponentsInChildren<Tile>();
         tileGrid = new List<List<Tile>>(); // Initialize overlist

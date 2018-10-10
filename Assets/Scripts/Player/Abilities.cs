@@ -319,26 +319,50 @@ public class Abilities : MonoBehaviour {
     }
 
 
-    public int MinDamCacl(int damMax, float damChange, int damPlus)
+    public int MinDamCacl(int damMin, float damChange, int damPlus)
     {
-        int tempdamage = Mathf.RoundToInt(spellDamageMin * (1 + playerBehaviour.damageChange) + playerBehaviour.damagePlus);
+        int tempdamage = Mathf.RoundToInt(damMin * (1 + damChange) + damPlus);
 
         return tempdamage;
     }
     public int MaxDamCacl(int damMax, float damChange, int damPlus)
     {
-        int tempdamage = Mathf.RoundToInt(spellDamageMax * (1 + playerBehaviour.damageChange) + playerBehaviour.damagePlus);
+        int tempdamage = Mathf.RoundToInt(damMax * (1 + damChange) + damPlus);
 
         return tempdamage;
     }
     public int TrueDamageCalculator(int damMax, int damMin, float damChange, int damPlus)
     {
-        int tempdamageMin = Mathf.RoundToInt(damMin * (1 + damChange) + damPlus);
-        int tempdamageMax = Mathf.RoundToInt(damMax * (1 + damChange) + damPlus);
+        int tempdamageMin = MinDamCacl(damMin, damChange, damPlus);
+        int tempdamageMax = MaxDamCacl(damMax, damChange, damPlus);
         int trueDamage = Random.Range(tempdamageMin, tempdamageMax);
 
         return trueDamage;
     }
+
+
+    public int MinHealCacl(int damMin, float heals)
+    {
+        int tempHeal = Mathf.RoundToInt(damMin * (1 + heals));
+
+        return tempHeal;
+    }
+    public int MaxHealCacl(int damMax, float heals)
+    {
+        int tempHeal = Mathf.RoundToInt(damMax * (1 + heals));
+
+        return tempHeal;
+    }
+    public int TrueHealCalculator(int damMax, int damMin, float heals)
+    {
+        int tempHealMin = MinHealCacl(damMin, heals);
+        int tempHealMax = MaxHealCacl(damMin, heals);
+        int trueHeal = Random.Range(tempHealMin, tempHealMax);
+
+        return trueHeal;
+    }
+
+
     //void LaunchSpell(List<Tile> targetTiles)
     //{
     //    targetTiles.Clear();

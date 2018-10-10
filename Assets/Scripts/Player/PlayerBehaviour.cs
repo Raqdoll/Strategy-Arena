@@ -21,6 +21,7 @@ public class PlayerBehaviour : MonoBehaviour {
     public int currentMp;
     public int playerNum;
     public float damageChange;
+    public float healsReceived;
     public int damagePlus;
     public Tile currentTile;
 
