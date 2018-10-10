@@ -410,6 +410,12 @@ public class Abilities : MonoBehaviour {
 
     public void SpellCancel()
     {
-
+        var derp = RangeType();
+        Color ihana = new Color(1, 0, 1);
+        
+        foreach(var herp in derp)
+        {
+            herp.BaseMaterial.SetColor("wut", ihana);
+        }
     }
 }

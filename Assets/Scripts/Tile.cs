@@ -134,10 +134,11 @@ public class Tile : MonoBehaviour {
         return false;
     }
 
-    // Update is called once per frame
-    void Update () {
-		
-	}
+    public List<Tile> GetTNeighbouringTiles()
+    {
+        return (gridController.GetTilesNextTo(locX, locZ));
+    }
+
     //void OnMouseOver()
     //{
     //    if (myType == BlockType.BaseBlock/* && gridController != null*/)
@@ -171,7 +172,7 @@ public class Tile : MonoBehaviour {
     //{
     //    if (myType == BlockType.BaseBlock)
     //    {
-            
+
     //        GetComponent<MeshRenderer>().material = BaseMaterial;
     //        //tileList.Clear();
     //        //gridController.hoverTile = null;

@@ -7,8 +7,6 @@ public class GridController : MonoBehaviour {
 
     public GameObject tiles;
     public Tile hoverTile;
-    public Tile playerTile;
-    public Tile characterTile;
     private Tile[] tileList;
     private List<List<Tile>> tileGrid;
 
@@ -38,13 +36,16 @@ public class GridController : MonoBehaviour {
     public Tile GetTile(int xCord, int zCord) {
         return tileGrid[xCord - 1][zCord - 1];
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-    //public void setHovertile()
-    //{
-    //    hoverTile = x;
-    //}
+
+    public List<Tile> GetTilesNextTo(int xCord, int zCord)
+    {
+        List<Tile> palautus = new List<Tile>();
+        palautus.Add(GetTile(xCord + 1, zCord));
+        palautus.Add(GetTile(xCord - 1, zCord));
+        palautus.Add(GetTile(xCord, zCord + 1));
+        palautus.Add(GetTile(xCord, zCord - 1));
+        return palautus;
+
+    }
+
 }

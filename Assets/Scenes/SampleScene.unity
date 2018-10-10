@@ -16126,6 +16126,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4646803612744470, guid: 5ed1fab2dd9260d42ac7ba751537ce55,
     type: 2}
   m_PrefabInternal: {fileID: 1953900523}
+--- !u!114 &846097849 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114315295282992962, guid: 5ed1fab2dd9260d42ac7ba751537ce55,
+    type: 2}
+  m_PrefabInternal: {fileID: 2116312618}
+  m_Script: {fileID: 11500000, guid: e1ee825309f21dc489ced7f4aa326a54, type: 3}
 --- !u!1001 &855350890
 Prefab:
   m_ObjectHideFlags: 0
@@ -17883,6 +17889,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114430614813003586, guid: 18266ece44db10747be94281c3ca1fc7,
+        type: 2}
+      propertyPath: exampleEvents.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4524410910402434, guid: 18266ece44db10747be94281c3ca1fc7, type: 2}
       propertyPath: m_LocalPosition.x
       value: 6
@@ -17944,6 +17955,41 @@ Prefab:
         type: 2}
       propertyPath: spellButton
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114430614813003586, guid: 18266ece44db10747be94281c3ca1fc7,
+        type: 2}
+      propertyPath: targetTile
+      value: 
+      objectReference: {fileID: 846097849}
+    - target: {fileID: 114565041542105288, guid: 18266ece44db10747be94281c3ca1fc7,
+        type: 2}
+      propertyPath: currentTile
+      value: 
+      objectReference: {fileID: 1948564867}
+    - target: {fileID: 114430614813003586, guid: 18266ece44db10747be94281c3ca1fc7,
+        type: 2}
+      propertyPath: exampleEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114430614813003586, guid: 18266ece44db10747be94281c3ca1fc7,
+        type: 2}
+      propertyPath: exampleEvents.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114430614813003586, guid: 18266ece44db10747be94281c3ca1fc7,
+        type: 2}
+      propertyPath: exampleEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1882631685}
+    - target: {fileID: 114430614813003586, guid: 18266ece44db10747be94281c3ca1fc7,
+        type: 2}
+      propertyPath: exampleEvents.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SpellCancel
+      objectReference: {fileID: 0}
+    - target: {fileID: 114430614813003586, guid: 18266ece44db10747be94281c3ca1fc7,
+        type: 2}
+      propertyPath: exampleEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18266ece44db10747be94281c3ca1fc7, type: 2}
@@ -22619,6 +22665,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnNumber: 0
+  activePlayer: 0
+  playerRotation: 0
+  currentCharacterAmount: 0
+  nextTurnButton: {fileID: 0}
 --- !u!4 &1260233783
 Transform:
   m_ObjectHideFlags: 0
@@ -22662,7 +22712,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tiles: {fileID: 21651153}
   hoverTile: {fileID: 0}
-  playerTile: {fileID: 0}
 --- !u!1001 &1278013875
 Prefab:
   m_ObjectHideFlags: 0
@@ -32892,6 +32941,44 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4646803612744470, guid: 5ed1fab2dd9260d42ac7ba751537ce55,
     type: 2}
   m_PrefabInternal: {fileID: 1875851129}
+--- !u!1 &1882631683 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1713654203958024, guid: 18266ece44db10747be94281c3ca1fc7,
+    type: 2}
+  m_PrefabInternal: {fileID: 966093010}
+--- !u!114 &1882631685 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114515325236404248, guid: 18266ece44db10747be94281c3ca1fc7,
+    type: 2}
+  m_PrefabInternal: {fileID: 966093010}
+  m_Script: {fileID: 11500000, guid: bc7f8fa981faa9f4cb8adb2c56bf9676, type: 3}
+--- !u!114 &1882631686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1882631683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe4e6f7cf6b476a4ab196636a41c8221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugEvents:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1882631685}
+        m_MethodName: SpellCancel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1001 &1888332990
 Prefab:
   m_ObjectHideFlags: 0
@@ -33502,6 +33589,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4646803612744470, guid: 5ed1fab2dd9260d42ac7ba751537ce55,
     type: 2}
   m_PrefabInternal: {fileID: 1944208221}
+--- !u!114 &1948564867 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114315295282992962, guid: 5ed1fab2dd9260d42ac7ba751537ce55,
+    type: 2}
+  m_PrefabInternal: {fileID: 897491937}
+  m_Script: {fileID: 11500000, guid: e1ee825309f21dc489ced7f4aa326a54, type: 3}
 --- !u!1001 &1953900523
 Prefab:
   m_ObjectHideFlags: 0

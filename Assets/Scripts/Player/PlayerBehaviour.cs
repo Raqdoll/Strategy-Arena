@@ -36,7 +36,8 @@ public class PlayerBehaviour : MonoBehaviour {
         if (!gridController)
             Debug.LogWarning("Gridcontroller is null!");
         tilescripts = GetComponent<Tile>();
-        currentTile = gridController.GetTile((int)transform.localPosition.x, (int)transform.localPosition.z);
+        if (!currentTile)
+            currentTile = gridController.GetTile((int)transform.localPosition.x, (int)transform.localPosition.z);
 
 
         // Put Information Of classes Here

@@ -16,8 +16,8 @@ public class EditorButtonDebugger : MonoBehaviour {
 #if UNITY_EDITOR
     //using UnityEditor;
 
-    [UnityEditor.CustomEditor(typeof(PlayerMovement))]
-    public class LaserButtonEditor : UnityEditor.Editor
+    [UnityEditor.CustomEditor(typeof(EditorButtonDebugger))]
+    public class DebuggerButtonEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
@@ -29,6 +29,7 @@ public class EditorButtonDebugger : MonoBehaviour {
             {
                 thisScript.DebuggingEvents();
             }
+
         }
     }
 #endif
