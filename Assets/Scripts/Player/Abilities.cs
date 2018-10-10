@@ -85,7 +85,7 @@ public class Abilities : MonoBehaviour {
                 Button cast = spellButton.GetComponent<Button>();
                 //cast.onClick.AddListener(LaunchSpell());
                 Debug.Log("BaseSpell Selected");
-                //cast.onClick.AddListener(DamageCalculator());
+                cast.onClick.AddListener(OpenSpell);
                 //cast.GetComponentInChildren<Text>().text = "SpellBase";
                 break;
             case SpellName.other:
@@ -99,7 +99,10 @@ public class Abilities : MonoBehaviour {
                 break;
         }
     }
-	
+	void OpenSpell()
+    {
+        spellOpen = true;
+    }
 
 	void Update ()
     {
