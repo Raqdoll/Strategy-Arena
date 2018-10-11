@@ -10,8 +10,6 @@ public class GridController : MonoBehaviour {
     private Tile[] tileList;
     private List<List<Tile>> tileGrid;
 
-
-    // Use this for initialization
     void Start()
     {
         playerTile = GetTile(5, 5);
@@ -49,4 +47,12 @@ public class GridController : MonoBehaviour {
 
     }
 
+	
+	void Update () {
+		
+	}
+    //public void setHovertile()
+    //{
+    //    hoverTile = x;
+    //}
 }

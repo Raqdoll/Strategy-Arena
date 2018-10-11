@@ -42,8 +42,7 @@ public class PlayerBehaviour : MonoBehaviour {
 
         // Put Information Of classes Here
         switch (myCharClass)
-        {
-            
+        {          
             case CharacterClass.Tank1:
                 maxHP = 4500;
                 maxAp = 11;

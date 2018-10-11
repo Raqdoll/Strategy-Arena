@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.574817, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -25350,6 +25350,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tiles: {fileID: 21651153}
   hoverTile: {fileID: 0}
+  playerTile: {fileID: 0}
+  characterTile: {fileID: 0}
 --- !u!1001 &1278013875
 Prefab:
   m_ObjectHideFlags: 0
@@ -39487,6 +39489,8 @@ MonoBehaviour:
   selected: {fileID: 0}
   hitObject: {fileID: 0}
   hovermaterial: {fileID: 2100000, guid: 4f15f06eff248f348967ec6b42905c3f, type: 2}
+  targetMaterial: {fileID: 2100000, guid: 527d095c83b5343448969d36e70de58e, type: 2}
+  rangeMaterial: {fileID: 2100000, guid: 8db0a574684bf5c4a920798b6bc0cc64, type: 2}
 --- !u!4 &2031842474
 Transform:
   m_ObjectHideFlags: 0

@@ -48,6 +48,15 @@ public class Abilities : MonoBehaviour {
     Tile tilescripts;
 
 
+    /*muistutus itsellleni
+     * reworkkaa abilityt
+     * tee spelleistä taas funktioita jotka muokkaavat perus arvoja 
+     * tee kuitenkin sillä tavalla että on arvoja jotka ovat vain yhteen spelliin sidottuja
+     * spell buttonut kutsuvat näitä funktioita
+     * säilytä nykyiset spell enumit muokattuina
+     * 
+     * */
+
     void Start () {
         mouseController = GameObject.FindGameObjectWithTag("MouseManager").GetComponent<MouseController>();
         gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
@@ -106,41 +115,6 @@ public class Abilities : MonoBehaviour {
 
 	void Update ()
     {
-        if (spellOpen == true)
-        {
-            Debug.Log("Spelll Open");
-            RangeType();
-            foreach (var tile in RangeType())
-            {
-
-                tile.GetComponent<Renderer>().material.color = tilescripts.RangeMaterial.color;
-            }
-            if (Input.GetMouseButtonDown(1))
-            {
-                foreach (var tile in RangeType())
-                {
-                    tile.GetComponent<Renderer>().material.color = tilescripts.BaseMaterial.color;
-                }
-                SpellCancel();
-            }
-            if (Input.GetMouseButtonDown(0) && playerBehaviour.currentAp >= spellApCost)
-            {
-                foreach(var tile in RangeType())
-                {
-                    if(mouseController.selected == gridController.GetTile(tile.locX, tile.locZ))
-                    {
-                        foreach(var tilt in AreaType())
-                        {
-
-                        }
-                    }
-                    else
-                    {
-
-                    }
-                }
-            }
-        }
     }
 
 
@@ -378,11 +352,18 @@ public class Abilities : MonoBehaviour {
     //}
 
     // This Spell serves as a Base for other Spells
-    void SpellBaseCast()
+
+    void SpellOpened()
     {
         SpellRangeType spellMyRange = mySpellRangeType;
         SpellAreaType spellMyArea = mySpellAreaType;
-        int spellAreaRange = areaRange = 1;
+        spellOpen = true;
+    }
+
+   public void SpellBaseCast()
+    {
+
+        int spellAreaRange = areaRange;
         int damageMyMin = spellDamageMin;
         int damageMyMax = spellDamageMax;
         int myRangeMin =  spellRangeMin;
@@ -401,18 +382,13 @@ public class Abilities : MonoBehaviour {
         bool myHurtsAlly = hurtsAlly;
         int myCooldownLeft = spellCooldownLeft;
 
-        RangeType();
-        AreaType();
-        foreach(var tile in AreaType())
-        {
-            TrueDamageCalculator(damageMyMin,damageMyMax,myDamageChange,myDamagePlus);
-        }
-        playerBehaviour.currentAp = playerBehaviour.currentAp - myApCost;
-        Debug.Log("BaseSpell Selected cast");
+        //playerBehaviour.currentAp = playerBehaviour.currentAp - myApCost;
+        Debug.Log("BaseSpell Selected");
     }
 
     public void SpellCancel()
     {
+        spellOpen = false;
         var derp = RangeType();
         Color ihana = new Color(1, 0, 1);
         

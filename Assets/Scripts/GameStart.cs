@@ -7,7 +7,6 @@ public class GameStart : MonoBehaviour {
     public enum Map { baseMap, one, two};
     public Map currentMap;
 
-    // Use this for initialization
     void Start()
     {
         switch (currentMap)
@@ -27,7 +26,7 @@ public class GameStart : MonoBehaviour {
 
 
     }
-	// Update is called once per frame
+
 	void Update () {
 		
 	}

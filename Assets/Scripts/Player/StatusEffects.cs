@@ -14,5 +14,4 @@ public static class StatusEffects {
     {
         return null; //return null when error occurs tjsp
     }
-
 }

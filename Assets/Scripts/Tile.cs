@@ -178,4 +178,7 @@ public class Tile : MonoBehaviour {
     //        //gridController.hoverTile = null;
     //    }
     //}
+    void Update () {
+		
+	}
 }

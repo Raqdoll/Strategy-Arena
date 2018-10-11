@@ -26,8 +26,6 @@ public class TurnManager : MonoBehaviour {
             }
         }
     }
-
-	// Use this for initialization
 		
     void Start () {
         playerRotation = 1;
