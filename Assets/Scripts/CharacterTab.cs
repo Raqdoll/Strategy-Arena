@@ -11,15 +11,49 @@ public class CharacterTab : MonoBehaviour {
     public Text tHealth;
     public Text tAp;
     public Text tMp;
-    public GameObject spells;
+    public GameObject spell1;
+    public GameObject spell2;
+    public GameObject spell3;
+    public GameObject spell4;
+    public GameObject spell5;
+    public GameObject spell6;
     public GameObject effects;
     public Image characterIcon;
     PlayerBehaviour _player;
     bool isMyPlayerActive;
+    public CharacterValues characterVal;
+    public GameObject healthBar;
 
-    private void Start()
+    void Start()
     {
         Subscribe();
+
+        if (characterVal)
+        {
+            if (characterVal.portrait)
+            {
+                characterIcon.sprite = characterVal.portrait;
+            }
+            UpdateSpellIcons();
+            UpdateInfo();
+        }
+    }
+
+    public void UpdateInfo()
+    {
+        UpdateName(characterVal.characterName);
+        UpdateHp(characterVal.currentHP, characterVal.maxHP);
+        UpdateAp(characterVal.currentAp);
+        UpdateMp(characterVal.currentMp);
+    }
+    public void UpdateSpellIcons()
+    {
+        spell1.GetComponent<Image>().sprite = characterVal.spell_1.spellIcon;
+        spell2.GetComponent<Image>().sprite = characterVal.spell_2.spellIcon;
+        spell3.GetComponent<Image>().sprite = characterVal.spell_3.spellIcon;
+        spell4.GetComponent<Image>().sprite = characterVal.spell_4.spellIcon;
+        spell5.GetComponent<Image>().sprite = characterVal.spell_5.spellIcon;
+        spell6.GetComponent<Image>().sprite = characterVal.spell_6.spellIcon;
     }
 
     private void OnDestroy()
@@ -52,21 +86,31 @@ public class CharacterTab : MonoBehaviour {
 
     public void UpdateHp(int minHP, int maxHP)
     {
-        tHealth.text ="HP: " + minHP.ToString() + " / " + maxHP.ToString();
+        tHealth.text = minHP.ToString() + "/" + maxHP.ToString();
+
+        UpdateHpBar();
     }
 
     public void UpdateAp(int AP)
     {
-        tAp.text = "AP: " + AP.ToString();
+        tAp.text = AP.ToString();
     }
 
     public void UpdateMp(int MP)
     {
-        tMp.text = "MP: " + MP.ToString();
+        tMp.text = MP.ToString();
     }
 
     public void UpdateName(string name)
     {
         tName.text = name;
+    }
+
+    public void UpdateHpBar()
+    {
+        float minHPf = characterVal.currentHP;
+        float maxHPf = characterVal.maxHP;
+        float hpBarAmount = minHPf / maxHPf;
+        healthBar.GetComponent<Image>().fillAmount = hpBarAmount;
     }
 }

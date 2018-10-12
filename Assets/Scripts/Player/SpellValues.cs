@@ -2,7 +2,8 @@
 
 [CreateAssetMenu(fileName = "Spell", menuName = "New Spell")]
 public class SpellValues : ScriptableObject
-{ public string mySpellName;
+{   public string mySpellName;
+    public Sprite spellIcon;
     public int mySpellAreaType;
     public int mySpellRangeType;
     public int spellInitialCooldown;
