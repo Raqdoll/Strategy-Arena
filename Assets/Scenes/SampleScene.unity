@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.574817, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1702,6 +1702,12 @@ Prefab:
       propertyPath: m_Name
       value: CharacterTab5
       objectReference: {fileID: 0}
+    - target: {fileID: 114683674142475220, guid: 8e96766781cab224c8066daaddbed9c8,
+        type: 2}
+      propertyPath: characterVal
+      value: 
+      objectReference: {fileID: 11400000, guid: eac0014924945a541af8dd0313094b37,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e96766781cab224c8066daaddbed9c8, type: 2}
   m_IsPrefabAsset: 0
@@ -13339,6 +13345,12 @@ Prefab:
       propertyPath: m_Name
       value: CharacterTab4
       objectReference: {fileID: 0}
+    - target: {fileID: 114683674142475220, guid: 8e96766781cab224c8066daaddbed9c8,
+        type: 2}
+      propertyPath: characterVal
+      value: 
+      objectReference: {fileID: 11400000, guid: eac0014924945a541af8dd0313094b37,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e96766781cab224c8066daaddbed9c8, type: 2}
   m_IsPrefabAsset: 0
@@ -17039,6 +17051,12 @@ Prefab:
       propertyPath: m_Name
       value: CharacterTab4
       objectReference: {fileID: 0}
+    - target: {fileID: 114683674142475220, guid: 8e96766781cab224c8066daaddbed9c8,
+        type: 2}
+      propertyPath: characterVal
+      value: 
+      objectReference: {fileID: 11400000, guid: eac0014924945a541af8dd0313094b37,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e96766781cab224c8066daaddbed9c8, type: 2}
   m_IsPrefabAsset: 0
@@ -25306,7 +25324,7 @@ MonoBehaviour:
   activePlayer: 0
   playerRotation: 0
   currentCharacterAmount: 0
-  nextTurnButton: {fileID: 0}
+  nextTurnButton: {fileID: 712718712}
 --- !u!4 &1260233783
 Transform:
   m_ObjectHideFlags: 0
@@ -25350,8 +25368,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tiles: {fileID: 21651153}
   hoverTile: {fileID: 0}
-  playerTile: {fileID: 0}
-  characterTile: {fileID: 0}
 --- !u!1001 &1278013875
 Prefab:
   m_ObjectHideFlags: 0
@@ -26774,6 +26790,12 @@ Prefab:
       propertyPath: m_Name
       value: CharacterTab2
       objectReference: {fileID: 0}
+    - target: {fileID: 114683674142475220, guid: 8e96766781cab224c8066daaddbed9c8,
+        type: 2}
+      propertyPath: characterVal
+      value: 
+      objectReference: {fileID: 11400000, guid: eac0014924945a541af8dd0313094b37,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e96766781cab224c8066daaddbed9c8, type: 2}
   m_IsPrefabAsset: 0
@@ -28513,6 +28535,12 @@ Prefab:
       propertyPath: m_Name
       value: CharacterTab5
       objectReference: {fileID: 0}
+    - target: {fileID: 114683674142475220, guid: 8e96766781cab224c8066daaddbed9c8,
+        type: 2}
+      propertyPath: characterVal
+      value: 
+      objectReference: {fileID: 11400000, guid: eac0014924945a541af8dd0313094b37,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e96766781cab224c8066daaddbed9c8, type: 2}
   m_IsPrefabAsset: 0
@@ -30765,6 +30793,12 @@ Prefab:
       propertyPath: m_Name
       value: CharacterTab3
       objectReference: {fileID: 0}
+    - target: {fileID: 114683674142475220, guid: 8e96766781cab224c8066daaddbed9c8,
+        type: 2}
+      propertyPath: characterVal
+      value: 
+      objectReference: {fileID: 11400000, guid: eac0014924945a541af8dd0313094b37,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e96766781cab224c8066daaddbed9c8, type: 2}
   m_IsPrefabAsset: 0
@@ -32039,6 +32073,12 @@ Prefab:
       propertyPath: m_Name
       value: CharacterTab1
       objectReference: {fileID: 0}
+    - target: {fileID: 114683674142475220, guid: 8e96766781cab224c8066daaddbed9c8,
+        type: 2}
+      propertyPath: characterVal
+      value: 
+      objectReference: {fileID: 11400000, guid: eac0014924945a541af8dd0313094b37,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e96766781cab224c8066daaddbed9c8, type: 2}
   m_IsPrefabAsset: 0
@@ -32331,6 +32371,12 @@ Prefab:
       propertyPath: m_FillAmount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114683674142475220, guid: 8e96766781cab224c8066daaddbed9c8,
+        type: 2}
+      propertyPath: characterVal
+      value: 
+      objectReference: {fileID: 11400000, guid: eac0014924945a541af8dd0313094b37,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e96766781cab224c8066daaddbed9c8, type: 2}
   m_IsPrefabAsset: 0
@@ -34815,6 +34861,12 @@ Prefab:
       propertyPath: m_Name
       value: CharacterTab3
       objectReference: {fileID: 0}
+    - target: {fileID: 114683674142475220, guid: 8e96766781cab224c8066daaddbed9c8,
+        type: 2}
+      propertyPath: characterVal
+      value: 
+      objectReference: {fileID: 11400000, guid: eac0014924945a541af8dd0313094b37,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e96766781cab224c8066daaddbed9c8, type: 2}
   m_IsPrefabAsset: 0

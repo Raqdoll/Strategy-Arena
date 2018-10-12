@@ -4,6 +4,7 @@
 public class CharacterValues : ScriptableObject
 {
     public string characterName;
+    public Sprite portrait;
     public int maxHP;
     public int maxAp;
     public int maxMp;
@@ -15,6 +16,7 @@ public class CharacterValues : ScriptableObject
     public int damagePlus;
     public bool moving;
     public Tile currentTile;
+    public bool dead;
     public SpellValues spell_1;
     public SpellValues spell_2;
     public SpellValues spell_3;

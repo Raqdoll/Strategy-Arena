@@ -1279,9 +1279,16 @@ MonoBehaviour:
   tHealth: {fileID: 114934665670089084}
   tAp: {fileID: 114319248382906038}
   tMp: {fileID: 114874865250705948}
-  spells: {fileID: 1779638476381164}
+  spell1: {fileID: 1291420948726810}
+  spell2: {fileID: 1421929550712318}
+  spell3: {fileID: 1087749941654490}
+  spell4: {fileID: 1907317563592344}
+  spell5: {fileID: 1787395244079922}
+  spell6: {fileID: 1939445582837606}
   effects: {fileID: 1553235131767544}
   characterIcon: {fileID: 114230330337663288}
+  characterVal: {fileID: 11400000, guid: eac0014924945a541af8dd0313094b37, type: 2}
+  healthBar: {fileID: 1907586769692412}
 --- !u!114 &114714930145146158
 MonoBehaviour:
   m_ObjectHideFlags: 1

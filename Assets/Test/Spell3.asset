@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Name: Spell3
   m_EditorClassIdentifier: 
   mySpellName: 
+  spellIcon: {fileID: 21300000, guid: 625cd75d3a25e6d459c106dfc52e25ae, type: 3}
   mySpellAreaType: 0
   mySpellRangeType: 0
   spellInitialCooldown: 0
