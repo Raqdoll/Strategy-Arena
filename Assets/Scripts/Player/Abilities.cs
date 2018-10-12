@@ -389,10 +389,15 @@ public class Abilities : MonoBehaviour {
     public void SpellCancel()
     {
         spellOpen = false;
+
+    }
+
+    public void Tester()
+    {
         var derp = RangeType();
         Color ihana = new Color(1, 0, 1);
-        
-        foreach(var herp in derp)
+
+        foreach (var herp in derp)
         {
             herp.BaseMaterial.SetColor("wut", ihana);
         }

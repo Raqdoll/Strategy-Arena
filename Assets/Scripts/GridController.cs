@@ -50,8 +50,4 @@ public class GridController : MonoBehaviour {
 	void Update () {
 		
 	}
-    //public void setHovertile()
-    //{
-    //    hoverTile = x;
-    //}
 }

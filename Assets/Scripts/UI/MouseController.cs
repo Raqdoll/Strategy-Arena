@@ -21,7 +21,9 @@ public class MouseController : MonoBehaviour
 
     void Start()
     {
-
+        gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
+        playerBehaviour = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehaviour>();
+        abilities = GameObject.FindGameObjectWithTag("Player").GetComponent<Abilities>();
     }
 
 
