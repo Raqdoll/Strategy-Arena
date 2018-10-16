@@ -45,7 +45,7 @@ public class TeamManager : MonoBehaviour {
     {
         activePlayer = playerEndingTurn;
         ChangeTurn();
-        while (activePlayer.currentHP <= 0)
+        while (activePlayer.currentCharacter.currentHP <= 0)
         {
             ChangeTurn();
             if (activePlayer == playerEndingTurn)  //Looped, we need a check for eg. 3 vs 0 situation, when someone is killed! -> Done -> CheckTeamHealths (not tested yet)
@@ -63,7 +63,7 @@ public class TeamManager : MonoBehaviour {
         bool teamBDead = true;
         foreach(var pb in teamA)
         {
-            if (pb.currentHP > 0)
+            if (pb.currentCharacter.currentHP > 0)
             {
                 teamADead = false;
                 break;
@@ -71,7 +71,7 @@ public class TeamManager : MonoBehaviour {
         }
         foreach (var pb in teamB)
         {
-            if (pb.currentHP > 0)
+            if (pb.currentCharacter.currentHP > 0)
             {
                 teamBDead = false;
                 break;

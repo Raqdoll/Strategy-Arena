@@ -110,7 +110,7 @@ public class PlayerMovement : MonoBehaviour {
     void Teleport(Tile destinationTile)
     {
         transform.localPosition = destinationTile.transform.localPosition;
-        behaviour.currentTile = destinationTile;
+        behaviour.currentCharacter.currentTile = destinationTile;
     }
 
     public void ExampleEventsForEditor()
