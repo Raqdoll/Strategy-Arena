@@ -22,7 +22,6 @@ public class SpellValues : ScriptableObject
     public int trueDamage;
     public bool healsAlly = false;
     public bool hurtsAlly = false;
-    public bool spellOpen = false;
     public bool needLineOfSight = false;
     public bool spellLaunched = false;
     public bool inCooldown = false;

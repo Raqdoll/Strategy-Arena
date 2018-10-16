@@ -12,11 +12,14 @@ public class CharacterValues : ScriptableObject
     public int currentAp;
     public int currentMp;
     public float damageChange;
+    public float armorChange;
     public float healsReceived;
     public int damagePlus;
+    public int armorPlus;
     public bool moving;
     public Tile currentTile;
     public bool dead;
+    public bool team; // true = 1 false = 2
     public SpellValues spell_1;
     public SpellValues spell_2;
     public SpellValues spell_3;

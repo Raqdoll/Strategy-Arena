@@ -8,7 +8,7 @@ public class MouseController : MonoBehaviour
     public Tile selected; // <- This is hover tile
     List<Tile> tileList;
     public GameObject hitObject;
-    Abilities abilities;
+    SpellCast spellCast;
     Tile tile;
     GridController gridController;
     PlayerBehaviour playerBehaviour;
@@ -18,12 +18,13 @@ public class MouseController : MonoBehaviour
     private Tile previousTile;
     List<Tile> targetedTiles;
     List<Tile> rangeTiles;
+    Abilities abilities;
 
     void Start()
     {
         gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
-        playerBehaviour = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehaviour>();
-        abilities = GameObject.FindGameObjectWithTag("Player").GetComponent<Abilities>();
+        playerBehaviour = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<PlayerBehaviour>();
+        spellCast = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<SpellCast>();
     }
 
 
@@ -76,10 +77,10 @@ public class MouseController : MonoBehaviour
                         }
                     }
 
-                    if (abilities.spellOpen == true)
+                    if (spellCast.spellOpen == true)
                     {
                         Debug.Log("Spelll Open");
-                            if (Input.GetMouseButtonDown(0) && playerBehaviour.currentAp >= abilities.spellApCost)
+                            if (Input.GetMouseButtonDown(0) && playerBehaviour.currentCharacter.currentAp >= spellCast.currentSpell.spellApCost /*abilities.spellApCost*/)
                             {
                                 foreach (var tile in targetedTiles)
                                 {
@@ -107,20 +108,14 @@ public class MouseController : MonoBehaviour
                                 sr.material = hovermaterial;
                             }
                         }
-                        if (Input.GetMouseButtonDown(0) && playerBehaviour.currentAp >= abilities.spellApCost)
+                        if (Input.GetMouseButtonDown(0) && playerBehaviour.currentCharacter.currentAp >= spellCast.currentSpell.spellApCost && spellCast.currentSpell != null)
                         {
                             foreach (var tile in targetedTiles)
                             {
-                                // tähän tulee damage calculaatio laskelmat ja vertaukset hahmoihin
-                                // spell kutsunnat
-
-                                             //   A
-                                             //  /T\
-                                             // / I \
-                                             ///  I  \
-                                             //   I
-                                             //   I
-                                             //   I
+                                
+                                CharacterValues target = tile.charCurrentlyOnTile;
+                                
+                                spellCast.CastSpell(spellCast.currentSpell, playerBehaviour.currentCharacter, target);
 
                             }
                             if (rangeTiles != null)
@@ -141,7 +136,7 @@ public class MouseController : MonoBehaviour
                                 }
                                 targetedTiles = null;
                             }
-                            abilities.SpellBaseCast();
+                            spellCast.Aftermath();
                         }
                         if (Input.GetMouseButtonDown(1))
                         {
@@ -163,7 +158,7 @@ public class MouseController : MonoBehaviour
                                 }
                                 targetedTiles = null;
                             }
-                            abilities.SpellCancel();
+                            spellCast.SpellCancel();
                         }
                     }
                     else

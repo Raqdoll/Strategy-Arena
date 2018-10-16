@@ -22,6 +22,8 @@ public class Tile : MonoBehaviour {
     Abilities abilities;
     PlayerBehaviour playerBehaviour;
 
+    public CharacterValues charCurrentlyOnTile;
+
     public bool isFree = true;
     public bool ShootThrough;
     public bool Targetable;
