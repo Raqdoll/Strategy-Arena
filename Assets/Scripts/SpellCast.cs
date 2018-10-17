@@ -10,12 +10,13 @@ public class SpellCast : MonoBehaviour {
     public CharacterValues cv;
     public SpellValues currentSpell;
     public bool spellOpen = false;
-    public int spell1CastedThisTurn;
-    public int spell2CastedThisTurn;
-    public int spell3CastedThisTurn;
-    public int spell4CastedThisTurn;
-    public int spell5CastedThisTurn;
-    public int spell6CastedThisTurn;
+    public int spell1CastedThisTurn = 0;
+    public int spell2CastedThisTurn = 0;
+    public int spell3CastedThisTurn = 0;
+    public int spell4CastedThisTurn = 0;
+    public int spell5CastedThisTurn = 0;
+    public int spell6CastedThisTurn = 0;
+    
 
 
     public Button spellButton1, spellButton2, spellButton3, spellButton4, spellButton5, spellButton6;
@@ -39,11 +40,13 @@ public class SpellCast : MonoBehaviour {
 
     public void CastSpell(SpellValues spell, CharacterValues caster, CharacterValues target)
     {
+        int damageStuff = 0;
+        int healingIsFun = 0;
         if (spell.hurtsAlly ==false)
         {
             if (caster.team != target.team)
             {
-                int damageStuff;
+                
                 damageStuff = TrueDamageCalculator(spell.spellDamageMax, spell.spellDamageMin, caster.damageChange, target.armorChange, caster.damagePlus, target.armorPlus);
             }
         }
@@ -51,24 +54,43 @@ public class SpellCast : MonoBehaviour {
         {
             if (caster.team = target.team)
             {
-                int healingIsFun;
+                
                 healingIsFun = TrueHealCalculator(spell.spellDamageMax, spell.spellDamageMin, target.healsReceived);
             }
             else
             {
-                int damageStuff;
+                
                 damageStuff = TrueDamageCalculator(spell.spellDamageMax, spell.spellDamageMin, caster.damageChange, target.armorChange, caster.damagePlus, target.armorPlus);
             }
         }
         else
         {
-            int damageStuff;
+            
             damageStuff = TrueDamageCalculator(spell.spellDamageMax, spell.spellDamageMin, caster.damageChange, target.armorChange, caster.damagePlus, target.armorPlus);
         }
 
-
+        GetHit(target, damageStuff);
+        GetHealed(target, healingIsFun);
+        playerBehaviour.UpdateTabs();
 
     }
+    //Deal the actual damage V V V
+    public void GetHit(CharacterValues target, int damage)
+    {
+        target.currentHP -= damage;
+    }
+    //Deal the actual healing V V V
+    public void GetHealed(CharacterValues target, int heal)
+    {
+        target.currentHP += heal;
+        if(target.currentHP > target.maxHP)
+        {
+            target.currentHP = target.maxHP;
+        }
+    }
+
+
+
 	public void Aftermath()
     {
 
@@ -128,11 +150,16 @@ public class SpellCast : MonoBehaviour {
 
     public void Spell1Cast()
     {
-        if (playerBehaviour.currentCharacter.currentAp >= cv.spell_1.spellApCost && spell1CastedThisTurn <= cv.spell_1.spellCastPerturn)
+        Debug.Log("spell 1 otettu");
+        //if(cv.spell_1 == null)
+        //{
+        //    Debug.Log("spell 1 on null");
+        //}
+        if (cv.currentAp >= cv.spell_1.spellApCost && spell1CastedThisTurn <= cv.spell_1.spellCastPerturn)
         {
             currentSpell = cv.spell_1;
             spellOpen = true;
-            
+            Debug.Log("spell 1 avattu");
         }
     }
 

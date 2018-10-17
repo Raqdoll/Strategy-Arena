@@ -49,7 +49,7 @@ public class MouseController : MonoBehaviour
                 
                 if (selected.myType == Tile.BlockType.BaseBlock && selected != previousTile)
                 {
-                    Debug.Log("Tämä on baseblock");
+                   // Debug.Log("Tämä on baseblock");
 
 
                     if (previousTile)

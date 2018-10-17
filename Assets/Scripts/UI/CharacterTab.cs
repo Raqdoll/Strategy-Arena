@@ -26,7 +26,7 @@ public class CharacterTab : MonoBehaviour {
 
     void Start()
     {
-        Subscribe();
+        //Subscribe();
 
         if (characterVal)
         {
@@ -58,23 +58,23 @@ public class CharacterTab : MonoBehaviour {
 
     private void OnDestroy()
     {
-        SubscribeOff();
+        //SubscribeOff();
     }
 
-    private void Subscribe()
-    {
-        GameObject GC = GameObject.FindGameObjectWithTag("GameController");
-        TurnManager TM = GC.GetComponent<TurnManager>();
-        TM.TurnChange += handleTurnChange;
-    }
+    //private void Subscribe()
+    //{
+    //    GameObject GC = GameObject.FindGameObjectWithTag("GameController");
+    //    TurnManager TM = GC.GetComponent<TurnManager>();
+    //    TM.TurnChange += handleTurnChange;
+    //}
 
-    //Voi laittaa myös pelaajan kuoleman kohdalle
-    private void SubscribeOff()
-    {
-        GameObject GC = GameObject.FindGameObjectWithTag("GameController");
-        TurnManager TM = GC.GetComponent<TurnManager>();
-        TM.TurnChange -= handleTurnChange;
-    }
+    ////Voi laittaa myös pelaajan kuoleman kohdalle
+    //private void SubscribeOff()
+    //{
+    //    GameObject GC = GameObject.FindGameObjectWithTag("GameController");
+    //    TurnManager TM = GC.GetComponent<TurnManager>();
+    //    TM.TurnChange -= handleTurnChange;
+    //}
 
     private void handleTurnChange(PlayerBehaviour player)
     {

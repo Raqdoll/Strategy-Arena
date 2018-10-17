@@ -15,6 +15,7 @@ TagManager:
   - spell6
   - MouseManager
   - PlayerController
+  - CharTab
   layers:
   - Default
   - TransparentFX
