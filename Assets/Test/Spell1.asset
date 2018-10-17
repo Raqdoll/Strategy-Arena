@@ -13,25 +13,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mySpellName: VoidBubble
   spellIcon: {fileID: 21300000, guid: 1a5c3f03b7320764dab6a2030a0324a7, type: 3}
-  mySpellAreaType: 0
-  mySpellRangeType: 0
+  mySpellAreaType: 1
+  mySpellRangeType: 2
   spellInitialCooldown: 0
-  spellDamageMin: 0
-  spellDamageMax: 0
+  spellDamageMin: 200
+  spellDamageMax: 300
   spellRangeMin: 0
-  spellRangeMax: 0
+  spellRangeMax: 7
   spellCooldown: 0
-  spellCastPerturn: 0
-  castPerTarget: 0
+  spellCastPerturn: 5
+  castPerTarget: 5
   spellApCost: 0
   spellPushback: 0
   spellPull: 0
-  areaRange: 0
+  areaRange: 5
   spellCooldownLeft: 0
   trueDamage: 0
-  healsAlly: 0
-  hurtsAlly: 0
-  spellOpen: 0
+  healsAlly: 1
+  hurtsAlly: 1
   needLineOfSight: 0
   spellLaunched: 0
   inCooldown: 0

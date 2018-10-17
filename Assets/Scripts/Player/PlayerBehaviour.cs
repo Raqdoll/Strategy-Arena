@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,12 +29,14 @@ public class PlayerBehaviour : MonoBehaviour {
 
     public CharacterValues currentCharacter;
 
+    public List<GameObject> charTabList;
+
     GridController gridController;
     Abilities abilities;
 
-    Tile tilescripts;  
+    Tile tilescripts;
 
-    void Start () {
+    void Start() {
 
         gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
         if (!gridController)
@@ -43,48 +46,14 @@ public class PlayerBehaviour : MonoBehaviour {
         //    currentTile = gridController.GetTile((int)transform.localPosition.x, (int)transform.localPosition.z);
 
 
-        // Put Information Of classes Here
-        //switch (myCharClass)
-        //{          
-        //    case CharacterClass.Tank1:
-        //        maxHP = 4500;
-        //        maxAp = 11;
-        //        maxMp = 6;
-        //        currentHP = maxHP;
-        //        currentAp = maxAp;
-        //        currentMp = maxMp;
-        //        damageChange = 1;
 
-        //        break;
-        //    case CharacterClass.Support1:
-        //        maxHP = 3000;
-        //        maxAp = 12;
-        //        maxMp = 6;
-        //        currentHP = maxHP;
-        //        currentAp = maxAp;
-        //        currentMp = maxMp;
-        //        damageChange = 1;
-        //        break;
-        //    case CharacterClass.Healer1:
-        //        maxHP = 3000;
-        //        maxAp = 12;
-        //        maxMp = 6;
-        //        currentHP = maxHP;
-        //        currentAp = maxAp;
-        //        currentMp = maxMp;
-        //        damageChange = 1;
-        //        break;
-        //    case CharacterClass.DmgDealer1:
-        //        maxHP = 3000;
-        //        maxAp = 12;
-        //        maxMp = 6;
-        //        currentHP = maxHP;
-        //        currentAp = maxAp;
-        //        currentMp = maxMp;
-        //        damageChange = 1;
-        //        break;
-        //}
-	}
-	void Update () {
+    }
+    public void UpdateTabs()
+    {
+        foreach(GameObject tab in charTabList)
+        {
+            CharacterTab tabby = tab.GetComponent<CharacterTab>();
+            tabby.UpdateInfo();
+        }
     }
 }
