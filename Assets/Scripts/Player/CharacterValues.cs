@@ -17,7 +17,7 @@ public class CharacterValues : ScriptableObject
     public int damagePlus;
     public int armorPlus;
     public bool moving;
-    public Tile currentTile;
+    public PositionContainer currentTile;
     public bool dead;
     public bool team; // true = 1 false = 2
     public SpellValues spell_1;
@@ -26,4 +26,5 @@ public class CharacterValues : ScriptableObject
     public SpellValues spell_4;
     public SpellValues spell_5;
     public SpellValues spell_6;
+
 }

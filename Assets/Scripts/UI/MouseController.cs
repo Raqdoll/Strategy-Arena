@@ -25,6 +25,7 @@ public class MouseController : MonoBehaviour
         gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
         playerBehaviour = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<PlayerBehaviour>();
         spellCast = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<SpellCast>();
+        abilities = GetComponent<Abilities>();
     }
 
 
@@ -87,7 +88,7 @@ public class MouseController : MonoBehaviour
 
                                 }
                             }
-                        rangeTiles = abilities.RangeType();
+                        rangeTiles = abilities.RangeType(spellCast.currentSpell.mySpellRangeType);
                         foreach (var tile in rangeTiles)
                         {
                             previousTile = selected;
@@ -95,7 +96,7 @@ public class MouseController : MonoBehaviour
                             aR.material = rangeMaterial;
                             if (tile == selected)
                             {
-                                targetedTiles = abilities.AreaType();
+                                targetedTiles = abilities.AreaType(spellCast.currentSpell.mySpellAreaType);
                                 foreach (var target in targetedTiles)
                                 {
                                     Renderer sr = selected.GetComponent<Renderer>();

@@ -4,8 +4,8 @@
 public class SpellValues : ScriptableObject
 {   public string mySpellName;
     public Sprite spellIcon;
-    public int mySpellAreaType;
-    public int mySpellRangeType;
+    public Abilities.SpellAreaType mySpellAreaType;
+    public Abilities.SpellRangeType mySpellRangeType;
     public int spellInitialCooldown;
     public int spellDamageMin;
     public int spellDamageMax;
@@ -17,7 +17,7 @@ public class SpellValues : ScriptableObject
     public int spellApCost;
     public int spellPushback;
     public int spellPull;
-    public int areaRange;
+    public int aoeRange;
     public int spellCooldownLeft;
     public int trueDamage;
     public bool healsAlly = false;

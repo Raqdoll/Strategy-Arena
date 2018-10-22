@@ -29,6 +29,9 @@ public class GridController : MonoBehaviour {
         {
             tileGrid[tileList[i].locX - 1][tileList[i].locZ - 1] = tileList[i];
         }
+
+        //Tile test = GetTile(4, 6);
+        //test.transform.position += new Vector3(2f, 2f, 2f);
     }
     //USE THIS TO CALL GRID!
     public Tile GetTile(int xCord, int zCord) {

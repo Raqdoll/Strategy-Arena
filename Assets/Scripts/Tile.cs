@@ -8,6 +8,7 @@ public class Tile : MonoBehaviour {
     public GameObject targetyTile;
     public int locX;
     public int locZ;
+    public PositionContainer positionContainer;
 
     public Material ShootThroughBlockMaterial;
     public Material BlockyBlockMaterial;
@@ -34,7 +35,6 @@ public class Tile : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
        hoveryTile = GridController.FindObjectOfType<GridController>().hoverTile;
-        //gridController = GetComponent<GridController>();
         gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
         locX = (int)transform.localPosition.x;
         locZ = (int)transform.localPosition.z;
@@ -87,7 +87,7 @@ public class Tile : MonoBehaviour {
     {
         int differencex = Mathf.Abs(other.locX - locX);
         int diffenercez = Mathf.Abs(other.locZ - locZ);
-        return Mathf.Sqrt(differencex^2 + diffenercez^2);
+        return Mathf.Sqrt(differencex ^ 2 + diffenercez ^ 2);
     }
 
     public List<Tile> GetRoute(Tile other)
@@ -101,7 +101,7 @@ public class Tile : MonoBehaviour {
     {
         Tile bestTile = null;
         float shortestDistance = 999;
-        for (int i = -1 ; i <= 1; i++)
+        for (int i = -1; i <= 1; i++)
         {
             for (int j = -1; j <= 1; j++)
             {
@@ -110,20 +110,20 @@ public class Tile : MonoBehaviour {
                     continue;  //skips iteration, as such tile is out of bounds
                 if (testTile.CheckAvailability())
 
-                if (bestTile != null)
-                {
-                    float temp = testTile.GetRealDistance(other);
-                    if (temp < shortestDistance)
+                    if (bestTile != null)
                     {
-                        shortestDistance = temp;
-                        bestTile = testTile;
+                        float temp = testTile.GetRealDistance(other);
+                        if (temp < shortestDistance)
+                        {
+                            shortestDistance = temp;
+                            bestTile = testTile;
+                        }
                     }
-                }
-                else
-                {
-                    bestTile = testTile;
-                    shortestDistance = testTile.GetRealDistance(other);
-                }
+                    else
+                    {
+                        bestTile = testTile;
+                        shortestDistance = testTile.GetRealDistance(other);
+                    }
             }
         }
         return bestTile;
@@ -141,7 +141,8 @@ public class Tile : MonoBehaviour {
         return (gridController.GetTilesNextTo(locX, locZ));
     }
 
-    void Update () {
-		
-	}
+    void Update()
+    {
+
+    }
 }
