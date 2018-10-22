@@ -10038,6 +10038,7 @@ GameObject:
   - component: {fileID: 451841860}
   - component: {fileID: 451841862}
   - component: {fileID: 451841861}
+  - component: {fileID: 451841863}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: PlayerController
@@ -10111,6 +10112,17 @@ MonoBehaviour:
   - {fileID: 363544296}
   - {fileID: 624303629}
   - {fileID: 1178994842}
+--- !u!114 &451841863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 451841859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc7f8fa981faa9f4cb8adb2c56bf9676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &454703253
 Prefab:
   m_ObjectHideFlags: 0
@@ -12590,7 +12602,6 @@ GameObject:
   - component: {fileID: 539631434}
   - component: {fileID: 539631437}
   - component: {fileID: 539631433}
-  - component: {fileID: 539631432}
   m_Layer: 0
   m_Name: ruma ukko 1 "Jan"
   m_TagString: Untagged
@@ -12598,43 +12609,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &539631432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 539631431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc7f8fa981faa9f4cb8adb2c56bf9676, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spellButton: {fileID: 0}
-  mySpellAreaType: 0
-  mySpellRangeType: 0
-  mySpellName: 0
-  spellInitialCooldown: 0
-  spellDamageMin: 0
-  spellDamageMax: 0
-  spellRangeMin: 0
-  spellRangeMax: 0
-  spellCooldown: 0
-  spellCastPerturn: 0
-  castPerTarget: 0
-  spellApCost: 0
-  spellPushback: 0
-  spellPull: 0
-  areaRange: 0
-  spellCooldownLeft: 0
-  trueDamage: 0
-  healsAlly: 0
-  hurtsAlly: 0
-  spellOpen: 0
-  needLineOfSight: 0
-  spellLaunched: 0
-  inCooldown: 0
-  spellName: 
-  cv: {fileID: 0}
 --- !u!114 &539631433
 MonoBehaviour:
   m_ObjectHideFlags: 0
