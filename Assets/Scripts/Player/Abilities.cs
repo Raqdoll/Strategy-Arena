@@ -195,14 +195,16 @@ public class Abilities : MonoBehaviour {
             default:
                 break;
         }
+        List<Tile> returnables = new List<Tile>();
         foreach (var tile in rangetiles)
         {
-            if (tile.myType != Tile.BlockType.BaseBlock)
+            if (tile.myType == Tile.BlockType.BaseBlock)
             {
-                rangetiles.Remove(tile);
+                returnables.Add(tile);
             }
         }
-        return rangetiles;
+        
+        return returnables;
     }
 
     //public void Tester()

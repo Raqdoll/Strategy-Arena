@@ -19,7 +19,7 @@ MonoBehaviour:
   spellDamageMin: 200
   spellDamageMax: 300
   spellRangeMin: 1
-  spellRangeMax: 7
+  spellRangeMax: 3
   spellCooldown: 0
   spellCastPerturn: 5
   castPerTarget: 5

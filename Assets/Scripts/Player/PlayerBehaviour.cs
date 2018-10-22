@@ -44,8 +44,8 @@ public class PlayerBehaviour : MonoBehaviour {
         tilescripts = GetComponent<Tile>();
         //if (!currentTile)
         //    currentTile = gridController.GetTile((int)transform.localPosition.x, (int)transform.localPosition.z);
-        Tile test = gridController.GetTile(6, 7);
-        test.transform.position += new Vector3(2f, 2f, 2f);
+
+        currentCharacter.currentTile = new PositionContainer(12, 12);
 
     }
     public void UpdateTabs()

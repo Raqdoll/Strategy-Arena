@@ -25,7 +25,7 @@ public class MouseController : MonoBehaviour
         gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
         playerBehaviour = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<PlayerBehaviour>();
         spellCast = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<SpellCast>();
-        abilities = GetComponent<Abilities>();
+        abilities = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<Abilities>();
     }
 
 
@@ -62,7 +62,7 @@ public class MouseController : MonoBehaviour
                         {
                             foreach (var tile in rangeTiles)
                             {
-                                Renderer tr = previousTile.GetComponent<Renderer>();
+                                MeshRenderer tr = previousTile.GetComponent<MeshRenderer>();
                                 tr.material = previousTile.GetComponent<Tile>().BaseMaterial;
                             }
                             rangeTiles = null;
