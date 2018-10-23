@@ -4,7 +4,6 @@ using UnityEngine;
 
 
 public class Tile : MonoBehaviour {
-    public Tile hoveryTile;
     public GameObject targetyTile;
     public int locX;
     public int locZ;
@@ -34,7 +33,6 @@ public class Tile : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-       hoveryTile = GridController.FindObjectOfType<GridController>().hoverTile;
         gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
         locX = (int)transform.localPosition.x;
         locZ = (int)transform.localPosition.z;
@@ -45,7 +43,7 @@ public class Tile : MonoBehaviour {
         {
             case BlockType.BaseBlock:
                 ShootThrough = true;
-                Targetable = false;
+                Targetable = true;
                 WalkThrough = true;
             break;
 

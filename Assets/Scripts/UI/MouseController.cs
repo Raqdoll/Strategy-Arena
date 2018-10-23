@@ -62,8 +62,8 @@ public class MouseController : MonoBehaviour
                         {
                             foreach (var tile in rangeTiles)
                             {
-                                MeshRenderer tr = previousTile.GetComponent<MeshRenderer>();
-                                tr.material = previousTile.GetComponent<Tile>().BaseMaterial;
+                                MeshRenderer tr = tile.GetComponent<MeshRenderer>();
+                                tr.material = tile.GetComponent<Tile>().BaseMaterial;
                             }
                             rangeTiles = null;
                         }
@@ -71,103 +71,15 @@ public class MouseController : MonoBehaviour
                         {
                             foreach (var target in targetedTiles)
                             {
-                                Renderer ar = previousTile.GetComponent<Renderer>();
-                                ar.material = previousTile.GetComponent<Tile>().BaseMaterial;
+                                Renderer ar = target.GetComponent<Renderer>();
+                                ar.material = target.GetComponent<Tile>().BaseMaterial;
                             }
                             targetedTiles = null;
                         }
                     }
-
-                    if (spellCast.spellOpen == true)
-                    {
-                        Debug.Log("Spelll Open");
-                            if (Input.GetMouseButtonDown(0) && playerBehaviour.currentCharacter.currentAp >= spellCast.currentSpell.spellApCost /*abilities.spellApCost*/)
-                            {
-                                foreach (var tile in targetedTiles)
-                                {
-
-                                }
-                            }
-                        rangeTiles = abilities.RangeType(spellCast.currentSpell.mySpellRangeType);
-                        foreach (var tile in rangeTiles)
-                        {
-                            previousTile = selected;
-                            Renderer aR = selected.GetComponent<Renderer>();
-                            aR.material = rangeMaterial;
-                            if (tile == selected)
-                            {
-                                targetedTiles = abilities.AreaType(spellCast.currentSpell.mySpellAreaType);
-                                foreach (var target in targetedTiles)
-                                {
-                                    Renderer sr = selected.GetComponent<Renderer>();
-                                    sr.material = targetMaterial;
-                                }
-                            }
-                            else
-                            { 
-                                Renderer sr = selected.GetComponent<Renderer>();
-                                sr.material = hovermaterial;
-                            }
-                        }
-                        if (Input.GetMouseButtonDown(0) && playerBehaviour.currentCharacter.currentAp >= spellCast.currentSpell.spellApCost && spellCast.currentSpell != null)
-                        {
-                            foreach (var tile in targetedTiles)
-                            {
-                                
-                                CharacterValues target = tile.charCurrentlyOnTile;
-                                
-                                spellCast.CastSpell(spellCast.currentSpell, playerBehaviour.currentCharacter, target);
-
-                            }
-                            if (rangeTiles != null)
-                            {
-                                foreach (var tile in rangeTiles)
-                                {
-                                    Renderer tr = previousTile.GetComponent<Renderer>();
-                                    tr.material = previousTile.GetComponent<Tile>().BaseMaterial;
-                                }
-                                rangeTiles = null;
-                            }
-                            if (targetedTiles != null)
-                            {
-                                foreach (var target in targetedTiles)
-                                {
-                                    Renderer ar = previousTile.GetComponent<Renderer>();
-                                    ar.material = previousTile.GetComponent<Tile>().BaseMaterial;
-                                }
-                                targetedTiles = null;
-                            }
-                            spellCast.Aftermath();
-                        }
-                        if (Input.GetMouseButtonDown(1))
-                        {
-                            if (rangeTiles != null)
-                            {
-                                foreach (var tile in rangeTiles)
-                                {
-                                    Renderer tr = previousTile.GetComponent<Renderer>();
-                                    tr.material = previousTile.GetComponent<Tile>().BaseMaterial;
-                                }
-                                rangeTiles = null;
-                            }
-                            if (targetedTiles != null)
-                            {
-                                foreach (var target in targetedTiles)
-                                {
-                                    Renderer ar = previousTile.GetComponent<Renderer>();
-                                    ar.material = previousTile.GetComponent<Tile>().BaseMaterial;
-                                }
-                                targetedTiles = null;
-                            }
-                            spellCast.SpellCancel();
-                        }
-                    }
-                    else
-                    {
-                        previousTile = selected;
-                        Renderer sr = selected.GetComponent<Renderer>();
-                        sr.material = hovermaterial;
-                    }
+                    previousTile = selected;
+                    Renderer sr = selected.GetComponent<Renderer>();
+                    sr.material = hovermaterial;
                 }
                 
             }
@@ -179,7 +91,97 @@ public class MouseController : MonoBehaviour
                     Renderer pr = previousTile.GetComponent<Renderer>();
                     pr.material = previousTile.GetComponent<Tile>().BaseMaterial;
                     previousTile = null;
+
+                    if (targetedTiles != null)
+                    {
+                        foreach (var target in targetedTiles)
+                        {
+                            Renderer ar = target.GetComponent<Renderer>();
+                            ar.material = target.GetComponent<Tile>().BaseMaterial;
+                        }
+                        targetedTiles = null;
+                    }
                 }
+            }
+        }
+
+        // kun spell nappulaa on painettu
+        if (spellCast.spellOpen == true)
+        {
+            Debug.Log("Spelll Open");
+            rangeTiles = abilities.RangeType(spellCast.currentSpell.mySpellRangeType);
+            targetedTiles = abilities.AreaType(spellCast.currentSpell.mySpellAreaType);
+            //pitäisi maalata target range
+            foreach (var tile in rangeTiles)
+            {
+                Renderer aR = tile.GetComponent<Renderer>();
+                aR.material = rangeMaterial;
+            }
+
+            //pitäisi maalata AOE tilet
+            foreach (var tile in rangeTiles)
+            {
+                if (tile == selected)
+                {
+                    foreach (var target in targetedTiles)
+                    {
+                        Renderer pr = target.GetComponent<Renderer>();
+                        pr.material = targetMaterial;
+                    }
+                }
+            }
+
+            // kun spell castataan
+            if (Input.GetMouseButtonDown(0) && playerBehaviour.currentCharacter.currentAp >= spellCast.currentSpell.spellApCost && spellCast.currentSpell != null)
+            {
+                foreach (var tile in targetedTiles)
+                {
+                    CharacterValues target = tile.charCurrentlyOnTile;
+                    spellCast.CastSpell(spellCast.currentSpell, playerBehaviour.currentCharacter, target);
+                }
+                if (rangeTiles != null)
+                {
+                    foreach (var tile in rangeTiles)
+                    {
+                        Renderer tr = tile.GetComponent<Renderer>();
+                        tr.material = tile.GetComponent<Tile>().BaseMaterial;
+                    }
+                    rangeTiles = null;
+                }
+                if (targetedTiles != null)
+                {
+                    foreach (var target in targetedTiles)
+                    {
+                        Renderer ar = target.GetComponent<Renderer>();
+                        ar.material = target.GetComponent<Tile>().BaseMaterial;
+                    }
+                    targetedTiles = null;
+                }
+                spellCast.Aftermath();
+            }
+
+            // spell cansellataan
+            if (Input.GetMouseButtonDown(1))
+            {
+                if (rangeTiles != null)
+                {
+                    foreach (var tile in rangeTiles)
+                    {
+                        Renderer tr = tile.GetComponent<Renderer>();
+                        tr.material = tile.GetComponent<Tile>().BaseMaterial;
+                    }
+                    rangeTiles = null;
+                }
+                if (targetedTiles != null)
+                {
+                    foreach (var target in targetedTiles)
+                    {
+                        Renderer ar = target.GetComponent<Renderer>();
+                        ar.material = target.GetComponent<Tile>().BaseMaterial;
+                    }
+                    targetedTiles = null;
+                }
+                spellCast.SpellCancel();
             }
         }
     }

@@ -6,7 +6,6 @@ using UnityEngine;
 public class GridController : MonoBehaviour {
 
     public GameObject tiles;
-    public Tile hoverTile;
     private Tile[] tileList;
     private List<List<Tile>> tileGrid;
 

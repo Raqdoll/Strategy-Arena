@@ -30,52 +30,40 @@ public class Abilities : MonoBehaviour {
 
    public List<Tile> AreaType(SpellAreaType mySpellAreaType)
     {
+        int[][] dirList = new int[4][] { new int[]{0, 1 }, new int[] { 0,-1}, new int[] { 1, 0 }, new int[] { -1, 0 } };
         List<Tile> targetTiles = new List<Tile>();
         switch (mySpellAreaType)
         {
+
+            //spellrange min ei saa olla 0
             case SpellAreaType.Line:
-                if (playerBehaviour.currentCharacter.currentTile.z <= gridController.hoverTile.locZ)
-                {
-                    for (int i = 1; i <= spellCast.currentSpell.aoeRange; i++)
-                    {
-                        targetTiles.Add(gridController.GetTile(gridController.hoverTile.locX, gridController.hoverTile.locZ + i));
-                    }
-                }
-                else if (playerBehaviour.currentCharacter.currentTile.z >= gridController.hoverTile.locZ)
-                    for (int i = 1; i <= spellCast.currentSpell.aoeRange; i++)
-                    {
-                        targetTiles.Add(gridController.GetTile(gridController.hoverTile.locX + i, gridController.hoverTile.locZ));
-                    }
-                else if (playerBehaviour.currentCharacter.currentTile.x >= gridController.hoverTile.locX)
-                    for (int i = 1; i <= spellCast.currentSpell.aoeRange; i++)
-                    {
-                        targetTiles.Add(gridController.GetTile(gridController.hoverTile.locX, gridController.hoverTile.locZ - i));
-                    }
+                if (playerBehaviour.currentCharacter.currentTile.z < mouseController.selected.locZ)
+                    LineTargets(0, dirList, out targetTiles);
+                else if (playerBehaviour.currentCharacter.currentTile.z > mouseController.selected.locZ)
+                    LineTargets(1, dirList, out targetTiles);
+                else if (playerBehaviour.currentCharacter.currentTile.x > mouseController.selected.locX)
+                    LineTargets(3, dirList, out targetTiles);
                 else
-                    for (int i = 1; i <= spellCast.currentSpell.aoeRange; i++)
-                    {
-                        targetTiles.Add(gridController.GetTile(gridController.hoverTile.locX - i, gridController.hoverTile.locZ));
-                    }
+                    LineTargets(2, dirList, out targetTiles);
                 break;
             case SpellAreaType.Cross:
 
-                targetTiles.Add(gridController.hoverTile);
+                targetTiles.Add(mouseController.selected);
                 for (int i = 1; i <= spellCast.currentSpell.aoeRange; i++)
-                {   
-                    targetTiles.Add(gridController.GetTile(gridController.hoverTile.locX, gridController.hoverTile.locZ + i));
-                    targetTiles.Add(gridController.GetTile(gridController.hoverTile.locX + i, gridController.hoverTile.locZ));
-                    targetTiles.Add(gridController.GetTile(gridController.hoverTile.locX, gridController.hoverTile.locZ - i));
-                    targetTiles.Add(gridController.GetTile(gridController.hoverTile.locX - i, gridController.hoverTile.locZ));
+                { 
+                    foreach (var c in dirList) {
+                        targetTiles.Add(gridController.GetTile(mouseController.selected.locX + c[0]*i, mouseController.selected.locZ+c[1]*i));
+                    }
                 }
                 break;
             case SpellAreaType.Diagonal:
-                targetTiles.Add(gridController.hoverTile);
+                targetTiles.Add(mouseController.selected);
                 for (int i = 1; i <= spellCast.currentSpell.aoeRange; i++)
                 {
-                    targetTiles.Add(gridController.GetTile(gridController.hoverTile.locX + i, gridController.hoverTile.locZ + i));
-                    targetTiles.Add(gridController.GetTile(gridController.hoverTile.locX + i, gridController.hoverTile.locZ - i));
-                    targetTiles.Add(gridController.GetTile(gridController.hoverTile.locX - i, gridController.hoverTile.locZ + i));
-                    targetTiles.Add(gridController.GetTile(gridController.hoverTile.locX - i, gridController.hoverTile.locZ - i));
+                    targetTiles.Add(gridController.GetTile(mouseController.selected.locX + i, mouseController.selected.locZ + i));
+                    targetTiles.Add(gridController.GetTile(mouseController.selected.locX + i, mouseController.selected.locZ - i));
+                    targetTiles.Add(gridController.GetTile(mouseController.selected.locX - i, mouseController.selected.locZ + i));
+                    targetTiles.Add(gridController.GetTile(mouseController.selected.locX - i, mouseController.selected.locZ - i));
                 }
                 break;
             case SpellAreaType.Normal:
@@ -89,47 +77,24 @@ public class Abilities : MonoBehaviour {
                     }
                 }
                 break;
-            case SpellAreaType.Cone:
-                if (playerBehaviour.currentCharacter.currentTile.z <= gridController.hoverTile.locZ)
-                {
-                    for (int i = 0; i <= spellCast.currentSpell.aoeRange; i++)
-                    {
-                        for (int j = 0 - i; j <= i; j++)
-                        {
-                            targetTiles.Add(gridController.GetTile(gridController.hoverTile.locX + j, gridController.hoverTile.locZ + i));
-                        }
-                    }
-                }
-                else if (playerBehaviour.currentCharacter.currentTile.z >= gridController.hoverTile.locZ)
-                {
-                    for (int i = 0; i <= spellCast.currentSpell.aoeRange; i++)
-                    {
-                        for (int j = 0 - i; j <= i; j++)
-                        {
-                            targetTiles.Add(gridController.GetTile(gridController.hoverTile.locX + j, gridController.hoverTile.locZ - i));
-                        }
-                    }
-                }
-                else if (playerBehaviour.currentCharacter.currentTile.x >= gridController.hoverTile.locX)
-                { 
 
-                    for (int i = 0; i <= spellCast.currentSpell.aoeRange; i++)
-                    {
-                        for (int j = 0 - i; j <= i; j++)
-                        {
-                            targetTiles.Add(gridController.GetTile(gridController.hoverTile.locX - j, gridController.hoverTile.locZ + i));
-                        }
-                    }
+                // spellrange ei saa olla 0
+            case SpellAreaType.Cone:
+                if (playerBehaviour.currentCharacter.currentTile.z < mouseController.selected.locZ)
+                {
+                    ConeTargets(0, dirList, out targetTiles);
+                }
+                else if (playerBehaviour.currentCharacter.currentTile.z > mouseController.selected.locZ)
+                {
+                    ConeTargets(1, dirList, out targetTiles);
+                }
+                else if (playerBehaviour.currentCharacter.currentTile.x > mouseController.selected.locX)
+                {
+                    ConeTargets(3, dirList, out targetTiles);
                 }
                 else
                 {
-                    for (int i = 0; i <= spellCast.currentSpell.aoeRange; i++)
-                    {
-                        for (int j = 0 - i; j <= i; j++)
-                        {
-                            targetTiles.Add(gridController.GetTile(gridController.hoverTile.locX - j, gridController.hoverTile.locZ - i));
-                        }
-                    }
+                    ConeTargets(2, dirList, out targetTiles);
                 }
                 break;
             case SpellAreaType.Square:
@@ -137,60 +102,90 @@ public class Abilities : MonoBehaviour {
                 {
                     for (int j = 0 - spellCast.currentSpell.aoeRange; j <= spellCast.currentSpell.aoeRange; j++)
                     {
-                        targetTiles.Add(gridController.GetTile(gridController.hoverTile.locX + j, gridController.hoverTile.locZ + i));
+                        targetTiles.Add(gridController.GetTile(mouseController.selected.locX + j, mouseController.selected.locZ + i));
                     }
                 }
                     break;
         }
-        return targetTiles;
+        List<Tile> returnables = new List<Tile>();
+        foreach (var tile in targetTiles)
+        {
+            if (tile.myType == Tile.BlockType.BaseBlock)
+            {
+                returnables.Add(tile);
+            }
+        }
+        return returnables;
+    }
+
+    private void LineTargets(int directionIndex, int[][] dirList, out List<Tile> targetTiles) {
+    targetTiles = new List<Tile>();
+        for (int i = 0; i <= spellCast.currentSpell.aoeRange; i++) {
+            targetTiles.Add(gridController.GetTile(mouseController.selected.locX + dirList[directionIndex][0] * i, mouseController.selected.locZ + dirList[directionIndex][1] * i));
+        }
+    }
+
+    private void ConeTargets(int directionIndex, int[][] dirList, out List<Tile> targetTiles ) {
+        targetTiles = new List<Tile>();
+        for (int i = 0; i <= spellCast.currentSpell.aoeRange; i++)
+        {
+            for (int j = 0 - i; j <= i; j++)
+            {
+                int x2 = dirList[directionIndex][0];
+                int z2 = dirList[directionIndex][1];
+                if (x2 == 0) {
+                    x2 = j;
+                    z2 *= i;
+                }
+                if (z2 == 0) {
+                    z2 = j;
+                    x2 *= i;
+                }
+                targetTiles.Add(gridController.GetTile(mouseController.selected.locX + x2, mouseController.selected.locZ + z2));
+            }
+        }
     }
 
     public List<Tile> RangeType(SpellRangeType mySpellRangeType)
-    {
-        
+    {      
     List<Tile> rangetiles = new List<Tile>();
+        int i = spellCast.currentSpell.spellRangeMin;
+        if (i == 0)
+        {
+            rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z));
+            i++;
+        }
         switch (mySpellRangeType)
         {
-            case SpellRangeType.Diagonal:
-                if(spellCast.currentSpell.needLineOfSight == false)
-                {
-                    rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z));
-                    for (int i = spellCast.currentSpell.spellRangeMin + 1; i <= spellCast.currentSpell.spellRangeMax; i++)
+            case SpellRangeType.Diagonal:              
+                    for ( i = spellCast.currentSpell.spellRangeMin; i <= spellCast.currentSpell.spellRangeMax; i++)
                         {
                             rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x + i, playerBehaviour.currentCharacter.currentTile.z + i));
                             rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x + i, playerBehaviour.currentCharacter.currentTile.z - i));
                             rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x - i, playerBehaviour.currentCharacter.currentTile.z + i));
                             rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x - i, playerBehaviour.currentCharacter.currentTile.z - i));
                         }
-                }
                 break;
             case SpellRangeType.Linear:
-                if (spellCast.currentSpell.needLineOfSight == true)
-                {
-                    rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z));
-                    for (int i = spellCast.currentSpell.spellRangeMin +1; i <= spellCast.currentSpell.spellRangeMax; i++)
+                    for ( i = spellCast.currentSpell.spellRangeMin; i <= spellCast.currentSpell.spellRangeMax; i++)
                     {
                             rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z + i));
                             rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x + i, playerBehaviour.currentCharacter.currentTile.z));
                             rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z - i));
                             rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x - i, playerBehaviour.currentCharacter.currentTile.z));
                     }
-                }
                 break;
             case SpellRangeType.Normal:
-                if (spellCast.currentSpell.needLineOfSight == false)
-                {
-                    for (int i = spellCast.currentSpell.spellRangeMin - spellCast.currentSpell.spellRangeMax; i <= spellCast.currentSpell.spellRangeMax; i++)
+                    for ( i = spellCast.currentSpell.spellRangeMin - spellCast.currentSpell.spellRangeMax; i <= spellCast.currentSpell.spellRangeMax; i++)
                     {
                         for (int j = 0 - spellCast.currentSpell.spellRangeMax; j <= spellCast.currentSpell.spellRangeMax; j++)
                         {
-                            if (Mathf.Abs(i) + Mathf.Abs(j) <= spellCast.currentSpell.aoeRange)
+                            if (Mathf.Abs(i) + Mathf.Abs(j) <= spellCast.currentSpell.spellRangeMax)
                             {                           
                                 rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x + j, playerBehaviour.currentCharacter.currentTile.z + i));
                             }
                         }
                     }
-                }
                 break;
             default:
                 break;
