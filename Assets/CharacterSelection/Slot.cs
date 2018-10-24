@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 using UnityEngine.EventSystems;
 
-public class Slot : MonoBehaviour, IDropHandler {
+public class Slot : MonoBehaviour, IDropHandler
+{
     public GameObject item
     {
         get
@@ -16,6 +16,7 @@ public class Slot : MonoBehaviour, IDropHandler {
         }
     }
 
+    #region IDropHandler implementation
     public void OnDrop(PointerEventData eventData)
     {
         if (!item)
@@ -23,5 +24,14 @@ public class Slot : MonoBehaviour, IDropHandler {
             DragHandler.itemBeingDragged.transform.SetParent(transform);
             ExecuteEvents.ExecuteHierarchy<IHasChanged>(gameObject, null, (x, y) => x.HasChanged());
         }
+        else
+        {
+            item.transform.SetParent(DragHandler.startParent);
+            ExecuteEvents.ExecuteHierarchy<IHasChanged>(gameObject, null, (x, y) => x.HasChanged());
+
+            DragHandler.itemBeingDragged.transform.SetParent(transform);
+            ExecuteEvents.ExecuteHierarchy<IHasChanged>(gameObject, null, (x, y) => x.HasChanged());
+        }
     }
+    #endregion
 }
