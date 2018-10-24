@@ -15,10 +15,13 @@ public class MouseController : MonoBehaviour
     public Material hovermaterial;
     public Material targetMaterial;
     public Material rangeMaterial;
+    public Material movementRangeMaterial;
     private Tile previousTile;
     List<Tile> targetedTiles;
     List<Tile> rangeTiles;
+    List<Tile> tilesToBeReset;
     Abilities abilities;
+    private bool rangeTilesPainted;
 
     void Start()
     {
@@ -26,6 +29,7 @@ public class MouseController : MonoBehaviour
         playerBehaviour = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<PlayerBehaviour>();
         spellCast = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<SpellCast>();
         abilities = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<Abilities>();
+        tilesToBeReset = new List<Tile>();
     }
 
 
@@ -60,20 +64,12 @@ public class MouseController : MonoBehaviour
                         previousTile = null;
                         if(rangeTiles != null)
                         {
-                            foreach (var tile in rangeTiles)
-                            {
-                                MeshRenderer tr = tile.GetComponent<MeshRenderer>();
-                                tr.material = tile.GetComponent<Tile>().BaseMaterial;
-                            }
+                            ResetTileMaterials(rangeTiles);
                             rangeTiles = null;
                         }
                         if(targetedTiles != null)
                         {
-                            foreach (var target in targetedTiles)
-                            {
-                                Renderer ar = target.GetComponent<Renderer>();
-                                ar.material = target.GetComponent<Tile>().BaseMaterial;
-                            }
+                            ResetTileMaterials(targetedTiles);
                             targetedTiles = null;
                         }
                     }
@@ -94,11 +90,7 @@ public class MouseController : MonoBehaviour
 
                     if (targetedTiles != null)
                     {
-                        foreach (var target in targetedTiles)
-                        {
-                            Renderer ar = target.GetComponent<Renderer>();
-                            ar.material = target.GetComponent<Tile>().BaseMaterial;
-                        }
+                        ResetTileMaterials(targetedTiles);
                         targetedTiles = null;
                     }
                 }
@@ -123,11 +115,7 @@ public class MouseController : MonoBehaviour
             {
                 if (tile == selected)
                 {
-                    foreach (var target in targetedTiles)
-                    {
-                        Renderer pr = target.GetComponent<Renderer>();
-                        pr.material = targetMaterial;
-                    }
+                    ChangeTileMaterials(targetedTiles, targetMaterial);
                 }
             }
 
@@ -165,24 +153,55 @@ public class MouseController : MonoBehaviour
             {
                 if (rangeTiles != null)
                 {
-                    foreach (var tile in rangeTiles)
-                    {
-                        Renderer tr = tile.GetComponent<Renderer>();
-                        tr.material = tile.GetComponent<Tile>().BaseMaterial;
-                    }
+                    ResetTileMaterials(rangeTiles);
                     rangeTiles = null;
                 }
                 if (targetedTiles != null)
                 {
-                    foreach (var target in targetedTiles)
-                    {
-                        Renderer ar = target.GetComponent<Renderer>();
-                        ar.material = target.GetComponent<Tile>().BaseMaterial;
-                    }
+                    ResetTileMaterials(targetedTiles);
                     targetedTiles = null;
                 }
                 spellCast.SpellCancel();
             }
         }
+
+        //if (spellCast.spellOpen == false)
+        //{
+        //    if (!rangeTilesPainted)
+        //    {
+        //        ResetTileMaterials(tilesToBeReset);
+        //        tilesToBeReset.Clear();
+        //        ChangeTileMaterials(playerBehaviour.movement.TilesInRange(), movementRangeMaterial);
+        //        rangeTilesPainted = true;
+        //    }
+
+        //    if (Input.GetMouseButtonDown(0))
+        //    {
+        //        playerBehaviour.movement.MoveToTile(selected, PlayerMovement.MovementMethod.Teleport);
+
+        //        ResetTileMaterials(tilesToBeReset);
+        //        tilesToBeReset.Clear();
+        //        rangeTilesPainted = false;
+        //    }
+        //}
     }
+
+    void ResetTileMaterials(List<Tile> tileList)
+    {
+        foreach(var tile in tileList)
+        {
+            Renderer ar = tile.GetComponent<Renderer>();
+            ar.material = tile.GetComponent<Tile>().BaseMaterial;
+        }
+    }
+
+    void ChangeTileMaterials(List<Tile> tileList, Material material)
+    {
+        foreach (var tile in tileList)
+        {
+            Renderer pr = tile.GetComponent<Renderer>();
+            pr.material = material;
+        }
+    }
+
 }
