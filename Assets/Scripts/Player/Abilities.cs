@@ -17,13 +17,14 @@ public class Abilities : MonoBehaviour {
     PlayerBehaviour playerBehaviour;
     MouseController mouseController;
     SpellCast spellCast;
-
+    LineOfSight lOS;
 
     void Start () {
         mouseController = GameObject.FindGameObjectWithTag("MouseManager").GetComponent<MouseController>();
         gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
         spellCast = GetComponent<SpellCast>();
         playerBehaviour = GetComponent<PlayerBehaviour>();
+        lOS = GetComponent<LineOfSight>();
         if (!gridController)
             Debug.LogWarning("Gridcontroller is null!");
     }
@@ -110,9 +111,12 @@ public class Abilities : MonoBehaviour {
         List<Tile> returnables = new List<Tile>();
         foreach (var tile in targetTiles)
         {
-            if (tile.myType == Tile.BlockType.BaseBlock)
+            if (tile != null)
             {
-                returnables.Add(tile);
+                if (tile.myType == Tile.BlockType.BaseBlock)
+                {
+                    returnables.Add(tile);
+                }
             }
         }
         return returnables;
@@ -193,9 +197,15 @@ public class Abilities : MonoBehaviour {
         List<Tile> returnables = new List<Tile>();
         foreach (var tile in rangetiles)
         {
-            if (tile.myType == Tile.BlockType.BaseBlock)
+            if (tile != null)
             {
-                returnables.Add(tile);
+                if(spellCast.currentSpell.needLineOfSight == true)
+                   if( lOS.LoSCheck(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z), tile) == true)
+                        if (tile.myType == Tile.BlockType.BaseBlock)
+                            returnables.Add(tile);
+                else
+                   if (tile.myType == Tile.BlockType.BaseBlock)               
+                    returnables.Add(tile);
             }
         }
         
