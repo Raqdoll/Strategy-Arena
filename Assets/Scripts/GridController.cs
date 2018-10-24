@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
 public class GridController : MonoBehaviour {
 
     public GameObject tiles;
@@ -34,6 +35,9 @@ public class GridController : MonoBehaviour {
     }
     //USE THIS TO CALL GRID!
     public Tile GetTile(int xCord, int zCord) {
+        if (xCord > 24 || zCord > 24 || zCord < 1 || xCord < 1)
+            return null;
+        else
         return tileGrid[xCord - 1][zCord - 1];
     }
 

@@ -108,7 +108,6 @@ public class MouseController : MonoBehaviour
         // kun spell nappulaa on painettu
         if (spellCast.spellOpen == true)
         {
-            Debug.Log("Spelll Open");
             rangeTiles = abilities.RangeType(spellCast.currentSpell.mySpellRangeType);
             targetedTiles = abilities.AreaType(spellCast.currentSpell.mySpellAreaType);
             //pitäisi maalata target range

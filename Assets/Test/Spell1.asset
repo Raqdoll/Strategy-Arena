@@ -14,12 +14,12 @@ MonoBehaviour:
   mySpellName: VoidBubble
   spellIcon: {fileID: 21300000, guid: 1a5c3f03b7320764dab6a2030a0324a7, type: 3}
   mySpellAreaType: 2
-  mySpellRangeType: 2
+  mySpellRangeType: 1
   spellInitialCooldown: 0
   spellDamageMin: 200
   spellDamageMax: 300
   spellRangeMin: 0
-  spellRangeMax: 7
+  spellRangeMax: 15
   spellCooldown: 0
   spellCastPerturn: 5
   castPerTarget: 5

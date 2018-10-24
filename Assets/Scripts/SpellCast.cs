@@ -150,7 +150,6 @@ public class SpellCast : MonoBehaviour {
 
     public void Spell1Cast()
     {
-        Debug.Log("spell 1 otettu");
         //if(cv.spell_1 == null)
         //{
         //    Debug.Log("spell 1 on null");
@@ -159,7 +158,6 @@ public class SpellCast : MonoBehaviour {
         {
             currentSpell = cv.spell_1;
             spellOpen = true;
-            Debug.Log("spell 1 avattu");
         }
     }
 
