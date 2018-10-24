@@ -15,7 +15,9 @@ public class PlayerMovement : MonoBehaviour {
     public enum MovementMethod { NotSpecified, Teleport, walk, push };  //Pidetään notspecified nollassa -> tällöin kutsu on tehty huolimattomasti eli liikkumismuotoa ei olla valittu
 
     PlayerBehaviour playerController;
+    PlayerInfo playerInfo;
     GridController gridController;
+    MouseController mouseController;
     public Tile targetTile;
     public UnityEvent exampleEvents;
 
@@ -35,11 +37,21 @@ public class PlayerMovement : MonoBehaviour {
         gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
         if (!gridController)
             Debug.LogWarning("Gridcontroller is null!");
+        mouseController = GameObject.FindGameObjectWithTag("MouseManager").GetComponent<MouseController>();
+        if (!mouseController)
+            Debug.LogWarning("Mousecontroller is null!");
+        mouseController.currentMovement = this;
         if (!playerController)
             playerController = gameObject.GetComponentInParent<PlayerBehaviour>();
         if (!playerController)
-            Debug.Log(" could not find playerbehaviour component in parents!");
+            Debug.Log("Could not find playerbehaviour component in parents!");
+        if (!playerInfo)
+            playerInfo = gameObject.GetComponent<PlayerInfo>();
+        if (!playerInfo)
+            Debug.Log("Could not find playerinfo component");
 
+        Tile tempTile = gridController.GetTile(playerInfo.thisCharacter.currentTile.x, playerInfo.thisCharacter.currentTile.z);
+        MoveToTile(tempTile, MovementMethod.Teleport);
     }
 
     private void Update()
@@ -49,9 +61,9 @@ public class PlayerMovement : MonoBehaviour {
 
     public List<Tile> TilesInRange()
     {
-        PositionContainer container = playerController.currentCharacter.currentTile;
+        PositionContainer container = playerInfo.thisCharacter.currentTile;
         Tile tile = gridController.GetTile(container.x, container.z);
-        return TilesInRange(tile, playerController.currentCharacter.currentMp, MovementMethod.Teleport);
+        return TilesInRange(tile, playerInfo.thisCharacter.currentMp, MovementMethod.Teleport);
     }
 
     /// <summary>
@@ -128,6 +140,11 @@ public class PlayerMovement : MonoBehaviour {
     {
         transform.localPosition = destinationTile.transform.localPosition;
         playerController.currentCharacter.currentTile = new PositionContainer(destinationTile.transform.localPosition);
+    }
+
+    public void MyTurn()
+    {
+        mouseController.currentMovement = this;
     }
 
     public void ExampleEventsForEditor()

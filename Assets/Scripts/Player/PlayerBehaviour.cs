@@ -30,7 +30,7 @@ public class PlayerBehaviour : MonoBehaviour {
     public CharacterValues currentCharacter;
 
     public List<GameObject> charTabList;
-    public PlayerMovement movement;
+
     GridController gridController;
     Abilities abilities;
 
@@ -39,10 +39,6 @@ public class PlayerBehaviour : MonoBehaviour {
             gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
         if (!gridController)
             Debug.LogWarning("Gridcontroller is null!");
-        if (!movement)
-            movement = GetComponent<PlayerMovement>();
-        if (!movement)
-            Debug.LogWarning("PlayerMovement is null!");
 
         //if (!currentTile)
         //    currentTile = gridController.GetTile((int)transform.localPosition.x, (int)transform.localPosition.z);

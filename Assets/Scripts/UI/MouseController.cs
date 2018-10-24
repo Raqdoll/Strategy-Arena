@@ -21,6 +21,7 @@ public class MouseController : MonoBehaviour
     List<Tile> rangeTiles;
     List<Tile> tilesToBeReset;
     Abilities abilities;
+    public PlayerMovement currentMovement;
     private bool rangeTilesPainted;
 
     void Start()
@@ -164,25 +165,30 @@ public class MouseController : MonoBehaviour
             }
         }
 
-        //if (spellCast.spellOpen == false)
-        //{
-        //    if (!rangeTilesPainted)
-        //    {
-        //        ResetTileMaterials(tilesToBeReset);
-        //        tilesToBeReset.Clear();
-        //        ChangeTileMaterials(playerBehaviour.movement.TilesInRange(), movementRangeMaterial);
-        //        rangeTilesPainted = true;
-        //    }
+        if (spellCast.spellOpen == false)
+        {
+            if (!currentMovement)
+            {
+                Debug.Log("Movement still not set!");
+            }
 
-        //    if (Input.GetMouseButtonDown(0))
-        //    {
-        //        playerBehaviour.movement.MoveToTile(selected, PlayerMovement.MovementMethod.Teleport);
+            if (!rangeTilesPainted)
+            {
+                ResetTileMaterials(tilesToBeReset);
+                tilesToBeReset.Clear();
+                ChangeTileMaterials(currentMovement.TilesInRange(), movementRangeMaterial);
+                rangeTilesPainted = true;
+            }
 
-        //        ResetTileMaterials(tilesToBeReset);
-        //        tilesToBeReset.Clear();
-        //        rangeTilesPainted = false;
-        //    }
-        //}
+            if (Input.GetMouseButtonDown(0))
+            {
+                currentMovement.MoveToTile(selected, PlayerMovement.MovementMethod.Teleport);
+
+                ResetTileMaterials(tilesToBeReset);
+                tilesToBeReset.Clear();
+                rangeTilesPainted = false;
+            }
+        }
     }
 
     void ResetTileMaterials(List<Tile> tileList)

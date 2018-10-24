@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.574817, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10053,8 +10053,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 451841859}
-  m_LocalRotation: {x: -0.04977113, y: -0.01226002, z: -0.05101335, w: -0.9973817}
-  m_LocalPosition: {x: 2.3962154, y: 5.3827667, z: -2.3539352}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1551654298}
@@ -12638,12 +12638,12 @@ MonoBehaviour:
   exampleEvents:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
-        m_Mode: 0
+      - m_Target: {fileID: 539631433}
+        m_MethodName: MyTurn
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -28446,8 +28446,8 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 539631431}
-  m_LocalRotation: {x: 0.04977113, y: 0.01226002, z: 0.05101335, w: -0.9973817}
-  m_LocalPosition: {x: 2.8483682, y: -4.75003, z: 9.938891}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13, y: 0, z: 13}
   m_LocalScale: {x: 0.8, y: 0.1, z: 0.8}
   m_Children:
   - {fileID: 341199638}
@@ -39894,6 +39894,8 @@ MonoBehaviour:
   hovermaterial: {fileID: 2100000, guid: 4f15f06eff248f348967ec6b42905c3f, type: 2}
   targetMaterial: {fileID: 2100000, guid: 527d095c83b5343448969d36e70de58e, type: 2}
   rangeMaterial: {fileID: 2100000, guid: 8db0a574684bf5c4a920798b6bc0cc64, type: 2}
+  movementRangeMaterial: {fileID: 0}
+  currentMovement: {fileID: 0}
 --- !u!4 &2031842474
 Transform:
   m_ObjectHideFlags: 0
