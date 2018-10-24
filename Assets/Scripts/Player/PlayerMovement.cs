@@ -14,64 +14,81 @@ public class PlayerMovement : MonoBehaviour {
 
     public enum MovementMethod { NotSpecified, Teleport, walk, push };  //Pidetään notspecified nollassa -> tällöin kutsu on tehty huolimattomasti eli liikkumismuotoa ei olla valittu
 
-    PlayerBehaviour behaviour;
+    PlayerBehaviour playerController;
     GridController gridController;
     public Tile targetTile;
     public UnityEvent exampleEvents;
+
+    //struct PathTile {
+    //    Tile _tile;
+    //    public List<Tile> neighbourTIles;
+    //    public int distanceToTarget, movementPointsUsed;
+
+    //    public PathTile(Tile tile, List<Tile> neighbours)
+    //    {
+    //        _tile = tile;
+    //    }
+    //}
 
     private void Start()
     {
         gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
         if (!gridController)
             Debug.LogWarning("Gridcontroller is null!");
-        if (!behaviour)
-            behaviour = gameObject.GetComponent<PlayerBehaviour>();
-        if (!behaviour)
-            Debug.Log("Player " + gameObject.name + " does not have playerbehaviour component!");
+        if (!playerController)
+            playerController = gameObject.GetComponentInParent<PlayerBehaviour>();
+        if (!playerController)
+            Debug.Log(" could not find playerbehaviour component in parents!");
 
+    }
+
+    private void Update()
+    {
+        
+    }
+
+    public List<Tile> TilesInRange()
+    {
+        PositionContainer container = playerController.currentCharacter.currentTile;
+        Tile tile = gridController.GetTile(container.x, container.z);
+        return TilesInRange(tile, playerController.currentCharacter.currentMp, MovementMethod.Teleport);
     }
 
     /// <summary>
     /// Returns all tiles that are in movement range, taking into account blockyblocks etc.
     /// </summary>
     //KESKEN
-    public List<Tile> TilesInRange(Tile startTile, int movementPoints)
+    public List<Tile> TilesInRange(Tile startTile, int movementPoints, MovementMethod method)
     {
+        List<Tile> returnables = new List<Tile>();
         int movementLeft = movementPoints;
-        List<Tile> palautus = new List<Tile>();
-        List<Tile> lastIteration = new List<Tile>();
-        lastIteration.Add(startTile);
-        while (movementLeft > 0)
+
+        switch (method)
         {
-            List<Tile> tempList = new List<Tile>();
-            foreach(var tile1 in lastIteration)
-            {
-                tempList.Union(tile1.GetTNeighbouringTiles());
-            }
+            case MovementMethod.Teleport:
+                List<Tile> lastIteration = new List<Tile>();
+                lastIteration.Add(startTile);
+                while (movementLeft > 0)
+                {
+                    foreach (var tile1 in lastIteration)
+                    {
+                        returnables.Union(tile1.GetTNeighbouringTiles());
+                    }
+                    movementLeft--;
+                }
+                break;
 
-            //palautus = palautus.Union(lastIteration);
+            //case MovementMethod.walk:
+            //    List<Tile> unProcessed = new List<Tile>();
 
-            //foreach (var tile2 in tempList)
-            //{
-            //    if (tile2.WalkThrough)
-            //    {
-            //        (tile2);
-            //    }
-            //}
+            //    break;
 
+            default:
+                break;
 
-            movementLeft--;
         }
 
-
-        throw new NotImplementedException();
-        //for(int i = 1; i <= movementPoints; i++)
-        //{
-        //    for (int j = 1; j <= movementPoints; j++)
-        //    {
-
-        //    }
-        //}
+        return returnables;
     }
 
     /// <summary>
@@ -110,7 +127,7 @@ public class PlayerMovement : MonoBehaviour {
     void Teleport(Tile destinationTile)
     {
         transform.localPosition = destinationTile.transform.localPosition;
-        behaviour.currentCharacter.currentTile = new PositionContainer(destinationTile.transform.localPosition);
+        playerController.currentCharacter.currentTile = new PositionContainer(destinationTile.transform.localPosition);
     }
 
     public void ExampleEventsForEditor()
