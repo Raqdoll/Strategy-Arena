@@ -199,12 +199,16 @@ public class Abilities : MonoBehaviour {
         {
             if (tile != null)
             {
-                if(spellCast.currentSpell.needLineOfSight == true)
-                   if( lOS.LoSCheck(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z), tile) == true)
+                if (spellCast.currentSpell.needLineOfSight == true)
+                {
+                    if (lOS.LoSCheck(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z), tile) == true)
+                    {
                         if (tile.myType == Tile.BlockType.BaseBlock)
                             returnables.Add(tile);
+                    }
+                }
                 else
-                   if (tile.myType == Tile.BlockType.BaseBlock)               
+                   if (tile.myType == Tile.BlockType.BaseBlock)
                     returnables.Add(tile);
             }
         }

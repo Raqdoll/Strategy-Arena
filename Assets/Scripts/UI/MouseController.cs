@@ -63,15 +63,16 @@ public class MouseController : MonoBehaviour
                         Renderer pr = previousTile.GetComponent<Renderer>();
                         pr.material = previousTile.GetComponent<Tile>().BaseMaterial;
                         previousTile = null;
-                        if(rangeTiles != null)
-                        {
-                            ResetTileMaterials(rangeTiles);
-                            rangeTiles = null;
-                        }
+                        //if(rangeTiles != null)
+                        //{
+                        //    ResetTileMaterials(rangeTiles);
+                        //    rangeTiles = null;
+                        //}
                         if(targetedTiles != null)
                         {
                             ResetTileMaterials(targetedTiles);
                             targetedTiles = null;
+                            ChangeTileMaterials(rangeTiles, rangeMaterial);
                         }
                     }
                     previousTile = selected;
@@ -93,6 +94,7 @@ public class MouseController : MonoBehaviour
                     {
                         ResetTileMaterials(targetedTiles);
                         targetedTiles = null;
+                        ChangeTileMaterials(rangeTiles, rangeMaterial);
                     }
                 }
             }
@@ -101,16 +103,19 @@ public class MouseController : MonoBehaviour
         // kun spell nappulaa on painettu
         if (spellCast.spellOpen == true)
         {
-            rangeTiles = abilities.RangeType(spellCast.currentSpell.mySpellRangeType);
-            targetedTiles = abilities.AreaType(spellCast.currentSpell.mySpellAreaType);
             //pitäisi maalata target range
-            foreach (var tile in rangeTiles)
+            if (rangeTiles == null)
             {
-                Renderer aR = tile.GetComponent<Renderer>();
-                aR.material = rangeMaterial;
+                rangeTiles = abilities.RangeType(spellCast.currentSpell.mySpellRangeType);
+                foreach (var tile in rangeTiles)
+                {
+                    Renderer aR = tile.GetComponent<Renderer>();
+                    aR.material = rangeMaterial;
+                } 
             }
 
             //pitäisi maalata AOE tilet
+            targetedTiles = abilities.AreaType(spellCast.currentSpell.mySpellAreaType);
             foreach (var tile in rangeTiles)
             {
                 if (tile == selected)
@@ -122,30 +127,31 @@ public class MouseController : MonoBehaviour
             // kun spell castataan
             if (Input.GetMouseButtonDown(0) && playerBehaviour.currentCharacter.currentAp >= spellCast.currentSpell.spellApCost && spellCast.currentSpell != null)
             {
-                foreach (var tile in targetedTiles)
-                {
-                    CharacterValues target = tile.charCurrentlyOnTile;
-                    spellCast.CastSpell(spellCast.currentSpell, playerBehaviour.currentCharacter, target);
-                }
-                if (rangeTiles != null)
-                {
-                    foreach (var tile in rangeTiles)
-                    {
-                        Renderer tr = tile.GetComponent<Renderer>();
-                        tr.material = tile.GetComponent<Tile>().BaseMaterial;
-                    }
-                    rangeTiles = null;
-                }
                 if (targetedTiles != null)
                 {
-                    foreach (var target in targetedTiles)
+                    foreach (var tile in targetedTiles)
                     {
-                        Renderer ar = target.GetComponent<Renderer>();
-                        ar.material = target.GetComponent<Tile>().BaseMaterial;
+                        CharacterValues target = tile.charCurrentlyOnTile;
+                        spellCast.CastSpell(spellCast.currentSpell, playerBehaviour.currentCharacter, target);
                     }
-                    targetedTiles = null;
+                    foreach (var tile in rangeTiles)
+                        {
+                            Renderer tr = tile.GetComponent<Renderer>();
+                            tr.material = tile.GetComponent<Tile>().BaseMaterial;
+                        }
+                    rangeTiles = null;
+                    foreach (var target in targetedTiles)
+                        {
+                            Renderer ar = target.GetComponent<Renderer>();
+                            ar.material = target.GetComponent<Tile>().BaseMaterial;
+                        }
+                    targetedTiles = null; 
+                    spellCast.Aftermath();
                 }
-                spellCast.Aftermath();
+                else
+                {
+                    spellCast.SpellCancel();
+                }
             }
 
             // spell cansellataan
