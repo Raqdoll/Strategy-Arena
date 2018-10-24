@@ -17,13 +17,16 @@ MonoBehaviour:
   maxAp: 12
   maxMp: 6
   currentHP: 2500
-  currentAp: 10
+  currentAp: 12
   currentMp: 5
   damageChange: 0
+  armorChange: 0
   healsReceived: 0
   damagePlus: 0
+  armorPlus: 0
   moving: 0
-  currentTile: {fileID: 0}
+  dead: 0
+  team: 0
   spell_1: {fileID: 11400000, guid: 1f9c48e5b5932244a8f8e11213c03de2, type: 2}
   spell_2: {fileID: 11400000, guid: fef2037784b39a9468ff12e292949a5c, type: 2}
   spell_3: {fileID: 11400000, guid: cf2eb4522ab3fb2478e368fef8d694a2, type: 2}

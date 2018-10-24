@@ -16,22 +16,21 @@ MonoBehaviour:
   mySpellAreaType: 0
   mySpellRangeType: 0
   spellInitialCooldown: 0
-  spellDamageMin: 0
-  spellDamageMax: 0
-  spellRangeMin: 0
-  spellRangeMax: 0
+  spellDamageMin: 100
+  spellDamageMax: 120
+  spellRangeMin: 1
+  spellRangeMax: 7
   spellCooldown: 0
-  spellCastPerturn: 0
-  castPerTarget: 0
-  spellApCost: 0
+  spellCastPerturn: 5
+  castPerTarget: 5
+  spellApCost: 5
   spellPushback: 0
   spellPull: 0
-  areaRange: 0
+  aoeRange: 3
   spellCooldownLeft: 0
   trueDamage: 0
   healsAlly: 0
   hurtsAlly: 0
-  spellOpen: 0
-  needLineOfSight: 0
+  needLineOfSight: 1
   spellLaunched: 0
   inCooldown: 0

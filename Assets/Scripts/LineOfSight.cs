@@ -1,83 +1,92 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LineOfSight : MonoBehaviour {
     public GridController gridC;
 
-public bool LoSCheck(Tile startpos, Tile target)
+    public bool LoSCheck(Tile startpos, Tile target)
     {
-        //checking linears
-        if (startpos.locX == target.locX)
+        
+
+        int x0 = startpos.locX;
+        int y0 = startpos.locZ;
+        int x1 = target.locX;
+        int y1 = target.locZ;
+
+        var clear = true;
+        var dx = Math.Abs(x1 - x0);
+        var dy = Math.Abs(y1 - y0);
+        var x = x0;
+        var y = y0;
+        var n = -1 + dx + dy;
+        var x_inc = (x1 > x0 ? 1 : -1);
+        var y_inc = (y1 > y0 ? 1 : -1);
+        var error = dx - dy;
+        dx *= 2;
+        dy *= 2;
+
+        for (var i = 0; i < 1; i++)
         {
-            for (int i = startpos.locZ; i < target.locZ; i++)
+
+            if (error > 0)
             {
-                if (gridC.GetTile(target.locX, i).ShootThrough == false)
-                {
-                    return false;
-                }
+                x += x_inc;
+                error -= dy;
             }
-            return true;
+
+            else if (error < 0)
+            {
+                y += y_inc;
+                error += dx;
+            }
+
+            else
+            {
+                x += x_inc;
+                error -= dy;
+                y += y_inc;
+                error += dx;
+                n--;
+            }
         }
 
-        if (startpos.locZ == target.locZ)
+        while (n > 0 && clear)
         {
-            for (int i = startpos.locX; i < target.locX; i++)
-            {
-                if (gridC.GetTile(target.locZ, i).ShootThrough == false)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-        //checking diagonals
-        if (target.locX - startpos.locX == target.locZ - startpos.locZ || target.locX - startpos.locX == (target.locZ - startpos.locZ) * (-1))
-        {
-            for (int i = 1; i <= Mathf.Abs(target.locX - startpos.locX); i++)
-            {
-                if (target.locX > startpos.locX && target.locZ > startpos.locZ)
-                {
-                    if (gridC.GetTile(startpos.locX + i, startpos.locZ + i).ShootThrough == false)
-                    {
-                        return false;
-                    }
-                }
-                if (target.locX < startpos.locX && target.locZ > startpos.locZ)
-                {
-                    if (gridC.GetTile(startpos.locX + i, startpos.locZ - i).ShootThrough == false)
-                    {
-                        return false;
-                    }
-                }
-                if (target.locX > startpos.locX && target.locZ < startpos.locZ)
-                {
-                    if (gridC.GetTile(startpos.locX - i, startpos.locZ + i).ShootThrough == false)
-                    {
-                        return false;
-                    }
-                }
-                if (target.locX < startpos.locX && target.locZ < startpos.locZ)
-                {
-                    if (gridC.GetTile(startpos.locX - i, startpos.locZ - i).ShootThrough == false)
-                    {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
 
+            if (gridC.GetTile(x,y).myType == Tile.BlockType.BlockyBlock)
+            {
+                clear = false;
+            }
 
-        //for (int i = 1; i <= 200; i++)
-        //{
-        //    if(gridC.GetTile(Mathf.RoundToInt((startpos.locX+target.locX)/200 * i)+startpos.locX,Mathf.RoundToInt((startpos.locX + target.locX) / 200 * i)+startpos.locZ).ShootThrough == false || gridC.GetTile(Mathf.RoundToInt((startpos.locX + target.locX) / 200 * i)+startpos.locX, Mathf.RoundToInt((startpos.locX + target.locX) / 200 * i)+startpos.locZ) != startpos)
-        //    {
-        //        return false;
-        //    }
-        //}
-        //return true;
+            else
+            {
+
+                if (error > 0)
+                {
+                    x += x_inc;
+                    error -= dy;
+                }
+
+                else if (error < 0)
+                {
+                    y += y_inc;
+                    error += dx;
+                }
+
+                else
+                {
+                    x += x_inc;
+                    error -= dy;
+                    y += y_inc;
+                    error += dx;
+                    n--;
+                }
+
+                n--;
+            }
+        }
+        return clear;
     }
-
 }
