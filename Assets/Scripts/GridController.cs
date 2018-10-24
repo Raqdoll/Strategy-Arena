@@ -44,12 +44,16 @@ public class GridController : MonoBehaviour {
     public List<Tile> GetTilesNextTo(int xCord, int zCord)
     {
         List<Tile> palautus = new List<Tile>();
-        palautus.Add(GetTile(xCord + 1, zCord));
-        palautus.Add(GetTile(xCord - 1, zCord));
-        palautus.Add(GetTile(xCord, zCord + 1));
-        palautus.Add(GetTile(xCord, zCord - 1));
+        Tile tempTile;
+        tempTile = GetTile(xCord + 1, zCord);
+        if (tempTile != null) palautus.Add(tempTile);
+        tempTile = GetTile(xCord - 1, zCord);
+        if (tempTile != null) palautus.Add(tempTile);
+        tempTile = GetTile(xCord, zCord + 1);
+        if (tempTile != null) palautus.Add(tempTile);
+        tempTile = GetTile(xCord, zCord - 1);
+        if (tempTile != null) palautus.Add(tempTile);
         return palautus;
-
     }
 
 	

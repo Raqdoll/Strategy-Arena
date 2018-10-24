@@ -62,7 +62,10 @@ public class PlayerMovement : MonoBehaviour {
     public List<Tile> TilesInRange()
     {
         PositionContainer container = playerInfo.thisCharacter.currentTile;
-        Tile tile = gridController.GetTile(container.x, container.z);
+        //Tile tile = gridController.GetTile(container.x, container.z);
+        Tile tile = gridController.GetTile((int)transform.localPosition.x, (int)transform.localPosition.z);
+        //Debug.Log("Getting tiles... " + tile + " and " + playerInfo.thisCharacter.currentMp + " and " + MovementMethod.Teleport);
+
         return TilesInRange(tile, playerInfo.thisCharacter.currentMp, MovementMethod.Teleport);
     }
 
@@ -82,10 +85,17 @@ public class PlayerMovement : MonoBehaviour {
                 lastIteration.Add(startTile);
                 while (movementLeft > 0)
                 {
+                    List<Tile> tempList = new List<Tile>();
                     foreach (var tile1 in lastIteration)
                     {
-                        returnables.Union(tile1.GetTNeighbouringTiles());
+                        if (tile1 != null)
+                        {
+                            tempList = tempList.Union(tile1.GetTNeighbouringTiles()).ToList();
+                            //Debug.Log("Returnables count: " + returnables.Count());
+                        }
                     }
+                    returnables = returnables.Union(tempList).ToList();
+                    lastIteration = tempList;
                     movementLeft--;
                 }
                 break;

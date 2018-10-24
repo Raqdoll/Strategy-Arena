@@ -39894,7 +39894,7 @@ MonoBehaviour:
   hovermaterial: {fileID: 2100000, guid: 4f15f06eff248f348967ec6b42905c3f, type: 2}
   targetMaterial: {fileID: 2100000, guid: 527d095c83b5343448969d36e70de58e, type: 2}
   rangeMaterial: {fileID: 2100000, guid: 8db0a574684bf5c4a920798b6bc0cc64, type: 2}
-  movementRangeMaterial: {fileID: 0}
+  movementMaterial: {fileID: 2100000, guid: 77f1923c6ed7e844faffedabda2864ea, type: 2}
   currentMovement: {fileID: 0}
 --- !u!4 &2031842474
 Transform:

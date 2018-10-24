@@ -15,10 +15,11 @@ public class MouseController : MonoBehaviour
     public Material hovermaterial;
     public Material targetMaterial;
     public Material rangeMaterial;
-    public Material movementRangeMaterial;
+    public Material movementMaterial;
     private Tile previousTile;
     List<Tile> targetedTiles;
     List<Tile> rangeTiles;
+    List<Tile> movementRangeTiles;
     List<Tile> tilesToBeReset;
     Abilities abilities;
     public PlayerMovement currentMovement;
@@ -31,6 +32,7 @@ public class MouseController : MonoBehaviour
         spellCast = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<SpellCast>();
         abilities = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<Abilities>();
         tilesToBeReset = new List<Tile>();
+        movementRangeTiles = new List<Tile>();
     }
 
 
@@ -52,10 +54,10 @@ public class MouseController : MonoBehaviour
                 //if (selected)
                 //    selected.GetComponent<Renderer>().material = selected.BaseMaterial;
                 selected = hitObject.gameObject.GetComponent<Tile>();
-                
+
                 if (selected.myType == Tile.BlockType.BaseBlock && selected != previousTile)
                 {
-                   // Debug.Log("Tämä on baseblock");
+                    // Debug.Log("Tämä on baseblock");
 
 
                     if (previousTile)
@@ -68,7 +70,7 @@ public class MouseController : MonoBehaviour
                         //    ResetTileMaterials(rangeTiles);
                         //    rangeTiles = null;
                         //}
-                        if(targetedTiles != null)
+                        if (targetedTiles != null)
                         {
                             ResetTileMaterials(targetedTiles);
                             targetedTiles = null;
@@ -79,10 +81,10 @@ public class MouseController : MonoBehaviour
                     Renderer sr = selected.GetComponent<Renderer>();
                     sr.material = hovermaterial;
                 }
-                
+
             }
             //Jos hovertile on jotain muuta, resettaa hovertilet
-            if(!hitObject.CompareTag("Tile") || (hitObject.CompareTag("Tile") && selected.myType != Tile.BlockType.BaseBlock))
+            if (!hitObject.CompareTag("Tile") || (hitObject.CompareTag("Tile") && selected.myType != Tile.BlockType.BaseBlock))
             {
                 if (previousTile)
                 {
@@ -111,7 +113,7 @@ public class MouseController : MonoBehaviour
                 {
                     Renderer aR = tile.GetComponent<Renderer>();
                     aR.material = rangeMaterial;
-                } 
+                }
             }
 
             //pitäisi maalata AOE tilet
@@ -135,17 +137,17 @@ public class MouseController : MonoBehaviour
                         spellCast.CastSpell(spellCast.currentSpell, playerBehaviour.currentCharacter, target);
                     }
                     foreach (var tile in rangeTiles)
-                        {
-                            Renderer tr = tile.GetComponent<Renderer>();
-                            tr.material = tile.GetComponent<Tile>().BaseMaterial;
-                        }
+                    {
+                        Renderer tr = tile.GetComponent<Renderer>();
+                        tr.material = tile.GetComponent<Tile>().BaseMaterial;
+                    }
                     rangeTiles = null;
                     foreach (var target in targetedTiles)
-                        {
-                            Renderer ar = target.GetComponent<Renderer>();
-                            ar.material = target.GetComponent<Tile>().BaseMaterial;
-                        }
-                    targetedTiles = null; 
+                    {
+                        Renderer ar = target.GetComponent<Renderer>();
+                        ar.material = target.GetComponent<Tile>().BaseMaterial;
+                    }
+                    targetedTiles = null;
                     spellCast.Aftermath();
                 }
                 else
@@ -182,12 +184,17 @@ public class MouseController : MonoBehaviour
             {
                 ResetTileMaterials(tilesToBeReset);
                 tilesToBeReset.Clear();
-                ChangeTileMaterials(currentMovement.TilesInRange(), movementRangeMaterial);
+                movementRangeTiles = currentMovement.TilesInRange();
+                ChangeTileMaterials(movementRangeTiles, movementMaterial);
+                tilesToBeReset.AddRange(movementRangeTiles);
                 rangeTilesPainted = true;
             }
 
-            if (Input.GetMouseButtonDown(0))
+            ChangeTileMaterials(movementRangeTiles, movementMaterial);  //otherwise hovering over resets the tiles
+
+            if (Input.GetMouseButtonDown(0) && movementRangeTiles.Contains(selected))
             {
+
                 currentMovement.MoveToTile(selected, PlayerMovement.MovementMethod.Teleport);
 
                 ResetTileMaterials(tilesToBeReset);
@@ -199,7 +206,7 @@ public class MouseController : MonoBehaviour
 
     void ResetTileMaterials(List<Tile> tileList)
     {
-        foreach(var tile in tileList)
+        foreach (var tile in tileList)
         {
             Renderer ar = tile.GetComponent<Renderer>();
             ar.material = tile.GetComponent<Tile>().BaseMaterial;
@@ -210,8 +217,11 @@ public class MouseController : MonoBehaviour
     {
         foreach (var tile in tileList)
         {
-            Renderer pr = tile.GetComponent<Renderer>();
-            pr.material = material;
+            if (Tile.BlockType.BaseBlock == tile.myType)
+            {
+                Renderer pr = tile.GetComponent<Renderer>();
+                pr.material = material;
+            }
         }
     }
 
