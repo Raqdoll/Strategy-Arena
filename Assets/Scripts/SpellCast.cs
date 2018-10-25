@@ -55,7 +55,7 @@ public class SpellCast : MonoBehaviour {
             if (caster.team = target.team)
             {
                 
-                healingIsFun = TrueHealCalculator(spell.spellDamageMax, spell.spellDamageMin, target.healsReceived);
+                healingIsFun = TrueHealCalculator(spell.spellHealMax, spell.spellHealMin, target.healsReceived);
             }
             else
             {
@@ -139,10 +139,10 @@ public class SpellCast : MonoBehaviour {
         return tempHeal;
     }
 
-    public int TrueHealCalculator(int damMax, int damMin, float heals)
+    public int TrueHealCalculator(int healMax, int healMin, float heals)
     {
-        int tempHealMin = MinHealCacl(damMin, heals);
-        int tempHealMax = MaxHealCacl(damMin, heals);
+        int tempHealMin = MinHealCacl(healMin, heals);
+        int tempHealMax = MaxHealCacl(healMin, heals);
         int trueHeal = Random.Range(tempHealMin, tempHealMax);
 
         return trueHeal;

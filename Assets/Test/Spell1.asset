@@ -13,24 +13,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mySpellName: VoidBubble
   spellIcon: {fileID: 21300000, guid: 1a5c3f03b7320764dab6a2030a0324a7, type: 3}
-  mySpellAreaType: 2
   mySpellRangeType: 2
-  spellInitialCooldown: 0
-  spellDamageMin: 200
-  spellDamageMax: 300
   spellRangeMin: 1
   spellRangeMax: 15
-  spellCooldown: 0
-  spellCastPerturn: 5
-  castPerTarget: 5
-  spellApCost: 3
-  spellPushback: 0
-  spellPull: 0
+  mySpellAreaType: 2
   aoeRange: 2
-  spellCooldownLeft: 0
-  trueDamage: 0
+  spellApCost: 3
+  spellDamageMin: 200
+  spellDamageMax: 300
+  spellHealMin: 0
+  spellHealMax: 0
   healsAlly: 0
   hurtsAlly: 0
   needLineOfSight: 1
+  spellPushback: 0
+  spellPull: 0
+  teleportToTarget: 0
+  chagePlaceWithTarget: 0
+  moveCloserToTarget: 0
+  MoveAwayFromTarget: 0
+  silenceTurns: 0
+  makeTargetImmune: 0
+  damageModifyPlus: 0
+  dmPlusAllies: 0
+  dmPlusEnemies: 0
+  damageModifyPercent: 0
+  dmPercentAllies: 0
+  dmPercentEnemies: 0
+  armorModify: 0
+  amAllies: 0
+  amEnemies: 0
+  healModify: 0
+  hmAllies: 0
+  hmEnemies: 0
+  apModify: 0
+  apAllies: 0
+  apEnemies: 0
+  mpModify: 0
+  mpAllies: 0
+  mpEnemies: 0
+  spellInitialCooldown: 0
+  spellCooldown: 0
+  spellCastPerturn: 5
+  castPerTarget: 5
+  spellCooldownLeft: 0
+  trueDamage: 0
   spellLaunched: 0
   inCooldown: 0
