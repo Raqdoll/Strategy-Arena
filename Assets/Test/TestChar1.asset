@@ -18,7 +18,7 @@ MonoBehaviour:
   maxMp: 6
   currentHP: 2500
   currentAp: 12
-  currentMp: 5
+  currentMp: 6
   damageChange: 0
   armorChange: 0
   healsReceived: 0
