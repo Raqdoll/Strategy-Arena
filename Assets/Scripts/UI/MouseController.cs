@@ -15,10 +15,12 @@ public class MouseController : MonoBehaviour
     public Material hovermaterial;
     public Material targetMaterial;
     public Material rangeMaterial;
+    public Material rangeNullMaterial;
     public Material movementMaterial;
     private Tile previousTile;
-    List<Tile> targetedTiles;
-    List<Tile> rangeTiles;
+    public List<Tile> targetedTiles;
+    public List<Tile> rangeTiles;
+    public List<Tile> nullTiles;
     List<Tile> movementRangeTiles;
     List<Tile> tilesToBeReset;
     Abilities abilities;
@@ -75,6 +77,7 @@ public class MouseController : MonoBehaviour
                             ResetTileMaterials(targetedTiles);
                             targetedTiles = null;
                             ChangeTileMaterials(rangeTiles, rangeMaterial);
+                            ChangeTileMaterials(nullTiles, rangeNullMaterial);
                         }
                     }
                     previousTile = selected;
@@ -97,6 +100,7 @@ public class MouseController : MonoBehaviour
                         ResetTileMaterials(targetedTiles);
                         targetedTiles = null;
                         ChangeTileMaterials(rangeTiles, rangeMaterial);
+                        ChangeTileMaterials(nullTiles, rangeNullMaterial);
                     }
                 }
             }
@@ -108,11 +112,18 @@ public class MouseController : MonoBehaviour
             //pitäisi maalata target range
             if (rangeTiles == null)
             {
-                rangeTiles = abilities.RangeType(spellCast.currentSpell.mySpellRangeType);
+                rangeTiles = abilities.RangeType(spellCast.currentSpell.mySpellRangeType, false);
                 foreach (var tile in rangeTiles)
                 {
                     Renderer aR = tile.GetComponent<Renderer>();
                     aR.material = rangeMaterial;
+                }
+
+                nullTiles = abilities.RangeType(spellCast.currentSpell.mySpellRangeType, true);
+                foreach (var tile in nullTiles)
+                {
+                    Renderer aR = tile.GetComponent<Renderer>();
+                    aR.material = rangeNullMaterial;
                 }
             }
 
@@ -159,16 +170,16 @@ public class MouseController : MonoBehaviour
             // spell cansellataan
             if (Input.GetMouseButtonDown(1))
             {
-                if (rangeTiles != null)
-                {
-                    ResetTileMaterials(rangeTiles);
-                    rangeTiles = null;
-                }
-                if (targetedTiles != null)
-                {
-                    ResetTileMaterials(targetedTiles);
-                    targetedTiles = null;
-                }
+                //if (rangeTiles != null)
+                //{
+                //    ResetTileMaterials(rangeTiles);
+                //    rangeTiles = null;
+                //}
+                //if (targetedTiles != null)
+                //{
+                //    ResetTileMaterials(targetedTiles);
+                //    targetedTiles = null;
+                //}
                 spellCast.SpellCancel();
             }
         }
@@ -204,7 +215,7 @@ public class MouseController : MonoBehaviour
         }
     }
 
-    void ResetTileMaterials(List<Tile> tileList)
+    public void ResetTileMaterials(List<Tile> tileList)
     {
         foreach (var tile in tileList)
         {
