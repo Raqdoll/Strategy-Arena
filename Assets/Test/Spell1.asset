@@ -26,32 +26,13 @@ MonoBehaviour:
   healsAlly: 0
   hurtsAlly: 0
   needLineOfSight: 1
+  effect: {fileID: 11400000, guid: 38c85b457e80ac944b8a8c5b78063c9a, type: 2}
   spellPushback: 0
   spellPull: 0
   teleportToTarget: 0
   chagePlaceWithTarget: 0
   moveCloserToTarget: 0
   MoveAwayFromTarget: 0
-  silenceTurns: 0
-  makeTargetImmune: 0
-  damageModifyPlus: 0
-  dmPlusAllies: 0
-  dmPlusEnemies: 0
-  damageModifyPercent: 0
-  dmPercentAllies: 0
-  dmPercentEnemies: 0
-  armorModify: 0
-  amAllies: 0
-  amEnemies: 0
-  healModify: 0
-  hmAllies: 0
-  hmEnemies: 0
-  apModify: 0
-  apAllies: 0
-  apEnemies: 0
-  mpModify: 0
-  mpAllies: 0
-  mpEnemies: 0
   spellInitialCooldown: 0
   spellCooldown: 0
   spellCastPerturn: 5
