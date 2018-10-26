@@ -43,7 +43,7 @@ public class PlayerBehaviour : MonoBehaviour {
         //if (!currentTile)
         //    currentTile = gridController.GetTile((int)transform.localPosition.x, (int)transform.localPosition.z);
 
-        currentCharacter.currentTile = new PositionContainer(12, 12);
+        currentCharacter.currentTile = new PositionContainer(12,12);
 
     }
     public void UpdateTabs()

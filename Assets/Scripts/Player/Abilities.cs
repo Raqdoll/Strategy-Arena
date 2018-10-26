@@ -150,7 +150,7 @@ public class Abilities : MonoBehaviour {
         }
     }
 
-    public List<Tile> RangeType(SpellRangeType mySpellRangeType)
+    public List<Tile> RangeType(SpellRangeType mySpellRangeType, bool ilaririkkootaman)
     {      
     List<Tile> rangetiles = new List<Tile>();
         int i = spellCast.currentSpell.spellRangeMin;
@@ -201,10 +201,21 @@ public class Abilities : MonoBehaviour {
             {
                 if (spellCast.currentSpell.needLineOfSight == true)
                 {
-                    if (lOS.LoSCheck(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z), tile) == true)
+                    if (ilaririkkootaman == false)
                     {
-                        if (tile.myType == Tile.BlockType.BaseBlock)
-                            returnables.Add(tile);
+                        if (lOS.LoSCheck(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z), tile) == true)
+                        {
+                            if (tile.myType == Tile.BlockType.BaseBlock)
+                                returnables.Add(tile);
+                        } 
+                    }
+                    else
+                    {
+                        if (lOS.LoSCheck(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z), tile) == false)
+                        {
+                            if (tile.myType == Tile.BlockType.BaseBlock)
+                                returnables.Add(tile);
+                        }
                     }
                 }
                 else
@@ -212,7 +223,6 @@ public class Abilities : MonoBehaviour {
                     returnables.Add(tile);
             }
         }
-        
         return returnables;
     }
 

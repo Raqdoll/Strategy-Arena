@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SpellCast : MonoBehaviour {
 
     public PlayerBehaviour playerBehaviour;
-
+    public MouseController mc;
     public CharacterValues cv;
     public SpellValues currentSpell;
     public bool spellOpen = false;
@@ -99,8 +99,32 @@ public class SpellCast : MonoBehaviour {
     }
 
 	void Update () {
-		
-	}
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Spell1Cast();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Spell2Cast();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Spell3Cast();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            Spell4Cast();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            Spell5Cast();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            Spell6Cast();
+        }
+
+    }
 
     public int MinDamCacl(int damMin, float damChange,float armorChange, int damPlus, int armorPlus)
     {
@@ -150,10 +174,7 @@ public class SpellCast : MonoBehaviour {
 
     public void Spell1Cast()
     {
-        //if(cv.spell_1 == null)
-        //{
-        //    Debug.Log("spell 1 on null");
-        //}
+            SpellCancel();
         if (cv.currentAp >= cv.spell_1.spellApCost && spell1CastedThisTurn <= cv.spell_1.spellCastPerturn)
         {
             currentSpell = cv.spell_1;
@@ -163,7 +184,9 @@ public class SpellCast : MonoBehaviour {
 
     public void Spell2Cast()
     {
-        if (playerBehaviour.currentCharacter.currentAp >= cv.spell_2.spellApCost && spell1CastedThisTurn <= cv.spell_2.spellCastPerturn)
+            SpellCancel();
+
+        if (cv.currentAp >= cv.spell_2.spellApCost && spell2CastedThisTurn <= cv.spell_2.spellCastPerturn)
         {
             currentSpell = cv.spell_2;
             spellOpen = true; 
@@ -172,7 +195,9 @@ public class SpellCast : MonoBehaviour {
 
     public void Spell3Cast()
     {
-        if (playerBehaviour.currentCharacter.currentAp >= cv.spell_3.spellApCost && spell1CastedThisTurn <= cv.spell_3.spellCastPerturn)
+            SpellCancel();
+        
+        if (cv.currentAp >= cv.spell_3.spellApCost && spell3CastedThisTurn <= cv.spell_3.spellCastPerturn)
         {
             currentSpell = cv.spell_3;
             spellOpen = true; 
@@ -181,7 +206,9 @@ public class SpellCast : MonoBehaviour {
 
     public void Spell4Cast()
     {
-        if (playerBehaviour.currentCharacter.currentAp >= cv.spell_4.spellApCost && spell1CastedThisTurn <= cv.spell_4.spellCastPerturn)
+            SpellCancel();
+        
+        if (cv.currentAp >= cv.spell_4.spellApCost && spell4CastedThisTurn <= cv.spell_4.spellCastPerturn)
         {
             currentSpell = cv.spell_4;
             spellOpen = true; 
@@ -190,7 +217,9 @@ public class SpellCast : MonoBehaviour {
 
     public void Spell5Cast()
     {
-        if (playerBehaviour.currentCharacter.currentAp >= cv.spell_5.spellApCost && spell1CastedThisTurn <= cv.spell_5.spellCastPerturn)
+            SpellCancel();
+        
+        if (cv.currentAp >= cv.spell_5.spellApCost && spell5CastedThisTurn <= cv.spell_5.spellCastPerturn)
         {
             currentSpell = cv.spell_5;
             spellOpen = true; 
@@ -199,7 +228,9 @@ public class SpellCast : MonoBehaviour {
 
     public void Spell6Cast()
     {
-        if (playerBehaviour.currentCharacter.currentAp >= cv.spell_6.spellApCost && spell1CastedThisTurn <= cv.spell_6.spellCastPerturn)
+            SpellCancel();
+        
+        if (cv.currentAp >= cv.spell_6.spellApCost && spell6CastedThisTurn <= cv.spell_6.spellCastPerturn)
         {
             currentSpell = cv.spell_6;
             spellOpen = true; 
@@ -208,6 +239,21 @@ public class SpellCast : MonoBehaviour {
 
     public void SpellCancel()
     {
+        if (mc.rangeTiles != null)
+        {
+            mc.ResetTileMaterials(mc.rangeTiles);
+            mc.rangeTiles = null;
+        }
+        if (mc.nullTiles != null)
+        {
+            mc.ResetTileMaterials(mc.nullTiles);
+            mc.nullTiles = null;
+        }
+        if (mc.targetedTiles != null)
+        {
+            mc.ResetTileMaterials(mc.targetedTiles);
+            mc.targetedTiles = null;
+        }
         currentSpell = null;
         spellOpen = false;
     }
