@@ -76,6 +76,7 @@ public class PlayerMovement : MonoBehaviour {
     public List<Tile> TilesInRange(Tile startTile, int movementPoints, MovementMethod method)
     {
         List<Tile> returnables = new List<Tile>();
+        List<Tile> truereturnables = new List<Tile>();
         int movementLeft = movementPoints;
 
         switch (method)
@@ -109,8 +110,15 @@ public class PlayerMovement : MonoBehaviour {
                 break;
 
         }
-
-        return returnables;
+        foreach (var tile in returnables)
+        {
+            if (tile != null)
+            {
+                if (tile.myType == Tile.BlockType.BaseBlock)
+                    truereturnables.Add(tile);
+            }         
+        }
+        return truereturnables;
     }
 
     /// <summary>
