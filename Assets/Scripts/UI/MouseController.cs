@@ -65,11 +65,6 @@ public class MouseController : MonoBehaviour
                         Renderer pr = previousTile.GetComponent<Renderer>();
                         pr.material = previousTile.GetComponent<Tile>().BaseMaterial;
                         previousTile = null;
-                        //if(rangeTiles != null)
-                        //{
-                        //    ResetTileMaterials(rangeTiles);
-                        //    rangeTiles = null;
-                        //}
                         if (targetedTiles != null)
                         {
                             ResetTileMaterials(targetedTiles);
