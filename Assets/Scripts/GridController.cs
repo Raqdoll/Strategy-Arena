@@ -43,7 +43,13 @@ public class GridController : MonoBehaviour {
 
     public Tile GetTile(PositionContainer container)
     {
-        return GetTile(container.x, container.z);
+        if (container != null)
+            return GetTile(container.x, container.z);
+        else
+        {
+            Debug.Log("container is null!");
+            return null;
+        }
     }
 
     public List<Tile> GetTilesNextTo(int xCord, int zCord)

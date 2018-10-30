@@ -52,6 +52,8 @@ public class PlayerMovement : MonoBehaviour {
 
         PositionContainer debuggerPositionContainer = new PositionContainer(7, 7);  //Remove this when starting positions are set properly!
         Tile tempTile = gridController.GetTile(debuggerPositionContainer);
+
+        //playerInfo.thisCharacter.currentTile = new PositionContainer(7, 7);
         //Tile tempTile = gridController.GetTile(playerInfo.thisCharacter.currentTile.x, playerInfo.thisCharacter.currentTile.z);  //CurrentTile is null!
         if (tempTile != null)
             MoveToTile(tempTile, MovementMethod.Teleport);
@@ -64,7 +66,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public List<Tile> TilesInRange()
     {
-        PositionContainer container = playerInfo.thisCharacter.currentTile;
+        //PositionContainer container = playerInfo.thisCharacter.currentTile;
         //Tile tile = gridController.GetTile(container.x, container.z);
         Tile tile = gridController.GetTile((int)transform.localPosition.x, (int)transform.localPosition.z);
         //Debug.Log("Getting tiles... " + tile + " and " + playerInfo.thisCharacter.currentMp + " and " + MovementMethod.Teleport);

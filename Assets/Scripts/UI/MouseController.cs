@@ -47,6 +47,7 @@ public class MouseController : MonoBehaviour
         tilesToBeReset = new List<Tile>();
         movementRangeTiles = new List<Tile>();
         SubscribtionOn();
+        movementEnabled = true;
     }
 
     private void OnDestroy()
@@ -206,8 +207,8 @@ public class MouseController : MonoBehaviour
             }
         }
 
-        //if (spellCast.spellOpen == false)
-        if (movementEnabled)
+        if (spellCast.spellOpen == false)
+        //if (movementEnabled)
         {
             if (!currentMovement)
             {

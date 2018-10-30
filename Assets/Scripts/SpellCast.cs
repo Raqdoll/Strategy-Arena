@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +8,8 @@ public class SpellCast : MonoBehaviour {
 
     public PlayerBehaviour playerBehaviour;
     public MouseController mc;
-    public CharacterValues cv;
+    public CharacterValues cv;  //Active player's charactervalues?
+    TurnManager turnManager;
     public SpellValues currentSpell;
     public bool spellOpen = false;
     public int spell1CastedThisTurn = 0;
@@ -36,6 +38,19 @@ public class SpellCast : MonoBehaviour {
         spellButton6 = spellButton6.GetComponent<Button>();
         spellButton6.onClick.AddListener(Spell6Cast);
 
+        turnManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TurnManager>();
+        turnManager.TurnChange += HandleTurnChange;
+    }
+
+    private void OnDestroy()
+    {
+        turnManager.TurnChange -= HandleTurnChange;
+    }
+
+    private void HandleTurnChange(PlayerInfo player)
+    {
+        cv = player.thisCharacter;
+        //Debug.Log("Handling event");
     }
 
     public void CastSpell(SpellValues spell, CharacterValues caster, CharacterValues target)
@@ -144,7 +159,7 @@ public class SpellCast : MonoBehaviour {
     {
         int tempdamageMin = MinDamCacl(damMin, damChange, armorChange, damPlus, armorPlus);
         int tempdamageMax = MaxDamCacl(damMax, damChange, armorChange, damPlus, armorPlus);
-        int trueDamage = Random.Range(tempdamageMin, tempdamageMax);
+        int trueDamage = UnityEngine.Random.Range(tempdamageMin, tempdamageMax);
 
         return trueDamage;
     }
@@ -167,7 +182,7 @@ public class SpellCast : MonoBehaviour {
     {
         int tempHealMin = MinHealCacl(healMin, heals);
         int tempHealMax = MaxHealCacl(healMin, heals);
-        int trueHeal = Random.Range(tempHealMin, tempHealMax);
+        int trueHeal = UnityEngine.Random.Range(tempHealMin, tempHealMax);
 
         return trueHeal;
     }

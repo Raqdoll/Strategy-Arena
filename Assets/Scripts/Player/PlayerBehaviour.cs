@@ -32,6 +32,7 @@ public class PlayerBehaviour : MonoBehaviour {
     public List<GameObject> charTabList;
 
     GridController gridController;
+    TurnManager turnManager;
     Abilities abilities;
 
     void Start() {
@@ -45,7 +46,20 @@ public class PlayerBehaviour : MonoBehaviour {
 
         currentCharacter.currentTile = new PositionContainer(12,12);
 
+        turnManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TurnManager>();
+        turnManager.TurnChange += HandleTurnChange;
     }
+
+    private void OnDestroy()
+    {
+        turnManager.TurnChange -= HandleTurnChange;
+    }
+
+    private void HandleTurnChange(PlayerInfo player)
+    {
+        currentCharacter = player.thisCharacter;
+    }
+
     public void UpdateTabs()
     {
         foreach(GameObject tab in charTabList)
