@@ -50,8 +50,11 @@ public class PlayerMovement : MonoBehaviour {
         if (!playerInfo)
             Debug.Log("Could not find playerinfo component");
 
-        Tile tempTile = gridController.GetTile(playerInfo.thisCharacter.currentTile.x, playerInfo.thisCharacter.currentTile.z);
-        MoveToTile(tempTile, MovementMethod.Teleport);
+        PositionContainer debuggerPositionContainer = new PositionContainer(7, 7);  //Remove this when starting positions are set properly!
+        Tile tempTile = gridController.GetTile(debuggerPositionContainer);
+        //Tile tempTile = gridController.GetTile(playerInfo.thisCharacter.currentTile.x, playerInfo.thisCharacter.currentTile.z);  //CurrentTile is null!
+        if (tempTile != null)
+            MoveToTile(tempTile, MovementMethod.Teleport);
     }
 
     private void Update()

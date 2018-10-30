@@ -11,22 +11,6 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1853389657857954}
   m_IsPrefabAsset: 1
---- !u!1 &1176443724027800
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4703541991781806}
-  - component: {fileID: 114172909891316772}
-  m_Layer: 0
-  m_Name: spell4
-  m_TagString: spell4
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1320270942754530
 GameObject:
   m_ObjectHideFlags: 0
@@ -45,70 +29,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1361348783788550
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4302255464721466}
-  - component: {fileID: 114915649993643790}
-  m_Layer: 0
-  m_Name: spell2
-  m_TagString: spell2
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1409854236748268
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4615100170569194}
-  - component: {fileID: 114262227729926706}
-  m_Layer: 0
-  m_Name: spell3
-  m_TagString: spell3
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1455155001656114
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4765877328808900}
-  - component: {fileID: 114597125945884578}
-  m_Layer: 0
-  m_Name: spell5
-  m_TagString: spell5
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1713654203958024
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4996095853123512}
-  - component: {fileID: 114515325236404248}
-  m_Layer: 0
-  m_Name: spell1
-  m_TagString: spell1
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1853389657857954
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,9 +40,8 @@ GameObject:
   - component: {fileID: 33652870537945326}
   - component: {fileID: 23744781665672658}
   - component: {fileID: 65922627364461470}
+  - component: {fileID: 114851480859274168}
   - component: {fileID: 114430614813003586}
-  - component: {fileID: 114690748119618586}
-  - component: {fileID: 114565041542105288}
   m_Layer: 0
   m_Name: ruma ukko 1
   m_TagString: Untagged
@@ -148,35 +67,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1985756934138374
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4296271073009532}
-  - component: {fileID: 114022686224245902}
-  m_Layer: 0
-  m_Name: spell6
-  m_TagString: spell6
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4296271073009532
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1985756934138374}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4524410910402434}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4301976683426854
 Transform:
   m_ObjectHideFlags: 1
@@ -189,19 +79,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4509539470191186}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4302255464721466
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1361348783788550}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4524410910402434}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4509539470191186
 Transform:
@@ -224,70 +101,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1853389657857954}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: 0, z: 7}
+  m_LocalPosition: {x: 13, y: 0, z: 13}
   m_LocalScale: {x: 0.8, y: 0.1, z: 0.8}
   m_Children:
   - {fileID: 4509539470191186}
-  - {fileID: 4996095853123512}
-  - {fileID: 4302255464721466}
-  - {fileID: 4615100170569194}
-  - {fileID: 4703541991781806}
-  - {fileID: 4765877328808900}
-  - {fileID: 4296271073009532}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4615100170569194
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1409854236748268}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4524410910402434}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4703541991781806
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1176443724027800}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4524410910402434}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4765877328808900
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1455155001656114}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4524410910402434}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4996095853123512
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1713654203958024}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4524410910402434}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23007399794871576
 MeshRenderer:
@@ -296,7 +115,7 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1949488720492698}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
@@ -331,7 +150,7 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1320270942754530}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
@@ -366,7 +185,7 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1853389657857954}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
@@ -423,115 +242,10 @@ BoxCollider:
   m_GameObject: {fileID: 1853389657857954}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114022686224245902
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1985756934138374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc7f8fa981faa9f4cb8adb2c56bf9676, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spellButton: {fileID: 0}
-  mySpellAreaType: 0
-  mySpellRangeType: 0
-  mySpellName: 0
-  spellInitialCooldown: 0
-  spellDamageMin: 0
-  spellDamageMax: 0
-  spellRangeMin: 0
-  spellRangeMax: 0
-  spellCooldown: 0
-  spellCastPerturn: 0
-  castPerTarget: 0
-  spellApCost: 0
-  spellPushback: 0
-  spellPull: 0
-  areaRange: 0
-  spellCooldownLeft: 0
-  trueDamage: 0
-  healsAlly: 0
-  hurtsAlly: 0
-  needLineOfSight: 0
-  spellLaunched: 0
-  inCooldown: 0
-  spellName: 
---- !u!114 &114172909891316772
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1176443724027800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc7f8fa981faa9f4cb8adb2c56bf9676, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spellButton: {fileID: 0}
-  mySpellAreaType: 0
-  mySpellRangeType: 0
-  mySpellName: 0
-  spellInitialCooldown: 0
-  spellDamageMin: 0
-  spellDamageMax: 0
-  spellRangeMin: 0
-  spellRangeMax: 0
-  spellCooldown: 0
-  spellCastPerturn: 0
-  castPerTarget: 0
-  spellApCost: 0
-  spellPushback: 0
-  spellPull: 0
-  areaRange: 0
-  spellCooldownLeft: 0
-  trueDamage: 0
-  healsAlly: 0
-  hurtsAlly: 0
-  needLineOfSight: 0
-  spellLaunched: 0
-  inCooldown: 0
-  spellName: 
---- !u!114 &114262227729926706
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1409854236748268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc7f8fa981faa9f4cb8adb2c56bf9676, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spellButton: {fileID: 0}
-  mySpellAreaType: 0
-  mySpellRangeType: 0
-  mySpellName: 0
-  spellInitialCooldown: 0
-  spellDamageMin: 0
-  spellDamageMax: 0
-  spellRangeMin: 0
-  spellRangeMax: 0
-  spellCooldown: 0
-  spellCastPerturn: 0
-  castPerTarget: 0
-  spellApCost: 0
-  spellPushback: 0
-  spellPull: 0
-  areaRange: 0
-  spellCooldownLeft: 0
-  trueDamage: 0
-  healsAlly: 0
-  hurtsAlly: 0
-  needLineOfSight: 0
-  spellLaunched: 0
-  inCooldown: 0
-  spellName: 
 --- !u!114 &114430614813003586
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -543,42 +257,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fff75888bfd6994cb75fd02abe9f0b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114515325236404248
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1713654203958024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc7f8fa981faa9f4cb8adb2c56bf9676, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spellButton: {fileID: 0}
-  mySpellAreaType: 2
-  mySpellRangeType: 1
-  mySpellName: 0
-  spellInitialCooldown: 0
-  spellDamageMin: 0
-  spellDamageMax: 0
-  spellRangeMin: 0
-  spellRangeMax: 0
-  spellCooldown: 676
-  spellCastPerturn: 0
-  castPerTarget: 35
-  spellApCost: 0
-  spellPushback: 5
-  spellPull: 0
-  areaRange: 0
-  spellCooldownLeft: 0
-  trueDamage: 0
-  healsAlly: 0
-  hurtsAlly: 0
-  needLineOfSight: 0
-  spellLaunched: 0
-  inCooldown: 0
-  spellName: 
---- !u!114 &114565041542105288
+  targetTile: {fileID: 0}
+  exampleEvents:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114430614813003586}
+        m_MethodName: MyTurn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 0
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &114851480859274168
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -586,100 +282,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1853389657857954}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54ce12f4f118c074e8524815cad4d480, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e2d1c99936bebb4a84061c8e36de4c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moving: 0
-  myCharClass: 0
-  maxHP: 0
-  currentHP: 0
-  maxAp: 0
-  maxMp: 0
-  currentAp: 0
-  currentMp: 0
-  damageChange: 0
-  spellOpen: 0
---- !u!114 &114597125945884578
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1455155001656114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc7f8fa981faa9f4cb8adb2c56bf9676, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spellButton: {fileID: 0}
-  mySpellAreaType: 0
-  mySpellRangeType: 0
-  mySpellName: 0
-  spellInitialCooldown: 0
-  spellDamageMin: 0
-  spellDamageMax: 0
-  spellRangeMin: 0
-  spellRangeMax: 0
-  spellCooldown: 0
-  spellCastPerturn: 0
-  castPerTarget: 0
-  spellApCost: 0
-  spellPushback: 0
-  spellPull: 0
-  areaRange: 0
-  spellCooldownLeft: 0
-  trueDamage: 0
-  healsAlly: 0
-  hurtsAlly: 0
-  needLineOfSight: 0
-  spellLaunched: 0
-  inCooldown: 0
-  spellName: 
---- !u!114 &114690748119618586
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1853389657857954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2c7c05187bf1454bb714663785c7580, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114915649993643790
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1361348783788550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc7f8fa981faa9f4cb8adb2c56bf9676, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spellButton: {fileID: 0}
-  mySpellAreaType: 0
-  mySpellRangeType: 0
-  mySpellName: 0
-  spellInitialCooldown: 0
-  spellDamageMin: 0
-  spellDamageMax: 0
-  spellRangeMin: 0
-  spellRangeMax: 0
-  spellCooldown: 0
-  spellCastPerturn: 0
-  castPerTarget: 0
-  spellApCost: 0
-  spellPushback: 0
-  spellPull: 0
-  areaRange: 0
-  spellCooldownLeft: 0
-  trueDamage: 0
-  healsAlly: 0
-  hurtsAlly: 0
-  needLineOfSight: 0
-  spellLaunched: 0
-  inCooldown: 0
-  spellName: 
+  thisCharacter: {fileID: 11400000, guid: eac0014924945a541af8dd0313094b37, type: 2}
 --- !u!135 &135415797577828190
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -688,7 +294,7 @@ SphereCollider:
   m_GameObject: {fileID: 1949488720492698}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -700,7 +306,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1320270942754530}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1

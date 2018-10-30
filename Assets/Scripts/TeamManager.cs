@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class TeamManager : MonoBehaviour {
 
-    public List<PlayerBehaviour> teamA;
-    public List<PlayerBehaviour> teamB;
+    public List<PlayerInfo> teamA;
+    public List<PlayerInfo> teamB;
     public bool firstTeamIsActive;
     public int playerPositionInTeam;
     //int charactersPerTeam = 5;  //Amount in the final version of the game
     int charactersPerTeam = 1;
     //public int activePlayers;   //needed?
-    public PlayerBehaviour activePlayer;
+    public PlayerInfo activePlayer; //Changed playerbehaviour to PlayerInfo
 
 
 
@@ -41,11 +41,16 @@ public class TeamManager : MonoBehaviour {
         }
     }
 
-    public PlayerBehaviour ChangeTurnUntilValidPlayer(PlayerBehaviour playerEndingTurn)
+    public PlayerInfo ChangeTurnUntilValidPlayer()
+    {
+        return ChangeTurnUntilValidPlayer(activePlayer);
+    }
+
+    private PlayerInfo ChangeTurnUntilValidPlayer(PlayerInfo playerEndingTurn)
     {
         activePlayer = playerEndingTurn;
         ChangeTurn();
-        while (activePlayer.currentCharacter.currentHP <= 0)
+        while (activePlayer.thisCharacter.currentHP <= 0)
         {
             ChangeTurn();
             if (activePlayer == playerEndingTurn)  //Looped, we need a check for eg. 3 vs 0 situation, when someone is killed! -> Done -> CheckTeamHealths (not tested yet)
@@ -63,7 +68,7 @@ public class TeamManager : MonoBehaviour {
         bool teamBDead = true;
         foreach(var pb in teamA)
         {
-            if (pb.currentCharacter.currentHP > 0)
+            if (pb.thisCharacter.currentHP > 0)
             {
                 teamADead = false;
                 break;
@@ -71,7 +76,7 @@ public class TeamManager : MonoBehaviour {
         }
         foreach (var pb in teamB)
         {
-            if (pb.currentCharacter.currentHP > 0)
+            if (pb.thisCharacter.currentHP > 0)
             {
                 teamBDead = false;
                 break;

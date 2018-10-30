@@ -11,6 +11,7 @@ public class MouseController : MonoBehaviour
     SpellCast spellCast;
     Tile tile;
     GridController gridController;
+    TurnManager turnManager;
     PlayerBehaviour playerBehaviour;
     public Material hovermaterial;
     public Material targetMaterial;
@@ -26,15 +27,41 @@ public class MouseController : MonoBehaviour
     Abilities abilities;
     public PlayerMovement currentMovement;
     private bool rangeTilesPainted;
+    private bool movementEnabled;  //Temporary, will be removed!!!
 
     void Start()
     {
-        gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
-        playerBehaviour = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<PlayerBehaviour>();
-        spellCast = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<SpellCast>();
-        abilities = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<Abilities>();
+        GameObject tempGO1 = GameObject.FindGameObjectWithTag("GameController");
+        if (tempGO1)
+        {
+            gridController = tempGO1.GetComponent<GridController>();
+            turnManager = tempGO1.GetComponent<TurnManager>();
+        }
+        GameObject tempGO2 = GameObject.FindGameObjectWithTag("PlayerController");
+        if (tempGO2)
+        {
+            playerBehaviour = tempGO2.GetComponent<PlayerBehaviour>();
+            spellCast = tempGO2.GetComponent<SpellCast>();
+            abilities = tempGO2.GetComponent<Abilities>();
+        }
         tilesToBeReset = new List<Tile>();
         movementRangeTiles = new List<Tile>();
+        SubscribtionOn();
+    }
+
+    private void OnDestroy()
+    {
+        SubscribtionOff();
+    }
+
+    void SubscribtionOn()
+    {
+        turnManager.TurnChange += HandlePlayerChange;
+    }
+
+    void SubscribtionOff()
+    {
+        turnManager.TurnChange -= HandlePlayerChange;
     }
 
 
@@ -179,7 +206,8 @@ public class MouseController : MonoBehaviour
             }
         }
 
-        if (spellCast.spellOpen == false)
+        //if (spellCast.spellOpen == false)
+        if (movementEnabled)
         {
             if (!currentMovement)
             {
@@ -229,6 +257,13 @@ public class MouseController : MonoBehaviour
                 pr.material = material;
             }
         }
+    }
+
+    void HandlePlayerChange(PlayerInfo player)
+    {
+        currentMovement = player.gameObject.GetComponent<PlayerMovement>();
+        movementEnabled = true;
+        rangeTilesPainted = false;
     }
 
 }

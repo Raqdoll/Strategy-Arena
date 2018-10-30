@@ -41,6 +41,11 @@ public class GridController : MonoBehaviour {
         return tileGrid[xCord - 1][zCord - 1];
     }
 
+    public Tile GetTile(PositionContainer container)
+    {
+        return GetTile(container.x, container.z);
+    }
+
     public List<Tile> GetTilesNextTo(int xCord, int zCord)
     {
         List<Tile> palautus = new List<Tile>();

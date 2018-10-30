@@ -7,23 +7,29 @@ using UnityEngine.UI;
 public class TurnManager : MonoBehaviour {
 
     public int turnNumber;
-    public delegate void PlayerEvent(PlayerBehaviour player);
-    public PlayerEvent TurnChange;
+    public delegate void PlayerEvent(PlayerInfo player);
+    public event PlayerEvent TurnChange;
     public int activePlayer;
     public int playerRotation;
     public int currentCharacterAmount;
     public Button nextTurnButton;
+    public TeamManager teamManager;
 
 
-    public void AnnounceTurnChange(GameObject newPlayer)
+    public void AnnounceTurnChange(GameObject newPlayerGO)
     {
-        if (newPlayer)
+        if (newPlayerGO)
         {
-            PlayerBehaviour temp = newPlayer.GetComponent<PlayerBehaviour>();
-            if (TurnChange != null && temp != null)
-            {
-                TurnChange(temp);
-            }
+            PlayerInfo temp = newPlayerGO.GetComponent<PlayerInfo>();
+            AnnounceTurnChange(temp);
+        }
+    }
+
+    public void AnnounceTurnChange(PlayerInfo newPlayer)
+    {
+        if (TurnChange != null && newPlayer != null)
+        {
+            TurnChange(newPlayer);
         }
     }
 		
@@ -33,14 +39,27 @@ public class TurnManager : MonoBehaviour {
         Button next = nextTurnButton.GetComponent<Button>();
         next.onClick.AddListener(NextTurn);
         currentCharacterAmount = 10;
-	}
-	
-	void Update () {
+        if (!teamManager)
+            teamManager = gameObject.GetComponent<TeamManager>();
+
+    }
+
+    void Update () {
 		
 	}
 
     public void NextTurn()
     {
+        //Asserin koodia
+        if (teamManager)
+        {
+            PlayerInfo temp = teamManager.ChangeTurnUntilValidPlayer();
+            AnnounceTurnChange(temp);
+        }
+        else
+            Debug.Log("Could not find team manager script!");
+
+        //Aiemmat koodit
         playerRotation++;
         if(playerRotation > currentCharacterAmount)
         {
