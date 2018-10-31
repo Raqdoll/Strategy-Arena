@@ -21,16 +21,21 @@ public class PlayerMovement : MonoBehaviour {
     public Tile targetTile;
     public UnityEvent exampleEvents;
 
-    //struct PathTile {
-    //    Tile _tile;
-    //    public List<Tile> neighbourTIles;
-    //    public int distanceToTarget, movementPointsUsed;
+    struct PathTile
+    {
+        public Tile _tile;
+        public List<Tile> _neighbours;
+        public int _distanceToTarget;
+        public int _movementPointsLeft;
 
-    //    public PathTile(Tile tile, List<Tile> neighbours)
-    //    {
-    //        _tile = tile;
-    //    }
-    //}
+        public PathTile(Tile currentTile, Tile destination, int movementPointsLeft)
+        {
+            _tile = currentTile;
+            _neighbours = _tile.GetTNeighbouringTiles();
+            _distanceToTarget = currentTile.GetCardinalDistance(destination);
+            _movementPointsLeft = movementPointsLeft;
+        }
+    }
 
     private void Start()
     {
@@ -169,6 +174,14 @@ public class PlayerMovement : MonoBehaviour {
     {
         mouseController.currentMovement = this;
     }
+
+    private List<Tile> AStar(PositionContainer destination)
+    {
+
+
+    }
+
+
 
     public void ExampleEventsForEditor()
     {

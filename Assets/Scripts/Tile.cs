@@ -88,12 +88,12 @@ public class Tile : MonoBehaviour {
         return Mathf.Sqrt(differencex ^ 2 + diffenercez ^ 2);
     }
 
-    public List<Tile> GetRoute(Tile other)
-    {
-        int maxDistance = GetCardinalDistance(other);
-        List<Tile> route = new List<Tile>();
-        return route;
-    }
+    //public List<Tile> GetRoute(Tile other)
+    //{
+    //    int maxDistance = GetCardinalDistance(other);
+    //    List<Tile> route = new List<Tile>();
+    //    return route;
+    //}
 
     public Tile GetOneCloserBruteForce(Tile other, bool checkIfAvailable)
     {
