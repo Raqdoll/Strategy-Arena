@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -25346,6 +25346,7 @@ GameObject:
   - component: {fileID: 1260233782}
   - component: {fileID: 1260233784}
   - component: {fileID: 1260233785}
+  - component: {fileID: 1260233786}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -25370,6 +25371,7 @@ MonoBehaviour:
   currentCharacterAmount: 0
   nextTurnButton: {fileID: 712718712}
   teamManager: {fileID: 0}
+  sEffects: {fileID: 0}
 --- !u!4 &1260233783
 Transform:
   m_ObjectHideFlags: 0
@@ -25413,6 +25415,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tiles: {fileID: 21651153}
+--- !u!114 &1260233786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1260233781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 398776e1da6290149883fd5ae4c80f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tManager: {fileID: 1260233782}
+  pBehaviour: {fileID: 0}
 --- !u!1001 &1278013875
 Prefab:
   m_ObjectHideFlags: 0

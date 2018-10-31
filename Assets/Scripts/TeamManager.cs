@@ -12,7 +12,7 @@ public class TeamManager : MonoBehaviour {
     int charactersPerTeam = 1;
     //public int activePlayers;   //needed?
     public PlayerInfo activePlayer; //Changed playerbehaviour to PlayerInfo
-
+    public StatusEffects sEffects;
 
 
 
@@ -21,6 +21,8 @@ public class TeamManager : MonoBehaviour {
         firstTeamIsActive = true;
         playerPositionInTeam = 0;
         activePlayer = teamA[0];
+        if (!sEffects)
+            sEffects = gameObject.GetComponent<StatusEffects>();
     }
 	
 
@@ -39,6 +41,7 @@ public class TeamManager : MonoBehaviour {
                 playerPositionInTeam = 0;
             activePlayer = teamA[playerPositionInTeam];
         }
+        sEffects.UpdateEffects();
     }
 
     public PlayerInfo ChangeTurnUntilValidPlayer()
@@ -91,4 +94,4 @@ public class TeamManager : MonoBehaviour {
         Debug.Log("End of game!");
     }
 
-}
+}//Made by Asser

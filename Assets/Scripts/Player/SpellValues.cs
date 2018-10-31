@@ -34,6 +34,8 @@ public class SpellValues : ScriptableObject
     [Space(6)]
     public int spellPushback;   //<
     public int spellPull;   //<
+    [Tooltip("ON: pushes/pulls from caster, OFF: -from AoE center")]
+    public bool moveFromCaster = true; //<
     public bool teleportToTarget = false;   //<
     public bool chagePlaceWithTarget = false;   //<
     public int moveCloserToTarget;  //<
