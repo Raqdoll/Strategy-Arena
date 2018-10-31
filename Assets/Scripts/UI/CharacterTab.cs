@@ -17,12 +17,15 @@ public class CharacterTab : MonoBehaviour {
     public GameObject spell4;
     public GameObject spell5;
     public GameObject spell6;
-    public GameObject effects;
+    public GameObject effectBlock;
     public Image characterIcon;
     PlayerBehaviour _player;
     bool isMyPlayerActive;
     public CharacterValues characterVal;
     public GameObject healthBar;
+    public GameObject panel;
+
+    //Muokataan kaikkia PlayerBehaviourissa
 
     void Start()
     {
@@ -46,6 +49,7 @@ public class CharacterTab : MonoBehaviour {
         UpdateAp(characterVal.currentAp);
         UpdateMp(characterVal.currentMp);
     }
+
     public void UpdateSpellIcons()
     {
         spell1.GetComponent<Image>().sprite = characterVal.spell_1.spellIcon;
@@ -54,6 +58,18 @@ public class CharacterTab : MonoBehaviour {
         spell4.GetComponent<Image>().sprite = characterVal.spell_4.spellIcon;
         spell5.GetComponent<Image>().sprite = characterVal.spell_5.spellIcon;
         spell6.GetComponent<Image>().sprite = characterVal.spell_6.spellIcon;
+    }
+
+    public void AddEffectIcon(EffectValues effect)
+    {
+        GameObject GO = Instantiate(effectBlock.gameObject);
+        GO.transform.parent = panel.transform;
+        GO.GetComponent<Image>().sprite = effect.effectIcon;
+    }
+
+    public void UpdateEffectIcons()
+    {
+        
     }
 
     private void OnDestroy()

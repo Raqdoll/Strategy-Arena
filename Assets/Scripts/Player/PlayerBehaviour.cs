@@ -35,6 +35,9 @@ public class PlayerBehaviour : MonoBehaviour {
     TurnManager turnManager;
     Abilities abilities;
 
+
+    //public EffectValues testing;
+
     void Start() {
         if (!gridController)
             gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
@@ -48,6 +51,15 @@ public class PlayerBehaviour : MonoBehaviour {
 
         turnManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TurnManager>();
         turnManager.TurnChange += HandleTurnChange;
+
+        //Tab testing V V V
+
+        //foreach (GameObject tab in charTabList)
+        //{
+        //    tab.GetComponent<CharacterTab>().AddEffectIcon(testing);
+        //    tab.GetComponent<CharacterTab>().AddEffectIcon(testing);
+        //    tab.GetComponent<CharacterTab>().AddEffectIcon(testing);
+        //}
     }
 
     private void OnDestroy()
