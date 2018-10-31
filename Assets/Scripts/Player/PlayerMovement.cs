@@ -177,7 +177,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private List<Tile> AStar(PositionContainer destination)
     {
-
+        return null;
 
     }
 
