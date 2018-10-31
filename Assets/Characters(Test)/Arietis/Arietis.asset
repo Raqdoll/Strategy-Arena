@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7801e28493a206a4c829f8153eaec05e, type: 3}
+  m_Name: Arietis
+  m_EditorClassIdentifier: 
+  characterName: Arietis
+  portrait: {fileID: 0}
+  maxHP: 3000
+  maxAp: 12
+  maxMp: 6
+  spell_1: {fileID: 11400000, guid: 758a3352e540d8e43ad330993fc9f8ec, type: 2}
+  spell_2: {fileID: 11400000, guid: 36ed731e70d9bf143b500522bc076be2, type: 2}
+  spell_3: {fileID: 11400000, guid: e225f57ecfd7d3949a01f9a2ca1cede9, type: 2}
+  spell_4: {fileID: 11400000, guid: 1e3aab796d782134d97907ad15c1794d, type: 2}
+  spell_5: {fileID: 11400000, guid: 62463b05c0cfc5f43a2fd320ae3c0108, type: 2}
+  spell_6: {fileID: 11400000, guid: fd53a605a37e50541aea3035e01b4342, type: 2}
+  damagePlus: 0
+  armorPlus: 0
+  moving: 0
+  dead: 0
+  team: 0
+  currentHP: 0
+  currentAp: 0
+  currentMp: 0
+  damageChange: 0
+  armorChange: 0
+  healsReceived: 0

@@ -2,6 +2,11 @@
 
 [CreateAssetMenu(fileName = "Effect", menuName = "New Effect")]
 public class EffectValues : ScriptableObject {
+    [Header("Info")]
+    [Space(6)]
+    public string effectName;
+    public Sprite effectIcon;
+    [Space(6)]
     [Header("Buffs/Debuffs")]
     [Space(6)]
     public int effectDuration;
@@ -36,6 +41,10 @@ public class EffectValues : ScriptableObject {
     public int mpModify = 0;    //<
     public bool mpAllies;
     public bool mpEnemies;
-    //[Space(6)]
-    //public int remainingTurns;
+    [Header("Do not touch!")]
+    [Space(6)]
+
+    public int remainingTurns;
+    public CharacterValues caster;
+    public CharacterValues target;
 }
