@@ -8,7 +8,8 @@ using UnityEngine.UI;
 /// Acts as the controller/nerve center for player classes and stores most of the variables.
 /// All input goes through this class.
 /// </summary>
-public class PlayerBehaviour : MonoBehaviour {
+public class PlayerBehaviour : MonoBehaviour
+{
 
     //public enum CharacterClass { Tank1, Healer1, Support1, DmgDealer1 }; // Put Classes Here 
     ////public Button spellButton1, spellButton2, spellButton3, spellButton4, spellButton5, spellButton6;
@@ -36,9 +37,10 @@ public class PlayerBehaviour : MonoBehaviour {
     Abilities abilities;
 
 
-    //public EffectValues testing;
+    public EffectValues testing;
 
-    void Start() {
+    void Start()
+    {
         if (!gridController)
             gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
         if (!gridController)
@@ -47,10 +49,19 @@ public class PlayerBehaviour : MonoBehaviour {
         //if (!currentTile)
         //    currentTile = gridController.GetTile((int)transform.localPosition.x, (int)transform.localPosition.z);
 
-        currentCharacter.currentTile = new PositionContainer(12,12);
+        currentCharacter.currentTile = new PositionContainer(12, 12);
 
         turnManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TurnManager>();
         turnManager.TurnChange += HandleTurnChange;
+
+        //Tab testing V V V
+
+        foreach (GameObject tab in charTabList)
+        {
+            tab.GetComponent<CharacterTab>().AddEffectIcon(testing);
+            tab.GetComponent<CharacterTab>().AddEffectIcon(testing);
+            tab.GetComponent<CharacterTab>().AddEffectIcon(testing);
+        }
     }
 
     private void OnDestroy()
@@ -65,20 +76,22 @@ public class PlayerBehaviour : MonoBehaviour {
 
     public void UpdateTabs()
     {
-        foreach(GameObject tab in charTabList)
+        foreach (GameObject tab in charTabList)
         {
             CharacterTab tabby = tab.GetComponent<CharacterTab>();
             tabby.UpdateInfo();
         }
     }
+
+
+
+
+
 }
 
 
-        //Tab testing V V V
 
-        //foreach (GameObject tab in charTabList)
-        //{
-        //    tab.GetComponent<CharacterTab>().AddEffectIcon(testing);
-        //    tab.GetComponent<CharacterTab>().AddEffectIcon(testing);
-        //    tab.GetComponent<CharacterTab>().AddEffectIcon(testing);
-        //}
+
+
+
+

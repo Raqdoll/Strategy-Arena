@@ -19,7 +19,7 @@ public class StatusEffects : MonoBehaviour {
     //Call this when you add another effect
     public void ApplyEffect(CharacterValues caster, EffectValues effect, CharacterValues target)
     {
-        EffectValues clone = effect;
+        EffectValues clone = Object.Instantiate(effect) as EffectValues;
         clone.caster = caster;
         clone.target = target;
         clone.remainingTurns = clone.effectDuration;

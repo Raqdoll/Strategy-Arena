@@ -16,6 +16,7 @@ TagManager:
   - MouseManager
   - PlayerController
   - CharTab
+  - UIcanvas
   layers:
   - Default
   - TransparentFX

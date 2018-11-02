@@ -64,7 +64,7 @@ public class CharacterTab : MonoBehaviour {
     {
         GameObject GO = Instantiate(effectBlock.gameObject);
         GO.transform.parent = panel.transform;
-        GO.GetComponent<Image>().sprite = effect.effectIcon;
+        GO.GetComponentInChildren<Image>().sprite = effect.effectIcon;
     }
 
     public void UpdateEffectIcons()
