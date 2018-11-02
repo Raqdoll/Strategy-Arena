@@ -132,6 +132,12 @@ public class MouseController : MonoBehaviour
         // kun spell nappulaa on painettu
         if (spellCast.spellOpen == true)
         {
+            if (currentMovement)
+            {
+                ResetTileMaterials(tilesToBeReset);
+                tilesToBeReset.Clear();
+                rangeTilesPainted = false; 
+            }
             //pitäisi maalata target range
             if (rangeTiles == null)
             {

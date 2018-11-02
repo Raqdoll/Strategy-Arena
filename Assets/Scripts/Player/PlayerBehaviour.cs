@@ -51,15 +51,6 @@ public class PlayerBehaviour : MonoBehaviour {
 
         turnManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TurnManager>();
         turnManager.TurnChange += HandleTurnChange;
-
-        //Tab testing V V V
-
-        //foreach (GameObject tab in charTabList)
-        //{
-        //    tab.GetComponent<CharacterTab>().AddEffectIcon(testing);
-        //    tab.GetComponent<CharacterTab>().AddEffectIcon(testing);
-        //    tab.GetComponent<CharacterTab>().AddEffectIcon(testing);
-        //}
     }
 
     private void OnDestroy()
@@ -81,3 +72,25 @@ public class PlayerBehaviour : MonoBehaviour {
         }
     }
 }
+
+
+        //Tab testing V V V
+
+        //foreach (GameObject tab in charTabList)
+        //{
+        //    tab.GetComponent<CharacterTab>().AddEffectIcon(testing);
+        //    tab.GetComponent<CharacterTab>().AddEffectIcon(testing);
+        //    tab.GetComponent<CharacterTab>().AddEffectIcon(testing);
+        //}
+    }
+
+    private void OnDestroy()
+    {
+        turnManager.TurnChange -= HandleTurnChange;
+    }
+
+    private void HandleTurnChange(PlayerInfo player)
+    {
+        currentCharacter = player.thisCharacter;
+    }
+

@@ -12,6 +12,8 @@ using UnityEngine.UI;
 public class Abilities : MonoBehaviour {
     public enum SpellAreaType { Cross, Line, Normal, Square, Cone, Diagonal}; // Different types of AoE
     public enum SpellRangeType { Linear, Diagonal, Normal}; // How Player Targets the spell
+    public enum SpellPushType { Line, DiagonalLine, BothCross, Cross, DiagonalCross };
+    public enum SpellPullType { Line, DiagonalLine, BothCross, Cross, DiagonalCross };
 
     GridController gridController;
     PlayerBehaviour playerBehaviour;
@@ -226,6 +228,117 @@ public class Abilities : MonoBehaviour {
         return returnables;
     }
 
+    public void SpellPull()
+    {
+
+    }
+
+    public void SpellPush()
+    {
+
+    }
+
+    public void SpellPullArea(SpellPullType myPullRangeType, bool pullsTowardsPlayer)
+    {
+        List<Tile> AoeList = AreaType(spellCast.currentSpell.mySpellAreaType);
+        List<Tile> targetList = new List<Tile>();
+        Tile target = new Tile();
+        Tile anchor = new Tile();
+        if (pullsTowardsPlayer == true)
+        {
+            target.locX = playerBehaviour.currentCharacter.currentTile.x;
+            target.locZ = playerBehaviour.currentCharacter.currentTile.z;
+            anchor = mouseController.selected;
+        }
+        else
+        {
+            target = mouseController.selected;
+            anchor.locX = playerBehaviour.currentCharacter.currentTile.x;
+            anchor.locZ = playerBehaviour.currentCharacter.currentTile.z;
+        }      
+        foreach (var tile in AoeList)
+        {
+            if (tile.charCurrentlyOnTile)
+            {
+                targetList.Add(tile);
+            }
+        }
+        List<Tile> rangetiles = new List<Tile>();
+        foreach (var item in targetList)
+        {
+            switch (myPullRangeType)
+            {
+                case SpellPullType.DiagonalLine:
+
+                    break;
+                case SpellPullType.DiagonalCross:
+
+                    break;
+                case SpellPullType.Line:
+
+
+                    break;
+                case SpellPullType.Cross:
+                    if (anchor.locX == target.locX && anchor.locZ < target.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            if (item)
+                            {
+
+                            }
+                        }
+                    }
+                    if (anchor.locX == target.locX && anchor.locZ > target.locZ)
+                    {
+
+                    }
+                    if (anchor.locZ == target.locZ && anchor.locX < target.locX)
+                    {
+
+                    }
+                    if (anchor.locZ == target.locZ && anchor.locX > target.locX)
+                    {
+
+                    }
+
+
+
+                    break;
+                case SpellPullType.BothCross:
+
+                    break;
+                default:
+                    break;
+            } 
+        }
+        //return rangetiles ;
+    }
+    public List<Tile> SpellPushArea(SpellPushType myPushRangeType)
+    {
+        List<Tile> rangetiles = new List<Tile>();
+        switch (myPushRangeType)
+        {
+            case SpellPushType.DiagonalLine:
+
+                break;
+            case SpellPushType.DiagonalCross:
+
+                break;
+            case SpellPushType.Line:
+
+                break;
+            case SpellPushType.Cross:
+
+                break;
+            case SpellPushType.BothCross:
+
+                break;
+            default:
+                break;
+        }
+        return null;
+    }
     //public void Tester()
     //{
     //    var derp = RangeType();

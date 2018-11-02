@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class GridController : MonoBehaviour {
 
+    public enum Directions { none, left, up, right, down};
+
     public GameObject tiles;
     private Tile[] tileList;
     private List<List<Tile>> tileGrid;
@@ -67,8 +69,66 @@ public class GridController : MonoBehaviour {
         return palautus;
     }
 
-	
-	void Update () {
+	public List<Tile> GetTilesInLinearDirection(Tile startTile, int range, Directions direction)
+    {
+        List<Tile> palautus = new List<Tile>();
+        Tile tempTile;
+        int rangeLeft = range;
+        bool acceptedTile = true;
+        int counter = 0;
+        while (rangeLeft > 0 && acceptedTile)
+        {
+            counter++;
+            tempTile = GetTileInDirection(startTile, direction, counter);
+            if (tempTile != null)
+            {
+                palautus.Add(tempTile);
+            }
+            else
+            {
+                acceptedTile = false;
+            }
+        }
+
+        return palautus;
+
+    }
+
+    /// <summary>
+    /// Distance 1 means the tile next to the starting tile.
+    /// </summary>
+    /// <param name="startTile"></param>
+    /// <param name="direction"></param>
+    /// <param name="distance"></param>
+    /// <returns></returns>
+
+    public Tile GetTileInDirection(Tile startTile, Directions direction, int distance)
+    {
+        Tile tempTile = null;
+        switch(direction)
+        {
+            case Directions.left:
+                tempTile = GetTile(startTile.locX - distance, startTile.locZ);
+                break;
+            case Directions.right:
+                tempTile = GetTile(startTile.locX + distance, startTile.locZ);
+                break;
+            case Directions.up:
+                tempTile = GetTile(startTile.locZ + distance, startTile.locX);
+                break;
+            case Directions.down:
+                tempTile = GetTile(startTile.locZ - distance, startTile.locX);
+                break;
+
+            default:
+                break;
+
+        }
+
+        return tempTile;
+    }
+
+    void Update () {
 		
 	}
 }
