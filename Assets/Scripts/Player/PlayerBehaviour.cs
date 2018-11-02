@@ -82,15 +82,3 @@ public class PlayerBehaviour : MonoBehaviour {
         //    tab.GetComponent<CharacterTab>().AddEffectIcon(testing);
         //    tab.GetComponent<CharacterTab>().AddEffectIcon(testing);
         //}
-    }
-
-    private void OnDestroy()
-    {
-        turnManager.TurnChange -= HandleTurnChange;
-    }
-
-    private void HandleTurnChange(PlayerInfo player)
-    {
-        currentCharacter = player.thisCharacter;
-    }
-

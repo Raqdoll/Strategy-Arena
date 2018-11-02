@@ -263,7 +263,7 @@ public class Abilities : MonoBehaviour {
                 targetList.Add(tile);
             }
         }
-        List<Tile> rangetiles = new List<Tile>();
+
         foreach (var item in targetList)
         {
             switch (myPullRangeType)
@@ -278,28 +278,72 @@ public class Abilities : MonoBehaviour {
 
 
                     break;
+                    // tarvitsee priorityt ja keski laskelmat
                 case SpellPullType.Cross:
-                    if (anchor.locX == target.locX && anchor.locZ < target.locZ)
+                    List<Tile> viereinen = new List<Tile>();
+                    if (item.locX == target.locX && item.locZ < target.locZ)
                     {
+                        viereinen = gridController.GetTilesInLinearDirection(gridController.GetTile(item.locX,item.locZ), spellCast.currentSpell.spellPull, GridController.Directions.up);
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
-                            if (item)
+                            foreach(Tile stuff in viereinen)
                             {
-
+                                Tile temp = gridController.GetTile(stuff.locX, stuff.locZ);
+                                if (temp.myType == Tile.BlockType.BaseBlock)
+                                {
+                                    // siirrä itemin päälläoleva tempin päälle Asser HEBL
+                                }
+                                else
+                                {
+                                    return;
+                                }
                             }
                         }
                     }
-                    if (anchor.locX == target.locX && anchor.locZ > target.locZ)
+                    if (item.locX == target.locX && item.locZ > target.locZ)
                     {
-
+                        viereinen = gridController.GetTilesInLinearDirection(gridController.GetTile(item.locX, item.locZ), spellCast.currentSpell.spellPull, GridController.Directions.down);
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            foreach (Tile stuff in viereinen)
+                            {
+                                Tile temp = gridController.GetTile(stuff.locX, stuff.locZ);
+                                if (temp.myType == Tile.BlockType.BaseBlock)
+                                {
+                                    // siirrä itemin päälläoleva tempin päälle Asser HEBL
+                                }
+                            }
+                        }
                     }
-                    if (anchor.locZ == target.locZ && anchor.locX < target.locX)
+                    if (item.locZ == target.locZ && item.locX < target.locX)
                     {
-
+                        viereinen = gridController.GetTilesInLinearDirection(gridController.GetTile(item.locX, item.locZ), spellCast.currentSpell.spellPull, GridController.Directions.right);
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            foreach (Tile stuff in viereinen)
+                            {
+                                Tile temp = gridController.GetTile(stuff.locX, stuff.locZ);
+                                if (temp.myType == Tile.BlockType.BaseBlock)
+                                {
+                                    // siirrä itemin päälläoleva tempin päälle Asser HEBL
+                                }
+                            }
+                        }
                     }
-                    if (anchor.locZ == target.locZ && anchor.locX > target.locX)
+                    if (item.locZ == target.locZ && item.locX > target.locX)
                     {
-
+                        viereinen = gridController.GetTilesInLinearDirection(gridController.GetTile(item.locX, item.locZ), spellCast.currentSpell.spellPull, GridController.Directions.left);
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            foreach (Tile stuff in viereinen)
+                            {
+                                Tile temp = gridController.GetTile(stuff.locX, stuff.locZ);
+                                if (temp.myType == Tile.BlockType.BaseBlock)
+                                {
+                                    // siirrä itemin päälläoleva tempin päälle Asser HEBL
+                                }
+                            }
+                        }
                     }
 
 
