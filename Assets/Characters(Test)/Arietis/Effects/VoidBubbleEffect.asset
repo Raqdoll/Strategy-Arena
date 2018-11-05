@@ -15,26 +15,29 @@ MonoBehaviour:
   effectIcon: {fileID: 21300000, guid: 1a5c3f03b7320764dab6a2030a0324a7, type: 3}
   effectDuration: 1
   silenceTurns: 0
-  immuneTurns: 0
-  heavyStateTurns: 0
-  damageModifyPlus: 0
+  immune: 1
+  heavyState: 1
+  damageModifyPlus: 5
   dmPlusAllies: 0
   dmPlusEnemies: 0
-  damageModifyPercent: 0
+  damageModifyPercent: -0.2
   dmPercentAllies: 0
   dmPercentEnemies: 0
-  armorModify: 0.25
-  amAllies: 1
-  amEnemies: 0
-  healModify: 0
+  armorModifyPlus: 5
+  amPlusAllies: 0
+  amPlusEnemies: 0
+  armorModifyPercent: -0.15
+  amPerAllies: 0
+  amPerEnemies: 0
+  healModify: 0.4
   hmAllies: 0
   hmEnemies: 0
-  apModify: 0
+  apModify: -2
   apAllies: 0
   apEnemies: 0
-  mpModify: 0
+  mpModify: 3
   mpAllies: 0
   mpEnemies: 0
-  remainingTurns: 0
+  remainingTurns: 1
   caster: {fileID: 0}
   target: {fileID: 0}
