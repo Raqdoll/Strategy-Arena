@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 224993367453139536}
   - component: {fileID: 222386515933359578}
   - component: {fileID: 225753137008347306}
+  - component: {fileID: 114100029461905696}
   m_Layer: 5
   m_Name: EffectUIBlock
   m_TagString: Untagged
@@ -45,6 +46,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114100029461905696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1061958723266966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 882dd681dc71a3743a9cae85bacdad75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spell: {fileID: 0}
+  character: {fileID: 0}
+  effect: {fileID: 0}
 --- !u!114 &114660181885341388
 MonoBehaviour:
   m_ObjectHideFlags: 1

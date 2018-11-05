@@ -26,6 +26,8 @@ public class SpellValues : ScriptableObject
     public bool healsAlly = false;  //<
     public bool hurtsAlly = false;  //<
     public bool needLineOfSight = true; //<
+    public bool needTarget = false; //<
+    public bool needFreeSquare = false; //<
     [Space(6)]
     [Header("Effect")]
     public EffectValues effect;
@@ -35,7 +37,6 @@ public class SpellValues : ScriptableObject
     public int spellPushback;   //<
     public int spellPull;   //<
     [Tooltip("ON: pushes/pulls from caster, OFF: -from AoE center")]
-    public bool moveFromCaster = true; //<
     public bool teleportToTarget = false;   //<
     public bool chagePlaceWithTarget = false;   //<
     public int moveCloserToTarget;  //<
@@ -47,6 +48,11 @@ public class SpellValues : ScriptableObject
     public int spellCooldown;   //<
     public int spellCastPerturn;    //<
     public int castPerTarget;   //<
+    [Space(6)]
+    [Header("Description for the spell")]
+    [Space(6)]
+    [TextArea]
+    public string description;
     [Space(6)]
     [Header("Ingame values, do not touch")]
     [Space(6)]

@@ -39,6 +39,12 @@ public class CharacterTab : MonoBehaviour {
             }
             UpdateSpellIcons();
             UpdateInfo();
+            spell1.GetComponent<Tooltip>().spell = characterVal.spell_1;
+            spell2.GetComponent<Tooltip>().spell = characterVal.spell_2;
+            spell3.GetComponent<Tooltip>().spell = characterVal.spell_3;
+            spell4.GetComponent<Tooltip>().spell = characterVal.spell_4;
+            spell5.GetComponent<Tooltip>().spell = characterVal.spell_5;
+            spell6.GetComponent<Tooltip>().spell = characterVal.spell_6;
         }
     }
 
@@ -63,8 +69,9 @@ public class CharacterTab : MonoBehaviour {
     public void AddEffectIcon(EffectValues effect)
     {
         GameObject GO = Instantiate(effectBlock.gameObject);
-        GO.transform.parent = panel.transform;
+        GO.transform.SetParent(panel.transform);
         GO.GetComponentInChildren<Image>().sprite = effect.effectIcon;
+        GO.GetComponent<Tooltip>().effect = effect;
     }
 
     public void UpdateEffectIcons()

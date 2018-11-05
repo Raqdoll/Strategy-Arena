@@ -9,11 +9,11 @@ public class EffectValues : ScriptableObject {
     [Space(6)]
     [Header("Buffs/Debuffs")]
     [Space(6)]
-    public int effectDuration;
+    public int effectDuration = 0;
     [Space(6)]
-    public int silenceTurns;    //<
-    public int immuneTurns;   //<
-    public int heavyStateTurns; //<
+    public int silenceTurns = 0;    //<
+    public bool immune = false;   //<
+    public bool heavyState = false; //<
     [Space(6)]
     public int damageModifyPlus = 0;    //<
     public bool dmPlusAllies;
@@ -24,10 +24,14 @@ public class EffectValues : ScriptableObject {
     public bool dmPercentAllies;
     public bool dmPercentEnemies;
     [Space(6)]
+    public float armorModifyPlus = 0;   //<
+    public bool amPlusAllies;
+    public bool amPlusEnemies;
+    [Space(6)]
     [Range(-1f, 1f)]
-    public float armorModify = 0;   //<
-    public bool amAllies;
-    public bool amEnemies;
+    public float armorModifyPercent = 0;   //<
+    public bool amPerAllies;
+    public bool amPerEnemies;
     [Space(6)]
     [Range(-1f, 1f)]
     public float healModify = 0;    //<
@@ -41,10 +45,11 @@ public class EffectValues : ScriptableObject {
     public int mpModify = 0;    //<
     public bool mpAllies;
     public bool mpEnemies;
+    [Space(6)]
     [Header("Do not touch!")]
     [Space(6)]
 
-    public int remainingTurns;
+    public int remainingTurns = 0;
     public CharacterValues caster;
     public CharacterValues target;
 }

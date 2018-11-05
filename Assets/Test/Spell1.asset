@@ -26,7 +26,9 @@ MonoBehaviour:
   healsAlly: 0
   hurtsAlly: 0
   needLineOfSight: 1
-  effect: {fileID: 11400000, guid: 38c85b457e80ac944b8a8c5b78063c9a, type: 2}
+  needTarget: 0
+  needFreeSquare: 0
+  effect: {fileID: 0}
   spellPushback: 0
   spellPull: 0
   teleportToTarget: 0
@@ -37,6 +39,8 @@ MonoBehaviour:
   spellCooldown: 0
   spellCastPerturn: 5
   castPerTarget: 5
+  description: "Shoots an exploding Jan's laptop \nat the target, dealing massive
+    \ndissapointment to the targets it hits."
   spellCooldownLeft: 0
   trueDamage: 0
   spellLaunched: 0
