@@ -257,22 +257,22 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             {
                 if (effect.armorModifyPlus > 0)
                 {
-                    ui._text += "\nArmor: +" + effect.damageModifyPlus; 
+                    ui._text += "\nArmor: +" + effect.armorModifyPlus; 
                 }
                 else
                 {
-                    ui._text += "\nArmor: " + effect.damageModifyPlus;
+                    ui._text += "\nArmor: " + effect.armorModifyPlus;
                 }
             }
             if (effect.armorModifyPercent != 0)
             {
                 if (effect.armorModifyPercent > 0)
                 {
-                    ui._text += "\nArmor: +" + effect.damageModifyPercent * 100 + "%";
+                    ui._text += "\nArmor: +" + effect.armorModifyPercent * 100 + "%";
                 }
                 else
                 {
-                    ui._text += "\nArmor: " + effect.damageModifyPercent * 100 + "%";
+                    ui._text += "\nArmor: " + effect.armorModifyPercent * 100 + "%";
                 }
             }
             if (effect.healModify != 0)
