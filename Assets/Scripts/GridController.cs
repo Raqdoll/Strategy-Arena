@@ -79,7 +79,7 @@ public class GridController : MonoBehaviour {
         while (rangeLeft > 0 && acceptedTile)
         {
             counter++;
-            tempTile = GetTileInDirection(startTile, direction, counter);
+            tempTile = GetTileInDirection(startTile, counter, direction);
             if (tempTile != null)
             {
                 palautus.Add(tempTile);
@@ -102,7 +102,7 @@ public class GridController : MonoBehaviour {
     /// <param name="distance"></param>
     /// <returns></returns>
 
-    public Tile GetTileInDirection(Tile startTile, Directions direction, int distance)
+    public Tile GetTileInDirection(Tile startTile, int distance, Directions direction)
     {
         Tile tempTile = null;
         switch(direction)
