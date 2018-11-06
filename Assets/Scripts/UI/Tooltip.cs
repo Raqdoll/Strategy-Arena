@@ -33,6 +33,43 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        //asettaa tooltipin hiiren eri puolille v
+        if (Input.mousePosition.y >= 350f)
+        {
+            if (Input.mousePosition.x >= 800f)
+            {
+                ui.tooltip.GetComponent<RectTransform>().anchoredPosition = new Vector2(1, 1);
+                ui.tooltip.GetComponent<RectTransform>().pivot = new Vector2(1, 1);
+                ui.tooltip.GetComponent<RectTransform>().position = new Vector2(1, 1);
+                ui.tooltip.transform.position = Input.mousePosition + new Vector3(-10f, 0f, 10f);
+            }
+            else
+            {
+                ui.tooltip.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 1);
+                ui.tooltip.GetComponent<RectTransform>().pivot = new Vector2(0, 1);
+                ui.tooltip.GetComponent<RectTransform>().position = new Vector2(0, 1);
+                ui.tooltip.transform.position = Input.mousePosition + new Vector3(10f, 0f, 10f);
+            } 
+        }
+        else
+        {
+            if (Input.mousePosition.x >= 800f)
+            {
+                ui.tooltip.GetComponent<RectTransform>().anchoredPosition = new Vector2(1, 0);
+                ui.tooltip.GetComponent<RectTransform>().pivot = new Vector2(1, 0);
+                ui.tooltip.GetComponent<RectTransform>().position = new Vector2(1, 0);
+                ui.tooltip.transform.position = Input.mousePosition + new Vector3(-10f, 0f, 10f);
+            }
+            else
+            {
+                ui.tooltip.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+                ui.tooltip.GetComponent<RectTransform>().pivot = new Vector2(0, 0);
+                ui.tooltip.GetComponent<RectTransform>().position = new Vector2(0, 0);
+                ui.tooltip.transform.position = Input.mousePosition + new Vector3(10f, 0f, 10f);
+            }
+        }
+        //^
+
         if (spell && !character && !effect)
         {
             ui._text = "";
