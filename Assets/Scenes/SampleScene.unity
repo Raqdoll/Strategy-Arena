@@ -3739,6 +3739,12 @@ Prefab:
       propertyPath: m_Name
       value: CharacterTab1
       objectReference: {fileID: 0}
+    - target: {fileID: 114683674142475220, guid: 8e96766781cab224c8066daaddbed9c8,
+        type: 2}
+      propertyPath: characterVal
+      value: 
+      objectReference: {fileID: 11400000, guid: b907da83412050848959eb2af593bbcf,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e96766781cab224c8066daaddbed9c8, type: 2}
   m_IsPrefabAsset: 0
@@ -25039,7 +25045,7 @@ Prefab:
         type: 2}
       propertyPath: thisCharacter
       value: 
-      objectReference: {fileID: 11400000, guid: e1a6fce33fd0910439d5af6a4fc733b0,
+      objectReference: {fileID: 11400000, guid: b907da83412050848959eb2af593bbcf,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18266ece44db10747be94281c3ca1fc7, type: 2}

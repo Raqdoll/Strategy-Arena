@@ -11,33 +11,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8038d5e1a6f4b4bb84ea3b5b6084fc, type: 3}
   m_Name: Vacuum Ray
   m_EditorClassIdentifier: 
-  mySpellName: 
-  spellIcon: {fileID: 0}
-  mySpellRangeType: 0
-  spellRangeMin: 0
-  spellRangeMax: 0
+  mySpellName: Vacuum Ray
+  spellIcon: {fileID: 21300000, guid: b1f0217a84e449941b07df754e4b5010, type: 3}
+  mySpellRangeType: 1
+  spellRangeMin: 1
+  spellRangeMax: 6
   mySpellAreaType: 0
   aoeRange: 0
-  spellApCost: 0
-  spellDamageMin: 0
-  spellDamageMax: 0
+  spellApCost: 4
+  spellDamageMin: 260
+  spellDamageMax: 280
   spellHealMin: 0
   spellHealMax: 0
   healsAlly: 0
   hurtsAlly: 0
   needLineOfSight: 1
+  needTarget: 1
+  needFreeSquare: 0
   effect: {fileID: 0}
   spellPushback: 0
-  spellPull: 0
-  moveFromCaster: 1
+  spellPull: 2
   teleportToTarget: 0
   chagePlaceWithTarget: 0
   moveCloserToTarget: 0
   MoveAwayFromTarget: 0
   spellInitialCooldown: 0
   spellCooldown: 0
-  spellCastPerturn: 0
+  spellCastPerturn: 1
   castPerTarget: 0
+  description: 'Pulls the target with a powerful
+
+    suction while damaging enemies.'
   spellCooldownLeft: 0
   trueDamage: 0
   spellLaunched: 0

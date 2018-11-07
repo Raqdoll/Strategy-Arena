@@ -127,83 +127,80 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 {
                     if (spell.effect.damageModifyPlus > 0)
                     {
-                        ui._text += "\nDamage: +" + effect.damageModifyPlus; 
+                        ui._text += "\nDamage: +" + spell.effect.damageModifyPlus; 
                     }
                     else
                     {
-                        ui._text += "\nDamage: " + effect.damageModifyPlus;
+                        ui._text += "\nDamage: " + spell.effect.damageModifyPlus;
                     }
                 }
                 if (spell.effect.damageModifyPercent != 0)
                 {
                     if (spell.effect.damageModifyPercent > 0)
                     {
-                        ui._text += "\nDamage: +" + effect.damageModifyPercent * 100 + "%"; 
+                        ui._text += "\nDamage: +" + spell.effect.damageModifyPercent * 100 + "%"; 
                     }
                     else
                     {
-                        ui._text += "\nDamage: " + effect.damageModifyPercent * 100 + "%";
+                        ui._text += "\nDamage: " + spell.effect.damageModifyPercent * 100 + "%";
                     }
                 }
                 if (spell.effect.armorModifyPlus != 0)
                 {
                     if (spell.effect.armorModifyPlus > 0)
                     {
-                        ui._text += "\nArmor: +" + effect.damageModifyPlus; 
+                        ui._text += "\nArmor: +" + spell.effect.armorModifyPlus; 
                     }
                     else
                     {
-                        ui._text += "\nArmor: " + effect.damageModifyPlus;
+                        ui._text += "\nArmor: " + spell.effect.armorModifyPlus;
                     }
                 }
                 if (spell.effect.armorModifyPercent != 0)
                 {
                     if (spell.effect.armorModifyPercent > 0)
                     {
-                        ui._text += "\nArmor: +" + effect.damageModifyPercent * 100 + "%"; 
+                        ui._text += "\nArmor: +" + spell.effect.armorModifyPercent * 100 + "%"; 
                     }
                     else
                     {
-                        ui._text += "\nArmor: " + effect.damageModifyPercent * 100 + "%";
+                        ui._text += "\nArmor: " + spell.effect.armorModifyPercent * 100 + "%";
                     }
                 }
                 if (spell.effect.healModify != 0)
                 {
                     if (spell.effect.healModify > 0)
                     {
-                        ui._text += "\nHeal modifier: +" + effect.healModify * 100 + "%"; 
+                        ui._text += "\nHeal modifier: +" + spell.effect.healModify * 100 + "%"; 
                     }
                     else
                     {
-                        ui._text += "\nHeal modifier: " + effect.healModify * 100 + "%";
+                        ui._text += "\nHeal modifier: " + spell.effect.healModify * 100 + "%";
                     }
                 }
                 if (spell.effect.apModify != 0)
                 {
                     if (spell.effect.apModify > 0)
                     {
-                        ui._text += "\nAP: +" + effect.apModify;
+                        ui._text += "\nAP: +" + spell.effect.apModify;
                     }
                     else
                     {
-                        ui._text += "\nAP: " + effect.apModify;
+                        ui._text += "\nAP: " + spell.effect.apModify;
                     }
                 }
                 if (spell.effect.mpModify != 0)
                 {
                     if (spell.effect.mpModify > 0)
                     {
-                        ui._text += "\nMP: +" + effect.mpModify; 
+                        ui._text += "\nMP: +" + spell.effect.mpModify; 
                     }
                     else
                     {
-                        ui._text += "\nMP: " + effect.mpModify;
+                        ui._text += "\nMP: " + spell.effect.mpModify;
                     }
                 }
 
-
-
-                ui._text += "\n";
             }
 
 
@@ -215,10 +212,6 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             if (spell.spellPull != 0)
             {
                 ui._text += "\nPull: " + spell.spellPull;
-            }
-            if (spell.spellPushback != 0)
-            {
-                ui._text += "\nPushback: " + spell.spellPushback;
             }
             ui._text += "\n";
             if (spell.spellInitialCooldown != 0)
