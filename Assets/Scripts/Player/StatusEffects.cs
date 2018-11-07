@@ -43,18 +43,21 @@ public class StatusEffects : MonoBehaviour {
     //Updates remaining turns
     public void UpdateEffects()
     {
-        foreach(EffectValues effect in effectList)
+        if (effectList != null)
         {
-            //If caster's turn, decrease timer
-            if(effect.caster == tManager.activePlayer.thisCharacter)
+            foreach (EffectValues effect in effectList)
             {
-                effect.remainingTurns -= 1;
-            }
-            //Checks if the spell stays active
-            if(effect.remainingTurns <= 0)
-            {
-                effectList.Remove(effect);
-            }
+                //If caster's turn, decrease timer
+                if (effect.caster == tManager.activePlayer.thisCharacter)
+                {
+                    effect.remainingTurns -= 1;
+                }
+                //Checks if the spell stays active
+                if (effect.remainingTurns <= 0)
+                {
+                    effectList.Remove(effect);
+                }
+            } 
         }
     }
 }//Last edited by Ilari
