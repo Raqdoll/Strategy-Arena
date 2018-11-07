@@ -242,7 +242,7 @@ public class Abilities : MonoBehaviour {
         // etsii siirrettävät pelaajat aoe:sta
         foreach (var tile in AoeList)
         {
-            if (tile.charCurrentlyOnTile)
+            if (tile.CharCurrentlyOnTile)
             {
                 targetList.Add(tile);
             }

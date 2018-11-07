@@ -7,6 +7,11 @@ public class PositionContainer {
     public int x;
     public int z;
 
+    /// <summary>
+    /// Contains x and z coordinates for grid
+    /// </summary>
+    /// <param name="vec"></param>
+
     public PositionContainer(Vector3 vec) {
         this.x = (int)vec.x;
         this.z = (int)vec.z;

@@ -18,8 +18,33 @@ public class PlayerMovement : MonoBehaviour {
     PlayerInfo playerInfo;
     GridController gridController;
     MouseController mouseController;
-    public Tile targetTile;
+    Tile _tile;
+
+    Tile CurrentTile
+    {
+        get
+        {
+            if (_tile == null)
+            {
+                Debug.Log("Haettiin tile jännästi, tee paremmin!");
+                return gridController.GetTile((int)transform.localPosition.x, (int)transform.localPosition.z);
+            }
+            else
+            {
+                return _tile;
+            }
+        }
+        set
+        {
+            _tile = value;
+            AnnounceTileChange(value);
+            value.CharCurrentlyOnTile = playerInfo;
+        }
+    }
+
     public UnityEvent exampleEvents;
+    public delegate void TileEvent(Tile tile);
+    public event TileEvent ChangeTile;
 
     struct PathTile
     {
@@ -71,12 +96,8 @@ public class PlayerMovement : MonoBehaviour {
 
     public List<Tile> TilesInRange()
     {
-        //PositionContainer container = playerInfo.thisCharacter.currentTile;
-        //Tile tile = gridController.GetTile(container.x, container.z);
-        Tile tile = gridController.GetTile((int)transform.localPosition.x, (int)transform.localPosition.z);
-        //Debug.Log("Getting tiles... " + tile + " and " + playerInfo.thisCharacter.currentMp + " and " + MovementMethod.Teleport);
 
-        return TilesInRange(tile, playerInfo.thisCharacter.currentMp, MovementMethod.Teleport);
+        return TilesInRange(CurrentTile, playerInfo.thisCharacter.currentMp, MovementMethod.Teleport);
     }
 
     /// <summary>
@@ -140,11 +161,6 @@ public class PlayerMovement : MonoBehaviour {
         throw new NotImplementedException();
     }
 
-    public void TestMovement()
-    {
-        MoveToTile(targetTile, MovementMethod.Teleport);
-    }
-
     public void MoveToTile(Tile destinationTile, MovementMethod method)
     {
         switch (method)
@@ -162,6 +178,7 @@ public class PlayerMovement : MonoBehaviour {
                 break;
 
         }
+        CurrentTile = destinationTile;
     }
 
     void Teleport(Tile destinationTile)
@@ -181,7 +198,13 @@ public class PlayerMovement : MonoBehaviour {
 
     }
 
-
+    void AnnounceTileChange(Tile tile)
+    {
+        if (ChangeTile != null && tile != null)
+        {
+            ChangeTile(tile);
+        }
+    }
 
     public void ExampleEventsForEditor()
     {
@@ -200,10 +223,6 @@ public class PlayerMovement : MonoBehaviour {
             DrawDefaultInspector();
 
             PlayerMovement PlayerMovementScript = (PlayerMovement)target;
-            if (GUILayout.Button("Test movement to target tile"))
-            {
-                PlayerMovementScript.TestMovement();
-            }
             if (GUILayout.Button("Invoke example events"))
             {
                 PlayerMovementScript.ExampleEventsForEditor();

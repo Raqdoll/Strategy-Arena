@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,11 +19,33 @@ public class Tile : MonoBehaviour {
     public Material RangeMaterial;
     public Material MovementMaterial;
     GridController gridController;
+    TeamManager teamManager;
     List<Tile> tileList;
     Abilities abilities;
     PlayerBehaviour playerBehaviour;
 
-    public CharacterValues charCurrentlyOnTile;
+    PlayerInfo _charCurrentlyOnTile;
+    public PlayerInfo CharCurrentlyOnTile
+    {
+        get
+        {
+            return _charCurrentlyOnTile;
+        }
+        set
+        {
+            if (_charCurrentlyOnTile != null)
+            {
+                var playerMovement = _charCurrentlyOnTile.GetComponent<PlayerMovement>();
+                playerMovement.ChangeTile -= HandleChangeTile;
+            }
+            _charCurrentlyOnTile = value;
+            if (value != null)
+            {
+                var playerMovement = _charCurrentlyOnTile.GetComponent<PlayerMovement>();
+                playerMovement.ChangeTile += HandleChangeTile;
+            }
+        }
+    }
 
     public bool isFree = true;
     public bool ShootThrough;
@@ -31,9 +54,10 @@ public class Tile : MonoBehaviour {
     public enum BlockType { BaseBlock, ShootThroughBlock, BlockyBlock, StartA, StartB};
     public BlockType myType;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
+        teamManager = gridController.gameObject.GetComponent<TeamManager>();
         locX = (int)transform.localPosition.x;
         locZ = (int)transform.localPosition.z;
         thisMaterial = GetComponent<Renderer>().material;
@@ -65,6 +89,14 @@ public class Tile : MonoBehaviour {
                 break;
         }
 	}
+
+    private void HandleChangeTile(Tile tile)
+    {
+        if (tile != this)
+        {
+            CharCurrentlyOnTile = null;
+        }
+    }
 
     /// <summary>
     /// No diagonal movement, so cardinal distance is more useful gamewise
@@ -139,8 +171,4 @@ public class Tile : MonoBehaviour {
         return (gridController.GetTilesNextTo(locX, locZ));
     }
 
-    void Update()
-    {
-
-    }
 }
