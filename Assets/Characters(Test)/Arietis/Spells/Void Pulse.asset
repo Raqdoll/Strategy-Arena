@@ -11,33 +11,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8038d5e1a6f4b4bb84ea3b5b6084fc, type: 3}
   m_Name: Void Pulse
   m_EditorClassIdentifier: 
-  mySpellName: 
-  spellIcon: {fileID: 0}
-  mySpellRangeType: 0
-  spellRangeMin: 0
-  spellRangeMax: 0
+  mySpellName: Void Pulse
+  spellIcon: {fileID: 21300000, guid: b617992c942a8894d83ee6e3101f24dd, type: 3}
+  mySpellRangeType: 2
+  spellRangeMin: 1
+  spellRangeMax: 8
   mySpellAreaType: 0
-  aoeRange: 0
-  spellApCost: 0
-  spellDamageMin: 0
-  spellDamageMax: 0
+  aoeRange: 1
+  spellApCost: 3
+  spellDamageMin: 180
+  spellDamageMax: 200
   spellHealMin: 0
   spellHealMax: 0
   healsAlly: 0
   hurtsAlly: 0
   needLineOfSight: 1
+  needTarget: 0
+  needFreeSquare: 0
   effect: {fileID: 0}
-  spellPushback: 0
+  spellPushback: 1
   spellPull: 0
-  moveFromCaster: 1
   teleportToTarget: 0
   chagePlaceWithTarget: 0
   moveCloserToTarget: 0
   MoveAwayFromTarget: 0
   spellInitialCooldown: 0
   spellCooldown: 0
-  spellCastPerturn: 0
+  spellCastPerturn: 1
   castPerTarget: 0
+  description: "Sends a small pulse of void energy \nto knock back everyone around
+    it."
   spellCooldownLeft: 0
   trueDamage: 0
   spellLaunched: 0

@@ -51,6 +51,19 @@ public class SpellCast : MonoBehaviour {
     {
         cv = player.thisCharacter;
         //Debug.Log("Handling event");
+        spellButton1.GetComponent<Image>().sprite = cv.spell_1.spellIcon;
+        spellButton2.GetComponent<Image>().sprite = cv.spell_2.spellIcon;
+        spellButton3.GetComponent<Image>().sprite = cv.spell_3.spellIcon;
+        spellButton4.GetComponent<Image>().sprite = cv.spell_4.spellIcon;
+        spellButton5.GetComponent<Image>().sprite = cv.spell_5.spellIcon;
+        spellButton6.GetComponent<Image>().sprite = cv.spell_6.spellIcon;
+
+        spellButton1.GetComponent<Tooltip>().spell = cv.spell_1;
+        spellButton2.GetComponent<Tooltip>().spell = cv.spell_2;
+        spellButton3.GetComponent<Tooltip>().spell = cv.spell_3;
+        spellButton4.GetComponent<Tooltip>().spell = cv.spell_4;
+        spellButton5.GetComponent<Tooltip>().spell = cv.spell_5;
+        spellButton6.GetComponent<Tooltip>().spell = cv.spell_6;
     }
 
     public void CastSpell(SpellValues spell, CharacterValues caster, CharacterValues target)

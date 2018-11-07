@@ -10,6 +10,7 @@ public class EffectValues : ScriptableObject {
     [Header("Buffs/Debuffs")]
     [Space(6)]
     public int effectDuration = 0;
+    public bool canBeSilenced = true; //<
     [Space(6)]
     public int silenceTurns = 0;    //<
     public bool immune = false;   //<

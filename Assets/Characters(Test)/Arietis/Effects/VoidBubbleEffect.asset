@@ -14,6 +14,7 @@ MonoBehaviour:
   effectName: Void Bubble
   effectIcon: {fileID: 21300000, guid: 1a5c3f03b7320764dab6a2030a0324a7, type: 3}
   effectDuration: 1
+  canBeSilenced: 1
   silenceTurns: 0
   immune: 0
   heavyState: 0
@@ -23,11 +24,11 @@ MonoBehaviour:
   damageModifyPercent: 0
   dmPercentAllies: 0
   dmPercentEnemies: 0
-  armorModifyPlus: 30
+  armorModifyPlus: 0
   amPlusAllies: 0
   amPlusEnemies: 0
-  armorModifyPercent: 0
-  amPerAllies: 0
+  armorModifyPercent: 0.25
+  amPerAllies: 1
   amPerEnemies: 0
   healModify: 0
   hmAllies: 0

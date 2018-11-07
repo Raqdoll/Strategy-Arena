@@ -11,14 +11,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8038d5e1a6f4b4bb84ea3b5b6084fc, type: 3}
   m_Name: Cosmic Shield
   m_EditorClassIdentifier: 
-  mySpellName: 
-  spellIcon: {fileID: 0}
-  mySpellRangeType: 0
+  mySpellName: Cosmic Shield
+  spellIcon: {fileID: 21300000, guid: 2055e5cb6da65834aa3d36a1f49f850b, type: 3}
+  mySpellRangeType: 2
   spellRangeMin: 0
   spellRangeMax: 0
-  mySpellAreaType: 0
-  aoeRange: 0
-  spellApCost: 0
+  mySpellAreaType: 2
+  aoeRange: 3
+  spellApCost: 3
   spellDamageMin: 0
   spellDamageMax: 0
   spellHealMin: 0
@@ -26,18 +26,20 @@ MonoBehaviour:
   healsAlly: 0
   hurtsAlly: 0
   needLineOfSight: 1
-  effect: {fileID: 0}
+  needTarget: 0
+  needFreeSquare: 0
+  effect: {fileID: 11400000, guid: 2107dab86fb34994da65b775a133d95a, type: 2}
   spellPushback: 0
   spellPull: 0
-  moveFromCaster: 1
   teleportToTarget: 0
   chagePlaceWithTarget: 0
   moveCloserToTarget: 0
   MoveAwayFromTarget: 0
   spellInitialCooldown: 0
-  spellCooldown: 0
+  spellCooldown: 3
   spellCastPerturn: 0
   castPerTarget: 0
+  description: Shields your allies with cosmic energy.
   spellCooldownLeft: 0
   trueDamage: 0
   spellLaunched: 0

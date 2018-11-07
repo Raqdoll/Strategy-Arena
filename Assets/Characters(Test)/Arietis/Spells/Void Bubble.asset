@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Void Bubble
   m_EditorClassIdentifier: 
   mySpellName: Void Bubble
-  spellIcon: {fileID: 0}
+  spellIcon: {fileID: 21300000, guid: 1a5c3f03b7320764dab6a2030a0324a7, type: 3}
   mySpellRangeType: 2
   spellRangeMin: 0
   spellRangeMax: 8
@@ -26,10 +26,11 @@ MonoBehaviour:
   healsAlly: 0
   hurtsAlly: 0
   needLineOfSight: 1
+  needTarget: 1
+  needFreeSquare: 0
   effect: {fileID: 11400000, guid: 234be2b29f5808e4dbab11315cd49775, type: 2}
   spellPushback: 0
   spellPull: 0
-  moveFromCaster: 1
   teleportToTarget: 0
   chagePlaceWithTarget: 0
   moveCloserToTarget: 0
@@ -38,6 +39,8 @@ MonoBehaviour:
   spellCooldown: 0
   spellCastPerturn: 1
   castPerTarget: 0
+  description: "Shields an ally with a bubble \nmade of void material.\nThis bubble
+    reduces damage taken."
   spellCooldownLeft: 0
   trueDamage: 0
   spellLaunched: 0

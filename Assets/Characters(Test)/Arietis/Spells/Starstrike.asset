@@ -9,27 +9,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b8038d5e1a6f4b4bb84ea3b5b6084fc, type: 3}
-  m_Name: Star Strike
+  m_Name: Starstrike
   m_EditorClassIdentifier: 
-  mySpellName: 
-  spellIcon: {fileID: 0}
+  mySpellName: Starstrike
+  spellIcon: {fileID: 21300000, guid: 3d131ff27a9bf134cb2b308f1b811817, type: 3}
   mySpellRangeType: 0
-  spellRangeMin: 0
-  spellRangeMax: 0
+  spellRangeMin: 1
+  spellRangeMax: 8
   mySpellAreaType: 0
   aoeRange: 0
-  spellApCost: 0
-  spellDamageMin: 0
-  spellDamageMax: 0
+  spellApCost: 3
+  spellDamageMin: 200
+  spellDamageMax: 230
   spellHealMin: 0
   spellHealMax: 0
   healsAlly: 0
   hurtsAlly: 0
   needLineOfSight: 1
+  needTarget: 1
+  needFreeSquare: 0
   effect: {fileID: 0}
-  spellPushback: 0
+  spellPushback: 1
   spellPull: 0
-  moveFromCaster: 1
   teleportToTarget: 0
   chagePlaceWithTarget: 0
   moveCloserToTarget: 0
@@ -37,7 +38,9 @@ MonoBehaviour:
   spellInitialCooldown: 0
   spellCooldown: 0
   spellCastPerturn: 0
-  castPerTarget: 0
+  castPerTarget: 2
+  description: "Sends a pulse of energy from the stars \nto deal damage and knock
+    enemies back."
   spellCooldownLeft: 0
   trueDamage: 0
   spellLaunched: 0
