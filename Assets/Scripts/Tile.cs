@@ -22,7 +22,7 @@ public class Tile : MonoBehaviour {
     TeamManager teamManager;
     List<Tile> tileList;
     Abilities abilities;
-    PlayerBehaviour playerBehaviour;
+    //PlayerBehaviour playerBehaviour;
 
     PlayerInfo _charCurrentlyOnTile;
     public PlayerInfo CharCurrentlyOnTile

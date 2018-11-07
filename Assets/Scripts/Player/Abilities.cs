@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 public class Abilities : MonoBehaviour {
     public enum SpellAreaType { Cross, Line, Normal, Square, Cone, Diagonal}; // Different types of AoE
-    public enum SpellRangeType { Linear, Diagonal, Normal}; // How Player Targets the spell
+    public enum SpellRangeType { Linear, Diagonal, Normal, LinDiag}; // How Player Targets the spell
     public enum SpellPushType { LineFromPlayer, DiagonalFromPlayer, BothFromPlayer, LineFromMouse, DiagonalFromMouse, BothFromMouse };
     public enum SpellPullType { LineTowardsPlayer, DiagonalTowardsPlayer, BothTowardsPlayer, LineTowardsMouse, DiagonalTowardsMouse, BothTowardsMouse, };
 
@@ -156,15 +156,17 @@ public class Abilities : MonoBehaviour {
     {      
     List<Tile> rangetiles = new List<Tile>();
         int i = spellCast.currentSpell.spellRangeMin;
+        int x = spellCast.currentSpell.spellRangeMin;
         if (i == 0)
         {
             rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z));
             i++;
+            x++;
         }
         switch (mySpellRangeType)
         {
             case SpellRangeType.Diagonal:              
-                    for ( i = spellCast.currentSpell.spellRangeMin; i <= spellCast.currentSpell.spellRangeMax; i++)
+                    for ( i = x; i <= spellCast.currentSpell.spellRangeMax; i++)
                         {
                             rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x + i, playerBehaviour.currentCharacter.currentTile.z + i));
                             rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x + i, playerBehaviour.currentCharacter.currentTile.z - i));
@@ -173,7 +175,7 @@ public class Abilities : MonoBehaviour {
                         }
                 break;
             case SpellRangeType.Linear:
-                    for ( i = spellCast.currentSpell.spellRangeMin; i <= spellCast.currentSpell.spellRangeMax; i++)
+                    for ( i =x; i <= spellCast.currentSpell.spellRangeMax; i++)
                     {
                             rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z + i));
                             rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x + i, playerBehaviour.currentCharacter.currentTile.z));
@@ -182,7 +184,7 @@ public class Abilities : MonoBehaviour {
                     }
                 break;
             case SpellRangeType.Normal:
-                    for ( i = spellCast.currentSpell.spellRangeMin - spellCast.currentSpell.spellRangeMax; i <= spellCast.currentSpell.spellRangeMax; i++)
+                    for ( i = x - spellCast.currentSpell.spellRangeMax; i <= spellCast.currentSpell.spellRangeMax; i++)
                     {
                         for (int j = 0 - spellCast.currentSpell.spellRangeMax; j <= spellCast.currentSpell.spellRangeMax; j++)
                         {
@@ -192,6 +194,22 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
+                break;
+            case SpellRangeType.LinDiag:
+                for (i =x; i <= spellCast.currentSpell.spellRangeMax; i++)
+                {
+                    rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z + i));
+                    rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x + i, playerBehaviour.currentCharacter.currentTile.z));
+                    rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z - i));
+                    rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x - i, playerBehaviour.currentCharacter.currentTile.z));
+                }
+                for (i =x; i <= spellCast.currentSpell.spellRangeMax; i++)
+                {
+                    rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x + i, playerBehaviour.currentCharacter.currentTile.z + i));
+                    rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x + i, playerBehaviour.currentCharacter.currentTile.z - i));
+                    rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x - i, playerBehaviour.currentCharacter.currentTile.z + i));
+                    rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x - i, playerBehaviour.currentCharacter.currentTile.z - i));
+                }
                 break;
             default:
                 break;
@@ -260,7 +278,7 @@ public class Abilities : MonoBehaviour {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -275,7 +293,7 @@ public class Abilities : MonoBehaviour {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -290,7 +308,7 @@ public class Abilities : MonoBehaviour {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -298,14 +316,14 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locZ == anchor.locZ && item.locX < anchor.locX)
+                    if (item.locZ == anchor.locZ && item.locX > anchor.locX)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -322,7 +340,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -339,7 +357,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -356,7 +374,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -373,7 +391,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -390,7 +408,7 @@ public class Abilities : MonoBehaviour {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -405,7 +423,7 @@ public class Abilities : MonoBehaviour {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -420,7 +438,7 @@ public class Abilities : MonoBehaviour {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -428,14 +446,14 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locZ == caster.locZ && anchor.locX < caster.locX)
+                    if (anchor.locZ == caster.locZ && anchor.locX > caster.locX)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -452,7 +470,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -469,7 +487,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -486,7 +504,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -503,7 +521,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -522,7 +540,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -539,7 +557,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -556,7 +574,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -573,7 +591,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -592,7 +610,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -609,7 +627,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -626,7 +644,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -643,7 +661,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -660,7 +678,7 @@ public class Abilities : MonoBehaviour {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -675,7 +693,7 @@ public class Abilities : MonoBehaviour {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -690,7 +708,7 @@ public class Abilities : MonoBehaviour {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -698,14 +716,14 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locZ == anchor.locZ && item.locX < anchor.locX)
+                    if (item.locZ == anchor.locZ && item.locX > anchor.locX)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -722,7 +740,7 @@ public class Abilities : MonoBehaviour {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -737,7 +755,7 @@ public class Abilities : MonoBehaviour {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -750,6 +768,210 @@ public class Abilities : MonoBehaviour {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
+                            if (pasta.myType == Tile.BlockType.BaseBlock)
+                            {
+                                PullPushAct(item, pasta);
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (anchor.locZ == caster.locZ && anchor.locX > caster.locX)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
+                            if (pasta.myType == Tile.BlockType.BaseBlock)
+                            {
+                                PullPushAct(item, pasta);
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            } 
+        }
+    }
+    public void SpellPushArea(SpellPushType myPushRangeType)
+    {
+        List<Tile> AoeList = AreaType(spellCast.currentSpell.mySpellAreaType);
+        List<Tile> targetList = new List<Tile>();
+        Tile anchor = new Tile();
+        Tile caster = new Tile();
+        caster.locX = playerBehaviour.currentCharacter.currentTile.x;
+        caster.locZ = playerBehaviour.currentCharacter.currentTile.z;
+        anchor = mouseController.selected;
+        // etsii siirrettävät pelaajat aoe:sta
+        foreach (var tile in AoeList)
+        {
+            if (tile.charCurrentlyOnTile)
+            {
+                targetList.Add(tile);
+            }
+        }
+        // tekee siirrot ei valmis tarvitsee asserin apua
+        foreach (var item in targetList)
+        {
+            switch (myPushRangeType)
+            {
+                case SpellPushType.BothFromMouse:
+                    if (item.locX == anchor.locX && item.locZ < anchor.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
+                            if (pasta.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (item.locX == anchor.locX && item.locZ > anchor.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
+                            if (pasta.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (item.locZ == anchor.locZ && item.locX < anchor.locX)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
+                            if (pasta.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (item.locZ == anchor.locZ && item.locX > anchor.locX)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
+                            if (pasta.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (item.locX < anchor.locX && item.locZ < anchor.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
+                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
+                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
+                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (item.locX < anchor.locX && item.locZ > anchor.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
+                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
+                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
+                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (item.locX > anchor.locX && item.locZ < anchor.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
+                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
+                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
+                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (item.locX > anchor.locX && item.locZ > anchor.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
+                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
+                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
+                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                case SpellPushType.BothFromPlayer:
+                    if (anchor.locX == caster.locX && anchor.locZ < caster.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
+                            if (pasta.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (anchor.locX == caster.locX && anchor.locZ > caster.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
                                 // siirrä itemin päälläoleva pastan päälle Asser HEBL
@@ -775,40 +997,366 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
+                    if (anchor.locZ == caster.locZ && anchor.locX > caster.locX)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
+                            if (pasta.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (anchor.locX < caster.locX && anchor.locZ < caster.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
+                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
+                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
+                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (anchor.locX < caster.locX && anchor.locZ > caster.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
+                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
+                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
+                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (anchor.locX > caster.locX && anchor.locZ < caster.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
+                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
+                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
+                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (anchor.locX > caster.locX && anchor.locZ > caster.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
+                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
+                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
+                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                case SpellPushType.DiagonalFromMouse:
+                    if (item.locX < anchor.locX && item.locZ < anchor.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
+                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
+                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
+                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (item.locX < anchor.locX && item.locZ > anchor.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
+                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
+                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
+                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (item.locX > anchor.locX && item.locZ < anchor.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
+                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
+                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
+                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (item.locX > anchor.locX && item.locZ > anchor.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
+                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
+                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
+                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                case SpellPushType.DiagonalFromPlayer:
+                    if (anchor.locX < caster.locX && anchor.locZ < caster.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
+                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
+                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
+                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (anchor.locX < caster.locX && anchor.locZ > caster.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
+                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
+                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
+                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (anchor.locX > caster.locX && anchor.locZ < caster.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
+                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
+                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
+                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (anchor.locX > caster.locX && anchor.locZ > caster.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
+                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
+                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
+                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                case SpellPushType.LineFromMouse:
+                    if (item.locX == anchor.locX && item.locZ < anchor.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
+                            if (pasta.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (item.locX == anchor.locX && item.locZ > anchor.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
+                            if (pasta.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (item.locZ == anchor.locZ && item.locX < anchor.locX)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
+                            if (pasta.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (item.locZ == anchor.locZ && item.locX > anchor.locX)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
+                            if (pasta.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                case SpellPushType.LineFromPlayer:
+                    if (anchor.locX == caster.locX && anchor.locZ < caster.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
+                            if (pasta.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (anchor.locX == caster.locX && anchor.locZ > caster.locZ)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
+                            if (pasta.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (anchor.locZ == caster.locZ && anchor.locX < caster.locX)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
+                            if (pasta.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    if (anchor.locZ == caster.locZ && anchor.locX > caster.locX)
+                    {
+                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                        {
+                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
+                            if (pasta.myType == Tile.BlockType.BaseBlock)
+                            {
+                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
                     break;
                 default:
                     break;
-            } 
+            }
         }
-        //return rangetiles ;
     }
-    public void SpellPushArea(SpellPushType myPushRangeType)
+
+    public void PullPushAct(Tile start, Tile end)
     {
-        List<Tile> rangetiles = new List<Tile>();
-        switch (myPushRangeType)
-        {
-            case SpellPushType.BothFromMouse:
-
-                break;
-            case SpellPushType.BothFromPlayer:
-
-                break;
-            case SpellPushType.DiagonalFromMouse:
-
-                break;
-            case SpellPushType.DiagonalFromPlayer:
-
-                break;
-            case SpellPushType.LineFromMouse:
-
-                break;
-            case SpellPushType.LineFromPlayer:
-
-                break;
-            default:
-                break;
-        }
+        // move player on tile start onto tile end
     }
+
+
     //public void Tester()
     //{
     //    var derp = RangeType();

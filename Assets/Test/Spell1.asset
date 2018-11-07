@@ -13,8 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mySpellName: VoidBubble
   spellIcon: {fileID: 21300000, guid: 1a5c3f03b7320764dab6a2030a0324a7, type: 3}
-  mySpellRangeType: 2
-  spellRangeMin: 1
+  mySpellRangeType: 0
+  spellRangeMin: 0
   spellRangeMax: 15
   mySpellAreaType: 2
   aoeRange: 2
