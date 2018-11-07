@@ -20,7 +20,7 @@ public class Tile : MonoBehaviour {
     GridController gridController;
     List<Tile> tileList;
     Abilities abilities;
-    PlayerBehaviour playerBehaviour;
+    //PlayerBehaviour playerBehaviour;
 
     public CharacterValues charCurrentlyOnTile;
 
