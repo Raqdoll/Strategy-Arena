@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -811,7 +811,7 @@ public class Abilities : MonoBehaviour {
         // etsii siirrettävät pelaajat aoe:sta
         foreach (var tile in AoeList)
         {
-            if (tile.charCurrentlyOnTile)
+            if (tile.CharCurrentlyOnTile)
             {
                 targetList.Add(tile);
             }
@@ -1354,6 +1354,14 @@ public class Abilities : MonoBehaviour {
     public void PullPushAct(Tile start, Tile end)
     {
         // move player on tile start onto tile end
+        // Jan: Lisää tämä metodi pasta carbonaran sekaan. Suosittelen edelleen miettimään apumetodia ylläolevan switchin if lausekkeille, jotta mahdolliset muokkaukset helpottuvat kummasti.
+
+        PlayerMovement playerMovement = start.CharCurrentlyOnTile.gameObject.GetComponent<PlayerMovement>();
+        if (playerMovement)
+        {
+            //playerMovement.MoveToTile(end, PlayerMovement.MovementMethod.push);    //Tämä tulee lopulliseen versioon, ei vielä implementoitu
+            playerMovement.MoveToTile(end, PlayerMovement.MovementMethod.Teleport);  //Väliaikainen liikkuminen
+        }
     }
 
 

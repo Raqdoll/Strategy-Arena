@@ -173,7 +173,11 @@ public class MouseController : MonoBehaviour
                 {
                     foreach (var tile in targetedTiles)
                     {
-                        CharacterValues target = tile.CharCurrentlyOnTile.thisCharacter;
+                        PlayerInfo checker = tile.CharCurrentlyOnTile;
+                        CharacterValues target = null;
+                        if (checker)
+                            target = checker.thisCharacter;
+
                         spellCast.CastSpell(spellCast.currentSpell, playerBehaviour.currentCharacter, target);
                     }
                     foreach (var tile in rangeTiles)

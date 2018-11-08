@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour {
         {
             if (_tile == null)
             {
-                Debug.Log("Haettiin tile jännästi, tee paremmin!");
+                //Debug.Log("Haettiin tile jännästi, tee paremmin");
                 return gridController.GetTile((int)transform.localPosition.x, (int)transform.localPosition.z);
             }
             else
@@ -83,15 +83,8 @@ public class PlayerMovement : MonoBehaviour {
         PositionContainer debuggerPositionContainer = new PositionContainer(7, 7);  //Remove this when starting positions are set properly!
         Tile tempTile = gridController.GetTile(debuggerPositionContainer);
 
-        //playerInfo.thisCharacter.currentTile = new PositionContainer(7, 7);
-        //Tile tempTile = gridController.GetTile(playerInfo.thisCharacter.currentTile.x, playerInfo.thisCharacter.currentTile.z);  //CurrentTile is null!
         if (tempTile != null)
             MoveToTile(tempTile, MovementMethod.Teleport);
-    }
-
-    private void Update()
-    {
-        
     }
 
     public List<Tile> TilesInRange()
