@@ -31,6 +31,8 @@ public class SpellValues : ScriptableObject
     [Space(6)]
     [Header("Effect")]
     public EffectValues effect;
+    public bool effectOnCaster = false; //<
+    public bool effectOnTarget = true; //<
     [Space(6)]
     [Header("Map manipulation")]
     [Space(6)]
