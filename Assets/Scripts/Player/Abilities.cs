@@ -153,12 +153,11 @@ public class Abilities : MonoBehaviour {
     }
 
     public List<Tile> RangeType(SpellRangeType mySpellRangeType, bool ilaririkkootaman)
-    {
-        List<Tile> returnables = new List<Tile>();
-        List<Tile> rangetiles = new List<Tile>();
+    {      
+    List<Tile> rangetiles = new List<Tile>();
         int i = spellCast.currentSpell.spellRangeMin;
         int x = spellCast.currentSpell.spellRangeMin;
-        if (i == 0 && spellCast.currentSpell.mySpellRangeType != SpellRangeType.Normal)
+        if (i == 0)
         {
             rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z));
             i++;
@@ -185,128 +184,16 @@ public class Abilities : MonoBehaviour {
                     }
                 break;
             case SpellRangeType.Normal:
-                List<Tile> badTiles = new List<Tile>();
-                if (spellCast.currentSpell.spellRangeMin != 0)
-                {
-                    List<Tile> tempo = new List<Tile>();
-                    for (int z = 0 - spellCast.currentSpell.spellRangeMin; z < spellCast.currentSpell.spellRangeMin; z++)
-                    {
-                        for (int j = 0 - spellCast.currentSpell.spellRangeMin; j <= spellCast.currentSpell.spellRangeMin; j++)
-                        {
-                            if (Mathf.Abs(z) + Mathf.Abs(j) <= spellCast.currentSpell.spellRangeMin)
-                            {
-                                tempo.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x + j, playerBehaviour.currentCharacter.currentTile.z + z));
-                            }
-                        }
-                    }
-                    foreach (var tile in tempo)
-                    {
-                        if (tile != null)
-                        {
-                                badTiles.Add(tile);
-                        }
-                    }
-                }
-                    for (i = 0 - spellCast.currentSpell.spellRangeMax; i <= spellCast.currentSpell.spellRangeMax; i++)
+                    for ( i = x - spellCast.currentSpell.spellRangeMax; i <= spellCast.currentSpell.spellRangeMax; i++)
                     {
                         for (int j = 0 - spellCast.currentSpell.spellRangeMax; j <= spellCast.currentSpell.spellRangeMax; j++)
                         {
                             if (Mathf.Abs(i) + Mathf.Abs(j) <= spellCast.currentSpell.spellRangeMax)
-                            {
+                            {                           
                                 rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x + j, playerBehaviour.currentCharacter.currentTile.z + i));
                             }
                         }
                     }
-                foreach (var tile in rangetiles)
-                {
-                    if (tile != null)
-                    {
-                        if (spellCast.currentSpell.needLineOfSight == true)
-                        {
-                            if (ilaririkkootaman == false)
-                            {
-                                if (lOS.LoSCheck(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z), tile) == true)
-                                {
-                                    if (badTiles != null)
-                                    {
-                                        bool isOk = true;
-                                        foreach (var item in badTiles)
-                                        {
-                                            if (gridController.GetTile(item.locX, item.locZ) == gridController.GetTile(tile.locX, tile.locZ))
-                                            {
-                                                isOk = false;
-                                            }
-                                        }
-                                        if (tile.myType == Tile.BlockType.BaseBlock && isOk == true)
-                                        {
-                                            returnables.Add(tile);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (tile.myType == Tile.BlockType.BaseBlock)
-                                        {
-                                            returnables.Add(tile);
-                                        }
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                if (lOS.LoSCheck(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z), tile) == false)
-                                {
-                                    if (badTiles != null)
-                                    {
-                                        bool isOk = true;
-                                        foreach (var item in badTiles)
-                                        {
-                                            if (gridController.GetTile(item.locX, item.locZ) == gridController.GetTile(tile.locX, tile.locZ))
-                                            {
-                                                isOk = false;
-                                            }
-                                        }
-                                        if (tile.myType == Tile.BlockType.BaseBlock && isOk == true)
-                                        {
-                                            returnables.Add(tile);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (tile.myType == Tile.BlockType.BaseBlock)
-                                        {
-                                            returnables.Add(tile);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (badTiles != null)
-                            {
-                                bool isOk = true;
-                                foreach (var item in badTiles)
-                                {
-                                    if(gridController.GetTile(item.locX,item.locZ) == gridController.GetTile(tile.locX, tile.locZ))
-                                    {
-                                        isOk = false;
-                                    }
-                                }
-                                if (tile.myType == Tile.BlockType.BaseBlock && isOk == true)
-                                {
-                                    returnables.Add(tile);
-                                }
-                            }
-                            else
-                            {
-                                if (tile.myType == Tile.BlockType.BaseBlock)
-                                {
-                                    returnables.Add(tile);
-                                }
-                            }
-                        }
-                    }
-                }
                 break;
             case SpellRangeType.LinDiag:
                 for (i =x; i <= spellCast.currentSpell.spellRangeMax; i++)
@@ -327,36 +214,34 @@ public class Abilities : MonoBehaviour {
             default:
                 break;
         }
-        if (spellCast.currentSpell.mySpellRangeType != SpellRangeType.Normal)
+        List<Tile> returnables = new List<Tile>();
+        foreach (var tile in rangetiles)
         {
-            foreach (var tile in rangetiles)
+            if (tile != null)
             {
-                if (tile != null)
+                if (spellCast.currentSpell.needLineOfSight == true)
                 {
-                    if (spellCast.currentSpell.needLineOfSight == true)
+                    if (ilaririkkootaman == false)
                     {
-                        if (ilaririkkootaman == false)
+                        if (lOS.LoSCheck(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z), tile) == true)
                         {
-                            if (lOS.LoSCheck(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z), tile) == true)
-                            {
-                                if (tile.myType == Tile.BlockType.BaseBlock)
-                                    returnables.Add(tile);
-                            }
-                        }
-                        else
-                        {
-                            if (lOS.LoSCheck(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z), tile) == false)
-                            {
-                                if (tile.myType == Tile.BlockType.BaseBlock)
-                                    returnables.Add(tile);
-                            }
-                        }
+                            if (tile.myType == Tile.BlockType.BaseBlock)
+                                returnables.Add(tile);
+                        } 
                     }
                     else
-                       if (tile.myType == Tile.BlockType.BaseBlock)
-                        returnables.Add(tile);
+                    {
+                        if (lOS.LoSCheck(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z), tile) == false)
+                        {
+                            if (tile.myType == Tile.BlockType.BaseBlock)
+                                returnables.Add(tile);
+                        }
+                    }
                 }
-            } 
+                else
+                   if (tile.myType == Tile.BlockType.BaseBlock)
+                    returnables.Add(tile);
+            }
         }
         return returnables;
     }
