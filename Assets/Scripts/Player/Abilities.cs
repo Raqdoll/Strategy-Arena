@@ -193,7 +193,7 @@ public class Abilities : MonoBehaviour {
                     {
                         for (int j = 0 - spellCast.currentSpell.spellRangeMin; j <= spellCast.currentSpell.spellRangeMin; j++)
                         {
-                            if (Mathf.Abs(z) + Mathf.Abs(j) <= spellCast.currentSpell.spellRangeMin)
+                            if (Mathf.Abs(z) + Mathf.Abs(j) < spellCast.currentSpell.spellRangeMin)
                             {
                                 tempo.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x + j, playerBehaviour.currentCharacter.currentTile.z + z));
                             }
@@ -915,7 +915,7 @@ public class Abilities : MonoBehaviour {
             } 
         }
     }
-    public void SpellPushArea(SpellPushType myPushRangeType)
+    public void SpellPush(SpellPushType myPushRangeType)
     {
         List<Tile> AoeList = AreaType(spellCast.currentSpell.mySpellAreaType);
         List<Tile> targetList = new List<Tile>();

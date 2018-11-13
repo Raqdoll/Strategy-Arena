@@ -18,14 +18,14 @@ public class SpellValues : ScriptableObject
     [Space(6)]
     [Header("Damage/Heal")]
     [Space(6)]
-    public int spellApCost; //<
-    public int spellDamageMin;  //<
-    public int spellDamageMax;  //<
-    public int spellHealMin;    //<
-    public int spellHealMax;    //<
-    public bool healsAlly = false;  //<
-    public bool hurtsAlly = false;  //<
-    public bool needLineOfSight = true; //<
+    public int spellApCost; //< cast reduction added. reset not implemented
+    public int spellDamageMin;
+    public int spellDamageMax;
+    public int spellHealMin;
+    public int spellHealMax;
+    public bool healsAlly = false;
+    public bool hurtsAlly = false;
+    public bool needLineOfSight = true;
     public bool needTarget = false; //<
     public bool needFreeSquare = false; //<
     [Space(6)]
@@ -36,8 +36,11 @@ public class SpellValues : ScriptableObject
     [Space(6)]
     [Header("Map manipulation")]
     [Space(6)]
-    public int spellPushback;   //<
-    public int spellPull;   //<
+    public int spellPushback;
+    public Abilities.SpellPushType mySpellPushType;
+    public int spellPull;
+    public Abilities.SpellPullType mySpellPullType;
+    
     public bool teleportToTarget = false;   //<
     public bool chagePlaceWithTarget = false;   //<
     public int moveCloserToTarget;  //<
@@ -58,7 +61,7 @@ public class SpellValues : ScriptableObject
     [Header("Ingame values, do not touch")]
     [Space(6)]
     public int spellCooldownLeft;   //<
-    public int trueDamage;  //<
+    public int trueDamage;
     public bool spellLaunched = false;  //<
     public bool inCooldown = false; //<
 }
