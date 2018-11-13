@@ -8,8 +8,11 @@ public class SpellCast : MonoBehaviour {
 
     public PlayerBehaviour playerBehaviour;
     public MouseController mc;
+    public Abilities abilities;
+    public GridController gridController;
     public CharacterValues cv;  //Active player's charactervalues?
     TurnManager turnManager;
+
     public SpellValues currentSpell;
     public bool spellOpen = false;
     public int spell1CastedThisTurn = 0;
@@ -65,37 +68,60 @@ public class SpellCast : MonoBehaviour {
         spellButton5.GetComponent<Tooltip>().spell = cv.spell_5;
         spellButton6.GetComponent<Tooltip>().spell = cv.spell_6;
     }
+    //public bool needTarget = false; //<
+    //public bool needFreeSquare = false; //<
+    //public bool inCooldown = false; //<
+    //public int spellCooldownLeft;   //<
+    //public int spellInitialCooldown;    //<
+    //public int spellCooldown;   //<
+    //public int spellCastPerturn;    //<
+    //public int castPerTarget;   //<
+
+
+
+
 
     public void CastSpell(SpellValues spell, CharacterValues caster, CharacterValues target)
     {
+        //Tile temp1 = gridController.GetTile(caster.currentTile.x,caster.currentTile.z);
+        //Tile temp2 = gridController.GetTile(target.currentTile.x,target.currentTile.z);
         int damageStuff = 0;
         int healingIsFun = 0;
-        if (spell.hurtsAlly ==false)
+
+        if(spell.healsAlly == true)
         {
-            if (caster.team != target.team)
+            if(target.team == caster.team)
             {
-                
-                damageStuff = TrueDamageCalculator(spell.spellDamageMax, spell.spellDamageMin, caster.damageChange, target.armorChange, caster.damagePlus, target.armorPlus);
-            }
-        }
-        else if (spell.healsAlly == true)
-        {
-            if (caster.team = target.team)
-            {
-                
                 healingIsFun = TrueHealCalculator(spell.spellHealMax, spell.spellHealMin, target.healsReceived);
             }
             else
             {
-                
+                damageStuff = TrueDamageCalculator(spell.spellDamageMax, spell.spellDamageMin, caster.damageChange, target.armorChange, caster.damagePlus, target.armorPlus);
+            }
+        }
+        else if(spell.hurtsAlly == false)
+        {
+            if (target.team != caster.team)
+            {
                 damageStuff = TrueDamageCalculator(spell.spellDamageMax, spell.spellDamageMin, caster.damageChange, target.armorChange, caster.damagePlus, target.armorPlus);
             }
         }
         else
         {
-            
             damageStuff = TrueDamageCalculator(spell.spellDamageMax, spell.spellDamageMin, caster.damageChange, target.armorChange, caster.damagePlus, target.armorPlus);
         }
+        abilities.SpellPull(spell.mySpellPullType);
+        abilities.SpellPush(spell.mySpellPushType);
+        //  moveCloserToTarget;  //<
+        //  MoveAwayFromTarget;  //<
+
+        //  teleportToTarget   //<
+        //  chagePlaceWithTarget   //<
+
+        //public EffectValues effect;
+        //public bool effectOnCaster = false; //<
+        //public bool effectOnTarget = true; //<
+
 
         GetHit(target, damageStuff);
         GetHealed(target, healingIsFun);
@@ -116,8 +142,6 @@ public class SpellCast : MonoBehaviour {
             target.currentHP = target.maxHP;
         }
     }
-
-
 
 	public void Aftermath()
     {
@@ -160,14 +184,12 @@ public class SpellCast : MonoBehaviour {
 
         return tempdamage;
     }
-
     public int MaxDamCacl(int damMax, float damChange, float armorChange, int damPlus, int armorPlus)
     {
         int tempdamage = Mathf.RoundToInt(damMax * (1 + (damChange - armorChange)) + (damPlus - armorPlus));
 
         return tempdamage;
     }
-
     public int TrueDamageCalculator(int damMax, int damMin, float damChange, float armorChange, int damPlus, int armorPlus)
     {
         int tempdamageMin = MinDamCacl(damMin, damChange, armorChange, damPlus, armorPlus);
@@ -183,14 +205,12 @@ public class SpellCast : MonoBehaviour {
 
         return tempHeal;
     }
-
     public int MaxHealCacl(int damMax, float heals)
     {
         int tempHeal = Mathf.RoundToInt(damMax * (1 + heals));
 
         return tempHeal;
     }
-
     public int TrueHealCalculator(int healMax, int healMin, float heals)
     {
         int tempHealMin = MinHealCacl(healMin, heals);
@@ -209,55 +229,45 @@ public class SpellCast : MonoBehaviour {
             spellOpen = true;
         }
     }
-
     public void Spell2Cast()
     {
             SpellCancel();
-
         if (cv.currentAp >= cv.spell_2.spellApCost && spell2CastedThisTurn <= cv.spell_2.spellCastPerturn)
         {
             currentSpell = cv.spell_2;
             spellOpen = true; 
         }
     }
-
     public void Spell3Cast()
     {
             SpellCancel();
-        
         if (cv.currentAp >= cv.spell_3.spellApCost && spell3CastedThisTurn <= cv.spell_3.spellCastPerturn)
         {
             currentSpell = cv.spell_3;
             spellOpen = true; 
         }
     }
-
     public void Spell4Cast()
     {
             SpellCancel();
-        
         if (cv.currentAp >= cv.spell_4.spellApCost && spell4CastedThisTurn <= cv.spell_4.spellCastPerturn)
         {
             currentSpell = cv.spell_4;
             spellOpen = true; 
         }
     }
-
     public void Spell5Cast()
     {
             SpellCancel();
-        
         if (cv.currentAp >= cv.spell_5.spellApCost && spell5CastedThisTurn <= cv.spell_5.spellCastPerturn)
         {
             currentSpell = cv.spell_5;
             spellOpen = true; 
         }
     }
-
     public void Spell6Cast()
     {
             SpellCancel();
-        
         if (cv.currentAp >= cv.spell_6.spellApCost && spell6CastedThisTurn <= cv.spell_6.spellCastPerturn)
         {
             currentSpell = cv.spell_6;
