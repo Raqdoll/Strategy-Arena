@@ -53,9 +53,9 @@ public class PlayerMovement : MonoBehaviour {
         public List<Tile> _neighbours;
         public int? _distanceToTarget;
         public int _movementPointsLeft;
-        //public PathTile previousTile;
+        public PathTile _previousTile;
 
-        public PathTile(Tile currentTile, Tile destination, int movementPointsLeft)
+        public PathTile(Tile currentTile, Tile destination, int movementPointsLeft, PathTile previousTile)
         {
             _tile = currentTile;
             _destination = destination;
@@ -65,6 +65,7 @@ public class PlayerMovement : MonoBehaviour {
             else
                 _distanceToTarget = currentTile.GetCardinalDistance(destination);
             _movementPointsLeft = movementPointsLeft;
+            _previousTile = previousTile;
         }
 
     }
@@ -159,13 +160,22 @@ public class PlayerMovement : MonoBehaviour {
     {
         List<PathTile> route = new List<PathTile>();
         route.Add(destinationTile);
-        //STILL IMPLEMENTING
+        PathTile tempTile = destinationTile;
+        while (tempTile != null && tempTile != startTile)
+        {
+            route.Add(tempTile);
+            tempTile = tempTile._previousTile;
+        }
+        route.Add(startTile);   
+        List<PathTile> orderedRoute = route.OrderByDescending(x => x._movementPointsLeft).ToList();
+        List<Tile> wishIHadMeatballs = new List<Tile>();
+        foreach (var pathTile in orderedRoute)
+        {
+            wishIHadMeatballs.Add(pathTile._tile);
+        }
 
-        return null;
+        return wishIHadMeatballs;
     }
-
-
-
 
     public void MoveToTile(Tile destinationTile, MovementMethod method)
     {
@@ -200,18 +210,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private List<Tile> WithinWalkingDistance(Tile startTile, int movementPoints)
     {
-        PathTile startPathTile = new PathTile(startTile, null, movementPoints);
-        //List<Tile> unprocessedTiles = new List<Tile>();
-        //List<Tile> processedTiles = new List<Tile>();
-        //int movementPointsLeft = movementPoints;
-
-        //unprocessedTiles.AddRange(startPathTile._neighbours);
-        //while (unprocessedTiles.Count > 0 && movementPointsLeft > 0)
-        //{
-
-        //    movementPointsLeft--;
-        //}
-
+        PathTile startPathTile = new PathTile(startTile, null, movementPoints, null);
         List<PathTile> unprocessedTiles = null;
         List<PathTile> processedTiles = new List<PathTile>();
         unprocessedTiles = ProcessPathTile(startPathTile);
@@ -290,7 +289,7 @@ public class PlayerMovement : MonoBehaviour {
         List<PathTile> pathTiles = new List<PathTile>();
         foreach (var tile in currentTile._neighbours)
         {
-            PathTile pathTile = new PathTile(tile, currentTile._destination, currentTile._movementPointsLeft - 1);
+            PathTile pathTile = new PathTile(tile, currentTile._destination, currentTile._movementPointsLeft - 1, currentTile);
             pathTiles.Add(pathTile);
         }
         return pathTiles;
