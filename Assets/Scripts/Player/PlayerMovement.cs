@@ -12,7 +12,7 @@ using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour {
 
-    public enum MovementMethod { NotSpecified, Teleport, walk, push };  //Pidetään notspecified nollassa -> tällöin kutsu on tehty huolimattomasti eli liikkumismuotoa ei olla valittu
+    public enum MovementMethod { NotSpecified, Teleport, Walk, Push };
 
     PlayerBehaviour playerController;
     PlayerInfo playerInfo;
@@ -46,20 +46,27 @@ public class PlayerMovement : MonoBehaviour {
     public delegate void TileEvent(Tile tile);
     public event TileEvent ChangeTile;
 
-    struct PathTile
+    class PathTile
     {
         public Tile _tile;
+        public Tile _destination;
         public List<Tile> _neighbours;
-        public int _distanceToTarget;
+        public int? _distanceToTarget;
         public int _movementPointsLeft;
+        //public PathTile previousTile;
 
         public PathTile(Tile currentTile, Tile destination, int movementPointsLeft)
         {
             _tile = currentTile;
-            _neighbours = _tile.GetTNeighbouringTiles();
-            _distanceToTarget = currentTile.GetCardinalDistance(destination);
+            _destination = destination;
+            _neighbours = GetWalkableTiles(_tile.GetTNeighbouringTiles());
+            if (destination == null)
+                _distanceToTarget = null;
+            else
+                _distanceToTarget = currentTile.GetCardinalDistance(destination);
             _movementPointsLeft = movementPointsLeft;
         }
+
     }
 
     private void Start()
@@ -90,7 +97,7 @@ public class PlayerMovement : MonoBehaviour {
     public List<Tile> TilesInRange()
     {
 
-        return TilesInRange(CurrentTile, playerInfo.thisCharacter.currentMp, MovementMethod.Teleport);
+        return TilesInRange(CurrentTile, playerInfo.thisCharacter.currentMp, MovementMethod.Walk);
     }
 
     /// <summary>
@@ -125,10 +132,9 @@ public class PlayerMovement : MonoBehaviour {
                 }
                 break;
 
-            //case MovementMethod.walk:
-            //    List<Tile> unProcessed = new List<Tile>();
-
-            //    break;
+            case MovementMethod.Walk:
+                truereturnables = WithinWalkingDistance(startTile, movementPoints);
+                break;
 
             default:
                 break;
@@ -146,13 +152,20 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     /// <summary>
-    /// Returns the shortest route to the destination.
+    /// Returns the route by calculating back from destination.
     /// </summary>
 
-    public List<Tile> CalculateRoute(Tile startTile, Tile destinationTile)
+    private List<Tile> CalculateRouteBack(PathTile startTile, PathTile destinationTile, List<PathTile> pathTiles)
     {
-        throw new NotImplementedException();
+        List<PathTile> route = new List<PathTile>();
+        route.Add(destinationTile);
+        //STILL IMPLEMENTING
+
+        return null;
     }
+
+
+
 
     public void MoveToTile(Tile destinationTile, MovementMethod method)
     {
@@ -185,10 +198,102 @@ public class PlayerMovement : MonoBehaviour {
         mouseController.currentMovement = this;
     }
 
-    private List<Tile> AStar(PositionContainer destination)
+    private List<Tile> WithinWalkingDistance(Tile startTile, int movementPoints)
     {
-        return null;
+        PathTile startPathTile = new PathTile(startTile, null, movementPoints);
+        //List<Tile> unprocessedTiles = new List<Tile>();
+        //List<Tile> processedTiles = new List<Tile>();
+        //int movementPointsLeft = movementPoints;
 
+        //unprocessedTiles.AddRange(startPathTile._neighbours);
+        //while (unprocessedTiles.Count > 0 && movementPointsLeft > 0)
+        //{
+
+        //    movementPointsLeft--;
+        //}
+
+        List<PathTile> unprocessedTiles = null;
+        List<PathTile> processedTiles = new List<PathTile>();
+        unprocessedTiles = ProcessPathTile(startPathTile);
+
+        while (unprocessedTiles.Count > 0)
+        {
+            PathTile tempTile = unprocessedTiles[0];
+            List<PathTile> tempList = null;
+            if (Upsert(processedTiles, tempTile))
+            {
+                tempList = ProcessPathTile(tempTile);
+            }
+            unprocessedTiles.Remove(tempTile);
+            if (tempList != null)
+                unprocessedTiles.AddRange(tempList);
+        }
+
+        List<Tile> returnables = new List<Tile>();
+        foreach (var pathTile in processedTiles)
+        {
+            returnables.Add(pathTile._tile);
+        }
+        return returnables;
+    }
+
+    /// <summary>
+    /// Returns null if out of movement points. Astar might not be implemented at all!
+    /// </summary>
+    /// <param name="startTile"></param>
+    /// <param name="dontUseAStar"></param>
+    /// <returns></returns>
+
+    private List<PathTile> ProcessPathTile(PathTile startTile, bool dontUseAStar = false)
+    {
+        List<PathTile> neighbours = null;
+        if (startTile._movementPointsLeft > 0)
+        {
+            neighbours = CreatePathTileNeighbours(startTile);
+            if (dontUseAStar)
+            {
+                //Do stuff
+            }
+        }
+        return neighbours;
+    }
+
+    /// <summary>
+    /// Returns true if an existing tile was updated or a new one inserted instead of being rejected. Updates only if the new tile has a larger value in movementPointsLeft.
+    /// </summary>
+    /// <param name="targetList"></param>
+    /// <param name="addedTile"></param>
+    /// <returns></returns>
+
+    private bool Upsert(List<PathTile> targetList, PathTile addedTile)
+    {
+        var sameTile = targetList.Where(x => x._tile == addedTile._tile).FirstOrDefault();
+        if (sameTile != null)
+        {
+            if (addedTile._movementPointsLeft > sameTile._movementPointsLeft)
+            {
+                sameTile._movementPointsLeft = addedTile._movementPointsLeft;
+                return true;    //Existing PathTile was updated
+            }
+            else
+            {
+                return false;   //Returning false should be captured and tile's neighbours should not be reprocessed!
+            }
+        }
+        targetList.Add(addedTile);  
+        return true;    //Added missing PathTile to list
+    }
+
+
+    private List<PathTile> CreatePathTileNeighbours(PathTile currentTile)
+    {
+        List<PathTile> pathTiles = new List<PathTile>();
+        foreach (var tile in currentTile._neighbours)
+        {
+            PathTile pathTile = new PathTile(tile, currentTile._destination, currentTile._movementPointsLeft - 1);
+            pathTiles.Add(pathTile);
+        }
+        return pathTiles;
     }
 
     void AnnounceTileChange(Tile tile)
@@ -202,6 +307,19 @@ public class PlayerMovement : MonoBehaviour {
     public void ExampleEventsForEditor()
     {
         exampleEvents.Invoke();
+    }
+
+    public static List<Tile> GetWalkableTiles(List<Tile> sourceTiles)
+    {
+        List<Tile> tiles = new List<Tile>();
+        foreach (var tile in sourceTiles)
+        {
+            if (tile.WalkThrough && tile.isFree)
+            {
+                tiles.Add(tile);
+            }
+        }
+        return tiles;
     }
 
 
