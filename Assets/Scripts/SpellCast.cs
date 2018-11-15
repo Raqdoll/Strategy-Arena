@@ -83,6 +83,8 @@ public class SpellCast : MonoBehaviour {
 
     public void CastSpell(SpellValues spell, CharacterValues caster, CharacterValues target)
     {
+        Tile casterTile = gridController.GetTile(caster.currentTile.x, caster.currentTile.z);
+        Tile targetTile = gridController.GetTile(target.currentTile.x, target.currentTile.z);
         //Tile temp1 = gridController.GetTile(caster.currentTile.x,caster.currentTile.z);
         //Tile temp2 = gridController.GetTile(target.currentTile.x,target.currentTile.z);
         int damageStuff = 0;
@@ -115,8 +117,8 @@ public class SpellCast : MonoBehaviour {
         //  moveCloserToTarget;  //<
         //  MoveAwayFromTarget;  //<
 
-        //  teleportToTarget   //<
-        //  chagePlaceWithTarget   //<
+        abilities.CasterTeleport(casterTile);
+        abilities.TeleportSwitch(casterTile, targetTile);
 
         //public EffectValues effect;
         //public bool effectOnCaster = false; //<

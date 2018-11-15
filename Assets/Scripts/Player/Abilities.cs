@@ -33,7 +33,7 @@ public class Abilities : MonoBehaviour {
 
    public List<Tile> AreaType(SpellAreaType mySpellAreaType)
     {
-        int[][] dirList = new int[4][] { new int[]{0, 1 }, new int[] { 0,-1}, new int[] { 1, 0 }, new int[] { -1, 0 } };
+        int[][] dirList = new int[4][] { new int[]{0, 1}, new int[] { 0,-1}, new int[] {1, 0}, new int[] {-1, 0} };
         List<Tile> targetTiles = new List<Tile>();
         switch (mySpellAreaType)
         {
@@ -130,7 +130,6 @@ public class Abilities : MonoBehaviour {
             targetTiles.Add(gridController.GetTile(mouseController.selected.locX + dirList[directionIndex][0] * i, mouseController.selected.locZ + dirList[directionIndex][1] * i));
         }
     }
-
     private void ConeTargets(int directionIndex, int[][] dirList, out List<Tile> targetTiles ) {
         targetTiles = new List<Tile>();
         for (int i = 0; i <= spellCast.currentSpell.aoeRange; i++)
@@ -373,7 +372,6 @@ public class Abilities : MonoBehaviour {
         caster.locX = playerBehaviour.currentCharacter.currentTile.x;
         caster.locZ = playerBehaviour.currentCharacter.currentTile.z;
         anchor = mouseController.selected;     
-        // etsii siirrettävät pelaajat aoe:sta
         foreach (var tile in AoeList)
         {
             if (tile.CharCurrentlyOnTile)
@@ -381,7 +379,6 @@ public class Abilities : MonoBehaviour {
                 targetList.Add(tile);
             }
         }
-        // tekee siirrot ei valmis tarvitsee asserin apua
         foreach (var item in targetList)
         {
             switch (myPullRangeType)
@@ -402,7 +399,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locX == anchor.locX && item.locZ > anchor.locZ)
+                    else if (item.locX == anchor.locX && item.locZ > anchor.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -417,7 +414,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locZ == anchor.locZ && item.locX < anchor.locX)
+                    else if (item.locZ == anchor.locZ && item.locX < anchor.locX)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -432,7 +429,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locZ == anchor.locZ && item.locX > anchor.locX)
+                    else if (item.locZ == anchor.locZ && item.locX > anchor.locX)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -447,7 +444,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locX < anchor.locX && item.locZ < anchor.locZ)
+                    else if (item.locX < anchor.locX && item.locZ < anchor.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -464,7 +461,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locX < anchor.locX && item.locZ > anchor.locZ)
+                    else if (item.locX < anchor.locX && item.locZ > anchor.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -481,7 +478,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locX > anchor.locX && item.locZ < anchor.locZ)
+                    else if (item.locX > anchor.locX && item.locZ < anchor.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -498,7 +495,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locX > anchor.locX && item.locZ > anchor.locZ)
+                    else if (item.locX > anchor.locX && item.locZ > anchor.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -532,7 +529,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locX == caster.locX && anchor.locZ > caster.locZ)
+                    else if (anchor.locX == caster.locX && anchor.locZ > caster.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -547,7 +544,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locZ == caster.locZ && anchor.locX < caster.locX)
+                    else if (anchor.locZ == caster.locZ && anchor.locX < caster.locX)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -562,7 +559,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locZ == caster.locZ && anchor.locX > caster.locX)
+                    else if (anchor.locZ == caster.locZ && anchor.locX > caster.locX)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -577,7 +574,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locX < caster.locX && anchor.locZ < caster.locZ)
+                    else if (anchor.locX < caster.locX && anchor.locZ < caster.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -594,7 +591,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locX < caster.locX && anchor.locZ > caster.locZ)
+                    else if (anchor.locX < caster.locX && anchor.locZ > caster.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -611,7 +608,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locX > caster.locX && anchor.locZ < caster.locZ)
+                    else if (anchor.locX > caster.locX && anchor.locZ < caster.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -628,7 +625,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locX > caster.locX && anchor.locZ > caster.locZ)
+                    else if (anchor.locX > caster.locX && anchor.locZ > caster.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -664,7 +661,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locX < anchor.locX && item.locZ > anchor.locZ)
+                    else if (item.locX < anchor.locX && item.locZ > anchor.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -681,7 +678,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locX > anchor.locX && item.locZ < anchor.locZ)
+                    else if (item.locX > anchor.locX && item.locZ < anchor.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -698,7 +695,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locX > anchor.locX && item.locZ > anchor.locZ)
+                    else if (item.locX > anchor.locX && item.locZ > anchor.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -734,7 +731,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locX < caster.locX && anchor.locZ > caster.locZ)
+                    else if (anchor.locX < caster.locX && anchor.locZ > caster.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -751,7 +748,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locX > caster.locX && anchor.locZ < caster.locZ)
+                    else if (anchor.locX > caster.locX && anchor.locZ < caster.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -768,7 +765,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locX > caster.locX && anchor.locZ > caster.locZ)
+                    else if (anchor.locX > caster.locX && anchor.locZ > caster.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -802,7 +799,7 @@ public class Abilities : MonoBehaviour {
                             } 
                         }
                     }
-                    if (item.locX == anchor.locX && item.locZ > anchor.locZ)
+                    else if (item.locX == anchor.locX && item.locZ > anchor.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -817,7 +814,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locZ == anchor.locZ && item.locX < anchor.locX)
+                    else if (item.locZ == anchor.locZ && item.locX < anchor.locX)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -832,7 +829,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locZ == anchor.locZ && item.locX > anchor.locX)
+                    else if (item.locZ == anchor.locZ && item.locX > anchor.locX)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -864,7 +861,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locX == caster.locX && anchor.locZ > caster.locZ)
+                    else if (anchor.locX == caster.locX && anchor.locZ > caster.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -879,7 +876,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locZ == caster.locZ && anchor.locX < caster.locX)
+                    else if (anchor.locZ == caster.locZ && anchor.locX < caster.locX)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -894,7 +891,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locZ == caster.locZ && anchor.locX > caster.locX)
+                    else if (anchor.locZ == caster.locZ && anchor.locX > caster.locX)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -945,7 +942,7 @@ public class Abilities : MonoBehaviour {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -953,14 +950,14 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locX == anchor.locX && item.locZ > anchor.locZ)
+                    else if (item.locX == anchor.locX && item.locZ > anchor.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -968,14 +965,14 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locZ == anchor.locZ && item.locX < anchor.locX)
+                    else if (item.locZ == anchor.locZ && item.locX < anchor.locX)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -983,14 +980,14 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locZ == anchor.locZ && item.locX > anchor.locX)
+                    else if (item.locZ == anchor.locZ && item.locX > anchor.locX)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -998,7 +995,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locX < anchor.locX && item.locZ < anchor.locZ)
+                    else if (item.locX < anchor.locX && item.locZ < anchor.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -1007,7 +1004,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -1015,7 +1012,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locX < anchor.locX && item.locZ > anchor.locZ)
+                    else if (item.locX < anchor.locX && item.locZ > anchor.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -1024,7 +1021,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -1032,7 +1029,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locX > anchor.locX && item.locZ < anchor.locZ)
+                    else if (item.locX > anchor.locX && item.locZ < anchor.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -1041,7 +1038,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -1049,7 +1046,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locX > anchor.locX && item.locZ > anchor.locZ)
+                    else if (item.locX > anchor.locX && item.locZ > anchor.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -1058,7 +1055,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -1075,7 +1072,7 @@ public class Abilities : MonoBehaviour {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -1083,14 +1080,14 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locX == caster.locX && anchor.locZ > caster.locZ)
+                    else if (anchor.locX == caster.locX && anchor.locZ > caster.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -1098,14 +1095,14 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locZ == caster.locZ && anchor.locX < caster.locX)
+                    else if (anchor.locZ == caster.locZ && anchor.locX < caster.locX)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -1113,14 +1110,14 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locZ == caster.locZ && anchor.locX > caster.locX)
+                    else if (anchor.locZ == caster.locZ && anchor.locX > caster.locX)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -1128,7 +1125,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locX < caster.locX && anchor.locZ < caster.locZ)
+                    else if (anchor.locX < caster.locX && anchor.locZ < caster.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -1137,7 +1134,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -1145,7 +1142,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locX < caster.locX && anchor.locZ > caster.locZ)
+                    else if (anchor.locX < caster.locX && anchor.locZ > caster.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -1154,7 +1151,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -1162,7 +1159,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locX > caster.locX && anchor.locZ < caster.locZ)
+                    else if (anchor.locX > caster.locX && anchor.locZ < caster.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -1171,7 +1168,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -1179,7 +1176,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locX > caster.locX && anchor.locZ > caster.locZ)
+                    else if (anchor.locX > caster.locX && anchor.locZ > caster.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -1188,7 +1185,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -1207,7 +1204,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -1215,7 +1212,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locX < anchor.locX && item.locZ > anchor.locZ)
+                    else if (item.locX < anchor.locX && item.locZ > anchor.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -1224,7 +1221,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -1232,7 +1229,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locX > anchor.locX && item.locZ < anchor.locZ)
+                    else if (item.locX > anchor.locX && item.locZ < anchor.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -1241,7 +1238,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -1249,7 +1246,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locX > anchor.locX && item.locZ > anchor.locZ)
+                    else if (item.locX > anchor.locX && item.locZ > anchor.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -1258,7 +1255,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -1277,7 +1274,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -1285,7 +1282,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locX < caster.locX && anchor.locZ > caster.locZ)
+                    else if (anchor.locX < caster.locX && anchor.locZ > caster.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -1294,7 +1291,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -1302,7 +1299,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locX > caster.locX && anchor.locZ < caster.locZ)
+                    else if (anchor.locX > caster.locX && anchor.locZ < caster.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -1311,7 +1308,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -1319,7 +1316,7 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locX > caster.locX && anchor.locZ > caster.locZ)
+                    else if (anchor.locX > caster.locX && anchor.locZ > caster.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
@@ -1328,7 +1325,7 @@ public class Abilities : MonoBehaviour {
                             Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
                             if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva beansin päälle Asser HEBL
+                                PullPushAct(item, bacon);
                             }
                             else
                             {
@@ -1345,7 +1342,7 @@ public class Abilities : MonoBehaviour {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -1353,14 +1350,14 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locX == anchor.locX && item.locZ > anchor.locZ)
+                    else if (item.locX == anchor.locX && item.locZ > anchor.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -1368,14 +1365,14 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locZ == anchor.locZ && item.locX < anchor.locX)
+                    else if (item.locZ == anchor.locZ && item.locX < anchor.locX)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -1383,14 +1380,14 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (item.locZ == anchor.locZ && item.locX > anchor.locX)
+                    else if (item.locZ == anchor.locZ && item.locX > anchor.locX)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -1407,7 +1404,7 @@ public class Abilities : MonoBehaviour {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -1415,14 +1412,14 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locX == caster.locX && anchor.locZ > caster.locZ)
+                    else if (anchor.locX == caster.locX && anchor.locZ > caster.locZ)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -1430,14 +1427,14 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locZ == caster.locZ && anchor.locX < caster.locX)
+                    else if (anchor.locZ == caster.locZ && anchor.locX < caster.locX)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -1445,14 +1442,14 @@ public class Abilities : MonoBehaviour {
                             }
                         }
                     }
-                    if (anchor.locZ == caster.locZ && anchor.locX > caster.locX)
+                    else if (anchor.locZ == caster.locZ && anchor.locX > caster.locX)
                     {
                         for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                         {
                             Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
                             if (pasta.myType == Tile.BlockType.BaseBlock)
                             {
-                                // siirrä itemin päälläoleva pastan päälle Asser HEBL
+                                PullPushAct(item, pasta);
                             }
                             else
                             {
@@ -1467,6 +1464,27 @@ public class Abilities : MonoBehaviour {
         }
     }
 
+    public void TeleportSwitch(Tile caster, Tile target)
+    {
+        PlayerMovement playerMovement = caster.CharCurrentlyOnTile.gameObject.GetComponent<PlayerMovement>();
+        PlayerMovement targetMovement = target.CharCurrentlyOnTile.gameObject.GetComponent<PlayerMovement>();
+        if (playerMovement)
+        {
+            playerMovement.MoveToTile(target, PlayerMovement.MovementMethod.Teleport);  //Väliaikainen liikkuminen
+        }  
+        if (playerMovement)
+        {
+            playerMovement.MoveToTile(caster, PlayerMovement.MovementMethod.Teleport);  //Väliaikainen liikkuminen
+        }
+    }
+    public void CasterTeleport(Tile caster)
+    {
+        PlayerMovement playerTeleport = caster.CharCurrentlyOnTile.gameObject.GetComponent<PlayerMovement>();
+        if (playerTeleport && mouseController.selected.CharCurrentlyOnTile == false)
+        {
+            playerTeleport.MoveToTile(mouseController.selected, PlayerMovement.MovementMethod.Teleport);
+        }
+    }
     public void PullPushAct(Tile start, Tile end)
     {
         // move player on tile start onto tile end
