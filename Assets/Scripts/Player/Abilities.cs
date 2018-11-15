@@ -381,537 +381,238 @@ public class Abilities : MonoBehaviour {
         }
         foreach (var item in targetList)
         {
-            switch (myPullRangeType)
-            {
+            GridController.Directions mydirection = new GridController.Directions();
+            GridController.Directions helpDirection = new GridController.Directions();
+            bool inLine = true;
+            switch (myPullRangeType) {
                 case SpellPullType.BothTowardsMouse:
                     if (item.locX == anchor.locX && item.locZ < anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.up;
+                        inLine = true;
                     }
                     else if (item.locX == anchor.locX && item.locZ > anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        inLine = true;
                     }
                     else if (item.locZ == anchor.locZ && item.locX < anchor.locX)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.right;
+                        inLine = true;
                     }
                     else if (item.locZ == anchor.locZ && item.locX > anchor.locX)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.left;
+                        inLine = true;
                     }
                     else if (item.locX < anchor.locX && item.locZ < anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.up;
+                        helpDirection = GridController.Directions.right;
+                        inLine = false;
                     }
                     else if (item.locX < anchor.locX && item.locZ > anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        helpDirection = GridController.Directions.right;
+                        inLine = false;
                     }
                     else if (item.locX > anchor.locX && item.locZ < anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.up;
+                        helpDirection = GridController.Directions.left;
+                        inLine = false;
                     }
                     else if (item.locX > anchor.locX && item.locZ > anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        helpDirection = GridController.Directions.left;
+                        inLine = false;
                     }
                     break;
                 case SpellPullType.BothTowardsPlayer:
                     if (anchor.locX == caster.locX && anchor.locZ < caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.up;
+                        inLine = true;
                     }
                     else if (anchor.locX == caster.locX && anchor.locZ > caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        inLine = true;
                     }
                     else if (anchor.locZ == caster.locZ && anchor.locX < caster.locX)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.right;
+                        inLine = true;
                     }
                     else if (anchor.locZ == caster.locZ && anchor.locX > caster.locX)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.left;
+                        inLine = true;
                     }
                     else if (anchor.locX < caster.locX && anchor.locZ < caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.up;
+                        helpDirection = GridController.Directions.right;
+                        inLine = false;
                     }
                     else if (anchor.locX < caster.locX && anchor.locZ > caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        helpDirection = GridController.Directions.right;
+                        inLine = false;
                     }
                     else if (anchor.locX > caster.locX && anchor.locZ < caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.up;
+                        helpDirection = GridController.Directions.left;
+                        inLine = false;
                     }
                     else if (anchor.locX > caster.locX && anchor.locZ > caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        helpDirection = GridController.Directions.left;
+                        inLine = false;
                     }
                     break;
                 case SpellPullType.DiagonalTowardsMouse:
                     if (item.locX < anchor.locX && item.locZ < anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.up;
+                        helpDirection = GridController.Directions.right;
+                        inLine = false;
                     }
                     else if (item.locX < anchor.locX && item.locZ > anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        helpDirection = GridController.Directions.right;
+                        inLine = false;
                     }
                     else if (item.locX > anchor.locX && item.locZ < anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.up;
+                        helpDirection = GridController.Directions.left;
+                        inLine = false;
                     }
                     else if (item.locX > anchor.locX && item.locZ > anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        helpDirection = GridController.Directions.left;
+                        inLine = false;
                     }
                     break;
                 case SpellPullType.DiagonalTowardsPlayer:
                     if (anchor.locX < caster.locX && anchor.locZ < caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.up;
+                        helpDirection = GridController.Directions.right;
+                        inLine = false;
                     }
                     else if (anchor.locX < caster.locX && anchor.locZ > caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        helpDirection = GridController.Directions.right;
+                        inLine = false;
                     }
                     else if (anchor.locX > caster.locX && anchor.locZ < caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.up;
+                        helpDirection = GridController.Directions.left;
+                        inLine = false;
                     }
                     else if (anchor.locX > caster.locX && anchor.locZ > caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        helpDirection = GridController.Directions.left;
+                        inLine = false;
                     }
                     break;
                 case SpellPullType.LineTowardsMouse:
                     if (item.locX == anchor.locX && item.locZ < anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            } 
-                        }
+                        mydirection = GridController.Directions.up;
+                        inLine = true;
                     }
                     else if (item.locX == anchor.locX && item.locZ > anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        inLine = true;
                     }
                     else if (item.locZ == anchor.locZ && item.locX < anchor.locX)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.right;
+                        inLine = true;
                     }
                     else if (item.locZ == anchor.locZ && item.locX > anchor.locX)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.left;
+                        inLine = true;
                     }
                     break;
                 case SpellPullType.LineTowardsPlayer:
                     if (anchor.locX == caster.locX && anchor.locZ < caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.up;
+                        inLine = true;
                     }
                     else if (anchor.locX == caster.locX && anchor.locZ > caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        inLine = true;
+
                     }
                     else if (anchor.locZ == caster.locZ && anchor.locX < caster.locX)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.right;
+                        inLine = true;
                     }
                     else if (anchor.locZ == caster.locZ && anchor.locX > caster.locX)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.left;
+                        inLine = true;
                     }
                     break;
                 default:
                     break;
-            } 
+            }
+            if (inLine == true)
+            {
+                for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                {
+                    Tile temp = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, mydirection);
+                    if (temp.myType == Tile.BlockType.BaseBlock)
+                    {
+                        PullPushAct(item, temp);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                {
+                    Tile temp1 = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, mydirection);
+                    Tile temp2 = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, helpDirection);
+                    Tile temp3 = gridController.GetTileInDirection(gridController.GetTile(temp1.locX, temp1.locZ), 1, helpDirection);
+                    if (temp1.myType == Tile.BlockType.BaseBlock && temp2.myType == Tile.BlockType.BaseBlock && temp3.myType == Tile.BlockType.BaseBlock)
+                    {
+                        PullPushAct(item, temp1);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            inLine = true;
         }
     }
+
     public void SpellPush(SpellPushType myPushRangeType)
     {
         List<Tile> AoeList = AreaType(spellCast.currentSpell.mySpellAreaType);
@@ -929,538 +630,238 @@ public class Abilities : MonoBehaviour {
                 targetList.Add(tile);
             }
         }
-        // tekee siirrot ei valmis tarvitsee asserin apua
         foreach (var item in targetList)
         {
+            GridController.Directions mydirection = new GridController.Directions();
+            GridController.Directions helpDirection = new GridController.Directions();
+            bool inLine = true;
             switch (myPushRangeType)
             {
                 case SpellPushType.BothFromMouse:
                     if (item.locX == anchor.locX && item.locZ < anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        inLine = true;
                     }
                     else if (item.locX == anchor.locX && item.locZ > anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.up;
+                        inLine = true;
                     }
                     else if (item.locZ == anchor.locZ && item.locX < anchor.locX)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.left;
+                        inLine = true;
                     }
                     else if (item.locZ == anchor.locZ && item.locX > anchor.locX)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.right;
+                        inLine = true;
                     }
                     else if (item.locX < anchor.locX && item.locZ < anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        helpDirection = GridController.Directions.left;
+                        inLine = false;
                     }
                     else if (item.locX < anchor.locX && item.locZ > anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.up;
+                        helpDirection = GridController.Directions.left;
+                        inLine = false;
                     }
                     else if (item.locX > anchor.locX && item.locZ < anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        helpDirection = GridController.Directions.right;
+                        inLine = false;
                     }
                     else if (item.locX > anchor.locX && item.locZ > anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.up;
+                        helpDirection = GridController.Directions.right;
+                        inLine = false;
                     }
                     break;
                 case SpellPushType.BothFromPlayer:
                     if (anchor.locX == caster.locX && anchor.locZ < caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        inLine = true;
+
                     }
                     else if (anchor.locX == caster.locX && anchor.locZ > caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.up;
+                        inLine = true;
                     }
                     else if (anchor.locZ == caster.locZ && anchor.locX < caster.locX)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.left;
+                        inLine = true;
                     }
                     else if (anchor.locZ == caster.locZ && anchor.locX > caster.locX)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.right;
+                        inLine = true;
                     }
                     else if (anchor.locX < caster.locX && anchor.locZ < caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        helpDirection = GridController.Directions.left;
+                        inLine = false;
                     }
                     else if (anchor.locX < caster.locX && anchor.locZ > caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.up;
+                        helpDirection = GridController.Directions.left;
+                        inLine = false;
                     }
                     else if (anchor.locX > caster.locX && anchor.locZ < caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        helpDirection = GridController.Directions.right;
+                        inLine = false;
                     }
                     else if (anchor.locX > caster.locX && anchor.locZ > caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.up;
+                        helpDirection = GridController.Directions.right;
+                        inLine = false;
                     }
                     break;
                 case SpellPushType.DiagonalFromMouse:
                     if (item.locX < anchor.locX && item.locZ < anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        helpDirection = GridController.Directions.left;
+                        inLine = false;
                     }
                     else if (item.locX < anchor.locX && item.locZ > anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.up;
+                        helpDirection = GridController.Directions.left;
+                        inLine = false;
                     }
                     else if (item.locX > anchor.locX && item.locZ < anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        helpDirection = GridController.Directions.right;
+                        inLine = false;
                     }
                     else if (item.locX > anchor.locX && item.locZ > anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.up;
+                        helpDirection = GridController.Directions.right;
+                        inLine = false;
                     }
                     break;
                 case SpellPushType.DiagonalFromPlayer:
                     if (anchor.locX < caster.locX && anchor.locZ < caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        helpDirection = GridController.Directions.left;
+                        inLine = false;
                     }
                     else if (anchor.locX < caster.locX && anchor.locZ > caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.left);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.up;
+                        helpDirection = GridController.Directions.left;
+                        inLine = false;
                     }
                     else if (anchor.locX > caster.locX && anchor.locZ < caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        helpDirection = GridController.Directions.right;
+                        inLine = false;
                     }
                     else if (anchor.locX > caster.locX && anchor.locZ > caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile bacon = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            Tile ham = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            Tile beans = gridController.GetTileInDirection(gridController.GetTile(bacon.locX, bacon.locZ), 1, GridController.Directions.right);
-                            if (bacon.myType == Tile.BlockType.BaseBlock && ham.myType == Tile.BlockType.BaseBlock && beans.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, bacon);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.up;
+                        helpDirection = GridController.Directions.right;
+                        inLine = false;
                     }
                     break;
                 case SpellPushType.LineFromMouse:
                     if (item.locX == anchor.locX && item.locZ < anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        inLine = true;
                     }
                     else if (item.locX == anchor.locX && item.locZ > anchor.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.up;
+                        inLine = true;
                     }
                     else if (item.locZ == anchor.locZ && item.locX < anchor.locX)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.left;
+                        inLine = true;
                     }
                     else if (item.locZ == anchor.locZ && item.locX > anchor.locX)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.right;
+                        inLine = true;
                     }
                     break;
                 case SpellPushType.LineFromPlayer:
                     if (anchor.locX == caster.locX && anchor.locZ < caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.down);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.down;
+                        inLine = true;
                     }
                     else if (anchor.locX == caster.locX && anchor.locZ > caster.locZ)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.up);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.up;
+                        inLine = true;
                     }
                     else if (anchor.locZ == caster.locZ && anchor.locX < caster.locX)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.left);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.left;
+                        inLine = true;
                     }
                     else if (anchor.locZ == caster.locZ && anchor.locX > caster.locX)
                     {
-                        for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
-                        {
-                            Tile pasta = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, GridController.Directions.right);
-                            if (pasta.myType == Tile.BlockType.BaseBlock)
-                            {
-                                PullPushAct(item, pasta);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
+                        mydirection = GridController.Directions.right;
+                        inLine = true;
                     }
                     break;
                 default:
                     break;
             }
+            if (inLine == true)
+            {
+                for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                {
+                    Tile temp = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, mydirection);
+                    if (temp.myType == Tile.BlockType.BaseBlock)
+                    {
+                        PullPushAct(item, temp);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                {
+                    Tile temp1 = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, mydirection);
+                    Tile temp2 = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, helpDirection);
+                    Tile temp3 = gridController.GetTileInDirection(gridController.GetTile(temp1.locX, temp1.locZ), 1, helpDirection);
+                    if (temp1.myType == Tile.BlockType.BaseBlock && temp2.myType == Tile.BlockType.BaseBlock && temp3.myType == Tile.BlockType.BaseBlock)
+                    {
+                        PullPushAct(item, temp1);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            inLine = true;
         }
     }
 
@@ -1470,11 +871,11 @@ public class Abilities : MonoBehaviour {
         PlayerMovement targetMovement = target.CharCurrentlyOnTile.gameObject.GetComponent<PlayerMovement>();
         if (playerMovement)
         {
-            playerMovement.MoveToTile(target, PlayerMovement.MovementMethod.Teleport);  //Väliaikainen liikkuminen
+            playerMovement.MoveToTile(target, PlayerMovement.MovementMethod.Teleport); 
         }  
         if (playerMovement)
         {
-            playerMovement.MoveToTile(caster, PlayerMovement.MovementMethod.Teleport);  //Väliaikainen liikkuminen
+            playerMovement.MoveToTile(caster, PlayerMovement.MovementMethod.Teleport);
         }
     }
     public void CasterTeleport(Tile caster)
