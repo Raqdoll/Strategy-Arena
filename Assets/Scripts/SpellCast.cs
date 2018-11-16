@@ -12,6 +12,7 @@ public class SpellCast : MonoBehaviour {
     public GridController gridController;
     public CharacterValues cv;  //Active player's charactervalues?
     TurnManager turnManager;
+    public HitText hitText;
 
     public SpellValues currentSpell;
     public bool spellOpen = false;
@@ -25,6 +26,7 @@ public class SpellCast : MonoBehaviour {
 
 
     public Button spellButton1, spellButton2, spellButton3, spellButton4, spellButton5, spellButton6;
+    public Text hpText, apText, mpText;
 
 
     void Start () {
@@ -41,8 +43,11 @@ public class SpellCast : MonoBehaviour {
         spellButton6 = spellButton6.GetComponent<Button>();
         spellButton6.onClick.AddListener(Spell6Cast);
 
+        hitText = GetComponent<HitText>();
+
         turnManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TurnManager>();
         turnManager.TurnChange += HandleTurnChange;
+
     }
 
     private void OnDestroy()
@@ -67,6 +72,16 @@ public class SpellCast : MonoBehaviour {
         spellButton4.GetComponent<Tooltip>().spell = cv.spell_4;
         spellButton5.GetComponent<Tooltip>().spell = cv.spell_5;
         spellButton6.GetComponent<Tooltip>().spell = cv.spell_6;
+
+        hpText.text = "HP: " + cv.currentHP + " / " + cv.maxHP;
+        apText.text = "AP: " + cv.currentAp;
+        mpText.text = "MP: " + cv.currentMp;    //  <----- ^---- Nää kannattaa ehkä siirtää jonnekki järkevämpään scriptiin kun spell castiin?
+
+        //test
+        //if (cv)
+        //{
+        //    hitText.DamageText(cv, 200);
+        //}
     }
     //public bool needTarget = false; //<
     //public bool needFreeSquare = false; //<
