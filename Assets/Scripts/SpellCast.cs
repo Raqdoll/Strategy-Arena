@@ -22,7 +22,12 @@ public class SpellCast : MonoBehaviour {
     public int spell4CastedThisTurn = 0;
     public int spell5CastedThisTurn = 0;
     public int spell6CastedThisTurn = 0;
-    
+    //Käytä spellin 
+
+    //
+    //    hitText.DamageText(target, damage);
+    //
+
 
 
     public Button spellButton1, spellButton2, spellButton3, spellButton4, spellButton5, spellButton6;
@@ -77,11 +82,7 @@ public class SpellCast : MonoBehaviour {
         apText.text = "AP: " + cv.currentAp;
         mpText.text = "MP: " + cv.currentMp;    //  <----- ^---- Nää kannattaa ehkä siirtää jonnekki järkevämpään scriptiin kun spell castiin?
 
-        //test
-        //if (cv)
-        //{
-        //    hitText.DamageText(cv, 200);
-        //}
+
     }
     //public bool needTarget = false; //<
     //public bool needFreeSquare = false; //<

@@ -35,7 +35,6 @@ public class PlayerBehaviour : MonoBehaviour
     GridController gridController;
     TurnManager turnManager;
     Abilities abilities;
-
     
 
 
@@ -58,12 +57,12 @@ public class PlayerBehaviour : MonoBehaviour
 
         //Tab testing V V V
 
-        foreach (GameObject tab in charTabList)
-        {
-            tab.GetComponent<CharacterTab>().AddEffectIcon(testing);
-            tab.GetComponent<CharacterTab>().AddEffectIcon(testing);
-            tab.GetComponent<CharacterTab>().AddEffectIcon(testing);
-        }
+        //foreach (GameObject tab in charTabList)
+        //{
+        //    tab.GetComponent<CharacterTab>().AddEffectIcon(testing);
+        //    tab.GetComponent<CharacterTab>().AddEffectIcon(testing);
+        //    tab.GetComponent<CharacterTab>().AddEffectIcon(testing);
+        //}
     }
 
     private void OnDestroy()

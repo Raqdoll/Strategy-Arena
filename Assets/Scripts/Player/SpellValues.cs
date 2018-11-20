@@ -7,6 +7,7 @@ public class SpellValues : ScriptableObject
     [Space(6)]
     public string mySpellName;
     public Sprite spellIcon;
+    public AudioClip spellSound; //<
     [Space(6)]
     [Header("Ranges")]
     [Space(6)]

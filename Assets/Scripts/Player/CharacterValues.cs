@@ -16,6 +16,9 @@ public class CharacterValues : ScriptableObject
     public SpellValues spell_4;
     public SpellValues spell_5;
     public SpellValues spell_6;
+    public AudioClip walkSoundLoop; //<
+    public AudioClip attackSound; //<
+    public AudioClip takeDamageSound; //<
     [Space(30)]
     [Header("Ingame modifiables")]
     [Space(6)]
