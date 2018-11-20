@@ -171,15 +171,7 @@ public class MouseController : MonoBehaviour
             {
                 if (targetedTiles != null)
                 {
-                    foreach (var tile in targetedTiles)
-                    {
-                        PlayerInfo checker = tile.CharCurrentlyOnTile;
-                        CharacterValues target = null;
-                        if (checker)
-                            target = checker.thisCharacter;
-
-                        spellCast.CastSpell(spellCast.currentSpell, playerBehaviour.currentCharacter, target);
-                    }
+                    spellCast.CastSpell(spellCast.currentSpell, playerBehaviour.currentCharacter, selected);
                     foreach (var tile in rangeTiles)
                     {
                         Renderer tr = tile.GetComponent<Renderer>();

@@ -601,7 +601,7 @@ public class Abilities : MonoBehaviour {
                     Tile temp3 = gridController.GetTileInDirection(gridController.GetTile(temp1.locX, temp1.locZ), 1, helpDirection);
                     if (temp1.myType == Tile.BlockType.BaseBlock && temp2.myType == Tile.BlockType.BaseBlock && temp3.myType == Tile.BlockType.BaseBlock)
                     {
-                        PullPushAct(item, temp1);
+                        PullPushAct(item, temp3);
                     }
                     else
                     {
@@ -853,7 +853,7 @@ public class Abilities : MonoBehaviour {
                     Tile temp3 = gridController.GetTileInDirection(gridController.GetTile(temp1.locX, temp1.locZ), 1, helpDirection);
                     if (temp1.myType == Tile.BlockType.BaseBlock && temp2.myType == Tile.BlockType.BaseBlock && temp3.myType == Tile.BlockType.BaseBlock)
                     {
-                        PullPushAct(item, temp1);
+                        PullPushAct(item, temp3);
                     }
                     else
                     {
@@ -861,7 +861,6 @@ public class Abilities : MonoBehaviour {
                     }
                 }
             }
-            inLine = true;
         }
     }
 
@@ -899,7 +898,181 @@ public class Abilities : MonoBehaviour {
         }
     }
 
+    public void WalkTowardsTarget()
+    {
+        Tile anchor = new Tile();
+        Tile caster = new Tile();
+        caster.locX = playerBehaviour.currentCharacter.currentTile.x;
+        caster.locZ = playerBehaviour.currentCharacter.currentTile.z;
+        anchor = mouseController.selected;
+        GridController.Directions mydirection = new GridController.Directions();
+        GridController.Directions helpDirection = new GridController.Directions();
+        bool inLine = true;
+        if (anchor.locX == caster.locX && anchor.locZ < caster.locZ)
+        {
+            mydirection = GridController.Directions.down;
+            inLine = true;
 
+        }
+        else if (anchor.locX == caster.locX && anchor.locZ > caster.locZ)
+        {
+            mydirection = GridController.Directions.up;
+            inLine = true;
+        }
+        else if (anchor.locZ == caster.locZ && anchor.locX < caster.locX)
+        {
+            mydirection = GridController.Directions.left;
+            inLine = true;
+        }
+        else if (anchor.locZ == caster.locZ && anchor.locX > caster.locX)
+        {
+            mydirection = GridController.Directions.right;
+            inLine = true;
+        }
+        else if (anchor.locX < caster.locX && anchor.locZ < caster.locZ)
+        {
+            mydirection = GridController.Directions.down;
+            helpDirection = GridController.Directions.left;
+            inLine = false;
+        }
+        else if (anchor.locX < caster.locX && anchor.locZ > caster.locZ)
+        {
+            mydirection = GridController.Directions.up;
+            helpDirection = GridController.Directions.left;
+            inLine = false;
+        }
+        else if (anchor.locX > caster.locX && anchor.locZ < caster.locZ)
+        {
+            mydirection = GridController.Directions.down;
+            helpDirection = GridController.Directions.right;
+            inLine = false;
+        }
+        else if (anchor.locX > caster.locX && anchor.locZ > caster.locZ)
+        {
+            mydirection = GridController.Directions.up;
+            helpDirection = GridController.Directions.right;
+            inLine = false;
+        }
+        if (inLine == true)
+        {
+            for (int i = 0; i < spellCast.currentSpell.moveCloserToTarget; i++)
+            {
+                Tile temp = gridController.GetTileInDirection(caster, 1, mydirection);
+                if (temp.myType == Tile.BlockType.BaseBlock)
+                {
+                    PullPushAct(caster, temp);
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < spellCast.currentSpell.moveCloserToTarget; i++)
+            {
+                Tile temp1 = gridController.GetTileInDirection(caster, 1, mydirection);
+                Tile temp2 = gridController.GetTileInDirection(caster, 1, helpDirection);
+                Tile temp3 = gridController.GetTileInDirection(gridController.GetTile(temp1.locX, temp1.locZ), 1, helpDirection);
+                if (temp1.myType == Tile.BlockType.BaseBlock && temp2.myType == Tile.BlockType.BaseBlock && temp3.myType == Tile.BlockType.BaseBlock)
+                {
+                    PullPushAct(caster, temp3);
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+    }
+    public void MoveAwayFromTarget()
+    {
+        Tile anchor = new Tile();
+        Tile caster = new Tile();
+        caster.locX = playerBehaviour.currentCharacter.currentTile.x;
+        caster.locZ = playerBehaviour.currentCharacter.currentTile.z;
+        anchor = mouseController.selected;
+        GridController.Directions mydirection = new GridController.Directions();
+        GridController.Directions helpDirection = new GridController.Directions();
+        bool inLine = true;
+        if (anchor.locX == caster.locX && anchor.locZ < caster.locZ)
+        {
+            mydirection = GridController.Directions.up;
+            inLine = true;
+        }
+        else if (anchor.locX == caster.locX && anchor.locZ > caster.locZ)
+        {
+            mydirection = GridController.Directions.down;
+            inLine = true;
+        }
+        else if (anchor.locZ == caster.locZ && anchor.locX < caster.locX)
+        {
+            mydirection = GridController.Directions.right;
+            inLine = true;
+        }
+        else if (anchor.locZ == caster.locZ && anchor.locX > caster.locX)
+        {
+            mydirection = GridController.Directions.left;
+            inLine = true;
+        }
+        else if (anchor.locX < caster.locX && anchor.locZ < caster.locZ)
+        {
+            mydirection = GridController.Directions.up;
+            helpDirection = GridController.Directions.right;
+            inLine = false;
+        }
+        else if (anchor.locX < caster.locX && anchor.locZ > caster.locZ)
+        {
+            mydirection = GridController.Directions.down;
+            helpDirection = GridController.Directions.right;
+            inLine = false;
+        }
+        else if (anchor.locX > caster.locX && anchor.locZ < caster.locZ)
+        {
+            mydirection = GridController.Directions.up;
+            helpDirection = GridController.Directions.left;
+            inLine = false;
+        }
+        else if (anchor.locX > caster.locX && anchor.locZ > caster.locZ)
+        {
+            mydirection = GridController.Directions.down;
+            helpDirection = GridController.Directions.left;
+            inLine = false;
+        }
+        if (inLine == true)
+        {
+            for (int i = 0; i < spellCast.currentSpell.moveAwayFromTarget; i++)
+            {
+                Tile temp = gridController.GetTileInDirection(caster, 1, mydirection);
+                if (temp.myType == Tile.BlockType.BaseBlock)
+                {
+                    PullPushAct(caster, temp);
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < spellCast.currentSpell.moveAwayFromTarget; i++)
+            {
+                Tile temp1 = gridController.GetTileInDirection(caster, 1, mydirection);
+                Tile temp2 = gridController.GetTileInDirection(caster, 1, helpDirection);
+                Tile temp3 = gridController.GetTileInDirection(gridController.GetTile(temp1.locX, temp1.locZ), 1, helpDirection);
+                if (temp1.myType == Tile.BlockType.BaseBlock && temp2.myType == Tile.BlockType.BaseBlock && temp3.myType == Tile.BlockType.BaseBlock)
+                {
+                    PullPushAct(caster, temp3);
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+    }
     //public void Tester()
     //{
     //    var derp = RangeType();
