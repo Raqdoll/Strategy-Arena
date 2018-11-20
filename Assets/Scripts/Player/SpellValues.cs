@@ -41,10 +41,10 @@ public class SpellValues : ScriptableObject
     public int spellPull;
     public Abilities.SpellPullType mySpellPullType;
     
-    public bool teleportToTarget = false;   //<
-    public bool chagePlaceWithTarget = false;   //<
-    public int moveCloserToTarget;  //<
-    public int MoveAwayFromTarget;  //<
+    public bool teleportToTarget = false;  
+    public bool chagePlaceWithTarget = false;
+    public int moveCloserToTarget;
+    public int moveAwayFromTarget;
     [Space(6)]
     [Header("Cooldowns")]
     [Space(6)]
