@@ -51,21 +51,24 @@ public class TeamManager : MonoBehaviour {
 
     private PlayerInfo ChangeTurnUntilValidPlayer(PlayerInfo playerEndingTurn)
     {
-        activePlayer = playerEndingTurn;
-        ChangeTurn();
-        while (activePlayer.thisCharacter.currentHP <= 0)
+        if (!IsOneTeamDead())
         {
+            activePlayer = playerEndingTurn;
             ChangeTurn();
-            if (activePlayer == playerEndingTurn)  //Looped, we need a check for eg. 3 vs 0 situation, when someone is killed! -> Done -> CheckTeamHealths (not tested yet)
+            while (activePlayer.thisCharacter.currentHP <= 0)
             {
-                AnnounceEndOfGame();
-                break;
+                ChangeTurn();
+                if (activePlayer == playerEndingTurn)  //Looped, we need a check for eg. 3 vs 0 situation, when someone is killed! -> Done -> CheckTeamHealths (not tested yet) -> Renamed to IsOneTeamDead
+                {
+                    //AnnounceEndOfGame();
+                    break;
+                }
             }
         }
         return activePlayer;
     }
 
-    public void CheckTeamHealths()
+    public bool IsOneTeamDead()
     {
         bool teamADead = true;
         bool teamBDead = true;
@@ -86,7 +89,14 @@ public class TeamManager : MonoBehaviour {
             }
         }
         if (teamADead || teamBDead)
+        {
             AnnounceEndOfGame();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void AnnounceEndOfGame()

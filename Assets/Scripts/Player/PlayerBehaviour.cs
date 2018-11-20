@@ -36,6 +36,8 @@ public class PlayerBehaviour : MonoBehaviour
     TurnManager turnManager;
     Abilities abilities;
 
+    
+
 
     public EffectValues testing;
 
