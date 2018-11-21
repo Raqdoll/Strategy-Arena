@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour {
     GridController gridController;
     MouseController mouseController;
     Tile _tile;
+    public List<PathTile> pathTiles;
 
     Tile CurrentTile
     {
@@ -46,7 +47,7 @@ public class PlayerMovement : MonoBehaviour {
     public delegate void TileEvent(Tile tile);
     public event TileEvent ChangeTile;
 
-    class PathTile
+    public class PathTile
     {
         public Tile _tile;
         public Tile _destination;
@@ -93,6 +94,7 @@ public class PlayerMovement : MonoBehaviour {
 
         if (tempTile != null)
             MoveToTile(tempTile, MovementMethod.Teleport);
+        pathTiles = new List<PathTile>();
     }
 
     public List<Tile> TilesInRange()
@@ -134,7 +136,11 @@ public class PlayerMovement : MonoBehaviour {
                 break;
 
             case MovementMethod.Walk:
-                truereturnables = WithinWalkingDistance(startTile, movementPoints);
+                pathTiles = WithinWalkingDistance(startTile, movementPoints);
+                foreach (var pathTile in pathTiles)
+                {
+                    truereturnables.Add(pathTile._tile);
+                }
                 break;
 
             default:
@@ -153,20 +159,19 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     /// <summary>
-    /// Returns the route by calculating back from destination.
+    /// Returns the route by calculating back from destination. Starting tile should have null in variable _previousTile
     /// </summary>
 
-    private List<Tile> CalculateRouteBack(PathTile startTile, PathTile destinationTile, List<PathTile> pathTiles)
+    public static List<Tile> CalculateRouteBack(PathTile destinationTile)
     {
         List<PathTile> route = new List<PathTile>();
         route.Add(destinationTile);
         PathTile tempTile = destinationTile;
-        while (tempTile != null && tempTile != startTile)
+        while (tempTile != null)
         {
             route.Add(tempTile);
             tempTile = tempTile._previousTile;
         }
-        route.Add(startTile);   
         List<PathTile> orderedRoute = route.OrderByDescending(x => x._movementPointsLeft).ToList();
         List<Tile> wishIHadMeatballs = new List<Tile>();
         foreach (var pathTile in orderedRoute)
@@ -189,6 +194,10 @@ public class PlayerMovement : MonoBehaviour {
                 Teleport(destinationTile);
                 break;
 
+            case MovementMethod.Walk:
+
+                break;
+
             default:
                 Debug.Log("Error with movement method selection!");  //Not yet implemented?
                 break;
@@ -208,7 +217,7 @@ public class PlayerMovement : MonoBehaviour {
         mouseController.currentMovement = this;
     }
 
-    private List<Tile> WithinWalkingDistance(Tile startTile, int movementPoints)
+    private List<PathTile> WithinWalkingDistance(Tile startTile, int movementPoints)
     {
         PathTile startPathTile = new PathTile(startTile, null, movementPoints, null);
         List<PathTile> unprocessedTiles = null;
@@ -228,12 +237,14 @@ public class PlayerMovement : MonoBehaviour {
                 unprocessedTiles.AddRange(tempList);
         }
 
-        List<Tile> returnables = new List<Tile>();
-        foreach (var pathTile in processedTiles)
-        {
-            returnables.Add(pathTile._tile);
-        }
-        return returnables;
+        return processedTiles;
+
+        //List<Tile> returnables = new List<Tile>();
+        //foreach (var pathTile in processedTiles)
+        //{
+        //    returnables.Add(pathTile._tile);
+        //}
+        //return returnables;
     }
 
     /// <summary>

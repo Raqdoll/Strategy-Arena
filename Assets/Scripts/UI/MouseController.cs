@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MouseController : MonoBehaviour
@@ -18,12 +19,14 @@ public class MouseController : MonoBehaviour
     public Material rangeMaterial;
     public Material rangeNullMaterial;
     public Material movementMaterial;
+    public Material pathMaterial;
     private Tile previousTile;
     public List<Tile> targetedTiles;
     public List<Tile> rangeTiles;
     public List<Tile> nullTiles;
     List<Tile> movementRangeTiles;
     List<Tile> tilesToBeReset;
+    List<Tile> tilesInPath;
     Abilities abilities;
     public PlayerMovement currentMovement;
     private bool rangeTilesPainted;
@@ -236,6 +239,16 @@ public class MouseController : MonoBehaviour
             }
 
             ChangeTileMaterials(movementRangeTiles, movementMaterial);  //otherwise hovering over resets the tiles
+            if (movementRangeTiles.Contains(selected))
+            {
+                //Hae reitti ja maalaa se
+                PlayerMovement.PathTile tempTest = currentMovement.pathTiles.Where(x => x._tile == selected).FirstOrDefault();
+                if (tempTest != null)
+                {
+                    tilesInPath = PlayerMovement.CalculateRouteBack(tempTest);
+                    ChangeTileMaterials(tilesInPath, pathMaterial);
+                }
+            }
 
             if (Input.GetMouseButtonDown(0) && movementRangeTiles.Contains(selected))
             {
