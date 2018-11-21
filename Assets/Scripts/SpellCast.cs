@@ -13,6 +13,7 @@ public class SpellCast : MonoBehaviour {
     public CharacterValues cv;  //Active player's charactervalues?
     TurnManager turnManager;
     public HitText hitText;
+    public StatusEffects sEffects;
 
     public SpellValues currentSpell;
     public bool spellOpen = false;
@@ -22,7 +23,12 @@ public class SpellCast : MonoBehaviour {
     public int spell4CastedThisTurn = 0;
     public int spell5CastedThisTurn = 0;
     public int spell6CastedThisTurn = 0;
-    
+    //Käytä spellin 
+
+    //
+    //    hitText.DamageText(target, damage);
+    //
+
 
 
     public Button spellButton1, spellButton2, spellButton3, spellButton4, spellButton5, spellButton6;
@@ -77,11 +83,7 @@ public class SpellCast : MonoBehaviour {
         apText.text = "AP: " + cv.currentAp;
         mpText.text = "MP: " + cv.currentMp;    //  <----- ^---- Nää kannattaa ehkä siirtää jonnekki järkevämpään scriptiin kun spell castiin?
 
-        //test
-        //if (cv)
-        //{
-        //    hitText.DamageText(cv, 200);
-        //}
+
     }
     //public bool needTarget = false; //<
     //public bool needFreeSquare = false; //<
@@ -96,53 +98,64 @@ public class SpellCast : MonoBehaviour {
 
 
 
-    public void CastSpell(SpellValues spell, CharacterValues caster, CharacterValues target)
+    public void CastSpell(SpellValues spell, CharacterValues caster,Tile currentMouseTile)
     {
+
+
         Tile casterTile = gridController.GetTile(caster.currentTile.x, caster.currentTile.z);
-        Tile targetTile = gridController.GetTile(target.currentTile.x, target.currentTile.z);
+        Tile targetTile = currentMouseTile;
         //Tile temp1 = gridController.GetTile(caster.currentTile.x,caster.currentTile.z);
         //Tile temp2 = gridController.GetTile(target.currentTile.x,target.currentTile.z);
-        int damageStuff = 0;
-        int healingIsFun = 0;
-
-        if(spell.healsAlly == true)
+        List<Tile> targetsList = abilities.AreaType(currentSpell.mySpellAreaType);
+        foreach (var item in targetsList)
         {
-            if(target.team == caster.team)
+            PlayerInfo checker = item.CharCurrentlyOnTile;
+            CharacterValues target = null;
+            if (checker)
+                target = checker.thisCharacter;
+
+            int damageStuff = 0;
+            int healingIsFun = 0;
+
+            if (spell.healsAlly == true)
             {
-                healingIsFun = TrueHealCalculator(spell.spellHealMax, spell.spellHealMin, target.healsReceived);
+                if (target.team == caster.team)
+                {
+                    healingIsFun = TrueHealCalculator(spell.spellHealMax, spell.spellHealMin, target.healsReceived);
+                }
+                else
+                {
+                    damageStuff = TrueDamageCalculator(spell.spellDamageMax, spell.spellDamageMin, caster.damageChange, target.armorChange, caster.damagePlus, target.armorPlus);
+                }
+            }
+            else if (spell.hurtsAlly == false)
+            {
+                if (target.team != caster.team)
+                {
+                    damageStuff = TrueDamageCalculator(spell.spellDamageMax, spell.spellDamageMin, caster.damageChange, target.armorChange, caster.damagePlus, target.armorPlus);
+                }
             }
             else
             {
                 damageStuff = TrueDamageCalculator(spell.spellDamageMax, spell.spellDamageMin, caster.damageChange, target.armorChange, caster.damagePlus, target.armorPlus);
             }
-        }
-        else if(spell.hurtsAlly == false)
-        {
-            if (target.team != caster.team)
+            GetHit(target, damageStuff);
+            GetHealed(target, healingIsFun);
+
+            if (spell.effect)
             {
-                damageStuff = TrueDamageCalculator(spell.spellDamageMax, spell.spellDamageMin, caster.damageChange, target.armorChange, caster.damagePlus, target.armorPlus);
+                sEffects.ApplyEffect(caster, spell.effect, target);
             }
-        }
-        else
-        {
-            damageStuff = TrueDamageCalculator(spell.spellDamageMax, spell.spellDamageMin, caster.damageChange, target.armorChange, caster.damagePlus, target.armorPlus);
+
+            playerBehaviour.UpdateTabs();
         }
         abilities.SpellPull(spell.mySpellPullType);
         abilities.SpellPush(spell.mySpellPushType);
-        //  moveCloserToTarget;  //<
-        //  MoveAwayFromTarget;  //<
+        abilities.WalkTowardsTarget();
+        abilities.MoveAwayFromTarget();
 
         abilities.CasterTeleport(casterTile);
         abilities.TeleportSwitch(casterTile, targetTile);
-
-        //public EffectValues effect;
-        //public bool effectOnCaster = false; //<
-        //public bool effectOnTarget = true; //<
-
-
-        GetHit(target, damageStuff);
-        GetHealed(target, healingIsFun);
-        playerBehaviour.UpdateTabs();
 
     }
     //Deal the actual damage V V V

@@ -7,6 +7,7 @@ public class SpellValues : ScriptableObject
     [Space(6)]
     public string mySpellName;
     public Sprite spellIcon;
+    public AudioClip spellSound; //<
     [Space(6)]
     [Header("Ranges")]
     [Space(6)]
@@ -41,10 +42,10 @@ public class SpellValues : ScriptableObject
     public int spellPull;
     public Abilities.SpellPullType mySpellPullType;
     
-    public bool teleportToTarget = false;   //<
-    public bool chagePlaceWithTarget = false;   //<
-    public int moveCloserToTarget;  //<
-    public int MoveAwayFromTarget;  //<
+    public bool teleportToTarget = false;  
+    public bool chagePlaceWithTarget = false;
+    public int moveCloserToTarget;
+    public int moveAwayFromTarget;
     [Space(6)]
     [Header("Cooldowns")]
     [Space(6)]

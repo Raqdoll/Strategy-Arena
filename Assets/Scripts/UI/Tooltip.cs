@@ -75,8 +75,15 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             ui._text = "";
             ui._text += spell.mySpellName + "\n";
             ui._text += "\nAP: " + spell.spellApCost;
-            ui._text += "\nRange: " + spell.mySpellRangeType + " : " + spell.spellRangeMin;
-            if(spell.spellRangeMin != spell.spellRangeMax)
+            if (spell.mySpellRangeType != Abilities.SpellRangeType.LinDiag)
+            {
+                ui._text += "\nRange: " + spell.mySpellRangeType + " : " + spell.spellRangeMin;
+            }
+            if (spell.mySpellRangeType == Abilities.SpellRangeType.LinDiag)
+            {
+                ui._text += "\nRange: " + "Linear & Diagonal" + " : " + spell.spellRangeMin;
+            }
+            if (spell.spellRangeMin != spell.spellRangeMax)
             {
                 ui._text += " - " + spell.spellRangeMax;
             }
