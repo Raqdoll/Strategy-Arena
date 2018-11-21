@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    PlayerBehaviour pb;
 
     public SpellValues spell;
     public CharacterValues character;
@@ -15,7 +16,13 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     void Start () {
         if (!ui)
+        {
             ui = GameObject.FindGameObjectWithTag("UIcanvas").GetComponent<UImanager>();
+        }
+        if (!pb)
+        {
+            pb = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<PlayerBehaviour>();
+        }
     }
 
     public void UpdateInfo(SpellValues x)
@@ -69,7 +76,7 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
         }
         //^
-
+        //SPELL
         if (spell && !character && !effect)
         {
             ui._text = "";
@@ -117,7 +124,7 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
 
 
-
+            //SPELLS EFFECT
             if (spell.effect != null)
             {
                 ui._text += "\n";
@@ -243,16 +250,18 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
             ui.ShowTooltip();
         }
+        //CHARACTER
         else if (!spell && character && !effect)
         {
-            ui._text = "";
-            ui._text += character.name;
-            ui._text += "\n";
-            ui._text += "\nHP: " + character.currentHP + " / " + character.maxHP;
-            ui._text += "\nAP: " + character.currentAp;
-            ui._text += "\nMP: " + character.currentMp;
-            ui.ShowTooltip();
+            //ui._text = "";
+            //ui._text += character.name;
+            //ui._text += "\n";
+            //ui._text += "\nHP: " + character.currentHP + " / " + character.maxHP;
+            //ui._text += "\nAP: " + character.currentAp;
+            //ui._text += "\nMP: " + character.currentMp;
+            //ui.ShowTooltip();
         }
+        //EFFECT
         else if (!spell && !character && effect)
         {
             ui._text = "";
@@ -360,6 +369,5 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerExit(PointerEventData eventData)
     {
         ui.HideTooltip();
-        
     }
 }

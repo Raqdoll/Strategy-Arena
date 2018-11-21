@@ -19,6 +19,7 @@ public class CharacterTab : MonoBehaviour {
     public GameObject spell6;
     public GameObject effectBlock;
     public Image characterIcon;
+    public Image highlight;
     PlayerBehaviour _player;
     bool isMyPlayerActive;
     public CharacterValues characterVal;
@@ -45,6 +46,8 @@ public class CharacterTab : MonoBehaviour {
             spell4.GetComponent<Tooltip>().spell = characterVal.spell_4;
             spell5.GetComponent<Tooltip>().spell = characterVal.spell_5;
             spell6.GetComponent<Tooltip>().spell = characterVal.spell_6;
+
+            highlight.gameObject.SetActive(false);
         }
     }
 
@@ -74,9 +77,9 @@ public class CharacterTab : MonoBehaviour {
         GO.GetComponent<Tooltip>().effect = effect;
     }
 
-    public void UpdateEffectIcons()
+    public void ToggleHighlight(bool lightswitch)
     {
-        
+        highlight.gameObject.SetActive(lightswitch);
     }
 
     private void OnDestroy()

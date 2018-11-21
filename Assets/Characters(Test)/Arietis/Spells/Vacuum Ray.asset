@@ -13,6 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mySpellName: Vacuum Ray
   spellIcon: {fileID: 21300000, guid: b1f0217a84e449941b07df754e4b5010, type: 3}
+  spellSound: {fileID: 8300000, guid: 713855f6637a2b744affb43f0a679519, type: 3}
   mySpellRangeType: 3
   spellRangeMin: 1
   spellRangeMax: 7
@@ -32,11 +33,13 @@ MonoBehaviour:
   effectOnCaster: 0
   effectOnTarget: 1
   spellPushback: 0
+  mySpellPushType: 0
   spellPull: 2
+  mySpellPullType: 0
   teleportToTarget: 0
   chagePlaceWithTarget: 0
   moveCloserToTarget: 0
-  MoveAwayFromTarget: 0
+  moveAwayFromTarget: 0
   spellInitialCooldown: 0
   spellCooldown: 0
   spellCastPerturn: 1

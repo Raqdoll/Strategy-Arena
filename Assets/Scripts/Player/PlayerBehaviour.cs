@@ -83,11 +83,6 @@ public class PlayerBehaviour : MonoBehaviour
             tabby.UpdateInfo();
         }
     }
-
-
-
-
-
 }
 
 

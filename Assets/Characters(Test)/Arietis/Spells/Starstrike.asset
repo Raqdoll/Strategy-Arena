@@ -13,6 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mySpellName: Starstrike
   spellIcon: {fileID: 21300000, guid: 3d131ff27a9bf134cb2b308f1b811817, type: 3}
+  spellSound: {fileID: 8300000, guid: e7cba8b3d82e5e3439241f91af03e8e1, type: 3}
   mySpellRangeType: 0
   spellRangeMin: 1
   spellRangeMax: 8
@@ -29,12 +30,16 @@ MonoBehaviour:
   needTarget: 1
   needFreeSquare: 0
   effect: {fileID: 0}
+  effectOnCaster: 0
+  effectOnTarget: 1
   spellPushback: 1
+  mySpellPushType: 0
   spellPull: 0
+  mySpellPullType: 0
   teleportToTarget: 0
   chagePlaceWithTarget: 0
   moveCloserToTarget: 0
-  MoveAwayFromTarget: 0
+  moveAwayFromTarget: 0
   spellInitialCooldown: 0
   spellCooldown: 0
   spellCastPerturn: 0
