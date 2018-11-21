@@ -37,15 +37,12 @@ public class TurnManager : MonoBehaviour {
             teamManager = gameObject.GetComponent<TeamManager>();
     }
 
-    void Update () {
-		
-	}
-
     public void NextTurn()
     {
         if (teamManager)
         {
             PlayerInfo temp = teamManager.ChangeTurnUntilValidPlayer();
+            temp.RefreshPoints();
             AnnounceTurnChange(temp);
         }
         else

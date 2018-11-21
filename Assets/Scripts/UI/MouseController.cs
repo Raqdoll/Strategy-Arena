@@ -20,6 +20,7 @@ public class MouseController : MonoBehaviour
     public Material rangeNullMaterial;
     public Material movementMaterial;
     public Material pathMaterial;
+    public Material pathSelectedMaterial;
     private Tile previousTile;
     public List<Tile> targetedTiles;
     public List<Tile> rangeTiles;
@@ -239,13 +240,17 @@ public class MouseController : MonoBehaviour
                 {
                     tilesInPath = PlayerMovement.CalculateRouteBack(tempTest);
                     ChangeTileMaterials(tilesInPath, pathMaterial);
+                    Renderer sr = selected.GetComponent<Renderer>();
+                    sr.material = pathSelectedMaterial;
                 }
             }
 
-            if (Input.GetMouseButtonDown(0) && movementRangeTiles.Contains(selected))
+            if (Input.GetMouseButtonDown(0)
+                    && selected != currentMovement.CurrentTile 
+                    && movementRangeTiles.Contains(selected))
             {
-
                 currentMovement.MoveToTile(selected, PlayerMovement.MovementMethod.Teleport);
+                currentMovement.playerInfo.thisCharacter.currentMp -= (tilesInPath.Count() -2);
 
                 ResetTileMaterials(tilesToBeReset);
                 tilesToBeReset.Clear();

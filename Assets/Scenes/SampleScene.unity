@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10308,6 +10308,7 @@ MonoBehaviour:
   gridController: {fileID: 0}
   cv: {fileID: 11400000, guid: eac0014924945a541af8dd0313094b37, type: 2}
   hitText: {fileID: 451841865}
+  sEffects: {fileID: 0}
   currentSpell: {fileID: 0}
   spellOpen: 0
   spell1CastedThisTurn: 0
@@ -40281,6 +40282,9 @@ MonoBehaviour:
   rangeMaterial: {fileID: 2100000, guid: 8db0a574684bf5c4a920798b6bc0cc64, type: 2}
   rangeNullMaterial: {fileID: 2100000, guid: 556f3eeb9d88d2441b59d9f236c58eac, type: 2}
   movementMaterial: {fileID: 2100000, guid: 77f1923c6ed7e844faffedabda2864ea, type: 2}
+  pathMaterial: {fileID: 2100000, guid: d8ad4d0acc5c4c44fbfd3e1b53317b45, type: 2}
+  pathSelectedMaterial: {fileID: 2100000, guid: 9bfa63f4c7f433e40b17d68017833ff9,
+    type: 2}
   targetedTiles: []
   rangeTiles: []
   nullTiles: []

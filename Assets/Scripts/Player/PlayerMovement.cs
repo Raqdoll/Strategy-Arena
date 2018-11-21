@@ -15,13 +15,13 @@ public class PlayerMovement : MonoBehaviour {
     public enum MovementMethod { NotSpecified, Teleport, Walk, Push };
 
     PlayerBehaviour playerController;
-    PlayerInfo playerInfo;
+    public PlayerInfo playerInfo;
     GridController gridController;
     MouseController mouseController;
     Tile _tile;
     public List<PathTile> pathTiles;
 
-    Tile CurrentTile
+    public Tile CurrentTile
     {
         get
         {
@@ -260,9 +260,9 @@ public class PlayerMovement : MonoBehaviour {
         if (startTile._movementPointsLeft > 0)
         {
             neighbours = CreatePathTileNeighbours(startTile);
-            if (dontUseAStar)
+            if (!dontUseAStar)
             {
-                //Do stuff
+                //Do A* stuff
             }
         }
         return neighbours;
