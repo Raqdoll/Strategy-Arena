@@ -52,6 +52,8 @@ public class SpellCast : MonoBehaviour {
         hitText = GetComponent<HitText>();
 
         turnManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TurnManager>();
+        gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
+        abilities = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<Abilities>();
         turnManager.TurnChange += HandleTurnChange;
 
     }
@@ -113,54 +115,88 @@ public class SpellCast : MonoBehaviour {
             if (checker)
                 target = checker.thisCharacter;
 
-            int damageStuff = 0;
-            int healingIsFun = 0;
-
-            if (spell.healsAlly == true)
+            if (target)
             {
-                if (target.team == caster.team)
+                Debug.Log("annetaan vAhinkoa");
+                int damageStuff = 0;
+                int healingIsFun = 0;
+
+                if (spell.healsAlly == true)
                 {
-                    healingIsFun = TrueHealCalculator(spell.spellHealMax, spell.spellHealMin, target.healsReceived);
+                    if (target.team == caster.team)
+                    {
+                        healingIsFun = TrueHealCalculator(spell.spellHealMax, spell.spellHealMin, target.healsReceived);
+                        Debug.Log("annetaan healia");
+                    }
+                    else
+                    {
+                        damageStuff = TrueDamageCalculator(spell.spellDamageMax, spell.spellDamageMin, caster.damageChange, target.armorChange, caster.damagePlus, target.armorPlus);
+                        Debug.Log("vahinko vihu");
+                    }
+                }
+                else if (spell.hurtsAlly == false)
+                {
+                    if (target.team != caster.team)
+                    {
+                        damageStuff = TrueDamageCalculator(spell.spellDamageMax, spell.spellDamageMin, caster.damageChange, target.armorChange, caster.damagePlus, target.armorPlus);
+                        Debug.Log("vahinko vihu");
+                    }
                 }
                 else
                 {
                     damageStuff = TrueDamageCalculator(spell.spellDamageMax, spell.spellDamageMin, caster.damageChange, target.armorChange, caster.damagePlus, target.armorPlus);
+                    Debug.Log("vahinko vihu");
                 }
-            }
-            else if (spell.hurtsAlly == false)
-            {
-                if (target.team != caster.team)
+                GetHit(target, damageStuff);
+                GetHealed(target, healingIsFun);
+
+                if (spell.effect)
                 {
-                    damageStuff = TrueDamageCalculator(spell.spellDamageMax, spell.spellDamageMin, caster.damageChange, target.armorChange, caster.damagePlus, target.armorPlus);
+                    sEffects.ApplyEffect(caster, spell.effect, target);
+                    playerBehaviour.UpdateTabs();
                 }
-            }
-            else
-            {
-                damageStuff = TrueDamageCalculator(spell.spellDamageMax, spell.spellDamageMin, caster.damageChange, target.armorChange, caster.damagePlus, target.armorPlus);
-            }
-            GetHit(target, damageStuff);
-            GetHealed(target, healingIsFun);
 
-            if (spell.effect)
-            {
-                sEffects.ApplyEffect(caster, spell.effect, target);
             }
-
-            playerBehaviour.UpdateTabs();
         }
-        abilities.SpellPull(spell.mySpellPullType);
-        abilities.SpellPush(spell.mySpellPushType);
-        abilities.WalkTowardsTarget();
-        abilities.MoveAwayFromTarget();
+        if (spell.spellPull != 0)
+        {
+            abilities.SpellPull(spell.mySpellPullType);
+            Debug.Log("spell pull");
+        }
+        if (spell.spellPushback != 0)
+        {
+            abilities.SpellPush(spell.mySpellPushType);
+            Debug.Log("spell push");
+        }
 
-        abilities.CasterTeleport(casterTile);
-        abilities.TeleportSwitch(casterTile, targetTile);
+        if (spell.moveCloserToTarget != 0)
+        {
+            abilities.WalkTowardsTarget();
+            Debug.Log("moving towards");
+        }
+        if (spell.moveAwayFromTarget != 0)
+        {
+            abilities.MoveAwayFromTarget();
+            Debug.Log("moving away");
+        }
+
+        if (spell.teleportToTarget == true)
+        {
+            abilities.CasterTeleport(casterTile);
+            Debug.Log("telepoting to target");
+        }
+        if (spell.chagePlaceWithTarget == true)
+        {
+            abilities.TeleportSwitch(casterTile, targetTile);
+            Debug.Log("switching places");
+        }
 
     }
     //Deal the actual damage V V V
     public void GetHit(CharacterValues target, int damage)
     {
         target.currentHP -= damage;
+        playerBehaviour.UpdateTabs();
     }
     //Deal the actual healing V V V
     public void GetHealed(CharacterValues target, int heal)
@@ -170,6 +206,7 @@ public class SpellCast : MonoBehaviour {
         {
             target.currentHP = target.maxHP;
         }
+        playerBehaviour.UpdateTabs();
     }
 
 	public void Aftermath()

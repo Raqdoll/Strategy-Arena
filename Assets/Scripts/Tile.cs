@@ -47,7 +47,7 @@ public class Tile : MonoBehaviour {
         }
     }
 
-    public bool isFree = true;
+    public bool isFree;
     public bool ShootThrough;
     public bool Targetable;
     public bool WalkThrough;
@@ -62,7 +62,7 @@ public class Tile : MonoBehaviour {
         locZ = (int)transform.localPosition.z;
         thisMaterial = GetComponent<Renderer>().material;
         BaseMaterial = GetComponent<Renderer>().material;
-
+        isFree = true;
         switch (myType)
         {
             case BlockType.BaseBlock:

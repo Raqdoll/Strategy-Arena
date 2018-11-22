@@ -367,14 +367,11 @@ public class Abilities : MonoBehaviour {
     {
         List<Tile> AoeList = AreaType(spellCast.currentSpell.mySpellAreaType);
         List<Tile> targetList = new List<Tile>();
-        Tile anchor = new Tile();
-        Tile caster = new Tile();
-        caster.locX = playerBehaviour.currentCharacter.currentTile.x;
-        caster.locZ = playerBehaviour.currentCharacter.currentTile.z;
-        anchor = mouseController.selected;     
+        Tile anchor = mouseController.selected;
+        Tile caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z);
         foreach (var tile in AoeList)
         {
-            if (tile.CharCurrentlyOnTile)
+            if (tile.CharCurrentlyOnTile && tile != caster)
             {
                 targetList.Add(tile);
             }
@@ -617,15 +614,12 @@ public class Abilities : MonoBehaviour {
     {
         List<Tile> AoeList = AreaType(spellCast.currentSpell.mySpellAreaType);
         List<Tile> targetList = new List<Tile>();
-        Tile anchor = new Tile();
-        Tile caster = new Tile();
-        caster.locX = playerBehaviour.currentCharacter.currentTile.x;
-        caster.locZ = playerBehaviour.currentCharacter.currentTile.z;
-        anchor = mouseController.selected;
+        Tile anchor = mouseController.selected;
+        Tile caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z);
         // etsii siirrettävät pelaajat aoe:sta
         foreach (var tile in AoeList)
         {
-            if (tile.CharCurrentlyOnTile)
+            if (tile.CharCurrentlyOnTile && tile != caster)
             {
                 targetList.Add(tile);
             }
@@ -831,7 +825,7 @@ public class Abilities : MonoBehaviour {
             }
             if (inLine == true)
             {
-                for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                for (int i = 0; i < spellCast.currentSpell.spellPushback; i++)
                 {
                     Tile temp = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, mydirection);
                     if (temp.myType == Tile.BlockType.BaseBlock)
@@ -846,7 +840,7 @@ public class Abilities : MonoBehaviour {
             }
             else
             {
-                for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
+                for (int i = 0; i < spellCast.currentSpell.spellPushback; i++)
                 {
                     Tile temp1 = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, mydirection);
                     Tile temp2 = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, helpDirection);
@@ -889,8 +883,11 @@ public class Abilities : MonoBehaviour {
     {
         // move player on tile start onto tile end
         // Jan: Lisää tämä metodi pasta carbonaran sekaan. Suosittelen edelleen miettimään apumetodia ylläolevan switchin if lausekkeille, jotta mahdolliset muokkaukset helpottuvat kummasti.
-
-        PlayerMovement playerMovement = start.CharCurrentlyOnTile.gameObject.GetComponent<PlayerMovement>();
+        PlayerMovement playerMovement = null;
+        if (start.CharCurrentlyOnTile)
+        {
+         playerMovement = start.CharCurrentlyOnTile.gameObject.GetComponent<PlayerMovement>(); 
+        }
         if (playerMovement)
         {
             //playerMovement.MoveToTile(end, PlayerMovement.MovementMethod.push);    //Tämä tulee lopulliseen versioon, ei vielä implementoitu
@@ -900,11 +897,8 @@ public class Abilities : MonoBehaviour {
 
     public void WalkTowardsTarget()
     {
-        Tile anchor = new Tile();
-        Tile caster = new Tile();
-        caster.locX = playerBehaviour.currentCharacter.currentTile.x;
-        caster.locZ = playerBehaviour.currentCharacter.currentTile.z;
-        anchor = mouseController.selected;
+        Tile anchor = mouseController.selected;
+        Tile caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z);
         GridController.Directions mydirection = new GridController.Directions();
         GridController.Directions helpDirection = new GridController.Directions();
         bool inLine = true;
@@ -988,11 +982,8 @@ public class Abilities : MonoBehaviour {
     }
     public void MoveAwayFromTarget()
     {
-        Tile anchor = new Tile();
-        Tile caster = new Tile();
-        caster.locX = playerBehaviour.currentCharacter.currentTile.x;
-        caster.locZ = playerBehaviour.currentCharacter.currentTile.z;
-        anchor = mouseController.selected;
+        Tile anchor = mouseController.selected;
+        Tile caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z);
         GridController.Directions mydirection = new GridController.Directions();
         GridController.Directions helpDirection = new GridController.Directions();
         bool inLine = true;
