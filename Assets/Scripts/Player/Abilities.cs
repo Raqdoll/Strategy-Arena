@@ -952,9 +952,10 @@ public class Abilities : MonoBehaviour {
             for (int i = 0; i < spellCast.currentSpell.moveCloserToTarget; i++)
             {
                 Tile temp = gridController.GetTileInDirection(caster, 1, mydirection);
-                if (temp.myType == Tile.BlockType.BaseBlock)
+                if (temp.myType == Tile.BlockType.BaseBlock && temp != null)
                 {
                     PullPushAct(caster, temp);
+                    caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z);
                 }
                 else
                 {
@@ -969,9 +970,10 @@ public class Abilities : MonoBehaviour {
                 Tile temp1 = gridController.GetTileInDirection(caster, 1, mydirection);
                 Tile temp2 = gridController.GetTileInDirection(caster, 1, helpDirection);
                 Tile temp3 = gridController.GetTileInDirection(gridController.GetTile(temp1.locX, temp1.locZ), 1, helpDirection);
-                if (temp1.myType == Tile.BlockType.BaseBlock && temp2.myType == Tile.BlockType.BaseBlock && temp3.myType == Tile.BlockType.BaseBlock)
+                if (temp1.myType == Tile.BlockType.BaseBlock && temp2.myType == Tile.BlockType.BaseBlock && temp3.myType == Tile.BlockType.BaseBlock && temp1 != null && temp2 != null && temp3 != null)
                 {
                     PullPushAct(caster, temp3);
+                    caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z);
                 }
                 else
                 {
@@ -1036,9 +1038,10 @@ public class Abilities : MonoBehaviour {
             for (int i = 0; i < spellCast.currentSpell.moveAwayFromTarget; i++)
             {
                 Tile temp = gridController.GetTileInDirection(caster, 1, mydirection);
-                if (temp.myType == Tile.BlockType.BaseBlock)
+                if (temp.myType == Tile.BlockType.BaseBlock && temp != null)
                 {
                     PullPushAct(caster, temp);
+                    caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z);
                 }
                 else
                 {
@@ -1053,9 +1056,10 @@ public class Abilities : MonoBehaviour {
                 Tile temp1 = gridController.GetTileInDirection(caster, 1, mydirection);
                 Tile temp2 = gridController.GetTileInDirection(caster, 1, helpDirection);
                 Tile temp3 = gridController.GetTileInDirection(gridController.GetTile(temp1.locX, temp1.locZ), 1, helpDirection);
-                if (temp1.myType == Tile.BlockType.BaseBlock && temp2.myType == Tile.BlockType.BaseBlock && temp3.myType == Tile.BlockType.BaseBlock)
+                if (temp1.myType == Tile.BlockType.BaseBlock && temp2.myType == Tile.BlockType.BaseBlock && temp3.myType == Tile.BlockType.BaseBlock && temp1 != null && temp2 != null && temp3 != null)
                 {
                     PullPushAct(caster, temp3);
+                    caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z);
                 }
                 else
                 {
