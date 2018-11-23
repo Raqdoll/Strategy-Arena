@@ -20,6 +20,7 @@ public class CharacterTab : MonoBehaviour {
     public GameObject effectBlock;
     public Image characterIcon;
     public Image highlight;
+    public Image deathMask;
     PlayerBehaviour _player;
     bool isMyPlayerActive;
     public CharacterValues characterVal;
@@ -46,8 +47,6 @@ public class CharacterTab : MonoBehaviour {
             spell4.GetComponent<Tooltip>().spell = characterVal.spell_4;
             spell5.GetComponent<Tooltip>().spell = characterVal.spell_5;
             spell6.GetComponent<Tooltip>().spell = characterVal.spell_6;
-
-            highlight.gameObject.SetActive(false);
         }
     }
 
@@ -112,8 +111,19 @@ public class CharacterTab : MonoBehaviour {
 
     public void UpdateHp(int minHP, int maxHP)
     {
-        tHealth.text = minHP.ToString() + "/" + maxHP.ToString();
+        if(minHP <= 0)
+        {
+            characterVal.currentHP = 0;
+            characterVal.currentAp = 0;
+            characterVal.currentMp = 0;
 
+            minHP = characterVal.currentHP;
+            UpdateAp(characterVal.currentAp);
+            UpdateMp(characterVal.currentMp);
+            Die();
+            //Remember to disable effects
+        }
+        tHealth.text = minHP.ToString() + "/" + maxHP.ToString();
         UpdateHpBar();
     }
 
@@ -138,5 +148,10 @@ public class CharacterTab : MonoBehaviour {
         float maxHPf = characterVal.maxHP;
         float hpBarAmount = minHPf / maxHPf;
         healthBar.GetComponent<Image>().fillAmount = hpBarAmount;
+    }
+
+    public void Die()
+    {
+        deathMask.gameObject.SetActive(true);
     }
 }

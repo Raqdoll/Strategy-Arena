@@ -7,6 +7,9 @@ public class UImanager : MonoBehaviour {
 
     public GameObject tooltip;
     public Text tooltipText;
+    public Button menuButton;
+    public Button exitMenuButton;
+    public GameObject menu;
     public string _text;
 
 	void Start () {
