@@ -4711,9 +4711,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltip: {fileID: 1764131515}
   tooltipText: {fileID: 1487865102}
-  menuButton: {fileID: 0}
-  exitMenuButton: {fileID: 0}
-  menu: {fileID: 0}
+  menuButton: {fileID: 1678971542}
+  returnButton: {fileID: 1130866789}
+  menu: {fileID: 261392069}
   _text: 
 --- !u!1001 &150470729
 Prefab:
@@ -6300,7 +6300,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &261392070
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15309,7 +15309,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Concede
+  m_Text: Return
 --- !u!222 &672730482
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -24456,7 +24456,7 @@ GameObject:
   - component: {fileID: 1130866790}
   - component: {fileID: 1130866789}
   m_Layer: 5
-  m_Name: ConcedeButton
+  m_Name: ReturnButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

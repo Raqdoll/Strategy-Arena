@@ -94,8 +94,16 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             {
                 ui._text += " - " + spell.spellRangeMax;
             }
-            ui._text += "\nArea of effect: " + spell.mySpellAreaType + " : " + spell.aoeRange;
-            ui._text += "\n";
+            if (spell.aoeRange != 0)
+            {
+                ui._text += "\nArea of effect: " + spell.mySpellAreaType + " : " + spell.aoeRange;
+                ui._text += "\n"; 
+            }
+            if (spell.aoeRange == 0)
+            {
+                ui._text += "\nSingle target";
+                ui._text += "\n";
+            }
             if (spell.spellDamageMin != 0)
             {
                 ui._text += "\n" + "Base damage: " + spell.spellDamageMin + " - " + spell.spellDamageMax; 
