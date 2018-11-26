@@ -55,7 +55,7 @@ public class SpellCast : MonoBehaviour {
         gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
         abilities = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<Abilities>();
         turnManager.TurnChange += HandleTurnChange;
-
+        sEffects = GameObject.FindGameObjectWithTag("GameController").GetComponent<StatusEffects>();
     }
 
     private void OnDestroy()
@@ -85,6 +85,7 @@ public class SpellCast : MonoBehaviour {
         apText.text = "AP: " + cv.currentAp;
         mpText.text = "MP: " + cv.currentMp;    //  <----- ^---- Nää kannattaa ehkä siirtää jonnekki järkevämpään scriptiin kun spell castiin?
 
+        
     }
     //public bool needTarget = false; //<
     //public bool needFreeSquare = false; //<

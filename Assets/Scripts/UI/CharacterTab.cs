@@ -76,6 +76,17 @@ public class CharacterTab : MonoBehaviour {
         GO.GetComponent<Tooltip>().effect = effect;
     }
 
+    //public void RemoveEffectIcon(EffectValues effect)
+    //{
+    //    foreach (Tooltip child in GetComponentsInChildren<Tooltip>())
+    //    {
+    //        if (child.effect == effect)
+    //        {
+    //            child.gameObject.SetActive(false);
+    //        }
+    //    }
+    //}
+
     public void ToggleHighlight(bool lightswitch)
     {
         highlight.gameObject.SetActive(lightswitch);

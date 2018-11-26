@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StatusEffects : MonoBehaviour {
 
-    List<EffectValues> effectList;
+    public List<EffectValues> effectList = new List<EffectValues>();
     public TeamManager tManager;
     public PlayerBehaviour pBehaviour;
 
@@ -24,6 +24,7 @@ public class StatusEffects : MonoBehaviour {
         clone.target = target;
         clone.remainingTurns = clone.effectDuration;
         effectList.Add(clone);
+        pBehaviour.AddTabEffect(clone, target);
     }
 
     //Calls all effects of a certain character
@@ -55,6 +56,7 @@ public class StatusEffects : MonoBehaviour {
                 //Checks if the spell stays active
                 if (effect.remainingTurns <= 0)
                 {
+                    //pBehaviour.RemoveTabEffect(effect);
                     effectList.Remove(effect);
                 }
             } 

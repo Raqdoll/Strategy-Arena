@@ -29,7 +29,7 @@ MonoBehaviour:
   armorPlus: 0
   moving: 0
   dead: 0
-  team: 0
+  team: 1
   currentHP: 3000
   currentAp: 12
   currentMp: 6
