@@ -11,9 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f98fb76e3ad09448970e12735799ad, type: 3}
   m_Name: AcidSprayEffect
   m_EditorClassIdentifier: 
-  effectName: 
-  effectIcon: {fileID: 0}
-  effectDuration: 0
+  effectName: Acid Spray
+  effectIcon: {fileID: 21300000, guid: 451fbf8d19ff54e40af152295a312b8b, type: 3}
+  effectDuration: 1
   stacks: 1
   canBeSilenced: 1
   silenceTurns: 0
@@ -28,9 +28,9 @@ MonoBehaviour:
   armorModifyPlus: 0
   amPlusAllies: 0
   amPlusEnemies: 0
-  armorModifyPercent: 0
+  armorModifyPercent: -0.15
   amPerAllies: 0
-  amPerEnemies: 0
+  amPerEnemies: 1
   healModify: 0
   hmAllies: 0
   hmEnemies: 0

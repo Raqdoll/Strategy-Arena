@@ -11,20 +11,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8038d5e1a6f4b4bb84ea3b5b6084fc, type: 3}
   m_Name: VoidstarPotion
   m_EditorClassIdentifier: 
-  mySpellName: 
-  spellIcon: {fileID: 0}
-  spellSound: {fileID: 0}
+  mySpellName: Voidstar Potion
+  spellIcon: {fileID: 21300000, guid: aa8e6fd5ce1d9d04ba103865946d7a6e, type: 3}
+  spellSound: {fileID: 8300000, guid: 274af4085c1f3114a85f25e0539aed94, type: 3}
   mySpellRangeType: 0
-  spellRangeMin: 0
-  spellRangeMax: 0
+  spellRangeMin: 1
+  spellRangeMax: 5
   mySpellAreaType: 0
   aoeRange: 0
-  spellApCost: 0
+  spellApCost: 4
   spellDamageMin: 0
   spellDamageMax: 0
-  spellHealMin: 0
-  spellHealMax: 0
-  healsAlly: 0
+  spellHealMin: 1500
+  spellHealMax: 1500
+  healsAlly: 1
   hurtsAlly: 0
   needLineOfSight: 1
   needTarget: 0
@@ -41,7 +41,7 @@ MonoBehaviour:
   moveCloserToTarget: 0
   moveAwayFromTarget: 0
   spellInitialCooldown: 0
-  spellCooldown: 0
+  spellCooldown: 4
   spellCastPerturn: 0
   castPerTarget: 0
   description: "A powerfull potion made out of \na rare plant which can only be found

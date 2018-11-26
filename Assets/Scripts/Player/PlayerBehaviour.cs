@@ -83,6 +83,32 @@ public class PlayerBehaviour : MonoBehaviour
             tabby.UpdateInfo();
         }
     }
+    public void AddTabEffect(EffectValues effect, CharacterValues target)
+    {
+        foreach (GameObject tab in charTabList)
+        {
+            CharacterTab tabby = tab.GetComponent<CharacterTab>();
+            if (tabby.characterVal == target)
+            {
+                tabby.AddEffectIcon(effect);
+            }
+        }
+    }
+    //public void RemoveTabEffect(EffectValues effect)
+    //{
+    //    foreach (GameObject tab in charTabList)
+    //    {
+    //        CharacterTab tabby = tab.GetComponent<CharacterTab>();
+    //        if (GetComponentInChildren<GameObject>() != null)
+    //        {
+    //            GameObject removed = tabby.GetComponentInChildren<GridLayoutGroup>().GetComponentInChildren<GameObject>();
+    //            if (removed.GetComponent<Tooltip>().effect == effect)
+    //            {
+    //                tabby.RemoveEffectIcon(removed.GetComponent<Tooltip>().effect);
+    //            } 
+    //        }
+    //    }
+    //}
 }
 
 

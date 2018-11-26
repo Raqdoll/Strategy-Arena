@@ -24,6 +24,16 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             pb = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<PlayerBehaviour>();
         }
     }
+    void Update()
+    {
+        if (effect)
+        {
+            if (effect.remainingTurns <= 0)
+            {
+                gameObject.SetActive(false);
+            }
+        }
+    }
 
     public void UpdateInfo(SpellValues x)
     {
@@ -106,11 +116,11 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
             if (spell.spellDamageMin != 0)
             {
-                ui._text += "\n" + "Base damage: " + spell.spellDamageMin + " - " + spell.spellDamageMax; 
+                ui._text += "\n" + "Damage: " + spell.spellDamageMin + " - " + spell.spellDamageMax; 
             }
             if (spell.spellHealMin != 0)
             {
-                ui._text += "\n" + "Base heal: " + spell.spellHealMin + " - " + spell.spellHealMax + "\n";
+                ui._text += "\n" + "Heal: " + spell.spellHealMin + " - " + spell.spellHealMax + "\n";
             }
 
             if (spell.needLineOfSight == false)
@@ -139,87 +149,87 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 //Effect info
                 if (spell.effect.immune == true)
                 {
-                    ui._text += "\nImmune to damage: " + spell.effect.effectDuration + " turn(s)";
+                    ui._text += "\nImmune to damage:" + " / " + spell.effect.effectDuration + " turn(s)";
                 }
                 if (spell.effect.heavyState == true)
                 {
-                    ui._text += "\nHeavy state: " + spell.effect.effectDuration + " turn(s)";
+                    ui._text += "\nHeavy state:" + " / " + spell.effect.effectDuration + " turn(s)";
                 }
                 if (spell.effect.damageModifyPlus != 0)
                 {
                     if (spell.effect.damageModifyPlus > 0)
                     {
-                        ui._text += "\nDamage: +" + spell.effect.damageModifyPlus; 
+                        ui._text += "\nDamage: +" + spell.effect.damageModifyPlus + " / " + spell.effect.effectDuration + " turn(s)"; 
                     }
                     else
                     {
-                        ui._text += "\nDamage: " + spell.effect.damageModifyPlus;
+                        ui._text += "\nDamage: " + spell.effect.damageModifyPlus + " / " + spell.effect.effectDuration + " turn(s)";
                     }
                 }
                 if (spell.effect.damageModifyPercent != 0)
                 {
                     if (spell.effect.damageModifyPercent > 0)
                     {
-                        ui._text += "\nDamage: +" + spell.effect.damageModifyPercent * 100 + "%"; 
+                        ui._text += "\nDamage: +" + spell.effect.damageModifyPercent * 100 + "%" + " / " + spell.effect.effectDuration + " turn(s)"; 
                     }
                     else
                     {
-                        ui._text += "\nDamage: " + spell.effect.damageModifyPercent * 100 + "%";
+                        ui._text += "\nDamage: " + spell.effect.damageModifyPercent * 100 + "%" + " / " + spell.effect.effectDuration + " turn(s)";
                     }
                 }
                 if (spell.effect.armorModifyPlus != 0)
                 {
                     if (spell.effect.armorModifyPlus > 0)
                     {
-                        ui._text += "\nArmor: +" + spell.effect.armorModifyPlus; 
+                        ui._text += "\nArmor: +" + spell.effect.armorModifyPlus + " / " + spell.effect.effectDuration + " turn(s)"; 
                     }
                     else
                     {
-                        ui._text += "\nArmor: " + spell.effect.armorModifyPlus;
+                        ui._text += "\nArmor: " + spell.effect.armorModifyPlus + " / " + spell.effect.effectDuration + " turn(s)";
                     }
                 }
                 if (spell.effect.armorModifyPercent != 0)
                 {
                     if (spell.effect.armorModifyPercent > 0)
                     {
-                        ui._text += "\nArmor: +" + spell.effect.armorModifyPercent * 100 + "%"; 
+                        ui._text += "\nArmor: +" + spell.effect.armorModifyPercent * 100 + "%" + " / " + spell.effect.effectDuration + " turn(s)"; 
                     }
                     else
                     {
-                        ui._text += "\nArmor: " + spell.effect.armorModifyPercent * 100 + "%";
+                        ui._text += "\nArmor: " + spell.effect.armorModifyPercent * 100 + "%" + " / " + spell.effect.effectDuration + " turn(s)";
                     }
                 }
                 if (spell.effect.healModify != 0)
                 {
                     if (spell.effect.healModify > 0)
                     {
-                        ui._text += "\nHeal modifier: +" + spell.effect.healModify * 100 + "%"; 
+                        ui._text += "\nHeal modifier: +" + spell.effect.healModify * 100 + "%" + " / " + spell.effect.effectDuration + " turn(s)"; 
                     }
                     else
                     {
-                        ui._text += "\nHeal modifier: " + spell.effect.healModify * 100 + "%";
+                        ui._text += "\nHeal modifier: " + spell.effect.healModify * 100 + "%" + " / " + spell.effect.effectDuration + " turn(s)";
                     }
                 }
                 if (spell.effect.apModify != 0)
                 {
                     if (spell.effect.apModify > 0)
                     {
-                        ui._text += "\nAP: +" + spell.effect.apModify;
+                        ui._text += "\nAP: +" + spell.effect.apModify + " / " + spell.effect.effectDuration + " turn(s)";
                     }
                     else
                     {
-                        ui._text += "\nAP: " + spell.effect.apModify;
+                        ui._text += "\nAP: " + spell.effect.apModify + " / " + spell.effect.effectDuration + " turn(s)";
                     }
                 }
                 if (spell.effect.mpModify != 0)
                 {
                     if (spell.effect.mpModify > 0)
                     {
-                        ui._text += "\nMP: +" + spell.effect.mpModify; 
+                        ui._text += "\nMP: +" + spell.effect.mpModify + " / " + spell.effect.effectDuration + " turn(s)"; 
                     }
                     else
                     {
-                        ui._text += "\nMP: " + spell.effect.mpModify;
+                        ui._text += "\nMP: " + spell.effect.mpModify + " / " + spell.effect.effectDuration + " turn(s)";
                     }
                 }
 

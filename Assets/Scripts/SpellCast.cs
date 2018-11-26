@@ -90,6 +90,7 @@ public class SpellCast : MonoBehaviour {
         apText.text = "AP: " + cv.currentAp;
         mpText.text = "MP: " + cv.currentMp;    //  <----- ^---- Nää kannattaa ehkä siirtää jonnekki järkevämpään scriptiin kun spell castiin?
 
+        
     }
     //public bool needTarget = false; //<
     //public bool needFreeSquare = false; //<
