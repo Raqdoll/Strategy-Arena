@@ -55,7 +55,12 @@ public class SpellCast : MonoBehaviour {
         gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
         abilities = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<Abilities>();
         turnManager.TurnChange += HandleTurnChange;
-
+        if (!gridController)
+            Debug.LogWarning("Gridcontroller is null!");
+        if (!turnManager)
+            Debug.Log("Could not find turnManager component in parents!");
+        if (!abilities)
+            Debug.Log("Could not find abilities component");
     }
 
     private void OnDestroy()
@@ -161,7 +166,6 @@ public class SpellCast : MonoBehaviour {
         if (spell.spellPull != 0)
         {
             abilities.SpellPull(spell.mySpellPullType);
-            Debug.Log("spell pull");
         }
         if (spell.spellPushback != 0)
         {
@@ -213,6 +217,22 @@ public class SpellCast : MonoBehaviour {
     {
 
         playerBehaviour.currentCharacter.currentAp -= currentSpell.spellApCost;
+        if (mc.rangeTiles != null)
+        {
+            mc.ResetTileMaterials(mc.rangeTiles);
+            mc.rangeTiles = null;
+        }
+        if (mc.nullTiles != null)
+        {
+            mc.ResetTileMaterials(mc.nullTiles);
+            mc.nullTiles = null;
+        }
+        if (mc.targetedTiles != null)
+        {
+            mc.ResetTileMaterials(mc.targetedTiles);
+            mc.targetedTiles = null;
+        }
+        currentSpell = null;
         spellOpen = false;
     }
 
