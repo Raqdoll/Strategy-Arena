@@ -29,6 +29,8 @@ public class Abilities : MonoBehaviour {
         lOS = GetComponent<LineOfSight>();
         if (!gridController)
             Debug.LogWarning("Gridcontroller is null!");
+        if (!mouseController)
+            Debug.LogWarning("Mousecontroller is null!");
     }
 
    public List<Tile> AreaType(SpellAreaType mySpellAreaType)
@@ -373,11 +375,13 @@ public class Abilities : MonoBehaviour {
         {
             if (tile.CharCurrentlyOnTile && tile != caster)
             {
+                Debug.Log("founf char");
                 targetList.Add(tile);
             }
         }
         foreach (var item in targetList)
         {
+            Debug.Log("starting pull on target");
             GridController.Directions mydirection = new GridController.Directions();
             GridController.Directions helpDirection = new GridController.Directions();
             bool inLine = true;
@@ -385,44 +389,52 @@ public class Abilities : MonoBehaviour {
                 case SpellPullType.BothTowardsMouse:
                     if (item.locX == anchor.locX && item.locZ < anchor.locZ)
                     {
+                        Debug.Log("pull up");
                         mydirection = GridController.Directions.up;
                         inLine = true;
                     }
                     else if (item.locX == anchor.locX && item.locZ > anchor.locZ)
                     {
+                        Debug.Log("pull down");
                         mydirection = GridController.Directions.down;
                         inLine = true;
                     }
                     else if (item.locZ == anchor.locZ && item.locX < anchor.locX)
                     {
+                        Debug.Log("pull right");
                         mydirection = GridController.Directions.right;
                         inLine = true;
                     }
                     else if (item.locZ == anchor.locZ && item.locX > anchor.locX)
                     {
+                        Debug.Log("pull left");
                         mydirection = GridController.Directions.left;
                         inLine = true;
                     }
                     else if (item.locX < anchor.locX && item.locZ < anchor.locZ)
                     {
+                        Debug.Log("pull up right");
                         mydirection = GridController.Directions.up;
                         helpDirection = GridController.Directions.right;
                         inLine = false;
                     }
                     else if (item.locX < anchor.locX && item.locZ > anchor.locZ)
                     {
+                        Debug.Log("pull down right");
                         mydirection = GridController.Directions.down;
                         helpDirection = GridController.Directions.right;
                         inLine = false;
                     }
                     else if (item.locX > anchor.locX && item.locZ < anchor.locZ)
                     {
+                        Debug.Log("pull up left");
                         mydirection = GridController.Directions.up;
                         helpDirection = GridController.Directions.left;
                         inLine = false;
                     }
                     else if (item.locX > anchor.locX && item.locZ > anchor.locZ)
                     {
+                        Debug.Log("pull down left");
                         mydirection = GridController.Directions.down;
                         helpDirection = GridController.Directions.left;
                         inLine = false;
@@ -578,13 +590,18 @@ public class Abilities : MonoBehaviour {
             {
                 for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                 {
+                    Debug.Log("causing pull action");
                     Tile temp = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, mydirection);
                     if (temp.myType == Tile.BlockType.BaseBlock)
                     {
+                        Debug.Log("Making the pull");
                         PullPushAct(item, temp);
+                        //item.locX = temp.locX;
+                        //item.locZ = temp.locZ;
                     }
                     else
                     {
+                        Debug.Log("wall hit");
                         break;
                     }
                 }
@@ -593,15 +610,20 @@ public class Abilities : MonoBehaviour {
             {
                 for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                 {
+                    Debug.Log("causing pull action");
                     Tile temp1 = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, mydirection);
                     Tile temp2 = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, helpDirection);
                     Tile temp3 = gridController.GetTileInDirection(gridController.GetTile(temp1.locX, temp1.locZ), 1, helpDirection);
                     if (temp1.myType == Tile.BlockType.BaseBlock && temp2.myType == Tile.BlockType.BaseBlock && temp3.myType == Tile.BlockType.BaseBlock)
                     {
+                        Debug.Log("Making the pull");
                         PullPushAct(item, temp3);
+                        //item.locX = temp3.locX;
+                        //item.locZ = temp3.locZ;
                     }
                     else
                     {
+                        Debug.Log("wall hit");
                         break;
                     }
                 }
@@ -860,15 +882,25 @@ public class Abilities : MonoBehaviour {
 
     public void TeleportSwitch(Tile caster, Tile target)
     {
-        PlayerMovement playerMovement = caster.CharCurrentlyOnTile.gameObject.GetComponent<PlayerMovement>();
-        PlayerMovement targetMovement = target.CharCurrentlyOnTile.gameObject.GetComponent<PlayerMovement>();
+        PlayerMovement playerMovement = null;
+        PlayerMovement targetMovement = null;
+        if (caster.CharCurrentlyOnTile)
+        {
+            playerMovement = caster.CharCurrentlyOnTile.gameObject.GetComponent<PlayerMovement>();
+        }
+        if (target.CharCurrentlyOnTile)
+        {
+            targetMovement = target.CharCurrentlyOnTile.gameObject.GetComponent<PlayerMovement>();
+        }
+        //playerMovement = caster.CharCurrentlyOnTile.gameObject.GetComponent<PlayerMovement>();
+        //targetMovement = target.CharCurrentlyOnTile.gameObject.GetComponent<PlayerMovement>();
         if (playerMovement)
         {
             playerMovement.MoveToTile(target, PlayerMovement.MovementMethod.Teleport); 
         }  
-        if (playerMovement)
+        if (targetMovement)
         {
-            playerMovement.MoveToTile(caster, PlayerMovement.MovementMethod.Teleport);
+            targetMovement.MoveToTile(caster, PlayerMovement.MovementMethod.Teleport);
         }
     }
     public void CasterTeleport(Tile caster)
@@ -882,7 +914,6 @@ public class Abilities : MonoBehaviour {
     public void PullPushAct(Tile start, Tile end)
     {
         // move player on tile start onto tile end
-        // Jan: Lisää tämä metodi pasta carbonaran sekaan. Suosittelen edelleen miettimään apumetodia ylläolevan switchin if lausekkeille, jotta mahdolliset muokkaukset helpottuvat kummasti.
         PlayerMovement playerMovement = null;
         if (start.CharCurrentlyOnTile)
         {
