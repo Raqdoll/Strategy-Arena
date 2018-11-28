@@ -14,6 +14,7 @@ MonoBehaviour:
   effectName: Void Bubble
   effectIcon: {fileID: 21300000, guid: 1a5c3f03b7320764dab6a2030a0324a7, type: 3}
   effectDuration: 1
+  stacks: 0
   canBeSilenced: 1
   silenceTurns: 0
   immune: 0

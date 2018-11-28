@@ -5,6 +5,8 @@ using UnityEngine;
 public class AudioController : MonoBehaviour {
 
     public AudioSource mainMusicControl;
+    public AudioSource temp;
+    public AudioSource temp2;
     public AudioClip mainMusic;
 
 	void Start () {
@@ -17,18 +19,18 @@ public class AudioController : MonoBehaviour {
         }
 	}
 
-    public void PlaySpell(AudioSource audio, SpellValues spell)
+    public void PlaySpell(SpellValues spell, AudioSource audio)
     {
         audio.loop = false;
-        
+
         audio.clip = spell.spellSound;
         audio.Play();
     }
     
-    public void PlayMovementStartLoop(AudioSource audio, CharacterValues character)
+    public void PlayMovementStartLoop(CharacterValues character, AudioSource audio)
     {
         audio.loop = true;
-       
+
         audio.clip = character.walkSoundLoop;
         audio.Play();
     }
@@ -37,7 +39,7 @@ public class AudioController : MonoBehaviour {
         audio.Stop();
     }
 
-    public void PlayAttack(AudioSource audio, CharacterValues character)
+    public void PlayAttack(CharacterValues character, AudioSource audio)
     {
         audio.loop = false;
 
@@ -45,7 +47,7 @@ public class AudioController : MonoBehaviour {
         audio.Play();
     }
 
-    public void PlayDamageTaken(AudioSource audio, CharacterValues character)
+    public void PlayDamageTaken(CharacterValues character, AudioSource audio)
     {
         audio.loop = false;
 

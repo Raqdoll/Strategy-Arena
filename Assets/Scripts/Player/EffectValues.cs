@@ -26,7 +26,7 @@ public class EffectValues : ScriptableObject {
     public bool dmPercentAllies;
     public bool dmPercentEnemies;
     [Space(6)]
-    public float armorModifyPlus = 0;   //<
+    public int armorModifyPlus = 0;   //<
     public bool amPlusAllies;
     public bool amPlusEnemies;
     [Space(6)]

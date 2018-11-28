@@ -35,8 +35,8 @@ public class PlayerBehaviour : MonoBehaviour
     GridController gridController;
     TurnManager turnManager;
     Abilities abilities;
-    
 
+    public AudioController aControll;
 
     public EffectValues testing;
 
@@ -46,6 +46,8 @@ public class PlayerBehaviour : MonoBehaviour
             gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
         if (!gridController)
             Debug.LogWarning("Gridcontroller is null!");
+        if (!aControll)
+            aControll = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>();
 
         //if (!currentTile)
         //    currentTile = gridController.GetTile((int)transform.localPosition.x, (int)transform.localPosition.z);
