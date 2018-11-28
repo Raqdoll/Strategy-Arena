@@ -7,9 +7,16 @@ public class PlayerInfo : MonoBehaviour {
 
     public CharacterValues thisCharacter;
 
+
+
     /// <summary>
     /// Quick fix for refreshing movement and action points at the beginning of a turn. Does not take status effects into account and might be moved elsewhere.
     /// </summary>
+    /// 
+    void Start()
+    {
+
+    }
 
     internal void RefreshPoints()
     {

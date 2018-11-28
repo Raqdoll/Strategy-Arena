@@ -9,17 +9,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b8038d5e1a6f4b4bb84ea3b5b6084fc, type: 3}
-  m_Name: Protective Stasis
+  m_Name: GravityShot
   m_EditorClassIdentifier: 
-  mySpellName: Protective Stasis
-  spellIcon: {fileID: 21300000, guid: 625cd75d3a25e6d459c106dfc52e25ae, type: 3}
-  spellSound: {fileID: 8300000, guid: be894b0c96dcc2245ada12d46a2f832e, type: 3}
-  mySpellRangeType: 2
-  spellRangeMin: 1
-  spellRangeMax: 4
+  mySpellName: 
+  spellIcon: {fileID: 0}
+  spellSound: {fileID: 0}
+  mySpellRangeType: 0
+  spellRangeMin: 0
+  spellRangeMax: 0
   mySpellAreaType: 0
   aoeRange: 0
-  spellApCost: 4
+  spellApCost: 0
   spellDamageMin: 0
   spellDamageMax: 0
   spellHealMin: 0
@@ -27,9 +27,9 @@ MonoBehaviour:
   healsAlly: 0
   hurtsAlly: 0
   needLineOfSight: 1
-  needTarget: 1
+  needTarget: 0
   needFreeSquare: 0
-  effect: {fileID: 11400000, guid: 7bd5ae171bdb60648b93b4c4d17a20a1, type: 2}
+  effect: {fileID: 0}
   effectOnCaster: 0
   effectOnTarget: 1
   spellPushback: 0
@@ -44,11 +44,7 @@ MonoBehaviour:
   spellCooldown: 0
   spellCastPerturn: 0
   castPerTarget: 0
-  description: 'Creates a powerful shiled
-
-    which absorbs all damage
-
-    dealt to the targeted ally.'
+  description: 
   spellCooldownLeft: 0
   trueDamage: 0
   spellLaunched: 0

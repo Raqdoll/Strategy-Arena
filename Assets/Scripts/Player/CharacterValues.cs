@@ -34,4 +34,5 @@ public class CharacterValues : ScriptableObject
     public float damageChange;
     public float armorChange;
     public float healsReceived;
+    public bool heavy = false;
 }

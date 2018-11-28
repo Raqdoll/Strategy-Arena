@@ -14,7 +14,7 @@ MonoBehaviour:
   characterName: Dr. Morgan
   portrait: {fileID: 21300000, guid: 8a86ee27c53ef974c9ec9e4796c12f39, type: 3}
   maxHP: 3000
-  maxAp: 12
+  maxAp: 10
   maxMp: 6
   spell_1: {fileID: 11400000, guid: a6dc960fa0204fb49a7ecc6b278a71d1, type: 2}
   spell_2: {fileID: 11400000, guid: cc4b5ac32363cfd45a50e644d66f0f51, type: 2}
@@ -36,3 +36,4 @@ MonoBehaviour:
   damageChange: 0
   armorChange: 0
   healsReceived: 0
+  heavy: 0

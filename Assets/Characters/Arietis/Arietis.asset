@@ -36,3 +36,4 @@ MonoBehaviour:
   damageChange: 0
   armorChange: 0
   healsReceived: 0
+  heavy: 0

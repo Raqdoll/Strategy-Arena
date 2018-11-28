@@ -61,6 +61,8 @@ public class SpellCast : MonoBehaviour {
             Debug.Log("Could not find turnManager component in parents!");
         if (!abilities)
             Debug.Log("Could not find abilities component");
+        if (!sEffects)
+            sEffects = GameObject.FindGameObjectWithTag("GameController").GetComponent<StatusEffects>();
     }
 
     private void OnDestroy()
@@ -107,6 +109,8 @@ public class SpellCast : MonoBehaviour {
 
     public void CastSpell(SpellValues spell, CharacterValues caster,Tile currentMouseTile)
     {
+        //playerBehaviour.aControll.PlayAttack(caster, playerBehaviour.aControll.temp);
+        playerBehaviour.aControll.PlaySpell(spell, playerBehaviour.aControll.temp2);
 
 
         Tile casterTile = gridController.GetTile(caster.currentTile.x, caster.currentTile.z);
@@ -159,6 +163,7 @@ public class SpellCast : MonoBehaviour {
                 if (spell.effect)
                 {
                     sEffects.ApplyEffect(caster, spell.effect, target);
+                    Debug.Log("Effect annettu");
                     playerBehaviour.UpdateTabs();
                 }
 
