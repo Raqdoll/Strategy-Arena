@@ -171,29 +171,38 @@ public class MouseController : MonoBehaviour
             }
 
             // kun spell castataan
-            if (Input.GetMouseButtonDown(0) && playerBehaviour.currentCharacter.currentAp >= spellCast.currentSpell.spellApCost && spellCast.currentSpell != null)
+            if (Input.GetMouseButtonDown(0) && spellCast.currentSpell != null)
             {
-                if (targetedTiles != null)
+
+                if (abilities.CheckCastability(spellCast.currentSpell, selected) == true)
                 {
-                    spellCast.CastSpell(spellCast.currentSpell, playerBehaviour.currentCharacter, selected);
-                    foreach (var tile in rangeTiles)
+                    if (targetedTiles != null)
                     {
-                        Renderer tr = tile.GetComponent<Renderer>();
-                        tr.material = tile.GetComponent<Tile>().BaseMaterial;
+                        spellCast.CastSpell(spellCast.currentSpell, playerBehaviour.currentCharacter, selected);
+                        foreach (var tile in rangeTiles)
+                        {
+                            Renderer tr = tile.GetComponent<Renderer>();
+                            tr.material = tile.GetComponent<Tile>().BaseMaterial;
+                        }
+                        rangeTiles = null;
+                        foreach (var target in targetedTiles)
+                        {
+                            Renderer ar = target.GetComponent<Renderer>();
+                            ar.material = target.GetComponent<Tile>().BaseMaterial;
+                        }
+                        targetedTiles = null;
+                        spellCast.Aftermath();
                     }
-                    rangeTiles = null;
-                    foreach (var target in targetedTiles)
+                    else
                     {
-                        Renderer ar = target.GetComponent<Renderer>();
-                        ar.material = target.GetComponent<Tile>().BaseMaterial;
-                    }
-                    targetedTiles = null;
-                    spellCast.Aftermath();
+                        spellCast.SpellCancel();
+                    } 
                 }
                 else
                 {
                     spellCast.SpellCancel();
                 }
+
             }
 
             // spell cansellataan

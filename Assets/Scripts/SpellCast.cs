@@ -123,7 +123,6 @@ public class SpellCast : MonoBehaviour {
 
             if (target)
             {
-                Debug.Log("annetaan vAhinkoa");
                 int damageStuff = 0;
                 int healingIsFun = 0;
 
@@ -132,12 +131,10 @@ public class SpellCast : MonoBehaviour {
                     if (target.team == caster.team)
                     {
                         healingIsFun = TrueHealCalculator(spell.spellHealMax, spell.spellHealMin, target.healsReceived);
-                        Debug.Log("annetaan healia");
                     }
                     else
                     {
                         damageStuff = TrueDamageCalculator(spell.spellDamageMax, spell.spellDamageMin, caster.damageChange, target.armorChange, caster.damagePlus, target.armorPlus);
-                        Debug.Log("vahinko vihu");
                     }
                 }
                 else if (spell.hurtsAlly == false)
@@ -145,13 +142,11 @@ public class SpellCast : MonoBehaviour {
                     if (target.team != caster.team)
                     {
                         damageStuff = TrueDamageCalculator(spell.spellDamageMax, spell.spellDamageMin, caster.damageChange, target.armorChange, caster.damagePlus, target.armorPlus);
-                        Debug.Log("vahinko vihu");
                     }
                 }
                 else
                 {
                     damageStuff = TrueDamageCalculator(spell.spellDamageMax, spell.spellDamageMin, caster.damageChange, target.armorChange, caster.damagePlus, target.armorPlus);
-                    Debug.Log("vahinko vihu");
                 }
                 GetHit(target, damageStuff);
                 GetHealed(target, healingIsFun);
@@ -171,29 +166,24 @@ public class SpellCast : MonoBehaviour {
         if (spell.spellPushback != 0)
         {
             abilities.SpellPush(spell.mySpellPushType);
-            Debug.Log("spell push");
         }
 
         if (spell.moveCloserToTarget != 0)
         {
             abilities.WalkTowardsTarget();
-            Debug.Log("moving towards");
         }
         if (spell.moveAwayFromTarget != 0)
         {
             abilities.MoveAwayFromTarget();
-            Debug.Log("moving away");
         }
 
         if (spell.teleportToTarget == true)
         {
             abilities.CasterTeleport(casterTile);
-            Debug.Log("telepoting to target");
         }
         if (spell.chagePlaceWithTarget == true)
         {
             abilities.TeleportSwitch(casterTile, targetTile);
-            Debug.Log("switching places");
         }
 
     }

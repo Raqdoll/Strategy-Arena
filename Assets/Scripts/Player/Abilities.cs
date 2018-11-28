@@ -610,20 +610,17 @@ public class Abilities : MonoBehaviour {
             {
                 for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                 {
-                    Debug.Log("causing pull action");
                     Tile temp1 = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, mydirection);
                     Tile temp2 = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, helpDirection);
                     Tile temp3 = gridController.GetTileInDirection(gridController.GetTile(temp1.locX, temp1.locZ), 1, helpDirection);
                     if (temp1.myType == Tile.BlockType.BaseBlock && temp2.myType == Tile.BlockType.BaseBlock && temp3.myType == Tile.BlockType.BaseBlock)
                     {
-                        Debug.Log("Making the pull");
                         PullPushAct(item, temp3);
                         //item.locX = temp3.locX;
                         //item.locZ = temp3.locZ;
                     }
                     else
                     {
-                        Debug.Log("wall hit");
                         break;
                     }
                 }
@@ -892,20 +889,19 @@ public class Abilities : MonoBehaviour {
         {
             targetMovement = target.CharCurrentlyOnTile.gameObject.GetComponent<PlayerMovement>();
         }
-        //playerMovement = caster.CharCurrentlyOnTile.gameObject.GetComponent<PlayerMovement>();
-        //targetMovement = target.CharCurrentlyOnTile.gameObject.GetComponent<PlayerMovement>();
-        if (playerMovement)
+        if (playerMovement && targetMovement)
         {
             playerMovement.MoveToTile(target, PlayerMovement.MovementMethod.Teleport); 
         }  
-        if (targetMovement)
+        if (targetMovement && playerMovement)
         {
             targetMovement.MoveToTile(caster, PlayerMovement.MovementMethod.Teleport);
         }
     }
     public void CasterTeleport(Tile caster)
     {
-        PlayerMovement playerTeleport = caster.CharCurrentlyOnTile.gameObject.GetComponent<PlayerMovement>();
+        PlayerMovement playerTeleport = null;
+        playerTeleport = caster.CharCurrentlyOnTile.gameObject.GetComponent<PlayerMovement>();
         if (playerTeleport && mouseController.selected.CharCurrentlyOnTile == false)
         {
             playerTeleport.MoveToTile(mouseController.selected, PlayerMovement.MovementMethod.Teleport);
@@ -924,6 +920,27 @@ public class Abilities : MonoBehaviour {
             //playerMovement.MoveToTile(end, PlayerMovement.MovementMethod.push);    //Tämä tulee lopulliseen versioon, ei vielä implementoitu
             playerMovement.MoveToTile(end, PlayerMovement.MovementMethod.Teleport);  //Väliaikainen liikkuminen
         }
+    }
+
+    public bool CheckCastability(SpellValues spell, Tile target)
+    {
+        bool result = true;
+        if (playerBehaviour.currentCharacter.currentAp < spellCast.currentSpell.spellApCost)
+        {
+            result = false;
+        }
+        if (spell.needTarget == true && target.CharCurrentlyOnTile == false)
+        {
+            result = false;
+        }
+        if(spell.needFreeSquare == true && target.CharCurrentlyOnTile == true)
+        {
+            result = false;
+        }
+        // put cooldown check here
+        // put cast per target here
+
+        return result;
     }
 
     public void WalkTowardsTarget()
