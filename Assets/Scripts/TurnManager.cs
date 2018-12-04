@@ -11,6 +11,7 @@ public class TurnManager : MonoBehaviour {
     public event PlayerEvent TurnChange;
     public Button nextTurnButton;
     public TeamManager teamManager;
+    public SpellCast spellCast;
 
 
     public void AnnounceTurnChange(GameObject newPlayerGO)
@@ -35,12 +36,14 @@ public class TurnManager : MonoBehaviour {
         next.onClick.AddListener(NextTurn);
         if (!teamManager)
             teamManager = gameObject.GetComponent<TeamManager>();
+        spellCast= GameObject.FindGameObjectWithTag("PlayerController").GetComponent<SpellCast>();
     }
 
     public void NextTurn()
     {
         if (teamManager)
         {
+            spellCast.SpellCancel();
             PlayerInfo temp = teamManager.ChangeTurnUntilValidPlayer();
             temp.RefreshPoints();
             AnnounceTurnChange(temp);
