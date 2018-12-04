@@ -26,7 +26,7 @@ MonoBehaviour:
   spellHealMax: 0
   healsAlly: 0
   hurtsAlly: 0
-  needLineOfSight: 1
+  needLineOfSight: 0
   needTarget: 0
   needFreeSquare: 0
   effect: {fileID: 0}
