@@ -31,7 +31,7 @@ public class MouseController : MonoBehaviour
     Abilities abilities;
     public PlayerMovement currentMovement;
     private bool rangeTilesPainted;
-    private bool movementEnabled;  //Temporary, will be removed!!!
+    private bool movementEnabled;
 
     void Start()
     {
@@ -202,8 +202,8 @@ public class MouseController : MonoBehaviour
                 {
                     spellCast.SpellCancel();
                 }
-
             }
+
 
             // spell cansellataan
             if (Input.GetMouseButtonDown(1))
@@ -220,10 +220,14 @@ public class MouseController : MonoBehaviour
                 //}
                 spellCast.SpellCancel();
             }
+            movementEnabled = false;
+        }
+        else
+        {
+            movementEnabled = true;
         }
 
-        if (spellCast.spellOpen == false)
-        //if (movementEnabled)
+        if (movementEnabled)
         {
             if (!currentMovement)
             {

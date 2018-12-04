@@ -8,9 +8,8 @@ public class TeamManager : MonoBehaviour {
     public List<PlayerInfo> teamB;
     public bool firstTeamIsActive;
     public int playerPositionInTeam;
-    //int charactersPerTeam = 5;  //Amount in the final version of the game
-    int charactersPerTeam = 1;
-    //public int activePlayers;   //needed?
+    [SerializeField]
+    private int charactersPerTeam = 5;
     public PlayerInfo activePlayer; //Changed playerbehaviour to PlayerInfo
     public StatusEffects sEffects;
 
@@ -23,6 +22,14 @@ public class TeamManager : MonoBehaviour {
         activePlayer = teamA[0];
         if (!sEffects)
             sEffects = gameObject.GetComponent<StatusEffects>();
+        if (teamA == null || teamB == null)
+        {
+            Debug.LogWarning("One of the teams is null!");
+        }
+        else if (charactersPerTeam != teamA.Count || charactersPerTeam != teamB.Count)
+        {
+            Debug.LogWarning("Check team sizes!");
+        }
     }
 	
 
@@ -51,6 +58,7 @@ public class TeamManager : MonoBehaviour {
 
     private PlayerInfo ChangeTurnUntilValidPlayer(PlayerInfo playerEndingTurn)
     {
+        playerEndingTurn.RefreshPoints();
         if (!IsOneTeamDead())
         {
             activePlayer = playerEndingTurn;

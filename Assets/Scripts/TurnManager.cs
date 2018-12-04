@@ -45,7 +45,6 @@ public class TurnManager : MonoBehaviour {
         {
             spellCast.SpellCancel();
             PlayerInfo temp = teamManager.ChangeTurnUntilValidPlayer();
-            temp.RefreshPoints();
             AnnounceTurnChange(temp);
         }
         else

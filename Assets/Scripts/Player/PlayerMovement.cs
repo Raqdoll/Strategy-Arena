@@ -89,11 +89,11 @@ public class PlayerMovement : MonoBehaviour {
         if (!playerInfo)
             Debug.Log("Could not find playerinfo component");
 
-        PositionContainer debuggerPositionContainer = new PositionContainer(7, 7);  //Remove this when starting positions are set properly!
-        Tile tempTile = gridController.GetTile(debuggerPositionContainer);
+        //PositionContainer debuggerPositionContainer = new PositionContainer(7, 7);  //Remove this when starting positions are set properly!
+        //Tile tempTile = gridController.GetTile(debuggerPositionContainer);
 
-        if (tempTile != null)
-            MoveToTile(tempTile, MovementMethod.Teleport);
+        //if (tempTile != null)
+        //    MoveToTile(tempTile, MovementMethod.Teleport);
         pathTiles = new List<PathTile>();
     }
 
@@ -224,7 +224,7 @@ public class PlayerMovement : MonoBehaviour {
         List<PathTile> processedTiles = new List<PathTile>();
         unprocessedTiles = ProcessPathTile(startPathTile);
 
-        while (unprocessedTiles.Count > 0)
+        while (unprocessedTiles != null && unprocessedTiles.Count > 0)
         {
             PathTile tempTile = unprocessedTiles[0];
             List<PathTile> tempList = null;
