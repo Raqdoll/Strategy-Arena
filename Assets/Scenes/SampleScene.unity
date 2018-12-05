@@ -3198,7 +3198,7 @@ GameObject:
   - component: {fileID: 105275986}
   - component: {fileID: 105275985}
   m_Layer: 0
-  m_Name: ruma ukko 1 "Sakari"
+  m_Name: ruma ukko "Optic"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6048,7 +6048,7 @@ GameObject:
   - component: {fileID: 190431489}
   - component: {fileID: 190431488}
   m_Layer: 0
-  m_Name: ruma akka 2 "Laura"
+  m_Name: ruma ukko "Mossfist"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6769,7 +6769,7 @@ GameObject:
   - component: {fileID: 232487480}
   - component: {fileID: 232487479}
   m_Layer: 0
-  m_Name: ruma ukko 2 "Asser"
+  m_Name: ruma ukko "DrMorgan"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10810,7 +10810,7 @@ GameObject:
   - component: {fileID: 411584044}
   - component: {fileID: 411584043}
   m_Layer: 0
-  m_Name: ruma ukko 1 "Miikka"
+  m_Name: ruma ukko "Arietis"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23227,7 +23227,7 @@ GameObject:
   - component: {fileID: 982212935}
   - component: {fileID: 982212934}
   m_Layer: 0
-  m_Name: ruma ukko 2 "Ilari"
+  m_Name: ruma ukko "Arietis"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23432,7 +23432,7 @@ GameObject:
   - component: {fileID: 982654705}
   - component: {fileID: 982654704}
   m_Layer: 0
-  m_Name: ruma ukko 1 "Jan"
+  m_Name: ruma ukko "Mossfist"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38976,7 +38976,7 @@ GameObject:
   - component: {fileID: 1768303069}
   - component: {fileID: 1768303068}
   m_Layer: 0
-  m_Name: ruma ukko 1 "Winston"
+  m_Name: ruma ukko "Pepper"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41537,7 +41537,7 @@ GameObject:
   - component: {fileID: 1925104486}
   - component: {fileID: 1925104485}
   m_Layer: 0
-  m_Name: ruma ukko 1 "Antti"
+  m_Name: ruma ukko "DrMorgan"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41958,7 +41958,7 @@ GameObject:
   - component: {fileID: 1942241118}
   - component: {fileID: 1942241117}
   m_Layer: 0
-  m_Name: ruma ukko 2 "Panu"
+  m_Name: ruma ukko "Pepper"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43702,7 +43702,7 @@ GameObject:
   - component: {fileID: 2029070008}
   - component: {fileID: 2029070007}
   m_Layer: 0
-  m_Name: ruma ukko 2 "Jesse"
+  m_Name: ruma ukko "Optic"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
