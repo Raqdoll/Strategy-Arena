@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f98fb76e3ad09448970e12735799ad, type: 3}
   m_Name: AcidSprayEffect
   m_EditorClassIdentifier: 
-  effectName: Acid Spray
+  effectName: ACID SPRAY
   effectIcon: {fileID: 21300000, guid: 451fbf8d19ff54e40af152295a312b8b, type: 3}
   effectDuration: 1
   stacks: 1

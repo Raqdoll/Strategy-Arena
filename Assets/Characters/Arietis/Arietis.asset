@@ -31,8 +31,8 @@ MonoBehaviour:
   dead: 0
   team: 0
   currentHP: 3000
-  currentAp: 12
-  currentMp: 6
+  currentAp: 9
+  currentMp: 0
   damageChange: 0
   armorChange: 0
   healsReceived: 0

@@ -11,9 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8038d5e1a6f4b4bb84ea3b5b6084fc, type: 3}
   m_Name: GravityShot
   m_EditorClassIdentifier: 
-  mySpellName: 
-  spellIcon: {fileID: 0}
-  spellSound: {fileID: 0}
+  mySpellName: GRAVITY SHOT
+  spellIcon: {fileID: 21300000, guid: 6cfe65a1712975943b37df7f4d02ff61, type: 3}
+  spellSound: {fileID: 8300000, guid: b1dd3d35b203bcf418b1598fa683318e, type: 3}
   mySpellRangeType: 0
   spellRangeMin: 0
   spellRangeMax: 0
@@ -29,7 +29,7 @@ MonoBehaviour:
   needLineOfSight: 1
   needTarget: 0
   needFreeSquare: 0
-  effect: {fileID: 0}
+  effect: {fileID: 11400000, guid: ecc796db976f1d543961b5d40a76b171, type: 2}
   effectOnCaster: 0
   effectOnTarget: 1
   spellPushback: 0
