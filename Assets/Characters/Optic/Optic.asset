@@ -11,20 +11,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7801e28493a206a4c829f8153eaec05e, type: 3}
   m_Name: Optic
   m_EditorClassIdentifier: 
-  characterName: 
-  portrait: {fileID: 0}
-  maxHP: 0
-  maxAp: 0
-  maxMp: 0
-  spell_1: {fileID: 0}
-  spell_2: {fileID: 0}
-  spell_3: {fileID: 0}
-  spell_4: {fileID: 0}
-  spell_5: {fileID: 0}
-  spell_6: {fileID: 0}
-  walkSoundLoop: {fileID: 0}
-  attackSound: {fileID: 0}
-  takeDamageSound: {fileID: 0}
+  characterName: Optic
+  portrait: {fileID: 21300000, guid: 8a86ee27c53ef974c9ec9e4796c12f39, type: 3}
+  maxHP: 3000
+  maxAp: 12
+  maxMp: 6
+  spell_1: {fileID: 11400000, guid: 1ee71a3098ab36f43a5d60769b973d99, type: 2}
+  spell_2: {fileID: 11400000, guid: ac5169bc0439b28499d93b1ce3963478, type: 2}
+  spell_3: {fileID: 11400000, guid: 3a4f4dd375ef87640be08d502c1a53e9, type: 2}
+  spell_4: {fileID: 11400000, guid: 9d88821981ee54b45a1ea3f7c7afaed2, type: 2}
+  spell_5: {fileID: 11400000, guid: a10c3b834d28b514eab148bbbd072e17, type: 2}
+  spell_6: {fileID: 11400000, guid: b16c97f1e18181d46beca11b65ebbc36, type: 2}
+  walkSoundLoop: {fileID: 8300000, guid: 5d60d79e96c8b3f468b01e52038a5639, type: 3}
+  attackSound: {fileID: 8300000, guid: d389c9660ecc00044bbd37e4a04a4ea5, type: 3}
+  takeDamageSound: {fileID: 8300000, guid: 2b81e9036760c8b40bf3cec2dde0dbc4, type: 3}
   damagePlus: 0
   armorPlus: 0
   moving: 0
@@ -36,3 +36,4 @@ MonoBehaviour:
   damageChange: 0
   armorChange: 0
   healsReceived: 0
+  heavy: 0

@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f98fb76e3ad09448970e12735799ad, type: 3}
   m_Name: ProtectiveStasisEffect
   m_EditorClassIdentifier: 
-  effectName: Protective Stasis
+  effectName: PROTECTIVE STASIS
   effectIcon: {fileID: 21300000, guid: 625cd75d3a25e6d459c106dfc52e25ae, type: 3}
   effectDuration: 1
   stacks: 1

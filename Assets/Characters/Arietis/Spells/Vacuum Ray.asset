@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8038d5e1a6f4b4bb84ea3b5b6084fc, type: 3}
   m_Name: Vacuum Ray
   m_EditorClassIdentifier: 
-  mySpellName: Vacuum Ray
+  mySpellName: VACUUM RAY
   spellIcon: {fileID: 21300000, guid: b1f0217a84e449941b07df754e4b5010, type: 3}
   spellSound: {fileID: 8300000, guid: 713855f6637a2b744affb43f0a679519, type: 3}
   mySpellRangeType: 3

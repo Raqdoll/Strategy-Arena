@@ -11,9 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8038d5e1a6f4b4bb84ea3b5b6084fc, type: 3}
   m_Name: GrandShot
   m_EditorClassIdentifier: 
-  mySpellName: 
-  spellIcon: {fileID: 0}
-  spellSound: {fileID: 0}
+  mySpellName: GRAND SHOT
+  spellIcon: {fileID: 21300000, guid: 864167978a1bef941861b6a34f077b3d, type: 3}
+  spellSound: {fileID: 8300000, guid: b7bc3b6de4ab309479062d06be81982c, type: 3}
   mySpellRangeType: 0
   spellRangeMin: 0
   spellRangeMax: 0

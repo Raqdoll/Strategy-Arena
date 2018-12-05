@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8038d5e1a6f4b4bb84ea3b5b6084fc, type: 3}
   m_Name: AcidSpray
   m_EditorClassIdentifier: 
-  mySpellName: Acid Spray
+  mySpellName: ACID SPRAY
   spellIcon: {fileID: 21300000, guid: 451fbf8d19ff54e40af152295a312b8b, type: 3}
   spellSound: {fileID: 8300000, guid: b536a06608b6fba4ab0bdaba98d77da8, type: 3}
   mySpellRangeType: 0

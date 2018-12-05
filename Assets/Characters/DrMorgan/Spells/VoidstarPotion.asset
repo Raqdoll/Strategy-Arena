@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8038d5e1a6f4b4bb84ea3b5b6084fc, type: 3}
   m_Name: VoidstarPotion
   m_EditorClassIdentifier: 
-  mySpellName: Voidstar Potion
+  mySpellName: VOIDSTAR POTION
   spellIcon: {fileID: 21300000, guid: aa8e6fd5ce1d9d04ba103865946d7a6e, type: 3}
   spellSound: {fileID: 8300000, guid: 274af4085c1f3114a85f25e0539aed94, type: 3}
   mySpellRangeType: 0

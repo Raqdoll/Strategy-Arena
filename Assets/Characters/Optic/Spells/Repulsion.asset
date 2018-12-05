@@ -11,9 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8038d5e1a6f4b4bb84ea3b5b6084fc, type: 3}
   m_Name: Repulsion
   m_EditorClassIdentifier: 
-  mySpellName: 
-  spellIcon: {fileID: 0}
-  spellSound: {fileID: 0}
+  mySpellName: REPULSION
+  spellIcon: {fileID: 21300000, guid: 6ed4799f366d33f488d6ae73b1b78dc1, type: 3}
+  spellSound: {fileID: 8300000, guid: 608b6a26680a0144984326b7e0468b5b, type: 3}
   mySpellRangeType: 0
   spellRangeMin: 0
   spellRangeMax: 0
