@@ -14,18 +14,19 @@ MonoBehaviour:
   mySpellName: SHARP SHOT
   spellIcon: {fileID: 21300000, guid: a182b084a4a5b3b4b8b2d660b721bb02, type: 3}
   spellSound: {fileID: 8300000, guid: 3dab8891b9314d74496cb49e6be94f68, type: 3}
-  mySpellRangeType: 0
-  spellRangeMin: 0
-  spellRangeMax: 0
+  mySpellRangeType: 2
+  spellRangeMin: 3
+  spellRangeMax: 15
   mySpellAreaType: 0
   aoeRange: 0
-  spellApCost: 0
-  spellDamageMin: 0
-  spellDamageMax: 0
+  spellApCost: 3
+  damageStealsHp: 0
+  spellDamageMin: 280
+  spellDamageMax: 300
   spellHealMin: 0
   spellHealMax: 0
   healsAlly: 0
-  hurtsAlly: 0
+  hurtsAlly: 1
   needLineOfSight: 1
   needTarget: 0
   needFreeSquare: 0
@@ -43,8 +44,8 @@ MonoBehaviour:
   spellInitialCooldown: 0
   spellCooldown: 0
   spellCastPerturn: 0
-  castPerTarget: 0
-  description: 
+  castPerTarget: 2
+  description: Well aimed rifle shot
   spellCooldownLeft: 0
   trueDamage: 0
   spellLaunched: 0

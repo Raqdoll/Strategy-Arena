@@ -14,18 +14,19 @@ MonoBehaviour:
   mySpellName: GRAND SHOT
   spellIcon: {fileID: 21300000, guid: 864167978a1bef941861b6a34f077b3d, type: 3}
   spellSound: {fileID: 8300000, guid: b7bc3b6de4ab309479062d06be81982c, type: 3}
-  mySpellRangeType: 0
-  spellRangeMin: 0
-  spellRangeMax: 0
+  mySpellRangeType: 1
+  spellRangeMin: 5
+  spellRangeMax: 8
   mySpellAreaType: 0
   aoeRange: 0
-  spellApCost: 0
-  spellDamageMin: 0
-  spellDamageMax: 0
+  spellApCost: 5
+  damageStealsHp: 0
+  spellDamageMin: 900
+  spellDamageMax: 960
   spellHealMin: 0
   spellHealMax: 0
   healsAlly: 0
-  hurtsAlly: 0
+  hurtsAlly: 1
   needLineOfSight: 1
   needTarget: 0
   needFreeSquare: 0
@@ -41,10 +42,10 @@ MonoBehaviour:
   moveCloserToTarget: 0
   moveAwayFromTarget: 0
   spellInitialCooldown: 0
-  spellCooldown: 0
+  spellCooldown: 3
   spellCastPerturn: 0
   castPerTarget: 0
-  description: 
+  description: Hard to hit but VERY powerfull shot
   spellCooldownLeft: 0
   trueDamage: 0
   spellLaunched: 0
