@@ -33,7 +33,7 @@ public class MouseController : MonoBehaviour
     public PlayerMovement currentMovement;
     private bool rangeTilesPainted;
     private bool movementEnabled;
-    private bool stillMoving;
+    public bool stillMoving;
 
     void Start()
     {
@@ -174,7 +174,7 @@ public class MouseController : MonoBehaviour
             }
 
             // kun spell castataan
-            if (Input.GetMouseButtonDown(0) && spellCast.currentSpell != null)
+            if (Input.GetMouseButtonDown(0) && !stillMoving && spellCast.currentSpell != null)
             {
 
                 if (abilities.CheckCastability(spellCast.currentSpell, selected) == true)
@@ -267,6 +267,7 @@ public class MouseController : MonoBehaviour
             }
 
             if (Input.GetMouseButtonDown(0)
+                    && !stillMoving
                     && selected != currentMovement.CurrentTile 
                     && movementRangeTiles.Contains(selected))
             {
@@ -310,6 +311,7 @@ public class MouseController : MonoBehaviour
     {
         currentMovement = player.gameObject.GetComponent<PlayerMovement>();
         movementEnabled = true;
+        stillMoving = false;
         rangeTilesPainted = false;
     }
 

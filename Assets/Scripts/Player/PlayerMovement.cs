@@ -239,32 +239,40 @@ public class PlayerMovement : MonoBehaviour {
     {
         foreach(var tile in route)
         {
-            Transform end = tile._nextTile._tile.transform;
-            float startTime = Time.time;
-
-            if (tile._nextTile == null)
+            mouseController.stillMoving = true;
+            //Are we there yet?
+            if (tile._nextTile != null)
             {
-                while (Vector3.Distance(transform.position, end.position) > 0.05f)
-                {
-                    transform.position = Vector3.Lerp(transform.position, end.position, 2 * Time.deltaTime);
 
-                    yield return null;
-                }
-            }
-            else
-            {
-                Transform start = transform;
-                float journeyLength = Vector3.Distance(start.position, end.position);
-                while (Vector3.Distance(transform.position, end.position) > 0.05f)
-                {
-                    float distCovered = (Time.time - startTime) * movementSpeed;
-                    float fracJourney = distCovered / journeyLength;
-                    transform.position = Vector3.Lerp(start.position, end.position, fracJourney);
-                    yield return null;
-                }
+                Transform end = tile._nextTile._tile.transform;
+                float startTime = Time.time;
 
+                //Second to last tile = last trip -> slow down!
+                if (tile._nextTile._nextTile == null)
+                {
+                    while (Vector3.Distance(transform.position, end.position) > 0.05f)
+                    {
+                        transform.position = Vector3.Lerp(transform.position, end.position, movementSpeed * Time.deltaTime);    //Slowing down
+
+                        yield return null;
+                    }
+                }
+                else
+                {
+                    Transform start = transform;
+                    float journeyLength = Vector3.Distance(start.position, end.position);
+                    while (Vector3.Distance(transform.position, end.position) > 0.05f)
+                    {
+                        float distCovered = (Time.time - startTime) * movementSpeed;
+                        float fracJourney = distCovered / journeyLength;
+                        transform.position = Vector3.Lerp(start.position, end.position, fracJourney);
+                        yield return null;
+                    }
+
+                } 
             }
         }
+        mouseController.stillMoving = false;
 
     }
 
