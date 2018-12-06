@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour {
     MouseController mouseController;
     Tile _tile;
     public List<PathTile> pathTiles;
+    public float movementSpeed;
+    public bool unlimitedMovementPoints;
 
     public Tile CurrentTile
     {
@@ -38,6 +40,7 @@ public class PlayerMovement : MonoBehaviour {
         set
         {
             _tile = value;
+            playerInfo.thisCharacter.currentTile = new PositionContainer(value.locX, value.locZ);
             AnnounceTileChange(value);
             value.CharCurrentlyOnTile = playerInfo;
         }
@@ -55,6 +58,7 @@ public class PlayerMovement : MonoBehaviour {
         public int? _distanceToTarget;
         public int _movementPointsLeft;
         public PathTile _previousTile;
+        public PathTile _nextTile;
 
         public PathTile(Tile currentTile, Tile destination, int movementPointsLeft, PathTile previousTile)
         {
@@ -67,6 +71,7 @@ public class PlayerMovement : MonoBehaviour {
                 _distanceToTarget = currentTile.GetCardinalDistance(destination);
             _movementPointsLeft = movementPointsLeft;
             _previousTile = previousTile;
+            _nextTile = null;
         }
 
     }
@@ -88,13 +93,12 @@ public class PlayerMovement : MonoBehaviour {
             playerInfo = gameObject.GetComponent<PlayerInfo>();
         if (!playerInfo)
             Debug.Log("Could not find playerinfo component");
-
-        //PositionContainer debuggerPositionContainer = new PositionContainer(7, 7);  //Remove this when starting positions are set properly!
-        //Tile tempTile = gridController.GetTile(debuggerPositionContainer);
-
-        //if (tempTile != null)
-        //    MoveToTile(tempTile, MovementMethod.Teleport);
         pathTiles = new List<PathTile>();
+        Invoke("SetStartingTile", 1f);
+        if (movementSpeed == 0)
+        {
+            movementSpeed = 5;
+        }
     }
 
     public List<Tile> TilesInRange()
@@ -164,26 +168,35 @@ public class PlayerMovement : MonoBehaviour {
 
     public static List<Tile> CalculateRouteBack(PathTile destinationTile)
     {
-        List<PathTile> route = new List<PathTile>();
-        route.Add(destinationTile);
-        PathTile tempTile = destinationTile;
-        while (tempTile != null)
-        {
-            route.Add(tempTile);
-            tempTile = tempTile._previousTile;
-        }
-        List<PathTile> orderedRoute = route.OrderByDescending(x => x._movementPointsLeft).ToList();
+        List<PathTile> orderedRoute = LinkListAndOrder(destinationTile);
         List<Tile> wishIHadMeatballs = new List<Tile>();
         foreach (var pathTile in orderedRoute)
         {
             wishIHadMeatballs.Add(pathTile._tile);
         }
-
         return wishIHadMeatballs;
     }
 
-    public void MoveToTile(Tile destinationTile, MovementMethod method)
+    static List<PathTile> LinkListAndOrder(PathTile destinationTile)
     {
+        List<PathTile> route = new List<PathTile>();
+        route.Add(destinationTile);
+        PathTile tempTile = destinationTile;
+        PathTile nextTile = null;
+        while (tempTile != null)
+        {
+            route.Add(tempTile);
+            tempTile._nextTile = nextTile;
+            nextTile = tempTile;
+            tempTile = tempTile._previousTile;
+        }
+        List<PathTile> orderedRoute = route.OrderByDescending(x => x._movementPointsLeft).ToList();
+        return orderedRoute;
+    }
+
+    public bool MoveToTile(Tile destinationTile, MovementMethod method, PathTile destinationPathTile = null)
+    {
+
         switch (method)
         {
             case MovementMethod.NotSpecified:
@@ -195,6 +208,15 @@ public class PlayerMovement : MonoBehaviour {
                 break;
 
             case MovementMethod.Walk:
+                if (destinationTile.myType == Tile.BlockType.BlockyBlock || destinationTile.CharCurrentlyOnTile != null)
+                {
+                    return false;
+                }
+                if (destinationPathTile != null && destinationPathTile._tile == destinationTile)
+                {
+                    List<PathTile> route = LinkListAndOrder(destinationPathTile);
+                    StartCoroutine("Walk", route);
+                }
 
                 break;
 
@@ -204,13 +226,48 @@ public class PlayerMovement : MonoBehaviour {
 
         }
         CurrentTile = destinationTile;
+        return true;
     }
 
     void Teleport(Tile destinationTile)
     {
         transform.localPosition = destinationTile.transform.localPosition;
-        playerController.currentCharacter.currentTile = new PositionContainer(destinationTile.transform.localPosition);
+        CurrentTile = destinationTile;
     }
+
+    IEnumerator Walk(List<PathTile> route)
+    {
+        foreach(var tile in route)
+        {
+            Transform end = tile._nextTile._tile.transform;
+            float startTime = Time.time;
+
+            if (tile._nextTile == null)
+            {
+                while (Vector3.Distance(transform.position, end.position) > 0.05f)
+                {
+                    transform.position = Vector3.Lerp(transform.position, end.position, 2 * Time.deltaTime);
+
+                    yield return null;
+                }
+            }
+            else
+            {
+                Transform start = transform;
+                float journeyLength = Vector3.Distance(start.position, end.position);
+                while (Vector3.Distance(transform.position, end.position) > 0.05f)
+                {
+                    float distCovered = (Time.time - startTime) * movementSpeed;
+                    float fracJourney = distCovered / journeyLength;
+                    transform.position = Vector3.Lerp(start.position, end.position, fracJourney);
+                    yield return null;
+                }
+
+            }
+        }
+
+    }
+
 
     public void MyTurn()
     {
@@ -238,13 +295,6 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         return processedTiles;
-
-        //List<Tile> returnables = new List<Tile>();
-        //foreach (var pathTile in processedTiles)
-        //{
-        //    returnables.Add(pathTile._tile);
-        //}
-        //return returnables;
     }
 
     /// <summary>
@@ -330,6 +380,12 @@ public class PlayerMovement : MonoBehaviour {
             }
         }
         return tiles;
+    }
+
+    void SetStartingTile()
+    {
+        //CurrentTile = gridController.GetTile(playerInfo.thisCharacter.currentTile);       //Käytetään tätä sitten, kun charactervalueseilla on järkevät aloitustiedot
+        CurrentTile = gridController.GetTile((int)transform.position.x, (int)transform.position.z);   //Väliaikainen homma
     }
 
 

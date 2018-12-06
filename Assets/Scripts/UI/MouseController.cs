@@ -7,6 +7,7 @@ public class MouseController : MonoBehaviour
 {
 
     public Tile selected; // <- This is hover tile
+    PlayerMovement.PathTile huijaus;
     List<Tile> tileList;
     public GameObject hitObject;
     SpellCast spellCast;
@@ -32,6 +33,7 @@ public class MouseController : MonoBehaviour
     public PlayerMovement currentMovement;
     private bool rangeTilesPainted;
     private bool movementEnabled;
+    private bool stillMoving;
 
     void Start()
     {
@@ -52,6 +54,7 @@ public class MouseController : MonoBehaviour
         movementRangeTiles = new List<Tile>();
         SubscribtionOn();
         movementEnabled = true;
+        stillMoving = false;
     }
 
     private void OnDestroy()
@@ -255,6 +258,11 @@ public class MouseController : MonoBehaviour
                     ChangeTileMaterials(tilesInPath, pathMaterial);
                     Renderer sr = selected.GetComponent<Renderer>();
                     sr.material = pathSelectedMaterial;
+                    huijaus = tempTest;
+                }
+                else
+                {
+                    huijaus = null;
                 }
             }
 
@@ -262,8 +270,13 @@ public class MouseController : MonoBehaviour
                     && selected != currentMovement.CurrentTile 
                     && movementRangeTiles.Contains(selected))
             {
-                currentMovement.MoveToTile(selected, PlayerMovement.MovementMethod.Teleport);
-                currentMovement.playerInfo.thisCharacter.currentMp -= (tilesInPath.Count() -2);
+                if (currentMovement.MoveToTile(selected, PlayerMovement.MovementMethod.Walk, huijaus))
+                {
+                    if (!currentMovement.unlimitedMovementPoints)
+                    {
+                        currentMovement.playerInfo.thisCharacter.currentMp -= (tilesInPath.Count() - 2);
+                    }
+                }
 
                 ResetTileMaterials(tilesToBeReset);
                 tilesToBeReset.Clear();
