@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7801e28493a206a4c829f8153eaec05e, type: 3}
+  m_Name: Mossfist2
+  m_EditorClassIdentifier: 
+  characterName: Mossfist
+  portrait: {fileID: 0}
+  maxHP: 4500
+  maxAp: 12
+  maxMp: 6
+  spell_1: {fileID: 11400000, guid: be10b7d4ebeeca54684bad9b2a0bb903, type: 2}
+  spell_2: {fileID: 11400000, guid: c2d3c96bfe8aa414096ab30bdf0e494e, type: 2}
+  spell_3: {fileID: 11400000, guid: 79451c82cd01a004ea2cb67f7127c93d, type: 2}
+  spell_4: {fileID: 11400000, guid: 160b257aeafe61e49b093b91720a85dc, type: 2}
+  spell_5: {fileID: 11400000, guid: ea6dd44b87c43dc4a9c1034a5573aca1, type: 2}
+  spell_6: {fileID: 11400000, guid: 6256fcbba10297b48a5f1d012270ff03, type: 2}
+  walkSoundLoop: {fileID: 0}
+  attackSound: {fileID: 0}
+  takeDamageSound: {fileID: 0}
+  damagePlus: 0
+  armorPlus: 0
+  moving: 0
+  dead: 0
+  team: 1
+  currentHP: 0
+  currentAp: 0
+  currentMp: 0
+  damageChange: 0
+  armorChange: 0
+  healsReceived: 0
+  heavy: 0
