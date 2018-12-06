@@ -15,11 +15,12 @@ MonoBehaviour:
   spellIcon: {fileID: 21300000, guid: 6ed4799f366d33f488d6ae73b1b78dc1, type: 3}
   spellSound: {fileID: 8300000, guid: 608b6a26680a0144984326b7e0468b5b, type: 3}
   mySpellRangeType: 0
-  spellRangeMin: 0
-  spellRangeMax: 0
+  spellRangeMin: 1
+  spellRangeMax: 1
   mySpellAreaType: 0
   aoeRange: 0
-  spellApCost: 0
+  spellApCost: 2
+  damageStealsHp: 0
   spellDamageMin: 0
   spellDamageMax: 0
   spellHealMin: 0
@@ -27,24 +28,24 @@ MonoBehaviour:
   healsAlly: 0
   hurtsAlly: 0
   needLineOfSight: 1
-  needTarget: 0
+  needTarget: 1
   needFreeSquare: 0
   effect: {fileID: 0}
   effectOnCaster: 0
   effectOnTarget: 1
-  spellPushback: 0
+  spellPushback: 1
   mySpellPushType: 0
   spellPull: 0
   mySpellPullType: 0
   teleportToTarget: 0
   chagePlaceWithTarget: 0
   moveCloserToTarget: 0
-  moveAwayFromTarget: 0
+  moveAwayFromTarget: 1
   spellInitialCooldown: 0
   spellCooldown: 0
   spellCastPerturn: 0
   castPerTarget: 0
-  description: 
+  description: "Non-damaging pulse which \n"
   spellCooldownLeft: 0
   trueDamage: 0
   spellLaunched: 0

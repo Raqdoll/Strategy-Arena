@@ -15,17 +15,18 @@ MonoBehaviour:
   spellIcon: {fileID: 21300000, guid: 6cfe65a1712975943b37df7f4d02ff61, type: 3}
   spellSound: {fileID: 8300000, guid: b1dd3d35b203bcf418b1598fa683318e, type: 3}
   mySpellRangeType: 0
-  spellRangeMin: 0
-  spellRangeMax: 0
+  spellRangeMin: 4
+  spellRangeMax: 12
   mySpellAreaType: 0
-  aoeRange: 0
-  spellApCost: 0
-  spellDamageMin: 0
-  spellDamageMax: 0
+  aoeRange: 1
+  spellApCost: 3
+  damageStealsHp: 0
+  spellDamageMin: 200
+  spellDamageMax: 220
   spellHealMin: 0
   spellHealMax: 0
   healsAlly: 0
-  hurtsAlly: 0
+  hurtsAlly: 1
   needLineOfSight: 1
   needTarget: 0
   needFreeSquare: 0
@@ -41,10 +42,12 @@ MonoBehaviour:
   moveCloserToTarget: 0
   moveAwayFromTarget: 0
   spellInitialCooldown: 0
-  spellCooldown: 0
+  spellCooldown: 2
   spellCastPerturn: 0
   castPerTarget: 0
-  description: 
+  description: 'A shot that makes the targets
+
+    unable to be moved by spells.'
   spellCooldownLeft: 0
   trueDamage: 0
   spellLaunched: 0

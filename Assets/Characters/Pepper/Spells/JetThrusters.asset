@@ -9,26 +9,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b8038d5e1a6f4b4bb84ea3b5b6084fc, type: 3}
-  m_Name: Buckshot
+  m_Name: JetThrusters
   m_EditorClassIdentifier: 
-  mySpellName: BUCKSHOT
-  spellIcon: {fileID: 21300000, guid: 159fbbcd5e7184a4bae448992a8f117b, type: 3}
-  spellSound: {fileID: 8300000, guid: bae2f446448261947baba6697dc4b75c, type: 3}
+  mySpellName: JET THRUSTERS
+  spellIcon: {fileID: 21300000, guid: 76daeb26dd1373045a08d5927da7cf22, type: 3}
+  spellSound: {fileID: 8300000, guid: 2d206df479263014b8b1434af0a06c86, type: 3}
   mySpellRangeType: 0
   spellRangeMin: 1
-  spellRangeMax: 4
-  mySpellAreaType: 4
-  aoeRange: 1
-  spellApCost: 4
+  spellRangeMax: 6
+  mySpellAreaType: 0
+  aoeRange: 0
+  spellApCost: 3
   damageStealsHp: 0
-  spellDamageMin: 340
-  spellDamageMax: 360
+  spellDamageMin: 240
+  spellDamageMax: 250
   spellHealMin: 0
   spellHealMax: 0
   healsAlly: 0
-  hurtsAlly: 1
+  hurtsAlly: 0
   needLineOfSight: 1
-  needTarget: 0
+  needTarget: 1
   needFreeSquare: 0
   effect: {fileID: 0}
   effectOnCaster: 0
@@ -39,13 +39,14 @@ MonoBehaviour:
   mySpellPullType: 0
   teleportToTarget: 0
   chagePlaceWithTarget: 0
-  moveCloserToTarget: 0
+  moveCloserToTarget: 6
   moveAwayFromTarget: 0
   spellInitialCooldown: 0
   spellCooldown: 0
-  spellCastPerturn: 2
+  spellCastPerturn: 1
   castPerTarget: 0
-  description: "Short ranged blunderbuss shot \nwhich hits everyone on its path\n\n\n"
+  description: "Uses jet thrusters to rush \ntowards a target,\ndealing damage on
+    collision"
   spellCooldownLeft: 0
   trueDamage: 0
   spellLaunched: 0

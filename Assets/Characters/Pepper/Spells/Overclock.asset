@@ -9,20 +9,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b8038d5e1a6f4b4bb84ea3b5b6084fc, type: 3}
-  m_Name: Buckshot
+  m_Name: Overclock
   m_EditorClassIdentifier: 
-  mySpellName: BUCKSHOT
-  spellIcon: {fileID: 21300000, guid: 159fbbcd5e7184a4bae448992a8f117b, type: 3}
-  spellSound: {fileID: 8300000, guid: bae2f446448261947baba6697dc4b75c, type: 3}
+  mySpellName: OVERCLOCK
+  spellIcon: {fileID: 21300000, guid: 24215a100bdb98144bba65598a3788b7, type: 3}
+  spellSound: {fileID: 8300000, guid: ee84172422631e14eb98d0349f12ba51, type: 3}
   mySpellRangeType: 0
   spellRangeMin: 1
-  spellRangeMax: 4
-  mySpellAreaType: 4
-  aoeRange: 1
-  spellApCost: 4
+  spellRangeMax: 1
+  mySpellAreaType: 0
+  aoeRange: 0
+  spellApCost: 3
   damageStealsHp: 0
-  spellDamageMin: 340
-  spellDamageMax: 360
+  spellDamageMin: 800
+  spellDamageMax: 850
   spellHealMin: 0
   spellHealMax: 0
   healsAlly: 0
@@ -30,9 +30,9 @@ MonoBehaviour:
   needLineOfSight: 1
   needTarget: 0
   needFreeSquare: 0
-  effect: {fileID: 0}
-  effectOnCaster: 0
-  effectOnTarget: 1
+  effect: {fileID: 11400000, guid: c68f06c4bd6bc8242b6fdc3c01e45c3d, type: 2}
+  effectOnCaster: 1
+  effectOnTarget: 0
   spellPushback: 0
   mySpellPushType: 0
   spellPull: 0
@@ -42,10 +42,16 @@ MonoBehaviour:
   moveCloserToTarget: 0
   moveAwayFromTarget: 0
   spellInitialCooldown: 0
-  spellCooldown: 0
-  spellCastPerturn: 2
+  spellCooldown: 3
+  spellCastPerturn: 0
   castPerTarget: 0
-  description: "Short ranged blunderbuss shot \nwhich hits everyone on its path\n\n\n"
+  description: 'Overclocks the mechs system
+
+    to deal massive damage.
+
+    The mech overheats in the process
+
+    and can''t perform well for a while.'
   spellCooldownLeft: 0
   trueDamage: 0
   spellLaunched: 0
