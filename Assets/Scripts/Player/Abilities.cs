@@ -883,18 +883,18 @@ public class Abilities : MonoBehaviour {
         PlayerMovement targetMovement = null;
         if (caster.CharCurrentlyOnTile)
         {
+            Debug.Log("casteri löydetty");
             playerMovement = caster.CharCurrentlyOnTile.gameObject.GetComponent<PlayerMovement>();
         }
         if (target.CharCurrentlyOnTile)
         {
+            Debug.Log("maali löydetty");
             targetMovement = target.CharCurrentlyOnTile.gameObject.GetComponent<PlayerMovement>();
         }
         if (playerMovement && targetMovement)
         {
-            playerMovement.MoveToTile(target, PlayerMovement.MovementMethod.Teleport); 
-        }  
-        if (targetMovement && playerMovement)
-        {
+            Debug.Log("tehdään siirto");
+            playerMovement.MoveToTile(target, PlayerMovement.MovementMethod.Teleport);
             targetMovement.MoveToTile(caster, PlayerMovement.MovementMethod.Teleport);
         }
     }
