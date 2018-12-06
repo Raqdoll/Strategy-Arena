@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8038d5e1a6f4b4bb84ea3b5b6084fc, type: 3}
   m_Name: Cosmic Shield
   m_EditorClassIdentifier: 
-  mySpellName: Cosmic Shield
+  mySpellName: COSMIC SHIELD
   spellIcon: {fileID: 21300000, guid: 2055e5cb6da65834aa3d36a1f49f850b, type: 3}
   spellSound: {fileID: 8300000, guid: 003fa2c1328dd9a40922851a454c9909, type: 3}
   mySpellRangeType: 2

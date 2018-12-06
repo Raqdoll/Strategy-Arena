@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8038d5e1a6f4b4bb84ea3b5b6084fc, type: 3}
   m_Name: Protective Stasis
   m_EditorClassIdentifier: 
-  mySpellName: Protective Stasis
+  mySpellName: PROTECTIVE STASIS
   spellIcon: {fileID: 21300000, guid: 625cd75d3a25e6d459c106dfc52e25ae, type: 3}
   spellSound: {fileID: 8300000, guid: be894b0c96dcc2245ada12d46a2f832e, type: 3}
   mySpellRangeType: 2

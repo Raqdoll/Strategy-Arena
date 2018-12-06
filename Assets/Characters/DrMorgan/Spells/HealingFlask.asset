@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8038d5e1a6f4b4bb84ea3b5b6084fc, type: 3}
   m_Name: HealingFlask
   m_EditorClassIdentifier: 
-  mySpellName: Healing Flask
+  mySpellName: HEALING FLASK
   spellIcon: {fileID: 21300000, guid: bfd45deae0a7c1748899a33b26fb075c, type: 3}
   spellSound: {fileID: 8300000, guid: 7bb580cb2cfbc9240be2e549d30cb60d, type: 3}
   mySpellRangeType: 2

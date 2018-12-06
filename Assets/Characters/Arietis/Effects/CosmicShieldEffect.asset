@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f98fb76e3ad09448970e12735799ad, type: 3}
   m_Name: CosmicShieldEffect
   m_EditorClassIdentifier: 
-  effectName: Cosmic Shield
+  effectName: COSMIC SHIELD
   effectIcon: {fileID: 21300000, guid: 2055e5cb6da65834aa3d36a1f49f850b, type: 3}
   effectDuration: 2
   stacks: 1

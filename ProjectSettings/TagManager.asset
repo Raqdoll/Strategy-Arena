@@ -18,6 +18,7 @@ TagManager:
   - CharTab
   - UIcanvas
   - AudioController
+  - BottomPlate
   layers:
   - Default
   - TransparentFX

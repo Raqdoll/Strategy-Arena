@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8038d5e1a6f4b4bb84ea3b5b6084fc, type: 3}
   m_Name: AdrealineStims
   m_EditorClassIdentifier: 
-  mySpellName: Adrenaline Stims
+  mySpellName: ADRENALINE STIMS
   spellIcon: {fileID: 21300000, guid: 6f55e394ef5052d458f82926fb0fd25e, type: 3}
   spellSound: {fileID: 8300000, guid: e2cafd74e26715f4d9435351ab5014e3, type: 3}
   mySpellRangeType: 2
