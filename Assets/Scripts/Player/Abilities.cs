@@ -161,7 +161,7 @@ public class Abilities : MonoBehaviour {
         int x = spellCast.currentSpell.spellRangeMin;
         if (i == 0 && spellCast.currentSpell.mySpellRangeType != SpellRangeType.Normal)
         {
-            rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z));
+            rangetiles.Add(gridController.GetTile(playerBehaviour.currentCharacter.currentTile));
             i++;
             x++;
         }
@@ -226,7 +226,7 @@ public class Abilities : MonoBehaviour {
                         {
                             if (ilaririkkootaman == false)
                             {
-                                if (lOS.LoSCheck(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z), tile) == true)
+                                if (lOS.LoSCheck(gridController.GetTile(playerBehaviour.currentCharacter.currentTile), tile) == true)
                                 {
                                     if (badTiles != null)
                                     {
@@ -254,7 +254,7 @@ public class Abilities : MonoBehaviour {
                             }
                             else
                             {
-                                if (lOS.LoSCheck(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z), tile) == false)
+                                if (lOS.LoSCheck(gridController.GetTile(playerBehaviour.currentCharacter.currentTile), tile) == false)
                                 {
                                     if (badTiles != null)
                                     {
@@ -339,7 +339,7 @@ public class Abilities : MonoBehaviour {
                     {
                         if (ilaririkkootaman == false)
                         {
-                            if (lOS.LoSCheck(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z), tile) == true)
+                            if (lOS.LoSCheck(gridController.GetTile(playerBehaviour.currentCharacter.currentTile), tile) == true)
                             {
                                 if (tile.myType == Tile.BlockType.BaseBlock)
                                     returnables.Add(tile);
@@ -347,7 +347,7 @@ public class Abilities : MonoBehaviour {
                         }
                         else
                         {
-                            if (lOS.LoSCheck(gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z), tile) == false)
+                            if (lOS.LoSCheck(gridController.GetTile(playerBehaviour.currentCharacter.currentTile), tile) == false)
                             {
                                 if (tile.myType == Tile.BlockType.BaseBlock)
                                     returnables.Add(tile);
@@ -370,7 +370,7 @@ public class Abilities : MonoBehaviour {
         List<Tile> AoeList = AreaType(spellCast.currentSpell.mySpellAreaType);
         List<Tile> targetList = new List<Tile>();
         Tile anchor = mouseController.selected;
-        Tile caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z);
+        Tile caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile);
         foreach (var tile in AoeList)
         {
             if (tile.CharCurrentlyOnTile && tile != caster)
@@ -634,7 +634,7 @@ public class Abilities : MonoBehaviour {
         List<Tile> AoeList = AreaType(spellCast.currentSpell.mySpellAreaType);
         List<Tile> targetList = new List<Tile>();
         Tile anchor = mouseController.selected;
-        Tile caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z);
+        Tile caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile);
         // etsii siirrettävät pelaajat aoe:sta
         foreach (var tile in AoeList)
         {
@@ -946,7 +946,7 @@ public class Abilities : MonoBehaviour {
     public void WalkTowardsTarget()
     {
         Tile anchor = mouseController.selected;
-        Tile caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z);
+        Tile caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile);
         GridController.Directions mydirection = new GridController.Directions();
         GridController.Directions helpDirection = new GridController.Directions();
         bool inLine = true;
@@ -1003,7 +1003,7 @@ public class Abilities : MonoBehaviour {
                 if (temp.myType == Tile.BlockType.BaseBlock && temp != null)
                 {
                     PullPushAct(caster, temp);
-                    caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z);
+                    caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile);
                 }
                 else
                 {
@@ -1021,7 +1021,7 @@ public class Abilities : MonoBehaviour {
                 if (temp1.myType == Tile.BlockType.BaseBlock && temp2.myType == Tile.BlockType.BaseBlock && temp3.myType == Tile.BlockType.BaseBlock && temp1 != null && temp2 != null && temp3 != null)
                 {
                     PullPushAct(caster, temp3);
-                    caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z);
+                    caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile);
                 }
                 else
                 {
@@ -1033,7 +1033,7 @@ public class Abilities : MonoBehaviour {
     public void MoveAwayFromTarget()
     {
         Tile anchor = mouseController.selected;
-        Tile caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z);
+        Tile caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile);
         GridController.Directions mydirection = new GridController.Directions();
         GridController.Directions helpDirection = new GridController.Directions();
         bool inLine = true;
@@ -1089,7 +1089,7 @@ public class Abilities : MonoBehaviour {
                 if (temp.myType == Tile.BlockType.BaseBlock && temp != null)
                 {
                     PullPushAct(caster, temp);
-                    caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z);
+                    caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile);
                 }
                 else
                 {
@@ -1107,7 +1107,7 @@ public class Abilities : MonoBehaviour {
                 if (temp1.myType == Tile.BlockType.BaseBlock && temp2.myType == Tile.BlockType.BaseBlock && temp3.myType == Tile.BlockType.BaseBlock && temp1 != null && temp2 != null && temp3 != null)
                 {
                     PullPushAct(caster, temp3);
-                    caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile.x, playerBehaviour.currentCharacter.currentTile.z);
+                    caster = gridController.GetTile(playerBehaviour.currentCharacter.currentTile);
                 }
                 else
                 {
