@@ -14,6 +14,7 @@ public class StatusEffects : MonoBehaviour {
             tManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TeamManager>();
         if (!pBehaviour)
             pBehaviour = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<PlayerBehaviour>();
+        effectList.Clear();
     }
 
     //Call this when you add another effect
@@ -55,8 +56,8 @@ public class StatusEffects : MonoBehaviour {
             target.armorPlus += clone.armorModifyPlus;
             target.armorChange += clone.armorModifyPercent;
             target.healsReceived += clone.healModify;
-            target.maxAp += clone.apModify;
-            target.maxMp += clone.mpModify;
+            target.currentAp += clone.apModify;
+            target.currentMp += clone.mpModify;
             if (clone.immune == true)
             {
                 target.armorChange += 1000;

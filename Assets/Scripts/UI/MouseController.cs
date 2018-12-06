@@ -23,7 +23,7 @@ public class MouseController : MonoBehaviour
     public Material pathMaterial;
     public Material pathSelectedMaterial;
     private Tile previousTile;
-    public List<Tile> targetedTiles;
+    public List<Tile> targetedTiles = null;
     public List<Tile> rangeTiles;
     public List<Tile> nullTiles;
     List<Tile> movementRangeTiles;
@@ -148,19 +148,32 @@ public class MouseController : MonoBehaviour
             //pitäisi maalata target range
             if (rangeTiles == null)
             {
-                rangeTiles = abilities.RangeType(spellCast.currentSpell.mySpellRangeType, false);
-                foreach (var tile in rangeTiles)
+                if (spellCast.currentSpell.needLineOfSight == true)
                 {
-                    Renderer aR = tile.GetComponent<Renderer>();
-                    aR.material = rangeMaterial;
+                    nullTiles = abilities.RangeType(spellCast.currentSpell.mySpellRangeType, true);
+                    foreach (var tile in nullTiles)
+                    {
+                        Renderer aR = tile.GetComponent<Renderer>();
+                        aR.material = rangeNullMaterial;
+                    }
+
+                    rangeTiles = abilities.RangeType(spellCast.currentSpell.mySpellRangeType, false);
+                    foreach (var tile in rangeTiles)
+                    {
+                        Renderer aR = tile.GetComponent<Renderer>();
+                        aR.material = rangeMaterial;
+                    } 
+                }
+                else
+                {
+                    rangeTiles = abilities.RangeType(spellCast.currentSpell.mySpellRangeType, false);
+                    foreach (var tile in rangeTiles)
+                    {
+                        Renderer aR = tile.GetComponent<Renderer>();
+                        aR.material = rangeMaterial;
+                    }
                 }
 
-                nullTiles = abilities.RangeType(spellCast.currentSpell.mySpellRangeType, true);
-                foreach (var tile in nullTiles)
-                {
-                    Renderer aR = tile.GetComponent<Renderer>();
-                    aR.material = rangeNullMaterial;
-                }
             }
 
             //pitäisi maalata AOE tilet

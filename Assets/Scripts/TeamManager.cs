@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +14,10 @@ public class TeamManager : MonoBehaviour {
     public PlayerInfo activePlayer; //Changed playerbehaviour to PlayerInfo
     public StatusEffects sEffects;
 
-
+    private void Awake()
+    {
+        SetupTeams();
+    }
 
     // Use this for initialization
     void Start () {
@@ -31,7 +35,38 @@ public class TeamManager : MonoBehaviour {
             Debug.LogWarning("Check team sizes!");
         }
     }
-	
+
+
+    /// <summary>
+    /// Sets current points to max values before match starts. Should be replaced by a method in character selection screen!
+    /// </summary>
+
+    private void SetupTeams()
+    {
+        foreach(var player in teamA)
+        {
+            SetupPlayer(player);
+        }
+        foreach (var player in teamB)
+        {
+            SetupPlayer(player);
+        }
+    }
+
+    private void SetupPlayer(PlayerInfo player)
+    {
+        player.thisCharacter.damagePlus = 0;
+        player.thisCharacter.armorPlus = 0;
+        player.thisCharacter.moving = false;
+        player.thisCharacter.dead = false;
+        player.thisCharacter.currentHP = player.thisCharacter.maxHP;
+        player.thisCharacter.currentAp = player.thisCharacter.maxAp;
+        player.thisCharacter.currentMp = player.thisCharacter.maxMp;
+        player.thisCharacter.damageChange = 0;
+        player.thisCharacter.armorChange = 0;
+        player.thisCharacter.healsReceived = 0;
+        player.thisCharacter.heavy = false;
+    }
 
     void ChangeTurn()
     {

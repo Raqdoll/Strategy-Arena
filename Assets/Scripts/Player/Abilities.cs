@@ -924,6 +924,7 @@ public class Abilities : MonoBehaviour {
 
     public bool CheckCastability(SpellValues spell, Tile target)
     {
+        List<Tile> range = RangeType(spell.mySpellRangeType, spell.needLineOfSight);
         bool result = true;
         if (playerBehaviour.currentCharacter.currentAp < spellCast.currentSpell.spellApCost)
         {
@@ -936,6 +937,18 @@ public class Abilities : MonoBehaviour {
         if(spell.needFreeSquare == true && target.CharCurrentlyOnTile == true)
         {
             result = false;
+        }
+        bool dryhu = false;
+        foreach (var haistaPaska in range)
+        {
+            if(haistaPaska == target)
+            {
+                dryhu = true;
+            }
+        }
+        if( dryhu == false)
+        {
+            return false;
         }
         // put cooldown check here
         // put cast per target here
