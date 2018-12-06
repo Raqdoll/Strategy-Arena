@@ -20,6 +20,7 @@ public class SpellValues : ScriptableObject
     [Header("Damage/Heal")]
     [Space(6)]
     public int spellApCost; //< cast reduction added. reset not implemented
+    public bool damageStealsHp = false; //<
     public int spellDamageMin;
     public int spellDamageMax;
     public int spellHealMin;

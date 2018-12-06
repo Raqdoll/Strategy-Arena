@@ -14,18 +14,19 @@ MonoBehaviour:
   mySpellName: EXPLOSIVE SHOT
   spellIcon: {fileID: 21300000, guid: cc304fccf4650c748bd30e79d7f24095, type: 3}
   spellSound: {fileID: 8300000, guid: da708e4c2687f7345bac20c5146c6c12, type: 3}
-  mySpellRangeType: 0
-  spellRangeMin: 0
-  spellRangeMax: 0
+  mySpellRangeType: 2
+  spellRangeMin: 4
+  spellRangeMax: 12
   mySpellAreaType: 0
-  aoeRange: 0
-  spellApCost: 0
-  spellDamageMin: 0
-  spellDamageMax: 0
+  aoeRange: 3
+  spellApCost: 4
+  damageStealsHp: 0
+  spellDamageMin: 280
+  spellDamageMax: 300
   spellHealMin: 0
   spellHealMax: 0
   healsAlly: 0
-  hurtsAlly: 0
+  hurtsAlly: 1
   needLineOfSight: 1
   needTarget: 0
   needFreeSquare: 0
@@ -42,9 +43,11 @@ MonoBehaviour:
   moveAwayFromTarget: 0
   spellInitialCooldown: 0
   spellCooldown: 0
-  spellCastPerturn: 0
+  spellCastPerturn: 2
   castPerTarget: 0
-  description: 
+  description: 'Well aimed explosive rifle shot.
+
+    Divides upon impact'
   spellCooldownLeft: 0
   trueDamage: 0
   spellLaunched: 0
