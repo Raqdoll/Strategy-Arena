@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 222184483620079222}
   - component: {fileID: 114304460218217856}
   - component: {fileID: 225831498614372170}
+  - component: {fileID: 114783028861221222}
   m_Layer: 5
   m_Name: TurnImage
   m_TagString: Untagged
@@ -100,6 +101,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114783028861221222
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1969269986047034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7659f308e8d5e8443b658035df3bfafb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 0}
+  arrow: {fileID: 1294124637479386}
 --- !u!222 &222184483620079222
 CanvasRenderer:
   m_ObjectHideFlags: 1
