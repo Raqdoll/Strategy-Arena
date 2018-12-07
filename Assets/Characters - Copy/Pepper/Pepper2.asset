@@ -15,7 +15,7 @@ MonoBehaviour:
   portrait: {fileID: 0}
   maxHP: 3000
   maxAp: 12
-  maxMp: 6
+  maxMp: 5
   spell_1: {fileID: 11400000, guid: a5355aec31ef1b34ebda0f8641a719b3, type: 2}
   spell_2: {fileID: 11400000, guid: 6456e45cf83cfe348ba5d44e694e37a9, type: 2}
   spell_3: {fileID: 11400000, guid: f2748fc14e42c8f4bac56f075eeac777, type: 2}
@@ -25,15 +25,15 @@ MonoBehaviour:
   walkSoundLoop: {fileID: 8300000, guid: 4fde02a4bb47e804d9c5d5290466ab78, type: 3}
   attackSound: {fileID: 8300000, guid: 9b7f04f1e86cf654d9e6fe17a24f172f, type: 3}
   takeDamageSound: {fileID: 8300000, guid: 9f6246bfc46f76042966ddac87d86056, type: 3}
-  damagePlus: 0
+  damagePlus: -30
   armorPlus: 0
   moving: 0
   dead: 0
   team: 1
-  currentHP: 0
-  currentAp: 0
-  currentMp: 0
+  currentHP: 490
+  currentAp: 12
+  currentMp: 5
   damageChange: 0
-  armorChange: 0
+  armorChange: -0.1
   healsReceived: 0
   heavy: 0

@@ -17,12 +17,6 @@ public class SpellCast : MonoBehaviour {
 
     public SpellValues currentSpell;
     public bool spellOpen = false;
-    public int spell1CastedThisTurn = 0;
-    public int spell2CastedThisTurn = 0;
-    public int spell3CastedThisTurn = 0;
-    public int spell4CastedThisTurn = 0;
-    public int spell5CastedThisTurn = 0;
-    public int spell6CastedThisTurn = 0;
     //Käytä spellin 
 
     //
@@ -63,6 +57,8 @@ public class SpellCast : MonoBehaviour {
             Debug.Log("Could not find abilities component");
         if (!sEffects)
             sEffects = GameObject.FindGameObjectWithTag("GameController").GetComponent<StatusEffects>();
+        //cv = turnManager.teamManager.activePlayer.thisCharacter;
+        UpdateHpApMp();
     }
 
     private void OnDestroy()
@@ -88,22 +84,75 @@ public class SpellCast : MonoBehaviour {
         spellButton5.GetComponent<Tooltip>().spell = cv.spell_5;
         spellButton6.GetComponent<Tooltip>().spell = cv.spell_6;
 
-        hpText.text = "HP: " + cv.currentHP + " / " + cv.maxHP;
-        apText.text = "AP: " + cv.currentAp;
-        mpText.text = "MP: " + cv.currentMp;    //  <----- ^---- Nää kannattaa ehkä siirtää jonnekki järkevämpään scriptiin kun spell castiin?
-
+        UpdateHpApMp();
         
     }
-    //public bool needTarget = false; //<
-    //public bool needFreeSquare = false; //<
-    //public bool inCooldown = false; //<
-    //public int spellCooldownLeft;   //<
-    //public int spellInitialCooldown;    //<
-    //public int spellCooldown;   //<
-    //public int spellCastPerturn;    //<
-    //public int castPerTarget;   //<
 
+    public void UpdateHpApMp()
+    {
+        hpText.text = "HP: " + cv.currentHP + " / " + cv.maxHP;
+        apText.text = "AP: " + cv.currentAp;
+        mpText.text = "MP: " + cv.currentMp;
+        DisableButtonsIfNotAp();
+    }
 
+        HanddleCooldownDecrease(cv.spell_1);
+        HanddleCooldownDecrease(cv.spell_2);
+        HanddleCooldownDecrease(cv.spell_3);
+        HanddleCooldownDecrease(cv.spell_4);
+        HanddleCooldownDecrease(cv.spell_5);
+        HanddleCooldownDecrease(cv.spell_6);
+    public void DisableButtonsIfNotAp()
+    {
+        if(cv.spell_1.spellApCost > cv.currentAp)
+        {
+            spellButton1.interactable = false;
+        }
+        else
+        {
+            spellButton1.interactable = true;
+        }
+        if (cv.spell_2.spellApCost > cv.currentAp)
+        {
+            spellButton2.interactable = false;
+        }
+        else
+        {
+            spellButton2.interactable = true;
+        }
+        if (cv.spell_3.spellApCost > cv.currentAp)
+        {
+            spellButton3.interactable = false;
+        }
+        else
+        {
+            spellButton3.interactable = true;
+        }
+        if (cv.spell_4.spellApCost > cv.currentAp)
+        {
+            spellButton4.interactable = false;
+        }
+        else
+        {
+            spellButton4.interactable = true;
+        }
+        if (cv.spell_5.spellApCost > cv.currentAp)
+        {
+            spellButton5.interactable = false;
+        }
+        else
+        {
+            spellButton5.interactable = true;
+        }
+        if (cv.spell_6.spellApCost > cv.currentAp)
+        {
+            spellButton6.interactable = false;
+        }
+        else
+        {
+            spellButton6.interactable = true;
+        }
+    }
 
 
 
@@ -118,6 +167,7 @@ public class SpellCast : MonoBehaviour {
         //Tile temp1 = gridController.GetTile(caster.currentTile.x,caster.currentTile.z);
         //Tile temp2 = gridController.GetTile(target.currentTile.x,target.currentTile.z);
         List<Tile> targetsList = abilities.AreaType(currentSpell.mySpellAreaType);
+        int leach = 0;
         foreach (var item in targetsList)
         {
             PlayerInfo checker = item.CharCurrentlyOnTile;
@@ -152,9 +202,10 @@ public class SpellCast : MonoBehaviour {
                 {
                     damageStuff = TrueDamageCalculator(spell.spellDamageMax, spell.spellDamageMin, caster.damageChange, target.armorChange, caster.damagePlus, target.armorPlus);
                 }
+                leach = leach + damageStuff;
                 GetHit(target, damageStuff);
                 GetHealed(target, healingIsFun);
-
+                HandleCoolDownIncrease(spell);
                 if (spell.effect)
                 {
                     sEffects.ApplyEffect(caster, spell.effect, target);
@@ -163,6 +214,10 @@ public class SpellCast : MonoBehaviour {
                 }
 
             }
+        }
+        if (spell.damageStealsHp == true)
+        {
+            StealHp(caster, leach); 
         }
         if (spell.spellPull != 0)
         {
@@ -190,8 +245,9 @@ public class SpellCast : MonoBehaviour {
         {
             abilities.TeleportSwitch(casterTile, targetTile);
         }
-
+        UpdateHpApMp();
     }
+
     //Deal the actual damage V V V
     public void GetHit(CharacterValues target, int damage)
     {
@@ -230,6 +286,8 @@ public class SpellCast : MonoBehaviour {
         }
         currentSpell = null;
         spellOpen = false;
+        UpdateHpApMp();
+        playerBehaviour.UpdateTabs();
     }
 
 	void Update () {
@@ -300,6 +358,38 @@ public class SpellCast : MonoBehaviour {
         int trueHeal = UnityEngine.Random.Range(tempHealMin, tempHealMax);
 
         return trueHeal;
+    }
+    public void StealHp(CharacterValues target, int damage)
+    {
+        int heal = damage / 2;
+        target.currentHP += heal;
+        if (target.currentHP > target.maxHP)
+        {
+            target.currentHP = target.maxHP;
+        }
+        playerBehaviour.UpdateTabs();
+    }
+
+    public void HanddleCooldownDecrease(SpellValues spell)
+    {
+        if (spell.spellInitialCooldowncounter > 0)
+            spell.spellInitialCooldowncounter--;
+
+        if (spell.spellCooldownLeft > 0)
+        spell.spellCooldownLeft--;
+
+        spell.spellCastPerturncounter = 0;
+    }
+    public void HandleCoolDownIncrease(SpellValues spell)
+    {
+        if(spell.spellCastPerturn != 0)
+        {
+            spell.spellCastPerturncounter++;
+        }
+        if(spell.spellCastPerturncounter >= spell.spellCastPerturn)
+        {
+            spell.spellCooldownLeft = spell.spellCooldown;
+        }
     }
 
     public void Spell1Cast()

@@ -19,7 +19,7 @@ public class SpellValues : ScriptableObject
     [Space(6)]
     [Header("Damage/Heal")]
     [Space(6)]
-    public int spellApCost; //< cast reduction added. reset not implemented
+    public int spellApCost;
     public bool damageStealsHp = false; //<
     public int spellDamageMin;
     public int spellDamageMax;
@@ -28,8 +28,8 @@ public class SpellValues : ScriptableObject
     public bool healsAlly = false;
     public bool hurtsAlly = false;
     public bool needLineOfSight = true;
-    public bool needTarget = false; //<
-    public bool needFreeSquare = false; //<
+    public bool needTarget = false;
+    public bool needFreeSquare = false;
     [Space(6)]
     [Header("Effect")]
     public EffectValues effect;
@@ -50,10 +50,15 @@ public class SpellValues : ScriptableObject
     [Space(6)]
     [Header("Cooldowns")]
     [Space(6)]
-    public int spellInitialCooldown;    //<
-    public int spellCooldown;   //<
-    public int spellCastPerturn;    //<
+    public int spellInitialCooldown; 
+    public int spellCooldown;
+    public int spellCastPerturn;
     public int castPerTarget;   //<
+    [Header("Cooldowns counters")]
+    [Space(6)]
+    public int spellInitialCooldowncounter;
+    public int spellCastPerturncounter; 
+    public int castPerTargetcounter; //<
     [Space(6)]
     [Header("Description for the spell")]
     [Space(6)]
@@ -62,9 +67,7 @@ public class SpellValues : ScriptableObject
     [Space(6)]
     [Header("Ingame values, do not touch")]
     [Space(6)]
-    public int spellCooldownLeft;   //<
+    public int spellCooldownLeft; 
     public int trueDamage;
-    public bool spellLaunched = false;  //<
-    public bool inCooldown = false; //<
 }
 

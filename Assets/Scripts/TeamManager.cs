@@ -13,6 +13,8 @@ public class TeamManager : MonoBehaviour {
     private int charactersPerTeam = 5;
     public PlayerInfo activePlayer; //Changed playerbehaviour to PlayerInfo
     public StatusEffects sEffects;
+    public TurnTimelineController timeline;
+
 
     private void Awake()
     {
@@ -84,6 +86,7 @@ public class TeamManager : MonoBehaviour {
             activePlayer = teamA[playerPositionInTeam];
         }
         sEffects.UpdateEffects();
+        timeline.MoveArrow(activePlayer.thisCharacter);
     }
 
     public PlayerInfo ChangeTurnUntilValidPlayer()
