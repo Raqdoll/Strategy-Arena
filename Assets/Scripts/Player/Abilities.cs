@@ -924,6 +924,23 @@ public class Abilities : MonoBehaviour {
 
     public bool CheckCastability(SpellValues spell, Tile target)
     {
+        //// ---------------------- nämä conflictas, muut oli ok -------------------------
+        //List<Tile> range = RangeType(spell.mySpellRangeType, spell.needLineOfSight);
+        //bool dryhu = false;
+        //foreach (var haistaPaska in range)
+        //{
+        //    if (haistaPaska == target)
+        //    {
+        //        dryhu = true;
+        //    }
+        //}
+        //if (dryhu == false)
+        //{
+        //    return false;
+        //}
+        //// --------------------- Pasta carbonara on hyvää vai mitä ---------------------
+
+
         if (playerBehaviour.currentCharacter.currentAp < spellCast.currentSpell.spellApCost)
         {
             return false;
@@ -942,6 +959,8 @@ public class Abilities : MonoBehaviour {
         }
         return true;
     }
+
+
     public bool SpellCooldownCheck(SpellValues spell)
     {
         if(spell.spellInitialCooldowncounter > 0)
