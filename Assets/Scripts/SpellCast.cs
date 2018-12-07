@@ -17,12 +17,6 @@ public class SpellCast : MonoBehaviour {
 
     public SpellValues currentSpell;
     public bool spellOpen = false;
-    public int spell1CastedThisTurn = 0;
-    public int spell2CastedThisTurn = 0;
-    public int spell3CastedThisTurn = 0;
-    public int spell4CastedThisTurn = 0;
-    public int spell5CastedThisTurn = 0;
-    public int spell6CastedThisTurn = 0;
     //Käytä spellin 
 
     //
@@ -92,7 +86,12 @@ public class SpellCast : MonoBehaviour {
         apText.text = "AP: " + cv.currentAp;
         mpText.text = "MP: " + cv.currentMp;    //  <----- ^---- Nää kannattaa ehkä siirtää jonnekki järkevämpään scriptiin kun spell castiin?
 
-        
+        HanddleCooldownDecrease(cv.spell_1);
+        HanddleCooldownDecrease(cv.spell_2);
+        HanddleCooldownDecrease(cv.spell_3);
+        HanddleCooldownDecrease(cv.spell_4);
+        HanddleCooldownDecrease(cv.spell_5);
+        HanddleCooldownDecrease(cv.spell_6);
     }
     //public bool needTarget = false; //<
     //public bool needFreeSquare = false; //<
@@ -118,6 +117,7 @@ public class SpellCast : MonoBehaviour {
         //Tile temp1 = gridController.GetTile(caster.currentTile.x,caster.currentTile.z);
         //Tile temp2 = gridController.GetTile(target.currentTile.x,target.currentTile.z);
         List<Tile> targetsList = abilities.AreaType(currentSpell.mySpellAreaType);
+        int leach = 0;
         foreach (var item in targetsList)
         {
             PlayerInfo checker = item.CharCurrentlyOnTile;
@@ -152,9 +152,10 @@ public class SpellCast : MonoBehaviour {
                 {
                     damageStuff = TrueDamageCalculator(spell.spellDamageMax, spell.spellDamageMin, caster.damageChange, target.armorChange, caster.damagePlus, target.armorPlus);
                 }
+                leach = leach + damageStuff;
                 GetHit(target, damageStuff);
                 GetHealed(target, healingIsFun);
-
+                HandleCoolDownIncrease(spell);
                 if (spell.effect)
                 {
                     sEffects.ApplyEffect(caster, spell.effect, target);
@@ -163,6 +164,10 @@ public class SpellCast : MonoBehaviour {
                 }
 
             }
+        }
+        if (spell.damageStealsHp == true)
+        {
+            StealHp(caster, leach); 
         }
         if (spell.spellPull != 0)
         {
@@ -192,6 +197,7 @@ public class SpellCast : MonoBehaviour {
         }
 
     }
+
     //Deal the actual damage V V V
     public void GetHit(CharacterValues target, int damage)
     {
@@ -300,6 +306,38 @@ public class SpellCast : MonoBehaviour {
         int trueHeal = UnityEngine.Random.Range(tempHealMin, tempHealMax);
 
         return trueHeal;
+    }
+    public void StealHp(CharacterValues target, int damage)
+    {
+        int heal = damage / 2;
+        target.currentHP += heal;
+        if (target.currentHP > target.maxHP)
+        {
+            target.currentHP = target.maxHP;
+        }
+        playerBehaviour.UpdateTabs();
+    }
+
+    public void HanddleCooldownDecrease(SpellValues spell)
+    {
+        if (spell.spellInitialCooldowncounter > 0)
+            spell.spellInitialCooldowncounter--;
+
+        if (spell.spellCooldownLeft > 0)
+        spell.spellCooldownLeft--;
+
+        spell.spellCastPerturncounter = 0;
+    }
+    public void HandleCoolDownIncrease(SpellValues spell)
+    {
+        if(spell.spellCastPerturn != 0)
+        {
+            spell.spellCastPerturncounter++;
+        }
+        if(spell.spellCastPerturncounter >= spell.spellCastPerturn)
+        {
+            spell.spellCooldownLeft = spell.spellCooldown;
+        }
     }
 
     public void Spell1Cast()

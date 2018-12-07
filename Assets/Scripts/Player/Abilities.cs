@@ -924,24 +924,46 @@ public class Abilities : MonoBehaviour {
 
     public bool CheckCastability(SpellValues spell, Tile target)
     {
-        bool result = true;
         if (playerBehaviour.currentCharacter.currentAp < spellCast.currentSpell.spellApCost)
         {
-            result = false;
+            return false;
         }
         if (spell.needTarget == true && target.CharCurrentlyOnTile == false)
         {
-            result = false;
+            return false;
         }
         if(spell.needFreeSquare == true && target.CharCurrentlyOnTile == true)
         {
-            result = false;
+            return false;
         }
-        // put cooldown check here
-        // put cast per target here
-
-        return result;
+        if (SpellCooldownCheck(spell) == false)
+        {
+            return false;
+        }
+        return true;
     }
+    public bool SpellCooldownCheck(SpellValues spell)
+    {
+        if(spell.spellInitialCooldowncounter > 0)
+        {
+            return false;
+        }
+        if (spell.spellCastPerturncounter >= spell.spellCastPerturn)
+        {
+            return false;
+        }
+        if (spell.spellCooldownLeft > 0)
+        {
+            return false;
+        }
+
+        return true;
+    }
+    public bool SpellCastPerTurn(SpellValues spell)
+    {
+        return true;
+    }
+
 
     public void WalkTowardsTarget()
     {
