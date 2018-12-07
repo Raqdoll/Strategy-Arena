@@ -545,7 +545,6 @@ GameObject:
   - component: {fileID: 4094327993012506}
   - component: {fileID: 33339264710844902}
   - component: {fileID: 23892952614480086}
-  - component: {fileID: 136933808898539072}
   m_Layer: 0
   m_Name: Bottom
   m_TagString: BottomPlate
@@ -2631,19 +2630,6 @@ CapsuleCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1344370398238352}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!136 &136933808898539072
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1917953983673378}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1

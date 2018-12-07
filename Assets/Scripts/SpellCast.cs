@@ -57,6 +57,8 @@ public class SpellCast : MonoBehaviour {
             Debug.Log("Could not find abilities component");
         if (!sEffects)
             sEffects = GameObject.FindGameObjectWithTag("GameController").GetComponent<StatusEffects>();
+        //cv = turnManager.teamManager.activePlayer.thisCharacter;
+        UpdateHpApMp();
     }
 
     private void OnDestroy()
@@ -82,9 +84,17 @@ public class SpellCast : MonoBehaviour {
         spellButton5.GetComponent<Tooltip>().spell = cv.spell_5;
         spellButton6.GetComponent<Tooltip>().spell = cv.spell_6;
 
+        UpdateHpApMp();
+        
+    }
+
+    public void UpdateHpApMp()
+    {
         hpText.text = "HP: " + cv.currentHP + " / " + cv.maxHP;
         apText.text = "AP: " + cv.currentAp;
-        mpText.text = "MP: " + cv.currentMp;    //  <----- ^---- Nää kannattaa ehkä siirtää jonnekki järkevämpään scriptiin kun spell castiin?
+        mpText.text = "MP: " + cv.currentMp;
+        DisableButtonsIfNotAp();
+    }
 
         HanddleCooldownDecrease(cv.spell_1);
         HanddleCooldownDecrease(cv.spell_2);
@@ -92,17 +102,57 @@ public class SpellCast : MonoBehaviour {
         HanddleCooldownDecrease(cv.spell_4);
         HanddleCooldownDecrease(cv.spell_5);
         HanddleCooldownDecrease(cv.spell_6);
+    public void DisableButtonsIfNotAp()
+    {
+        if(cv.spell_1.spellApCost > cv.currentAp)
+        {
+            spellButton1.interactable = false;
+        }
+        else
+        {
+            spellButton1.interactable = true;
+        }
+        if (cv.spell_2.spellApCost > cv.currentAp)
+        {
+            spellButton2.interactable = false;
+        }
+        else
+        {
+            spellButton2.interactable = true;
+        }
+        if (cv.spell_3.spellApCost > cv.currentAp)
+        {
+            spellButton3.interactable = false;
+        }
+        else
+        {
+            spellButton3.interactable = true;
+        }
+        if (cv.spell_4.spellApCost > cv.currentAp)
+        {
+            spellButton4.interactable = false;
+        }
+        else
+        {
+            spellButton4.interactable = true;
+        }
+        if (cv.spell_5.spellApCost > cv.currentAp)
+        {
+            spellButton5.interactable = false;
+        }
+        else
+        {
+            spellButton5.interactable = true;
+        }
+        if (cv.spell_6.spellApCost > cv.currentAp)
+        {
+            spellButton6.interactable = false;
+        }
+        else
+        {
+            spellButton6.interactable = true;
+        }
     }
-    //public bool needTarget = false; //<
-    //public bool needFreeSquare = false; //<
-    //public bool inCooldown = false; //<
-    //public int spellCooldownLeft;   //<
-    //public int spellInitialCooldown;    //<
-    //public int spellCooldown;   //<
-    //public int spellCastPerturn;    //<
-    //public int castPerTarget;   //<
-
-
 
 
 
@@ -195,7 +245,7 @@ public class SpellCast : MonoBehaviour {
         {
             abilities.TeleportSwitch(casterTile, targetTile);
         }
-
+        UpdateHpApMp();
     }
 
     //Deal the actual damage V V V
@@ -236,6 +286,8 @@ public class SpellCast : MonoBehaviour {
         }
         currentSpell = null;
         spellOpen = false;
+        UpdateHpApMp();
+        playerBehaviour.UpdateTabs();
     }
 
 	void Update () {
