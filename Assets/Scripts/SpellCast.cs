@@ -84,6 +84,13 @@ public class SpellCast : MonoBehaviour {
         spellButton5.GetComponent<Tooltip>().spell = cv.spell_5;
         spellButton6.GetComponent<Tooltip>().spell = cv.spell_6;
 
+        HandleCooldownDecrease(cv.spell_1);
+        HandleCooldownDecrease(cv.spell_2);
+        HandleCooldownDecrease(cv.spell_3);
+        HandleCooldownDecrease(cv.spell_4);
+        HandleCooldownDecrease(cv.spell_5);
+        HandleCooldownDecrease(cv.spell_6);
+
         UpdateHpApMp();
         
     }
@@ -96,12 +103,6 @@ public class SpellCast : MonoBehaviour {
         DisableButtonsIfNotAp();
     }
 
-        HanddleCooldownDecrease(cv.spell_1);
-        HanddleCooldownDecrease(cv.spell_2);
-        HanddleCooldownDecrease(cv.spell_3);
-        HanddleCooldownDecrease(cv.spell_4);
-        HanddleCooldownDecrease(cv.spell_5);
-        HanddleCooldownDecrease(cv.spell_6);
     public void DisableButtonsIfNotAp()
     {
         if(cv.spell_1.spellApCost > cv.currentAp)
@@ -370,7 +371,14 @@ public class SpellCast : MonoBehaviour {
         playerBehaviour.UpdateTabs();
     }
 
-    public void HanddleCooldownDecrease(SpellValues spell)
+
+    public void HandleCooldownReset(SpellValues spell)
+    {
+            spell.spellInitialCooldowncounter = spell.spellInitialCooldown;
+        spell.spellCooldownLeft = 0;
+            spell.spellCastPerturncounter = 0;
+    }
+    public void HandleCooldownDecrease(SpellValues spell)
     {
         if (spell.spellInitialCooldowncounter > 0)
             spell.spellInitialCooldowncounter--;
@@ -386,7 +394,7 @@ public class SpellCast : MonoBehaviour {
         {
             spell.spellCastPerturncounter++;
         }
-        if(spell.spellCastPerturncounter >= spell.spellCastPerturn)
+        if(spell.spellCastPerturncounter >= spell.spellCastPerturn && spell.spellCastPerturn != 0)
         {
             spell.spellCooldownLeft = spell.spellCooldown;
         }
@@ -395,56 +403,38 @@ public class SpellCast : MonoBehaviour {
     public void Spell1Cast()
     {
             SpellCancel();
-        if (cv.currentAp >= cv.spell_1.spellApCost && spell1CastedThisTurn <= cv.spell_1.spellCastPerturn)
-        {
             currentSpell = cv.spell_1;
             spellOpen = true;
-        }
     }
     public void Spell2Cast()
     {
             SpellCancel();
-        if (cv.currentAp >= cv.spell_2.spellApCost && spell2CastedThisTurn <= cv.spell_2.spellCastPerturn)
-        {
             currentSpell = cv.spell_2;
             spellOpen = true; 
-        }
     }
     public void Spell3Cast()
     {
             SpellCancel();
-        if (cv.currentAp >= cv.spell_3.spellApCost && spell3CastedThisTurn <= cv.spell_3.spellCastPerturn)
-        {
             currentSpell = cv.spell_3;
             spellOpen = true; 
-        }
     }
     public void Spell4Cast()
     {
             SpellCancel();
-        if (cv.currentAp >= cv.spell_4.spellApCost && spell4CastedThisTurn <= cv.spell_4.spellCastPerturn)
-        {
             currentSpell = cv.spell_4;
             spellOpen = true; 
-        }
     }
     public void Spell5Cast()
     {
             SpellCancel();
-        if (cv.currentAp >= cv.spell_5.spellApCost && spell5CastedThisTurn <= cv.spell_5.spellCastPerturn)
-        {
             currentSpell = cv.spell_5;
             spellOpen = true; 
-        }
     }
     public void Spell6Cast()
     {
             SpellCancel();
-        if (cv.currentAp >= cv.spell_6.spellApCost && spell6CastedThisTurn <= cv.spell_6.spellCastPerturn)
-        {
             currentSpell = cv.spell_6;
             spellOpen = true; 
-        }
     }
 
     public void SpellCancel()

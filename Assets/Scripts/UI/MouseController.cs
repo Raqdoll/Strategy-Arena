@@ -216,6 +216,7 @@ public class MouseController : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("cannot be cast");
                     spellCast.SpellCancel();
                 }
             }

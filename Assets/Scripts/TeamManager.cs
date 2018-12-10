@@ -14,18 +14,28 @@ public class TeamManager : MonoBehaviour {
     public PlayerInfo activePlayer; //Changed playerbehaviour to PlayerInfo
     public StatusEffects sEffects;
     public TurnTimelineController timeline;
+    public SpellCast spellCast;
 
 
     private void Awake()
     {
+        if (spellCast == null)
+        {
+            spellCast = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<SpellCast>();
+        }
         SetupTeams();
     }
 
     // Use this for initialization
     void Start () {
+        if (spellCast == null)
+        {
+            spellCast = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<SpellCast>(); 
+        }
         firstTeamIsActive = true;
         playerPositionInTeam = 0;
         activePlayer = teamA[0];
+
         if (!sEffects)
             sEffects = gameObject.GetComponent<StatusEffects>();
         if (teamA == null || teamB == null)
@@ -68,6 +78,13 @@ public class TeamManager : MonoBehaviour {
         player.thisCharacter.armorChange = 0;
         player.thisCharacter.healsReceived = 0;
         player.thisCharacter.heavy = false;
+
+        spellCast.HandleCooldownReset(player.thisCharacter.spell_1);
+        spellCast.HandleCooldownReset(player.thisCharacter.spell_2);
+        spellCast.HandleCooldownReset(player.thisCharacter.spell_3);
+        spellCast.HandleCooldownReset(player.thisCharacter.spell_4);
+        spellCast.HandleCooldownReset(player.thisCharacter.spell_5);
+        spellCast.HandleCooldownReset(player.thisCharacter.spell_6);
     }
 
     void ChangeTurn()

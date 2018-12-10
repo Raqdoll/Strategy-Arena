@@ -925,19 +925,19 @@ public class Abilities : MonoBehaviour {
     public bool CheckCastability(SpellValues spell, Tile target)
     {
         //// ---------------------- nämä conflictas, muut oli ok -------------------------
-        //List<Tile> range = RangeType(spell.mySpellRangeType, spell.needLineOfSight);
-        //bool dryhu = false;
-        //foreach (var haistaPaska in range)
-        //{
-        //    if (haistaPaska == target)
-        //    {
-        //        dryhu = true;
-        //    }
-        //}
-        //if (dryhu == false)
-        //{
-        //    return false;
-        //}
+        List<Tile> range = RangeType(spell.mySpellRangeType, spell.needLineOfSight);
+        bool correct = false;
+        foreach (var temp in range)
+        {
+            if (temp == target)
+            {
+                correct = true;
+            }
+        }
+        if (correct == false)
+        {
+            return false;
+        }
         //// --------------------- Pasta carbonara on hyvää vai mitä ---------------------
 
 
@@ -967,7 +967,7 @@ public class Abilities : MonoBehaviour {
         {
             return false;
         }
-        if (spell.spellCastPerturncounter >= spell.spellCastPerturn)
+        if (spell.spellCastPerturncounter >= spell.spellCastPerturn && spell.spellCastPerturn != 0)
         {
             return false;
         }
@@ -976,10 +976,6 @@ public class Abilities : MonoBehaviour {
             return false;
         }
 
-        return true;
-    }
-    public bool SpellCastPerTurn(SpellValues spell)
-    {
         return true;
     }
 
