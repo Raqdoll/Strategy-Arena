@@ -14,7 +14,6 @@ public class SpellCast : MonoBehaviour {
     TurnManager turnManager;
     public HitText hitText;
     public StatusEffects sEffects;
-
     public SpellValues currentSpell;
     public bool spellOpen = false;
     //Käytä spellin 
@@ -253,6 +252,7 @@ public class SpellCast : MonoBehaviour {
     {
         //Damage dealt
         target.currentHP -= damage;
+        hitText.DamageText(target, damage * (-1));
         //Max health reduction
         target.currentMaxHP -= Mathf.RoundToInt(damage * turnManager.maxHealthReduction);
         playerBehaviour.UpdateTabs();
@@ -261,7 +261,16 @@ public class SpellCast : MonoBehaviour {
     public void GetHealed(CharacterValues target, int heal)
     {
         target.currentHP += heal;
-        if(target.currentHP > target.currentMaxHP)
+        if (target.currentHP != target.currentMaxHP)
+        {
+            hitText.DamageText(target, heal); 
+        }
+        else
+        {
+            hitText.DamageText(target, 0);
+        }
+
+        if (target.currentHP > target.currentMaxHP)
         {
             target.currentHP = target.currentMaxHP;
         }
