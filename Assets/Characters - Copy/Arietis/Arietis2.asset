@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Arietis2
   m_EditorClassIdentifier: 
   characterName: Arietis
-  portrait: {fileID: 21300000, guid: 528dd510e76efa6488e5ff74962d4503, type: 3}
+  portrait: {fileID: 21300000, guid: 4afec3581eb755744831ca062f6765ea, type: 3}
   maxHP: 3000
   maxAp: 12
   maxMp: 6
@@ -30,9 +30,10 @@ MonoBehaviour:
   moving: 0
   dead: 0
   team: 1
+  currentMaxHP: 3000
   currentHP: 3000
-  currentAp: 9
-  currentMp: 0
+  currentAp: 12
+  currentMp: 6
   damageChange: 0
   armorChange: 0
   healsReceived: 0

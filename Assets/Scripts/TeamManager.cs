@@ -113,7 +113,6 @@ public class TeamManager : MonoBehaviour {
         }
         sEffects.UpdateEffects();
         sEffects.CalculateEffects(activePlayer.thisCharacter);
-        timeline.MoveArrow(activePlayer.thisCharacter);
     }
 
     public PlayerInfo ChangeTurnUntilValidPlayer()

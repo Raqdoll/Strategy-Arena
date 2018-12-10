@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: DrMorgan2
   m_EditorClassIdentifier: 
   characterName: Dr. Morgan
-  portrait: {fileID: 21300000, guid: 8a86ee27c53ef974c9ec9e4796c12f39, type: 3}
+  portrait: {fileID: 21300000, guid: 6aa698f9879c9e5428f7ce43452571d9, type: 3}
   maxHP: 3000
   maxAp: 12
   maxMp: 6
@@ -30,6 +30,7 @@ MonoBehaviour:
   moving: 0
   dead: 0
   team: 1
+  currentMaxHP: 3000
   currentHP: 3000
   currentAp: 12
   currentMp: 6
