@@ -25,7 +25,7 @@ MonoBehaviour:
   spellDamageMax: 0
   spellHealMin: 220
   spellHealMax: 240
-  healsAlly: 0
+  healsAlly: 1
   hurtsAlly: 0
   needLineOfSight: 1
   needTarget: 0
@@ -45,10 +45,11 @@ MonoBehaviour:
   spellCooldown: 0
   spellCastPerturn: 2
   castPerTarget: 0
+  spellInitialCooldowncounter: 0
+  spellCastPerturncounter: 0
+  castPerTargetcounter: 0
   description: 'Throws a flask of herbal potion
 
     The potion heals every ally it hits'
   spellCooldownLeft: 0
   trueDamage: 0
-  spellLaunched: 0
-  inCooldown: 0
