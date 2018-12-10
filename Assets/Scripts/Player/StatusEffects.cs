@@ -25,58 +25,30 @@ public class StatusEffects : MonoBehaviour {
         clone.target = target;
         clone.remainingTurns = clone.effectDuration;
 
-
-
-        bool inUse = false;
-        if (effectList.Count != 0)
+        foreach (EffectValues eff in effectList)
         {
-            foreach (EffectValues eff in effectList)
+            if (eff.target == clone.target)
             {
-                if (eff.target == clone.target && eff.name == clone.name)
+                if (eff.name == clone.name)
                 {
-                    inUse = true;
+                    if (clone.stacks == false)
+                    {
+                        eff.remainingTurns = clone.effectDuration;      //New spells are always better!
+                    }
+                    else
+                    {
+                        effectList.Add(clone);
+                        pBehaviour.AddTabEffect(clone, target);
+                    }
                 }
                 else
                 {
                     effectList.Add(clone);
                     pBehaviour.AddTabEffect(clone, target);
                 }
-            } 
-        }
-        else
-        {
-            effectList.Add(clone);
-            pBehaviour.AddTabEffect(clone, target);
-        }
-
-        if (clone.stacks == true || (clone.stacks == false && inUse == false))
-        {
-            target.damagePlus += clone.damageModifyPlus;
-            target.damageChange += clone.damageModifyPercent;
-            target.armorPlus += clone.armorModifyPlus;
-            target.armorChange += clone.armorModifyPercent;
-            target.healsReceived += clone.healModify;
-            target.currentAp += clone.apModify;
-            target.currentMp += clone.mpModify;
-            if (clone.immune == true)
-            {
-                target.armorChange += 1000;
-            }
-            if (clone.heavyState == true)
-            {
-                target.heavy = true;
             }
         }
-        if (clone.stacks == false && inUse == true)
-        {
-            foreach (EffectValues eff in effectList)
-            {
-                if (eff.name == clone.name && eff.target == clone.target)
-                {
-                    eff.remainingTurns = clone.effectDuration;
-                }
-            }
-        }
+        CalculateEffects(target);
     }
 
     //Calls all effects of a certain character
@@ -108,25 +80,88 @@ public class StatusEffects : MonoBehaviour {
                 //Checks if the spell stays active
                 if (effect.remainingTurns <= 0)
                 {
-                    effect.target.damagePlus -= effect.damageModifyPlus;
-                    effect.target.damageChange -= effect.damageModifyPercent;
-                    effect.target.armorPlus -= effect.armorModifyPlus;
-                    effect.target.armorChange -= effect.armorModifyPercent;
-                    effect.target.healsReceived -= effect.healModify;
-                    effect.target.maxAp -= effect.apModify;
-                    effect.target.maxMp -= effect.mpModify;
-                    if (effect.immune == true)
-                    {
-                        effect.target.armorChange -= 1000;
-                    }
-                    if (effect.heavyState == true)
-                    {
-                        effect.target.heavy = false; //saattaa tuottaa ongelmia jos useampi heavy state käytössä! Korjaus kun tarve
-                    }
-                    //pBehaviour.RemoveTabEffect(effect);
+                    //effect.target.damagePlus -= effect.damageModifyPlus;
+                    //effect.target.damageChange -= effect.damageModifyPercent;
+                    //effect.target.armorPlus -= effect.armorModifyPlus;
+                    //effect.target.armorChange -= effect.armorModifyPercent;
+                    //effect.target.healsReceived -= effect.healModify;
+                    //effect.target.maxAp -= effect.apModify;
+                    //effect.target.maxMp -= effect.mpModify;
+                    //if (effect.immune == true)
+                    //{
+                    //    effect.target.armorChange -= 1000;
+                    //}
+                    //if (effect.heavyState == true)
+                    //{
+                    //    effect.target.heavy = false; //saattaa tuottaa ongelmia jos useampi heavy state käytössä! Korjaus kun tarve
+                    //}
+                    ////pBehaviour.RemoveTabEffect(effect);
                     effectList.Remove(effect);
                 }
             } 
         }
     }
+
+    public void CalculateEffects(CharacterValues effectTarget)
+    {
+        if (effectTarget == null)
+        {
+            Debug.Log("EffectTarget was null!");
+            return;
+        }
+        List<EffectValues> effects = GetEffects(effectTarget);
+        if (effects == null)
+        {
+            Debug.Log("EffectList was null!");
+            return;
+        }
+        ClearEffectValues(effectTarget);
+                //Laita tähän tabien clearaus!
+        if (effects.Count == 0)
+        {
+            Debug.Log("No active effects");
+            return;
+        }
+        List<string> effectNames = new List<string>();
+        foreach (EffectValues effect in effects)
+        {
+            if (effect.stacks || !effectNames.Contains(effect.name))
+            {
+                effectTarget.damagePlus += effect.damageModifyPlus;
+                effectTarget.damageChange += effect.damageModifyPercent;
+                effectTarget.armorPlus += effect.armorModifyPlus;
+                effectTarget.armorChange += effect.armorModifyPercent;
+                effectTarget.healsReceived += effect.healModify;
+                effectTarget.currentAp += effect.apModify;
+                effectTarget.currentMp += effect.mpModify;
+                if (effect.immune == true)
+                {
+                    effectTarget.armorChange = 1000;
+                }
+                if (effect.heavyState == true)
+                {
+                    effectTarget.heavy = true;
+                }
+                if (!effectNames.Contains(effect.name))
+                {
+                    effectNames.Add(effect.name);
+                }
+                //pBehaviour.AddTabEffect(effect, effectTarget);
+            }
+        }
+    }
+
+    public void ClearEffectValues(CharacterValues effectTarget)
+    {
+        effectTarget.damagePlus = 0;
+        effectTarget.damageChange = 0;
+        effectTarget.armorPlus = 0;
+        effectTarget.armorChange = 0;
+        effectTarget.healsReceived = 0;
+        effectTarget.maxAp = 0;
+        effectTarget.maxMp = 0;
+        effectTarget.armorChange = 0;
+        effectTarget.heavy = false;
+    }
+
 }//Last edited by Ilari

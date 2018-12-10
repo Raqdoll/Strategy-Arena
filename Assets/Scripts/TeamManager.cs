@@ -112,6 +112,7 @@ public class TeamManager : MonoBehaviour {
             activePlayer = teamA[playerPositionInTeam];
         }
         sEffects.UpdateEffects();
+        sEffects.CalculateEffects(activePlayer.thisCharacter);
         timeline.MoveArrow(activePlayer.thisCharacter);
     }
 
