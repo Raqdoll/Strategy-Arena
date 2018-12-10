@@ -43,10 +43,11 @@ MonoBehaviour:
   moveAwayFromTarget: 0
   spellInitialCooldown: 0
   spellCooldown: 0
-  spellCastPerturn: 4
-  castPerTarget: 3
+  spellCastPerturn: 3
+  castPerTarget: 0
+  spellInitialCooldowncounter: 0
+  spellCastPerturncounter: 0
+  castPerTargetcounter: 0
   description: "A shotgun round which \npushes the target back"
   spellCooldownLeft: 0
   trueDamage: 0
-  spellLaunched: 0
-  inCooldown: 0

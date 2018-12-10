@@ -67,7 +67,7 @@ public class SpellValues : ScriptableObject
     [Space(6)]
     [Header("Ingame values, do not touch")]
     [Space(6)]
-    public int spellCooldownLeft; 
+    public int spellCooldownLeft = 0; 
     public int trueDamage;
 }
 

@@ -53,7 +53,7 @@ public class CharacterTab : MonoBehaviour {
     public void UpdateInfo()
     {
         UpdateName(characterVal.characterName);
-        UpdateHp(characterVal.currentHP, characterVal.maxHP);
+        UpdateHp(characterVal.currentHP, characterVal.currentMaxHP);
         UpdateAp(characterVal.currentAp);
         UpdateMp(characterVal.currentMp);
     }

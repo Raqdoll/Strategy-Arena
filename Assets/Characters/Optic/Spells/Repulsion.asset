@@ -43,10 +43,11 @@ MonoBehaviour:
   moveAwayFromTarget: 1
   spellInitialCooldown: 0
   spellCooldown: 0
-  spellCastPerturn: 0
+  spellCastPerturn: 2
   castPerTarget: 0
-  description: "Non-damaging pulse which \n"
+  spellInitialCooldowncounter: 0
+  spellCastPerturncounter: 0
+  castPerTargetcounter: 0
+  description: "Non-damaging pulse which \nrepels caster and target\naway from eachother\n"
   spellCooldownLeft: 0
   trueDamage: 0
-  spellLaunched: 0
-  inCooldown: 0

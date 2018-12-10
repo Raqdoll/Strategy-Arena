@@ -43,10 +43,11 @@ MonoBehaviour:
   moveAwayFromTarget: 0
   spellInitialCooldown: 0
   spellCooldown: 0
-  spellCastPerturn: 0
-  castPerTarget: 2
+  spellCastPerturn: 2
+  castPerTarget: 0
+  spellInitialCooldowncounter: 0
+  spellCastPerturncounter: 0
+  castPerTargetcounter: 0
   description: High damage dealing bolt of plasma
   spellCooldownLeft: 0
   trueDamage: 0
-  spellLaunched: 0
-  inCooldown: 0

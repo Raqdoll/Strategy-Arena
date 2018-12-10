@@ -44,11 +44,12 @@ MonoBehaviour:
   spellInitialCooldown: 0
   spellCooldown: 0
   spellCastPerturn: 2
-  castPerTarget: 1
+  castPerTarget: 0
+  spellInitialCooldowncounter: 0
+  spellCastPerturncounter: 0
+  castPerTargetcounter: 0
   description: 'Changes places with the target
 
     dealing damage on enemies'
   spellCooldownLeft: 0
   trueDamage: 0
-  spellLaunched: 0
-  inCooldown: 0

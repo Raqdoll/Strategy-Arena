@@ -6,12 +6,15 @@ using UnityEngine.UI;
 
 public class TurnManager : MonoBehaviour {
 
+    public float maxHealthReduction;
     public int turnNumber;
     public delegate void PlayerEvent(PlayerInfo player);
     public event PlayerEvent TurnChange;
     public Button nextTurnButton;
     public TeamManager teamManager;
     public SpellCast spellCast;
+    public Text TurnNumberText;
+    public Text MaxHrText;
 
 
     public void AnnounceTurnChange(GameObject newPlayerGO)
@@ -37,6 +40,9 @@ public class TurnManager : MonoBehaviour {
         if (!teamManager)
             teamManager = gameObject.GetComponent<TeamManager>();
         spellCast= GameObject.FindGameObjectWithTag("PlayerController").GetComponent<SpellCast>();
+        turnNumber = 1;
+        maxHealthReduction = 0;
+        UpdateTurnNumber();
     }
 
     public void NextTurn()
@@ -49,6 +55,21 @@ public class TurnManager : MonoBehaviour {
         }
         else
             Debug.Log("Could not find team manager script!");
+    }
+
+    public void UpdateTurnNumber()
+    {
+        TurnNumberText.text = "Turn: " + turnNumber;
+        UpdateMaxHR();
+        MaxHrText.text = "Max health reduction: " + maxHealthReduction * 100 + "%";
+    }
+
+    public void UpdateMaxHR()
+    {
+        if(turnNumber >= 3 && maxHealthReduction < 1)
+        {
+            maxHealthReduction = (turnNumber - 2) * 0.05f;
+        }
     }
 }
 //Made by Asser

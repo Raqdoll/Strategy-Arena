@@ -92,7 +92,13 @@ public class SpellCast : MonoBehaviour {
         HandleCooldownDecrease(cv.spell_6);
 
         UpdateHpApMp();
-        
+
+        HanddleCooldownDecrease(cv.spell_1);
+        HanddleCooldownDecrease(cv.spell_2);
+        HanddleCooldownDecrease(cv.spell_3);
+        HanddleCooldownDecrease(cv.spell_4);
+        HanddleCooldownDecrease(cv.spell_5);
+        HanddleCooldownDecrease(cv.spell_6);
     }
 
     public void UpdateHpApMp()
@@ -105,7 +111,7 @@ public class SpellCast : MonoBehaviour {
 
     public void DisableButtonsIfNotAp()
     {
-        if(cv.spell_1.spellApCost > cv.currentAp)
+        if(cv.spell_1.spellApCost > cv.currentAp || abilities.SpellCooldownCheck(cv.spell_1) == false)
         {
             spellButton1.interactable = false;
         }
@@ -113,7 +119,7 @@ public class SpellCast : MonoBehaviour {
         {
             spellButton1.interactable = true;
         }
-        if (cv.spell_2.spellApCost > cv.currentAp)
+        if (cv.spell_2.spellApCost > cv.currentAp || abilities.SpellCooldownCheck(cv.spell_2) == false)
         {
             spellButton2.interactable = false;
         }
@@ -121,7 +127,7 @@ public class SpellCast : MonoBehaviour {
         {
             spellButton2.interactable = true;
         }
-        if (cv.spell_3.spellApCost > cv.currentAp)
+        if (cv.spell_3.spellApCost > cv.currentAp || abilities.SpellCooldownCheck(cv.spell_3) == false)
         {
             spellButton3.interactable = false;
         }
@@ -129,7 +135,7 @@ public class SpellCast : MonoBehaviour {
         {
             spellButton3.interactable = true;
         }
-        if (cv.spell_4.spellApCost > cv.currentAp)
+        if (cv.spell_4.spellApCost > cv.currentAp || abilities.SpellCooldownCheck(cv.spell_4) == false)
         {
             spellButton4.interactable = false;
         }
@@ -137,7 +143,7 @@ public class SpellCast : MonoBehaviour {
         {
             spellButton4.interactable = true;
         }
-        if (cv.spell_5.spellApCost > cv.currentAp)
+        if (cv.spell_5.spellApCost > cv.currentAp || abilities.SpellCooldownCheck(cv.spell_5) == false)
         {
             spellButton5.interactable = false;
         }
@@ -145,7 +151,7 @@ public class SpellCast : MonoBehaviour {
         {
             spellButton5.interactable = true;
         }
-        if (cv.spell_6.spellApCost > cv.currentAp)
+        if (cv.spell_6.spellApCost > cv.currentAp || abilities.SpellCooldownCheck(cv.spell_6) == false)
         {
             spellButton6.interactable = false;
         }
@@ -252,16 +258,19 @@ public class SpellCast : MonoBehaviour {
     //Deal the actual damage V V V
     public void GetHit(CharacterValues target, int damage)
     {
+        //Damage dealt
         target.currentHP -= damage;
+        //Max health reduction
+        target.currentMaxHP -= Mathf.RoundToInt(damage * turnManager.maxHealthReduction);
         playerBehaviour.UpdateTabs();
     }
     //Deal the actual healing V V V
     public void GetHealed(CharacterValues target, int heal)
     {
         target.currentHP += heal;
-        if(target.currentHP > target.maxHP)
+        if(target.currentHP > target.currentMaxHP)
         {
-            target.currentHP = target.maxHP;
+            target.currentHP = target.currentMaxHP;
         }
         playerBehaviour.UpdateTabs();
     }
@@ -398,6 +407,7 @@ public class SpellCast : MonoBehaviour {
         {
             spell.spellCooldownLeft = spell.spellCooldown;
         }
+        Debug.Log("Cooldown raised");
     }
 
     public void Spell1Cast()
