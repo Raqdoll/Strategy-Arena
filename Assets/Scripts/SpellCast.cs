@@ -374,9 +374,9 @@ public class SpellCast : MonoBehaviour {
 
     public void HandleCooldownReset(SpellValues spell)
     {
-            spell.spellInitialCooldowncounter = spell.spellInitialCooldown;
+        spell.spellInitialCooldowncounter = spell.spellInitialCooldown;
         spell.spellCooldownLeft = 0;
-            spell.spellCastPerturncounter = 0;
+        spell.spellCastPerturncounter = 0;
     }
     public void HandleCooldownDecrease(SpellValues spell)
     {
