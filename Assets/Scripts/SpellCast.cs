@@ -252,7 +252,11 @@ public class SpellCast : MonoBehaviour {
     {
         //Damage dealt
         target.currentHP -= damage;
-        hitText.DamageText(target, damage * (-1));
+        //Popup
+        if (damage != 0)
+        {
+            hitText.DamageText(target, damage * (-1)); 
+        }
         //Max health reduction
         target.currentMaxHP -= Mathf.RoundToInt(damage * turnManager.maxHealthReduction);
         playerBehaviour.UpdateTabs();
@@ -261,15 +265,12 @@ public class SpellCast : MonoBehaviour {
     public void GetHealed(CharacterValues target, int heal)
     {
         target.currentHP += heal;
-        if (target.currentHP != target.currentMaxHP)
+        //Popup
+        if (target.currentHP != target.currentMaxHP && heal != 0)
         {
             hitText.DamageText(target, heal); 
         }
-        else
-        {
-            hitText.DamageText(target, 0);
-        }
-
+        //Max hp check
         if (target.currentHP > target.currentMaxHP)
         {
             target.currentHP = target.currentMaxHP;
@@ -366,7 +367,7 @@ public class SpellCast : MonoBehaviour {
     public int TrueHealCalculator(int healMax, int healMin, float heals)
     {
         int tempHealMin = MinHealCacl(healMin, heals);
-        int tempHealMax = MaxHealCacl(healMin, heals);
+        int tempHealMax = MaxHealCacl(healMax, heals);
         int trueHeal = UnityEngine.Random.Range(tempHealMin, tempHealMax);
 
         return trueHeal;

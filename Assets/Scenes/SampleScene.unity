@@ -11592,8 +11592,8 @@ MonoBehaviour:
   hitTextPrefab: {fileID: 1808744042088248, guid: 62bb031edb51b3f44b410df40e2eb31c,
     type: 2}
   offset: {x: 0, y: 3, z: 0}
-  damageColor: {r: 0.3009078, g: 0.50750184, b: 0.9245283, a: 1}
-  healColor: {r: 0.8867924, g: 0.15477037, b: 0.42510742, a: 1}
+  damageColor: {r: 0.080010675, g: 0.23279227, b: 0.5471698, a: 1}
+  healColor: {r: 0.9150943, g: 0.06474723, b: 0.30896446, a: 1}
   zeroColor: {r: 0.9254902, g: 0.7885795, b: 0.15294118, a: 1}
 --- !u!1001 &454703253
 Prefab:
@@ -27408,6 +27408,7 @@ MonoBehaviour:
   activePlayer: {fileID: 386171256}
   sEffects: {fileID: 0}
   timeline: {fileID: 537816653}
+  spellCast: {fileID: 0}
   tManager: {fileID: 0}
 --- !u!114 &1260233785
 MonoBehaviour:
