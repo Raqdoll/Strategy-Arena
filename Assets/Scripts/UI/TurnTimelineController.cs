@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,10 +7,13 @@ using UnityEngine.UI;
 public class TurnTimelineController : MonoBehaviour {
 
     public List<GameObject> blocks;
+    private TurnManager tManager;
     private int currentArrow = 0;
 
 	void Start ()
     {
+        tManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TurnManager>();
+        tManager.TurnChange += HandleTurnChange;
         //Get sprites
         foreach(GameObject block in blocks)
         {
@@ -17,6 +21,15 @@ public class TurnTimelineController : MonoBehaviour {
             //Disable arrows
             DisableArrows();
         }
+    }
+    private void OnDestroy()
+    {
+        tManager.TurnChange -= HandleTurnChange;
+    }
+
+    private void HandleTurnChange(PlayerInfo player)
+    {
+        MoveArrow(player.thisCharacter);
     }
 
     public void MoveArrow(CharacterValues character)

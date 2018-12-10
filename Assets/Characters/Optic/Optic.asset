@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Name: Optic
   m_EditorClassIdentifier: 
   characterName: Optic
-  portrait: {fileID: 21300000, guid: 8a86ee27c53ef974c9ec9e4796c12f39, type: 3}
+  portrait: {fileID: 21300000, guid: 9c65225251e542b4bad5db9d209f198c, type: 3}
   maxHP: 3000
   maxAp: 12
-  maxMp: 6
+  maxMp: 8
   spell_1: {fileID: 11400000, guid: 1ee71a3098ab36f43a5d60769b973d99, type: 2}
   spell_2: {fileID: 11400000, guid: ac5169bc0439b28499d93b1ce3963478, type: 2}
   spell_3: {fileID: 11400000, guid: 3a4f4dd375ef87640be08d502c1a53e9, type: 2}
@@ -30,9 +30,10 @@ MonoBehaviour:
   moving: 0
   dead: 0
   team: 0
-  currentHP: 2703
+  currentMaxHP: 2976
+  currentHP: 2531
   currentAp: 12
-  currentMp: 3
+  currentMp: 6
   damageChange: 0
   armorChange: 0
   healsReceived: 0

@@ -284,13 +284,13 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         //CHARACTER
         else if (!spell && character && !effect)
         {
-            //ui._text = "";
-            //ui._text += character.name;
-            //ui._text += "\n";
-            //ui._text += "\nHP: " + character.currentHP + " / " + character.maxHP;
-            //ui._text += "\nAP: " + character.currentAp;
-            //ui._text += "\nMP: " + character.currentMp;
-            //ui.ShowTooltip();
+            ui._text = "";
+            ui._text += character.characterName;
+            ui._text += "\n";
+            ui._text += "\nHP: " + character.currentHP + " / " + character.maxHP;
+            ui._text += "\nAP: " + character.currentAp;
+            ui._text += "\nMP: " + character.currentMp;
+            ui.ShowTooltip();
         }
         //EFFECT
         else if (!spell && !character && effect)

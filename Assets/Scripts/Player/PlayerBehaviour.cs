@@ -40,6 +40,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     public EffectValues testing;
 
+    public SpellCast sCast;
+
     void Start()
     {
         if (!gridController)
@@ -48,6 +50,8 @@ public class PlayerBehaviour : MonoBehaviour
             Debug.LogWarning("Gridcontroller is null!");
         if (!aControll)
             aControll = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>();
+        if (!sCast)
+            sCast = gameObject.GetComponent<SpellCast>();
 
         //if (!currentTile)
         //    currentTile = gridController.GetTile((int)transform.localPosition.x, (int)transform.localPosition.z);
@@ -83,6 +87,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             CharacterTab tabby = tab.GetComponent<CharacterTab>();
             tabby.UpdateInfo();
+            sCast.DisableButtonsIfNotAp();
         }
     }
     public void AddTabEffect(EffectValues effect, CharacterValues target)
@@ -95,6 +100,19 @@ public class PlayerBehaviour : MonoBehaviour
                 tabby.AddEffectIcon(effect);
             }
         }
+    }
+    public CharacterTab GetTab(CharacterValues character)
+    {
+        foreach (GameObject tab in charTabList)
+        {
+            CharacterTab tabby = tab.GetComponent<CharacterTab>();
+            if (tabby.characterVal == character)
+            {
+                return tabby;
+            }
+        }
+        Debug.Log("No tab found");
+        return null;
     }
     //public void RemoveTabEffect(EffectValues effect)
     //{
