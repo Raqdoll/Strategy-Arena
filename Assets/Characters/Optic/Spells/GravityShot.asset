@@ -21,8 +21,8 @@ MonoBehaviour:
   aoeRange: 1
   spellApCost: 3
   damageStealsHp: 0
-  spellDamageMin: 200
-  spellDamageMax: 220
+  spellDamageMin: 220
+  spellDamageMax: 240
   spellHealMin: 0
   spellHealMax: 0
   healsAlly: 0
@@ -45,10 +45,11 @@ MonoBehaviour:
   spellCooldown: 2
   spellCastPerturn: 0
   castPerTarget: 0
-  description: 'A shot that makes the targets
+  spellInitialCooldowncounter: 0
+  spellCastPerturncounter: 0
+  castPerTargetcounter: 0
+  description: 'A shot that hits with a
 
-    unable to be moved by spells.'
+    shock wave slowing enemies'
   spellCooldownLeft: 0
   trueDamage: 0
-  spellLaunched: 0
-  inCooldown: 0

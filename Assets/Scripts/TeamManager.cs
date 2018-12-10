@@ -112,7 +112,6 @@ public class TeamManager : MonoBehaviour {
             activePlayer = teamA[playerPositionInTeam];
         }
         sEffects.UpdateEffects();
-        timeline.MoveArrow(activePlayer.thisCharacter);
     }
 
     public PlayerInfo ChangeTurnUntilValidPlayer()

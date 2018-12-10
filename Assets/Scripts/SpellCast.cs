@@ -90,6 +90,7 @@ public class SpellCast : MonoBehaviour {
         HandleCooldownDecrease(cv.spell_5);
         HandleCooldownDecrease(cv.spell_6);
 
+        playerBehaviour.UpdateTabs();
         UpdateHpApMp();
     }
 
@@ -114,42 +115,124 @@ public class SpellCast : MonoBehaviour {
         if (cv.spell_2.spellApCost > cv.currentAp || abilities.SpellCooldownCheck(cv.spell_2) == false)
         {
             spellButton2.interactable = false;
+            
         }
         else
         {
             spellButton2.interactable = true;
+            
         }
         if (cv.spell_3.spellApCost > cv.currentAp || abilities.SpellCooldownCheck(cv.spell_3) == false)
         {
             spellButton3.interactable = false;
+           
         }
         else
         {
             spellButton3.interactable = true;
+            
         }
         if (cv.spell_4.spellApCost > cv.currentAp || abilities.SpellCooldownCheck(cv.spell_4) == false)
         {
             spellButton4.interactable = false;
+           
         }
         else
         {
             spellButton4.interactable = true;
+           
         }
         if (cv.spell_5.spellApCost > cv.currentAp || abilities.SpellCooldownCheck(cv.spell_5) == false)
         {
             spellButton5.interactable = false;
+           
         }
         else
         {
             spellButton5.interactable = true;
+           
         }
         if (cv.spell_6.spellApCost > cv.currentAp || abilities.SpellCooldownCheck(cv.spell_6) == false)
         {
             spellButton6.interactable = false;
+           
         }
         else
         {
             spellButton6.interactable = true;
+           
+        }
+        //Tabs
+        if (playerBehaviour.GetTab(cv) != null && cv.spell_1.spellCooldownLeft > 1)
+        {
+            playerBehaviour.GetTab(cv).spell1.GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            if (playerBehaviour.GetTab(cv) != null)
+            {
+                playerBehaviour.GetTab(cv).spell1.GetComponent<Button>().interactable = true;
+            }
+        }
+
+        if (playerBehaviour.GetTab(cv) != null && cv.spell_2.spellCooldownLeft > 1)
+        {
+            playerBehaviour.GetTab(cv).spell2.GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            if (playerBehaviour.GetTab(cv) != null)
+            {
+                playerBehaviour.GetTab(cv).spell2.GetComponent<Button>().interactable = true;
+            }
+        }
+
+        if (playerBehaviour.GetTab(cv) != null && cv.spell_3.spellCooldownLeft > 1)
+        {
+            playerBehaviour.GetTab(cv).spell3.GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            if (playerBehaviour.GetTab(cv) != null)
+            {
+                playerBehaviour.GetTab(cv).spell3.GetComponent<Button>().interactable = true;
+            }
+        }
+
+        if (playerBehaviour.GetTab(cv) != null && cv.spell_4.spellCooldownLeft > 1)
+        {
+            playerBehaviour.GetTab(cv).spell4.GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            if (playerBehaviour.GetTab(cv) != null)
+            {
+                playerBehaviour.GetTab(cv).spell4.GetComponent<Button>().interactable = true;
+            }
+        }
+
+        if (playerBehaviour.GetTab(cv) != null && cv.spell_5.spellCooldownLeft > 1)
+        {
+            playerBehaviour.GetTab(cv).spell5.GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            if (playerBehaviour.GetTab(cv) != null)
+            {
+                playerBehaviour.GetTab(cv).spell5.GetComponent<Button>().interactable = true;
+            }
+        }
+
+        if (playerBehaviour.GetTab(cv) != null && cv.spell_6.spellCooldownLeft > 1)
+        {
+            playerBehaviour.GetTab(cv).spell6.GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            if (playerBehaviour.GetTab(cv) != null)
+            {
+                playerBehaviour.GetTab(cv).spell6.GetComponent<Button>().interactable = true;
+            }
         }
     }
 

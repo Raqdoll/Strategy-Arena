@@ -35,6 +35,7 @@ public class TurnManager : MonoBehaviour {
     }
 		
     void Start () {
+        
         Button next = nextTurnButton.GetComponent<Button>();
         next.onClick.AddListener(NextTurn);
         if (!teamManager)
@@ -42,6 +43,13 @@ public class TurnManager : MonoBehaviour {
         spellCast= GameObject.FindGameObjectWithTag("PlayerController").GetComponent<SpellCast>();
         turnNumber = 1;
         maxHealthReduction = 0;
+
+        Invoke("Purkka", 0.1f);
+    }
+
+    void Purkka()
+    {
+        AnnounceTurnChange(teamManager.teamA[0]);
         UpdateTurnNumber();
     }
 

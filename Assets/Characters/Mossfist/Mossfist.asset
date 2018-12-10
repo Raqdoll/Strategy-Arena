@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Name: Mossfist
   m_EditorClassIdentifier: 
   characterName: Mossfist
-  portrait: {fileID: 0}
+  portrait: {fileID: 21300000, guid: 8d2b094e3ceab354ab0f045843abc52c, type: 3}
   maxHP: 4500
   maxAp: 12
-  maxMp: 6
+  maxMp: 9
   spell_1: {fileID: 11400000, guid: ef58f8eb443458143a7560c7721ef566, type: 2}
   spell_2: {fileID: 11400000, guid: f2da9bd783e65934d829ba8f875d7464, type: 2}
   spell_3: {fileID: 11400000, guid: 27e3786a987f11543860aa33be94d50f, type: 2}
@@ -30,10 +30,11 @@ MonoBehaviour:
   moving: 0
   dead: 0
   team: 0
-  currentHP: 3677
+  currentMaxHP: 4488
+  currentHP: 4265
   currentAp: 12
-  currentMp: 6
+  currentMp: 9
   damageChange: 0
-  armorChange: 0.6
-  healsReceived: 0.25
+  armorChange: 0
+  healsReceived: 0
   heavy: 0

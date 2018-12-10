@@ -3899,12 +3899,6 @@ Prefab:
       propertyPath: m_Name
       value: CharacterTab1
       objectReference: {fileID: 0}
-    - target: {fileID: 114683674142475220, guid: 8e96766781cab224c8066daaddbed9c8,
-        type: 2}
-      propertyPath: characterVal
-      value: 
-      objectReference: {fileID: 11400000, guid: 937fc06e95c1c1a4198cd31d62dc4408,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e96766781cab224c8066daaddbed9c8, type: 2}
   m_IsPrefabAsset: 0
@@ -11555,6 +11549,7 @@ MonoBehaviour:
   - {fileID: 1178994842}
   aControll: {fileID: 0}
   testing: {fileID: 11400000, guid: 234be2b29f5808e4dbab11315cd49775, type: 2}
+  sCast: {fileID: 0}
 --- !u!114 &451841863
 MonoBehaviour:
   m_ObjectHideFlags: 0

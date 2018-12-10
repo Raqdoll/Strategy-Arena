@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Pepper
   m_EditorClassIdentifier: 
   characterName: Pepper
-  portrait: {fileID: 0}
+  portrait: {fileID: 21300000, guid: d4bf2449307085147a530f6be2276852, type: 3}
   maxHP: 3000
   maxAp: 12
   maxMp: 6
@@ -30,10 +30,11 @@ MonoBehaviour:
   moving: 0
   dead: 0
   team: 0
-  currentHP: 1003
+  currentMaxHP: 3000
+  currentHP: 3000
   currentAp: 12
   currentMp: 6
   damageChange: 0
-  armorChange: -0.25
+  armorChange: 0
   healsReceived: 0
   heavy: 0
