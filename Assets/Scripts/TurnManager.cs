@@ -10,6 +10,7 @@ public class TurnManager : MonoBehaviour {
     public int turnNumber;
     public delegate void PlayerEvent(PlayerInfo player);
     public event PlayerEvent TurnChange;
+    public event PlayerEvent TurnEnd;
     public Button nextTurnButton;
     public TeamManager teamManager;
     public SpellCast spellCast;
@@ -31,6 +32,14 @@ public class TurnManager : MonoBehaviour {
         if (TurnChange != null && newPlayer != null)
         {
             TurnChange(newPlayer);
+        }
+    }
+
+    public void AnnounceTurnEnd(PlayerInfo endingPlayer)
+    {
+        if (TurnEnd != null && endingPlayer != null)
+        {
+            TurnEnd(endingPlayer);
         }
     }
 		
@@ -57,6 +66,7 @@ public class TurnManager : MonoBehaviour {
     {
         if (teamManager)
         {
+            AnnounceTurnEnd(teamManager.activePlayer);
             spellCast.SpellCancel();
             PlayerInfo temp = teamManager.ChangeTurnUntilValidPlayer();
             AnnounceTurnChange(temp);
