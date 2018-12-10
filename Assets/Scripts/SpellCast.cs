@@ -92,13 +92,6 @@ public class SpellCast : MonoBehaviour {
         HandleCooldownDecrease(cv.spell_6);
 
         UpdateHpApMp();
-
-        HanddleCooldownDecrease(cv.spell_1);
-        HanddleCooldownDecrease(cv.spell_2);
-        HanddleCooldownDecrease(cv.spell_3);
-        HanddleCooldownDecrease(cv.spell_4);
-        HanddleCooldownDecrease(cv.spell_5);
-        HanddleCooldownDecrease(cv.spell_6);
     }
 
     public void UpdateHpApMp()
@@ -212,7 +205,6 @@ public class SpellCast : MonoBehaviour {
                 leach = leach + damageStuff;
                 GetHit(target, damageStuff);
                 GetHealed(target, healingIsFun);
-                HandleCoolDownIncrease(spell);
                 if (spell.effect)
                 {
                     sEffects.ApplyEffect(caster, spell.effect, target);
@@ -252,6 +244,7 @@ public class SpellCast : MonoBehaviour {
         {
             abilities.TeleportSwitch(casterTile, targetTile);
         }
+        HandleCoolDownIncrease(spell);
         UpdateHpApMp();
     }
 
@@ -386,6 +379,7 @@ public class SpellCast : MonoBehaviour {
         spell.spellInitialCooldowncounter = spell.spellInitialCooldown;
         spell.spellCooldownLeft = 0;
         spell.spellCastPerturncounter = 0;
+        Debug.Log("cooldown reset");
     }
     public void HandleCooldownDecrease(SpellValues spell)
     {
@@ -396,6 +390,7 @@ public class SpellCast : MonoBehaviour {
         spell.spellCooldownLeft--;
 
         spell.spellCastPerturncounter = 0;
+        Debug.Log("cooldown decrease");
     }
     public void HandleCoolDownIncrease(SpellValues spell)
     {
@@ -403,7 +398,7 @@ public class SpellCast : MonoBehaviour {
         {
             spell.spellCastPerturncounter++;
         }
-        if(spell.spellCastPerturncounter >= spell.spellCastPerturn && spell.spellCastPerturn != 0)
+        if((spell.spellCastPerturncounter >= spell.spellCastPerturn && spell.spellCastPerturn != 0) || spell.spellCooldown > 0)
         {
             spell.spellCooldownLeft = spell.spellCooldown;
         }

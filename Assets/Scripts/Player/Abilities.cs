@@ -927,22 +927,27 @@ public class Abilities : MonoBehaviour {
 
         if (TargetInRangeCheck(spell, target) == false)
         {
+            Debug.Log("not in range");
             return false;
         }
         if (playerBehaviour.currentCharacter.currentAp < spellCast.currentSpell.spellApCost)
         {
+            Debug.Log("not enough ap");
             return false;
         }
         if (spell.needTarget == true && target.CharCurrentlyOnTile == false)
         {
+            Debug.Log("need target");
             return false;
         }
         if(spell.needFreeSquare == true && target.CharCurrentlyOnTile == true)
         {
+            Debug.Log("free square needed");
             return false;
         }
         if (SpellCooldownCheck(spell) == false)
         {
+            Debug.Log("cooldown failure");
             return false;
         }
         return true;
@@ -969,7 +974,7 @@ public class Abilities : MonoBehaviour {
     public bool TargetInRangeCheck(SpellValues spell, Tile target)
     {
         //// ---------------------- nämä conflictas, muut oli ok -------------------------
-        List<Tile> range = RangeType(spell.mySpellRangeType, true);
+        List<Tile> range = RangeType(spell.mySpellRangeType, false);
         bool correct = false;
         foreach (var temp in range)
         {
