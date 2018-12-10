@@ -20,6 +20,7 @@ MonoBehaviour:
   mySpellAreaType: 0
   aoeRange: 0
   spellApCost: 3
+  damageStealsHp: 0
   spellDamageMin: 200
   spellDamageMax: 230
   spellHealMin: 0
@@ -42,11 +43,12 @@ MonoBehaviour:
   moveAwayFromTarget: 0
   spellInitialCooldown: 0
   spellCooldown: 0
-  spellCastPerturn: 0
-  castPerTarget: 2
+  spellCastPerturn: 2
+  castPerTarget: 0
+  spellInitialCooldowncounter: 0
+  spellCastPerturncounter: 0
+  castPerTargetcounter: 0
   description: "Sends a pulse of energy from the stars \nto deal damage and knock
     enemies back."
   spellCooldownLeft: 0
   trueDamage: 0
-  spellLaunched: 0
-  inCooldown: 0

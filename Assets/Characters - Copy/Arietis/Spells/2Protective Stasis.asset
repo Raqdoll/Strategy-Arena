@@ -42,9 +42,12 @@ MonoBehaviour:
   moveCloserToTarget: 0
   moveAwayFromTarget: 0
   spellInitialCooldown: 0
-  spellCooldown: 0
+  spellCooldown: 3
   spellCastPerturn: 0
   castPerTarget: 0
+  spellInitialCooldowncounter: 0
+  spellCastPerturncounter: 0
+  castPerTargetcounter: 0
   description: 'Creates a powerful shiled
 
     which absorbs all damage
@@ -52,5 +55,3 @@ MonoBehaviour:
     dealt to the targeted ally.'
   spellCooldownLeft: 0
   trueDamage: 0
-  spellLaunched: 0
-  inCooldown: 0

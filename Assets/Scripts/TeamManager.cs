@@ -14,6 +14,7 @@ public class TeamManager : MonoBehaviour {
     public PlayerInfo activePlayer; //Changed playerbehaviour to PlayerInfo
     public StatusEffects sEffects;
     public TurnTimelineController timeline;
+    public TurnManager tManager;
 
 
     private void Awake()
@@ -28,6 +29,8 @@ public class TeamManager : MonoBehaviour {
         activePlayer = teamA[0];
         if (!sEffects)
             sEffects = gameObject.GetComponent<StatusEffects>();
+        if (!tManager)
+            tManager = gameObject.GetComponent<TurnManager>();
         if (teamA == null || teamB == null)
         {
             Debug.LogWarning("One of the teams is null!");
@@ -36,6 +39,7 @@ public class TeamManager : MonoBehaviour {
         {
             Debug.LogWarning("Check team sizes!");
         }
+        
     }
 
 
@@ -61,6 +65,7 @@ public class TeamManager : MonoBehaviour {
         player.thisCharacter.armorPlus = 0;
         player.thisCharacter.moving = false;
         player.thisCharacter.dead = false;
+        player.thisCharacter.currentMaxHP = player.thisCharacter.maxHP;
         player.thisCharacter.currentHP = player.thisCharacter.maxHP;
         player.thisCharacter.currentAp = player.thisCharacter.maxAp;
         player.thisCharacter.currentMp = player.thisCharacter.maxMp;
@@ -82,7 +87,11 @@ public class TeamManager : MonoBehaviour {
             firstTeamIsActive = true;
             playerPositionInTeam++;
             if (playerPositionInTeam > charactersPerTeam - 1)
+            {
                 playerPositionInTeam = 0;
+                tManager.turnNumber += 1;
+                tManager.UpdateTurnNumber();
+            }
             activePlayer = teamA[playerPositionInTeam];
         }
         sEffects.UpdateEffects();

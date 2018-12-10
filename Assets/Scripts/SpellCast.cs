@@ -85,7 +85,13 @@ public class SpellCast : MonoBehaviour {
         spellButton6.GetComponent<Tooltip>().spell = cv.spell_6;
 
         UpdateHpApMp();
-        
+
+        HanddleCooldownDecrease(cv.spell_1);
+        HanddleCooldownDecrease(cv.spell_2);
+        HanddleCooldownDecrease(cv.spell_3);
+        HanddleCooldownDecrease(cv.spell_4);
+        HanddleCooldownDecrease(cv.spell_5);
+        HanddleCooldownDecrease(cv.spell_6);
     }
 
     public void UpdateHpApMp()
@@ -96,15 +102,10 @@ public class SpellCast : MonoBehaviour {
         DisableButtonsIfNotAp();
     }
 
-        HanddleCooldownDecrease(cv.spell_1);
-        HanddleCooldownDecrease(cv.spell_2);
-        HanddleCooldownDecrease(cv.spell_3);
-        HanddleCooldownDecrease(cv.spell_4);
-        HanddleCooldownDecrease(cv.spell_5);
-        HanddleCooldownDecrease(cv.spell_6);
+
     public void DisableButtonsIfNotAp()
     {
-        if(cv.spell_1.spellApCost > cv.currentAp)
+        if(cv.spell_1.spellApCost > cv.currentAp || abilities.SpellCooldownCheck(cv.spell_1) == false)
         {
             spellButton1.interactable = false;
         }
@@ -112,7 +113,7 @@ public class SpellCast : MonoBehaviour {
         {
             spellButton1.interactable = true;
         }
-        if (cv.spell_2.spellApCost > cv.currentAp)
+        if (cv.spell_2.spellApCost > cv.currentAp || abilities.SpellCooldownCheck(cv.spell_2) == false)
         {
             spellButton2.interactable = false;
         }
@@ -120,7 +121,7 @@ public class SpellCast : MonoBehaviour {
         {
             spellButton2.interactable = true;
         }
-        if (cv.spell_3.spellApCost > cv.currentAp)
+        if (cv.spell_3.spellApCost > cv.currentAp || abilities.SpellCooldownCheck(cv.spell_3) == false)
         {
             spellButton3.interactable = false;
         }
@@ -128,7 +129,7 @@ public class SpellCast : MonoBehaviour {
         {
             spellButton3.interactable = true;
         }
-        if (cv.spell_4.spellApCost > cv.currentAp)
+        if (cv.spell_4.spellApCost > cv.currentAp || abilities.SpellCooldownCheck(cv.spell_4) == false)
         {
             spellButton4.interactable = false;
         }
@@ -136,7 +137,7 @@ public class SpellCast : MonoBehaviour {
         {
             spellButton4.interactable = true;
         }
-        if (cv.spell_5.spellApCost > cv.currentAp)
+        if (cv.spell_5.spellApCost > cv.currentAp || abilities.SpellCooldownCheck(cv.spell_5) == false)
         {
             spellButton5.interactable = false;
         }
@@ -144,7 +145,7 @@ public class SpellCast : MonoBehaviour {
         {
             spellButton5.interactable = true;
         }
-        if (cv.spell_6.spellApCost > cv.currentAp)
+        if (cv.spell_6.spellApCost > cv.currentAp || abilities.SpellCooldownCheck(cv.spell_6) == false)
         {
             spellButton6.interactable = false;
         }
@@ -251,16 +252,19 @@ public class SpellCast : MonoBehaviour {
     //Deal the actual damage V V V
     public void GetHit(CharacterValues target, int damage)
     {
+        //Damage dealt
         target.currentHP -= damage;
+        //Max health reduction
+        target.currentMaxHP -= Mathf.RoundToInt(damage * turnManager.maxHealthReduction);
         playerBehaviour.UpdateTabs();
     }
     //Deal the actual healing V V V
     public void GetHealed(CharacterValues target, int heal)
     {
         target.currentHP += heal;
-        if(target.currentHP > target.maxHP)
+        if(target.currentHP > target.currentMaxHP)
         {
-            target.currentHP = target.maxHP;
+            target.currentHP = target.currentMaxHP;
         }
         playerBehaviour.UpdateTabs();
     }
@@ -390,61 +394,56 @@ public class SpellCast : MonoBehaviour {
         {
             spell.spellCooldownLeft = spell.spellCooldown;
         }
+        Debug.Log("Cooldown raised");
     }
 
     public void Spell1Cast()
     {
             SpellCancel();
-        if (cv.currentAp >= cv.spell_1.spellApCost && spell1CastedThisTurn <= cv.spell_1.spellCastPerturn)
-        {
+
             currentSpell = cv.spell_1;
             spellOpen = true;
-        }
+        
     }
     public void Spell2Cast()
     {
             SpellCancel();
-        if (cv.currentAp >= cv.spell_2.spellApCost && spell2CastedThisTurn <= cv.spell_2.spellCastPerturn)
-        {
+
             currentSpell = cv.spell_2;
             spellOpen = true; 
-        }
+        
     }
     public void Spell3Cast()
     {
             SpellCancel();
-        if (cv.currentAp >= cv.spell_3.spellApCost && spell3CastedThisTurn <= cv.spell_3.spellCastPerturn)
-        {
+
             currentSpell = cv.spell_3;
             spellOpen = true; 
-        }
+        
     }
     public void Spell4Cast()
     {
             SpellCancel();
-        if (cv.currentAp >= cv.spell_4.spellApCost && spell4CastedThisTurn <= cv.spell_4.spellCastPerturn)
-        {
+
             currentSpell = cv.spell_4;
             spellOpen = true; 
-        }
+        
     }
     public void Spell5Cast()
     {
             SpellCancel();
-        if (cv.currentAp >= cv.spell_5.spellApCost && spell5CastedThisTurn <= cv.spell_5.spellCastPerturn)
-        {
+
             currentSpell = cv.spell_5;
             spellOpen = true; 
-        }
+        
     }
     public void Spell6Cast()
     {
             SpellCancel();
-        if (cv.currentAp >= cv.spell_6.spellApCost && spell6CastedThisTurn <= cv.spell_6.spellCastPerturn)
-        {
+
             currentSpell = cv.spell_6;
             spellOpen = true; 
-        }
+        
     }
 
     public void SpellCancel()

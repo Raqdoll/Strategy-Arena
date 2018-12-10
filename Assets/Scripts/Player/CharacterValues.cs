@@ -28,6 +28,7 @@ public class CharacterValues : ScriptableObject
     public PositionContainer currentTile;
     public bool dead;
     public bool team; // true = 1 false = 2
+    public int currentMaxHP;
     public int currentHP;
     public int currentAp;
     public int currentMp;
