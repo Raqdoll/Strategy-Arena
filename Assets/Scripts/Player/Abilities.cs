@@ -969,7 +969,7 @@ public class Abilities : MonoBehaviour {
     public bool TargetInRangeCheck(SpellValues spell, Tile target)
     {
         //// ---------------------- nämä conflictas, muut oli ok -------------------------
-        List<Tile> range = RangeType(spell.mySpellRangeType, true);
+        List<Tile> range = RangeType(spell.mySpellRangeType, false);
         bool correct = false;
         foreach (var temp in range)
         {

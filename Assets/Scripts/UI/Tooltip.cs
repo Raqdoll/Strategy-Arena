@@ -275,7 +275,8 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             ui._text += "\n" + spell.description;
             if(spell.spellCooldownLeft != 0)
             {
-                ui._text += "COOLDOWN LEFT: " + spell.spellCooldownLeft + " TURNS!";
+                ui._text += "\n";
+                ui._text += "\nCOOLDOWN LEFT: " + spell.spellCooldownLeft + " TURNS!";
             }
 
             ui.ShowTooltip();
