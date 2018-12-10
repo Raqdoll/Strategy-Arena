@@ -381,6 +381,7 @@ public class Abilities : MonoBehaviour {
         }
         foreach (var item in targetList)
         {
+            Tile carpet = item;
             Debug.Log("starting pull on target");
             GridController.Directions mydirection = new GridController.Directions();
             GridController.Directions helpDirection = new GridController.Directions();
@@ -591,14 +592,12 @@ public class Abilities : MonoBehaviour {
                 for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                 {
                     Debug.Log("causing pull action");
-                    Tile temp = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, mydirection);
+                    Tile temp = gridController.GetTileInDirection(gridController.GetTile(carpet.locX, carpet.locZ), 1, mydirection);
                     if (temp.myType == Tile.BlockType.BaseBlock)
                     {
                         Debug.Log("Making the pull");
-                        PullPushAct(item, temp);
-
-                        //item.locX = temp.locX;
-                        //item.locZ = temp.locZ;
+                        PullPushAct(carpet, temp);
+                        carpet = temp;
                     }
                     else
                     {
@@ -611,12 +610,13 @@ public class Abilities : MonoBehaviour {
             {
                 for (int i = 0; i < spellCast.currentSpell.spellPull; i++)
                 {
-                    Tile temp1 = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, mydirection);
-                    Tile temp2 = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, helpDirection);
+                    Tile temp1 = gridController.GetTileInDirection(gridController.GetTile(carpet.locX, carpet.locZ), 1, mydirection);
+                    Tile temp2 = gridController.GetTileInDirection(gridController.GetTile(carpet.locX, carpet.locZ), 1, helpDirection);
                     Tile temp3 = gridController.GetTileInDirection(gridController.GetTile(temp1.locX, temp1.locZ), 1, helpDirection);
                     if (temp1.myType == Tile.BlockType.BaseBlock && temp2.myType == Tile.BlockType.BaseBlock && temp3.myType == Tile.BlockType.BaseBlock)
                     {
-                        PullPushAct(item, temp3);
+                        PullPushAct(carpet, temp3);
+                        carpet = temp3;
                         //item.locX = temp3.locX;
                         //item.locZ = temp3.locZ;
                     }
@@ -646,6 +646,7 @@ public class Abilities : MonoBehaviour {
         }
         foreach (var item in targetList)
         {
+            Tile carpet = item;
             GridController.Directions mydirection = new GridController.Directions();
             GridController.Directions helpDirection = new GridController.Directions();
             bool inLine = true;
@@ -847,10 +848,12 @@ public class Abilities : MonoBehaviour {
             {
                 for (int i = 0; i < spellCast.currentSpell.spellPushback; i++)
                 {
-                    Tile temp = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, mydirection);
+                    Tile temp = gridController.GetTileInDirection(gridController.GetTile(carpet.locX, carpet.locZ), 1, mydirection);
                     if (temp.myType == Tile.BlockType.BaseBlock)
                     {
-                        PullPushAct(item, temp);
+                        Debug.Log("Making the pull");
+                        PullPushAct(carpet, temp);
+                        carpet = temp;
                     }
                     else
                     {
@@ -862,12 +865,15 @@ public class Abilities : MonoBehaviour {
             {
                 for (int i = 0; i < spellCast.currentSpell.spellPushback; i++)
                 {
-                    Tile temp1 = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, mydirection);
-                    Tile temp2 = gridController.GetTileInDirection(gridController.GetTile(item.locX, item.locZ), 1, helpDirection);
+                    Tile temp1 = gridController.GetTileInDirection(gridController.GetTile(carpet.locX, carpet.locZ), 1, mydirection);
+                    Tile temp2 = gridController.GetTileInDirection(gridController.GetTile(carpet.locX, carpet.locZ), 1, helpDirection);
                     Tile temp3 = gridController.GetTileInDirection(gridController.GetTile(temp1.locX, temp1.locZ), 1, helpDirection);
                     if (temp1.myType == Tile.BlockType.BaseBlock && temp2.myType == Tile.BlockType.BaseBlock && temp3.myType == Tile.BlockType.BaseBlock)
                     {
-                        PullPushAct(item, temp3);
+                        PullPushAct(carpet, temp3);
+                        carpet = temp3;
+                        //item.locX = temp3.locX;
+                        //item.locZ = temp3.locZ;
                     }
                     else
                     {
