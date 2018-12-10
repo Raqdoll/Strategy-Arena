@@ -153,7 +153,7 @@ public class Abilities : MonoBehaviour {
         }
     }
 
-    public List<Tile> RangeType(SpellRangeType mySpellRangeType, bool ilaririkkootaman)
+    public List<Tile> RangeType(SpellRangeType mySpellRangeType, bool kumpitile)
     {      
     List<Tile> rangetiles = new List<Tile>();
         List<Tile> returnables = new List<Tile>();
@@ -224,7 +224,7 @@ public class Abilities : MonoBehaviour {
                     {
                         if (spellCast.currentSpell.needLineOfSight == true)
                         {
-                            if (ilaririkkootaman == false)
+                            if (kumpitile == false)
                             {
                                 if (lOS.LoSCheck(gridController.GetTile(playerBehaviour.currentCharacter.currentTile), tile) == true)
                                 {
@@ -337,7 +337,7 @@ public class Abilities : MonoBehaviour {
                 {
                     if (spellCast.currentSpell.needLineOfSight == true)
                     {
-                        if (ilaririkkootaman == false)
+                        if (kumpitile == false)
                         {
                             if (lOS.LoSCheck(gridController.GetTile(playerBehaviour.currentCharacter.currentTile), tile) == true)
                             {
@@ -924,23 +924,11 @@ public class Abilities : MonoBehaviour {
 
     public bool CheckCastability(SpellValues spell, Tile target)
     {
-        //// ---------------------- nämä conflictas, muut oli ok -------------------------
-        List<Tile> range = RangeType(spell.mySpellRangeType, spell.needLineOfSight);
-        bool correct = false;
-        foreach (var temp in range)
-        {
-            if (temp == target)
-            {
-                correct = true;
-            }
-        }
-        if (correct == false)
+
+        if (TargetInRangeCheck(spell, target) == false)
         {
             return false;
         }
-        //// --------------------- Pasta carbonara on hyvää vai mitä ---------------------
-
-
         if (playerBehaviour.currentCharacter.currentAp < spellCast.currentSpell.spellApCost)
         {
             return false;
@@ -978,7 +966,25 @@ public class Abilities : MonoBehaviour {
 
         return true;
     }
-
+    public bool TargetInRangeCheck(SpellValues spell, Tile target)
+    {
+        //// ---------------------- nämä conflictas, muut oli ok -------------------------
+        List<Tile> range = RangeType(spell.mySpellRangeType, true);
+        bool correct = false;
+        foreach (var temp in range)
+        {
+            if (temp == target)
+            {
+                correct = true;
+            }
+        }
+        if (correct == false)
+        {
+            return false;
+        }
+        //// --------------------- Pasta carbonara on hyvää vai mitä ---------------------
+        return true;
+    }
 
     public void WalkTowardsTarget()
     {
