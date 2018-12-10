@@ -204,10 +204,14 @@ public class SpellCast : MonoBehaviour {
                 leach = leach + damageStuff;
                 GetHit(target, damageStuff);
                 GetHealed(target, healingIsFun);
-                if (spell.effect)
+                if (spell.effect && spell.effectOnTarget == true && target != caster)
                 {
                     sEffects.ApplyEffect(caster, spell.effect, target);
-                    Debug.Log("Effect annettu");
+                    playerBehaviour.UpdateTabs();
+                }
+                if (spell.effect && spell.effectOnCaster == true && target == caster)
+                {
+                    sEffects.ApplyEffect(caster, spell.effect, target);
                     playerBehaviour.UpdateTabs();
                 }
 
@@ -388,7 +392,6 @@ public class SpellCast : MonoBehaviour {
         spell.spellInitialCooldowncounter = spell.spellInitialCooldown;
         spell.spellCooldownLeft = 0;
         spell.spellCastPerturncounter = 0;
-        Debug.Log("cooldown reset");
     }
     public void HandleCooldownDecrease(SpellValues spell)
     {
@@ -399,7 +402,6 @@ public class SpellCast : MonoBehaviour {
         spell.spellCooldownLeft--;
 
         spell.spellCastPerturncounter = 0;
-        Debug.Log("cooldown decrease");
     }
     public void HandleCoolDownIncrease(SpellValues spell)
     {
@@ -411,7 +413,6 @@ public class SpellCast : MonoBehaviour {
         {
             spell.spellCooldownLeft = spell.spellCooldown;
         }
-        Debug.Log("Cooldown raised");
     }
 
     public void Spell1Cast()

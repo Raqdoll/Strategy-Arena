@@ -596,6 +596,7 @@ public class Abilities : MonoBehaviour {
                     {
                         Debug.Log("Making the pull");
                         PullPushAct(item, temp);
+
                         //item.locX = temp.locX;
                         //item.locZ = temp.locZ;
                     }
@@ -927,33 +928,26 @@ public class Abilities : MonoBehaviour {
 
         if (TargetInRangeCheck(spell, target) == false)
         {
-            Debug.Log("not in range");
             return false;
         }
         if (playerBehaviour.currentCharacter.currentAp < spellCast.currentSpell.spellApCost)
         {
-            Debug.Log("not enough ap");
             return false;
         }
         if (spell.needTarget == true && target.CharCurrentlyOnTile == false)
         {
-            Debug.Log("need target");
             return false;
         }
         if(spell.needFreeSquare == true && target.CharCurrentlyOnTile == true)
         {
-            Debug.Log("free square needed");
             return false;
         }
         if (SpellCooldownCheck(spell) == false)
         {
-            Debug.Log("cooldown failure");
             return false;
         }
         return true;
     }
-
-
     public bool SpellCooldownCheck(SpellValues spell)
     {
         if(spell.spellInitialCooldowncounter > 0)
