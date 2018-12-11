@@ -40,9 +40,12 @@ public class PlayerMovement : MonoBehaviour {
         set
         {
             _tile = value;
-            playerInfo.thisCharacter.currentTile = new PositionContainer(value.locX, value.locZ);
+            if (value != null)
+            {
+                playerInfo.thisCharacter.currentTile = new PositionContainer(value.locX, value.locZ);
+                value.CharCurrentlyOnTile = playerInfo;
+            }
             AnnounceTileChange(value);
-            value.CharCurrentlyOnTile = playerInfo;
         }
     }
 
@@ -379,7 +382,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void AnnounceTileChange(Tile tile)
     {
-        if (ChangeTile != null && tile != null)
+        if (ChangeTile != null /*&& tile != null*/)
         {
             ChangeTile(tile);
         }

@@ -14,8 +14,6 @@ public class GridController : MonoBehaviour {
 
     void Start()
     {
-
-
         tileList = tiles.GetComponentsInChildren<Tile>();
         tileGrid = new List<List<Tile>>(); // Initialize overlist
         for (int j = 0; j < 24; j++)
@@ -23,18 +21,39 @@ public class GridController : MonoBehaviour {
             List<Tile> tempList = new List<Tile>();
             for (int z = 0; z < 24; z++)
             {
-                tempList.Add(null); // Initialize each object
+                tempList.Add(null); // Initialize each list
             }
             tileGrid.Add(tempList);
         }
-        for (int i = 0; i < tileList.Length; i++)
-        {
-            tileGrid[tileList[i].locX - 1][tileList[i].locZ - 1] = tileList[i];
-        }
-
+        StartCoroutine("InitializeGrid");
         //Tile test = GetTile(4, 6);
         //test.transform.position += new Vector3(2f, 2f, 2f);
     }
+
+    /// <summary>
+    /// Looping makes sure, that we do not go out of range in the lists. Maybe you fix it yes kind sir?
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator InitializeGrid()
+    {
+        for (int i = 0; i < tileList.Length; i++)
+        {
+            bool meatballs = true;
+            while (meatballs)
+            {
+                if (tileList[i].locX == 0 || tileList[i].locZ == 0)
+                {
+                    yield return new WaitForSeconds(0.001f);
+                }
+                else
+                {
+                    meatballs = false;  //The index will not be negative now! Hooray!
+                }
+            }
+            tileGrid[tileList[i].locX - 1][tileList[i].locZ - 1] = tileList[i];
+        }
+    }
+
     //USE THIS TO CALL GRID!
     public Tile GetTile(int xCord, int zCord) {
         if (xCord > 24 || zCord > 24 || zCord < 1 || xCord < 1)
