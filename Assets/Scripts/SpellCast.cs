@@ -108,7 +108,7 @@ public class SpellCast : MonoBehaviour {
 
     public void UpdateHpApMp()
     {
-        hpText.text = "HP: " + cv.currentHP + " / " + cv.maxHP;
+        hpText.text = "HP: " + cv.currentHP + " / " + cv.currentMaxHP;
         apText.text = "AP: " + cv.currentAp;
         mpText.text = "MP: " + cv.currentMp;
         DisableButtonsIfNotAp();
@@ -252,8 +252,8 @@ public class SpellCast : MonoBehaviour {
 
     public void CastSpell(SpellValues spell, CharacterValues caster,Tile currentMouseTile)
     {
-        //playerBehaviour.aControll.PlayAttack(caster, playerBehaviour.aControll.temp);
-        playerBehaviour.aControll.PlaySpell(spell, playerBehaviour.aControll.temp2);
+        playerBehaviour.aControll.PlayAttack(caster);
+        playerBehaviour.aControll.PlaySpell(spell);
 
 
         Tile casterTile = gridController.GetTile(caster.currentTile.x, caster.currentTile.z);
@@ -503,9 +503,9 @@ public class SpellCast : MonoBehaviour {
     {
         int heal = damage / 2;
         target.currentHP += heal;
-        if (target.currentHP > target.maxHP)
+        if (target.currentHP > target.currentMaxHP)
         {
-            target.currentHP = target.maxHP;
+            target.currentHP = target.currentMaxHP;
         }
         playerBehaviour.UpdateTabs();
     }
