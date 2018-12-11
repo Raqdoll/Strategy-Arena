@@ -25,7 +25,7 @@ public class StatusEffects : MonoBehaviour {
         clone.caster = caster;
         clone.target = target;
         clone.remainingTurns = clone.effectDuration;
-        Debug.Log("Applying effect " + effect.effectName);
+        //Debug.Log("Applying effect " + effect.effectName);
 
         foreach (EffectValues eff in effectList)
         {
@@ -125,32 +125,32 @@ public class StatusEffects : MonoBehaviour {
 
     public void CalculateEffects(CharacterValues effectTarget)
     {
-        Debug.Log("Starting effect calculation on " + effectTarget.name);
+        //Debug.Log("Starting effect calculation on " + effectTarget.name);
         if (effectTarget == null)
         {
-            Debug.Log("EffectTarget was null!");
+            //Debug.Log("EffectTarget was null!");
             return;
         }
         List<EffectValues> effects = GetEffects(effectTarget);
         if (effects == null)
         {
-            Debug.Log("EffectList was null!");
+            //Debug.Log("EffectList was null!");
             return;
         }
         ClearEffectValues(effectTarget);
                 //Laita tähän efektien ikonien poistaminen, jos myöhemmin lisätään ikoni uudestaan (ei tällä hetkellä lisätä)
         if (effects.Count == 0)
         {
-            Debug.Log("No active effects");
+            //Debug.Log("No active effects");
             return;
         }
         List<string> effectNames = new List<string>();
-        Debug.Log("Starting effect calculation loop");
+        //Debug.Log("Starting effect calculation loop");
         foreach (EffectValues effect in effects)
         {
             if (effect != null && (effect.stacks || !effectNames.Contains(effect.name)))
             {
-                Debug.Log("Calculating " + effect.name);
+                //Debug.Log("Calculating " + effect.name);
                 effectTarget.damagePlus += effect.damageModifyPlus;
                 effectTarget.damageChange += effect.damageModifyPercent;
                 effectTarget.armorPlus += effect.armorModifyPlus;
@@ -171,7 +171,7 @@ public class StatusEffects : MonoBehaviour {
                     effectNames.Add(effect.name);
                 }
                 //pBehaviour.AddTabEffect(effect, effectTarget);
-                Debug.Log("Calculation done!");
+                //Debug.Log("Calculation done!");
             }
         }
     }

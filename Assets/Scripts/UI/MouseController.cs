@@ -316,12 +316,15 @@ public class MouseController : MonoBehaviour
 
     void ChangeTileMaterials(List<Tile> tileList, Material material)
     {
-        foreach (var tile in tileList)
+        if (tileList != null && tileList.Count > 0)
         {
-            if (Tile.BlockType.BaseBlock == tile.myType)
+            foreach (var tile in tileList)
             {
-                Renderer pr = tile.GetComponent<Renderer>();
-                pr.material = material;
+                if (Tile.BlockType.BaseBlock == tile.myType)
+                {
+                    Renderer pr = tile.GetComponent<Renderer>();
+                    pr.material = material;
+                }
             }
         }
     }

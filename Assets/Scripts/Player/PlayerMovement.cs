@@ -155,7 +155,7 @@ public class PlayerMovement : MonoBehaviour {
                 }
                 else
                 {
-                    Debug.Log("Path was null!");
+                    //Debug.Log("Path was null!");
                 }
                 break;
 
@@ -300,7 +300,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (startTile == null)
         {
-            Debug.Log("Starting tile for path is null!");
+            //Debug.Log("Starting tile for path is null!");
             return null;
         }
         PathTile startPathTile = new PathTile(startTile, null, movementPoints, null);
