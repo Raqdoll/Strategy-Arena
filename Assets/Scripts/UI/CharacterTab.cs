@@ -156,7 +156,7 @@ public class CharacterTab : MonoBehaviour {
     public void UpdateHpBar()
     {
         float minHPf = characterVal.currentHP;
-        float maxHPf = characterVal.maxHP;
+        float maxHPf = characterVal.currentMaxHP;
         float hpBarAmount = minHPf / maxHPf;
         healthBar.GetComponent<Image>().fillAmount = hpBarAmount;
     }
