@@ -296,9 +296,18 @@ public class SpellCast : MonoBehaviour {
                 {
                     damageStuff = TrueDamageCalculator(spell.spellDamageMax, spell.spellDamageMin, caster.damageChange, target.armorChange, caster.damagePlus, target.armorPlus);
                 }
-                leach = leach + damageStuff;
-                GetHit(target, damageStuff);
-                GetHealed(target, healingIsFun);
+                if (spell.damageStealsHp == true)
+                {
+                    leach = leach + damageStuff; 
+                }
+                if (damageStuff > 0)
+                {
+                    GetHit(target, damageStuff); 
+                }
+                if (healingIsFun > 0)
+                {
+                    GetHealed(target, healingIsFun); 
+                }
                 if (spell.effect && spell.effectOnTarget == true && target != caster)
                 {
                     sEffects.ApplyEffect(caster, spell.effect, target);
@@ -318,20 +327,20 @@ public class SpellCast : MonoBehaviour {
         }
         if (spell.spellPull != 0)
         {
-            abilities.SpellPull(spell.mySpellPullType);
+         //   abilities.SpellPull(spell.mySpellPullType);
         }
         if (spell.spellPushback != 0)
         {
-            abilities.SpellPush(spell.mySpellPushType);
+          //  abilities.SpellPush(spell.mySpellPushType);
         }
 
         if (spell.moveCloserToTarget != 0)
         {
-            abilities.WalkTowardsTarget();
+          //  abilities.WalkTowardsTarget();
         }
         if (spell.moveAwayFromTarget != 0)
         {
-            abilities.MoveAwayFromTarget();
+          //  abilities.MoveAwayFromTarget();
         }
 
         if (spell.teleportToTarget == true)
