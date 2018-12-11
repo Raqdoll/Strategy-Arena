@@ -4527,8 +4527,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMusicControl: {fileID: 137569553}
-  temp: {fileID: 137569555}
-  temp2: {fileID: 137569556}
+  spellAudio: {fileID: 137569555}
+  moveAudio: {fileID: 137569556}
   mainMusic: {fileID: 8300000, guid: d1c30a26c51493a4687f479dbd2dfdf4, type: 3}
 --- !u!82 &137569553
 AudioSource:
@@ -11516,6 +11516,7 @@ MonoBehaviour:
   sEffects: {fileID: 0}
   currentSpell: {fileID: 0}
   spellOpen: 0
+  bodyList: []
   spellButton1: {fileID: 1634221147}
   spellButton2: {fileID: 1754007591}
   spellButton3: {fileID: 136390769}

@@ -5,8 +5,8 @@ using UnityEngine;
 public class AudioController : MonoBehaviour {
 
     public AudioSource mainMusicControl;
-    public AudioSource temp;
-    public AudioSource temp2;
+    public AudioSource spellAudio;
+    public AudioSource moveAudio;
     public AudioClip mainMusic;
 
 	void Start () {
@@ -19,40 +19,47 @@ public class AudioController : MonoBehaviour {
         }
 	}
 
-    public void PlaySpell(SpellValues spell, AudioSource audio)
+    public void PlaySpell(SpellValues spell)
     {
-        audio.loop = false;
+        
+        spellAudio.loop = false;
 
-        audio.clip = spell.spellSound;
-        audio.Play();
+        spellAudio.clip = spell.spellSound;
+        spellAudio.Play();
     }
     
-    public void PlayMovementStartLoop(CharacterValues character, AudioSource audio)
+    public void PlayMovementStartLoop(CharacterValues character)
     {
-        audio.loop = true;
+        moveAudio.loop = true;
 
-        audio.clip = character.walkSoundLoop;
-        audio.Play();
+        moveAudio.clip = character.walkSoundLoop;
+        moveAudio.Play();
     }
-    public void PlayMovementStopLoop(AudioSource audio)
+    public void SlowMovementLoop()
     {
-        audio.Stop();
+        moveAudio.pitch -= 0.15f;
+        moveAudio.volume -= 0.5f;
+    }
+    public void PlayMovementStopLoop()
+    {
+        moveAudio.pitch = 1f;
+        moveAudio.volume = 1f;
+        moveAudio.Stop();
     }
 
-    public void PlayAttack(CharacterValues character, AudioSource audio)
+    public void PlayAttack(CharacterValues character)
     {
-        audio.loop = false;
-
-        audio.clip = character.attackSound;
-        audio.Play();
+        moveAudio.loop = false;
+        moveAudio.clip = character.attackSound;
+        moveAudio.Play();
     }
 
-    public void PlayDamageTaken(CharacterValues character, AudioSource audio)
+    public void PlayDamageTaken(CharacterValues character)
     {
-        audio.loop = false;
+        spellAudio.loop = false;
 
-        audio.clip = character.takeDamageSound;
-        audio.Play();
+        spellAudio.clip = character.takeDamageSound;
+        spellAudio.Play();
     }
 
 	

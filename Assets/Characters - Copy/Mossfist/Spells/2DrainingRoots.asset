@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mySpellName: DRAINING ROOTS
   spellIcon: {fileID: 21300000, guid: 561e0a71db8a72b4492cfa190d6b1c15, type: 3}
-  spellSound: {fileID: 0}
+  spellSound: {fileID: 8300000, guid: 344699b525422c34ab6001b45390364f, type: 3}
   mySpellRangeType: 2
   spellRangeMin: 0
   spellRangeMax: 0
@@ -45,10 +45,11 @@ MonoBehaviour:
   spellCooldown: 0
   spellCastPerturn: 2
   castPerTarget: 0
+  spellInitialCooldowncounter: 0
+  spellCastPerturncounter: 0
+  castPerTargetcounter: 0
   description: 'Spreads roots to nearby targets
 
     draining life out of them'
   spellCooldownLeft: 0
   trueDamage: 0
-  spellLaunched: 0
-  inCooldown: 0

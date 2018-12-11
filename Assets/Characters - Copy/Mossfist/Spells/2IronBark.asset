@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mySpellName: IRONBARK
   spellIcon: {fileID: 21300000, guid: 5e45fb601a65f9e4d91ffb32209dce2f, type: 3}
-  spellSound: {fileID: 0}
+  spellSound: {fileID: 8300000, guid: dfa20cd0d380e944fbe52aea35544fe0, type: 3}
   mySpellRangeType: 2
   spellRangeMin: 0
   spellRangeMax: 0
@@ -45,8 +45,9 @@ MonoBehaviour:
   spellCooldown: 2
   spellCastPerturn: 0
   castPerTarget: 0
+  spellInitialCooldowncounter: 0
+  spellCastPerturncounter: 0
+  castPerTargetcounter: 0
   description: "Hardens the bark \ngaining survavibility"
-  spellCooldownLeft: 0
+  spellCooldownLeft: 2
   trueDamage: 0
-  spellLaunched: 0
-  inCooldown: 0

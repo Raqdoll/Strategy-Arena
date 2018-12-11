@@ -287,7 +287,7 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             ui._text = "";
             ui._text += character.characterName;
             ui._text += "\n";
-            ui._text += "\nHP: " + character.currentHP + " / " + character.maxHP;
+            ui._text += "\nHP: " + character.currentHP + " / " + character.currentMaxHP;
             ui._text += "\nAP: " + character.currentAp;
             ui._text += "\nMP: " + character.currentMp;
             ui.ShowTooltip();

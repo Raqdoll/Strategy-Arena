@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour {
     public PlayerInfo playerInfo;
     GridController gridController;
     MouseController mouseController;
+    AudioController aController;
     Tile _tile;
     public List<PathTile> pathTiles;
     public float movementSpeed;
@@ -81,6 +82,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Start()
     {
+        aController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>();
         gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
         if (!gridController)
             Debug.LogWarning("Gridcontroller is null!");
@@ -100,7 +102,7 @@ public class PlayerMovement : MonoBehaviour {
         Invoke("SetStartingTile", 1f);
         if (movementSpeed == 0)
         {
-            movementSpeed = 5;      //SAA MUUTTAA
+            movementSpeed = 3;      //SAA MUUTTAA
         }
     }
 
@@ -247,7 +249,8 @@ public class PlayerMovement : MonoBehaviour {
 
     IEnumerator Walk(List<PathTile> route)
     {
-        foreach(var tile in route)
+        aController.PlayMovementStartLoop(playerInfo.thisCharacter);
+        foreach (var tile in route)
         {
             mouseController.stillMoving = true;
             //Are we there yet?
@@ -256,10 +259,11 @@ public class PlayerMovement : MonoBehaviour {
 
                 Transform end = tile._nextTile._tile.transform;
                 float startTime = Time.time;
-
+                
                 //Second to last tile = last trip -> slow down!
                 if (tile._nextTile._nextTile == null)
                 {
+                    aController.SlowMovementLoop();
                     while (Vector3.Distance(transform.position, end.position) > 0.05f)
                     {
                         transform.position = Vector3.Lerp(transform.position, end.position, movementSpeed * Time.deltaTime);    //Slowing down
@@ -283,7 +287,7 @@ public class PlayerMovement : MonoBehaviour {
             }
         }
         mouseController.stillMoving = false;
-
+        aController.PlayMovementStopLoop();
     }
 
 
