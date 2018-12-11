@@ -31,7 +31,7 @@ MonoBehaviour:
   needTarget: 0
   needFreeSquare: 0
   effect: {fileID: 11400000, guid: 2107dab86fb34994da65b775a133d95a, type: 2}
-  effectOnCaster: 0
+  effectOnCaster: 1
   effectOnTarget: 1
   spellPushback: 0
   mySpellPushType: 0
@@ -45,8 +45,9 @@ MonoBehaviour:
   spellCooldown: 3
   spellCastPerturn: 0
   castPerTarget: 0
+  spellInitialCooldowncounter: 0
+  spellCastPerturncounter: 0
+  castPerTargetcounter: 0
   description: Shields your allies with cosmic energy.
   spellCooldownLeft: 0
   trueDamage: 0
-  spellLaunched: 0
-  inCooldown: 0
