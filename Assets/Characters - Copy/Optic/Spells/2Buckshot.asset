@@ -45,8 +45,9 @@ MonoBehaviour:
   spellCooldown: 0
   spellCastPerturn: 2
   castPerTarget: 0
-  description: "Short ranged blunderbuss shot \nwhich hits everyone on its path\n\n\n"
+  spellInitialCooldowncounter: 0
+  spellCastPerturncounter: 0
+  castPerTargetcounter: 0
+  description: "Short ranged blunderbuss shot \nwhich hits everyone on its path"
   spellCooldownLeft: 0
   trueDamage: 0
-  spellLaunched: 0
-  inCooldown: 0

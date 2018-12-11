@@ -15,7 +15,7 @@ MonoBehaviour:
   portrait: {fileID: 21300000, guid: a6f4abc1bf9ceeb41a8ed5d52cd83922, type: 3}
   maxHP: 3000
   maxAp: 12
-  maxMp: 5
+  maxMp: 6
   spell_1: {fileID: 11400000, guid: a5355aec31ef1b34ebda0f8641a719b3, type: 2}
   spell_2: {fileID: 11400000, guid: 6456e45cf83cfe348ba5d44e694e37a9, type: 2}
   spell_3: {fileID: 11400000, guid: f2748fc14e42c8f4bac56f075eeac777, type: 2}
@@ -33,7 +33,7 @@ MonoBehaviour:
   currentMaxHP: 3000
   currentHP: 3000
   currentAp: 12
-  currentMp: 5
+  currentMp: 6
   damageChange: 0
   armorChange: 0
   healsReceived: 0

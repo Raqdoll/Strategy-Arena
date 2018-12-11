@@ -3226,7 +3226,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 105275983}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13, y: 0, z: 19}
+  m_LocalPosition: {x: 13, y: 0, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 786503834}
@@ -5197,6 +5197,8 @@ MonoBehaviour:
   tooltipText: {fileID: 1487865102}
   menuButton: {fileID: 1678971542}
   returnButton: {fileID: 1130866789}
+  restartButton: {fileID: 577209051}
+  quitButton: {fileID: 674784700}
   menu: {fileID: 261392069}
   _text: 
 --- !u!1001 &150470729
@@ -10726,7 +10728,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 411584041}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14, y: 0, z: 19}
+  m_LocalPosition: {x: 14, y: 0, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1658122901}
@@ -14754,7 +14756,7 @@ GameObject:
   - component: {fileID: 577209052}
   - component: {fileID: 577209051}
   m_Layer: 5
-  m_Name: OptionsButton
+  m_Name: RestartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30390,7 +30392,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 982654703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11, y: 0, z: 19}
+  m_LocalPosition: {x: 11, y: 0, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1959371615}
@@ -35970,7 +35972,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Options
+  m_Text: Restart
 --- !u!222 &1689583958
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -37641,7 +37643,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1768303066}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12, y: 0, z: 19}
+  m_LocalPosition: {x: 12, y: 0, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1880239737}
@@ -40231,7 +40233,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1925104483}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11, y: 0, z: 20}
+  m_LocalPosition: {x: 11, y: 0, z: 21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1461215566}
