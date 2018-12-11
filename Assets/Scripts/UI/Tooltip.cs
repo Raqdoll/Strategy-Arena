@@ -116,7 +116,14 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
             if (spell.spellDamageMin != 0)
             {
-                ui._text += "\n" + "Damage: " + spell.spellDamageMin + " - " + spell.spellDamageMax; 
+                if (spell.damageStealsHp == false)
+                {
+                    ui._text += "\n" + "Damage: " + spell.spellDamageMin + " - " + spell.spellDamageMax;  
+                }
+                else
+                {
+                    ui._text += "\n" + "Damage (Steal): " + spell.spellDamageMin + " - " + spell.spellDamageMax;
+                }
             }
             if (spell.spellHealMin != 0)
             {
