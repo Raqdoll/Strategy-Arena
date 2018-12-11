@@ -184,8 +184,8 @@ public class StatusEffects : MonoBehaviour {
         effectTarget.armorPlus = 0;
         effectTarget.armorChange = 0;
         effectTarget.healsReceived = 0;
-        //effectTarget.maxAp = 0;       //Hoida toisella tavalla nämä kaksi!   
-        //effectTarget.maxMp = 0;
+        //effectTarget.currentAp = effectTarget.maxAp;       //Hoida toisella tavalla nämä kaksi!   
+        //effectTarget.currentMp = effectTarget.maxMp;
         effectTarget.armorChange = 0;
         effectTarget.heavy = false;
     }
