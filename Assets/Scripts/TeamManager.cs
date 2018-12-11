@@ -67,6 +67,7 @@ public class TeamManager : MonoBehaviour {
         {
             SetupPlayer(player);
         }
+        spellCast.ActivateBodies();
     }
 
     private void SetupPlayer(PlayerInfo player)

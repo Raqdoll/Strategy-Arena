@@ -16,6 +16,7 @@ public class SpellCast : MonoBehaviour {
     public StatusEffects sEffects;
     public SpellValues currentSpell;
     public bool spellOpen = false;
+    public List<GameObject> bodyList;
     //Käytä spellin 
 
     //
@@ -357,6 +358,10 @@ public class SpellCast : MonoBehaviour {
         }
         //Max health reduction
         target.currentMaxHP -= Mathf.RoundToInt(damage * turnManager.maxHealthReduction);
+        if(target.currentHP <= 0)
+        {
+            GetDead(target);
+        }
         playerBehaviour.UpdateTabs();
     }
     //Deal the actual healing V V V
@@ -374,6 +379,30 @@ public class SpellCast : MonoBehaviour {
             target.currentHP = target.currentMaxHP;
         }
         playerBehaviour.UpdateTabs();
+    }
+
+    public void GetDead(CharacterValues target)
+    {
+        target.dead = true; //  muista korjata startissa
+        foreach(var temp in bodyList)
+        {
+            CharacterValues ego = temp.GetComponentInParent<PlayerInfo>().thisCharacter;
+            if (ego == target)
+            {
+                temp.SetActive(false);
+            }
+        }
+        target.currentTile = null;
+        // aseman poisto e toimi
+
+    }
+
+    public void ActivateBodies()
+    {
+        foreach (var temp in bodyList)
+        {
+                temp.SetActive(true);
+        }
     }
 
 	public void Aftermath()
