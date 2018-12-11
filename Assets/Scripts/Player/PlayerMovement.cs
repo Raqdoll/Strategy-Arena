@@ -141,9 +141,16 @@ public class PlayerMovement : MonoBehaviour {
 
             case MovementMethod.Walk:
                 pathTiles = WithinWalkingDistance(startTile, movementPoints);
-                foreach (var pathTile in pathTiles)
+                if (pathTiles != null)
                 {
-                    truereturnables.Add(pathTile._tile);
+                    foreach (var pathTile in pathTiles)
+                    {
+                        truereturnables.Add(pathTile._tile);
+                    }
+                }
+                else
+                {
+                    Debug.Log("Path was null!");
                 }
                 break;
 
@@ -284,24 +291,30 @@ public class PlayerMovement : MonoBehaviour {
 
     private List<PathTile> WithinWalkingDistance(Tile startTile, int movementPoints)
     {
+        if (startTile == null)
+        {
+            Debug.Log("Starting tile for path is null!");
+            return null;
+        }
         PathTile startPathTile = new PathTile(startTile, null, movementPoints, null);
         List<PathTile> unprocessedTiles = null;
         List<PathTile> processedTiles = new List<PathTile>();
         unprocessedTiles = ProcessPathTile(startPathTile);
-
         while (unprocessedTiles != null && unprocessedTiles.Count > 0)
         {
             PathTile tempTile = unprocessedTiles[0];
-            List<PathTile> tempList = null;
-            if (Upsert(processedTiles, tempTile))
+            if (tempTile != null)
             {
-                tempList = ProcessPathTile(tempTile);
+                List<PathTile> tempList = null;
+                if (Upsert(processedTiles, tempTile))
+                {
+                    tempList = ProcessPathTile(tempTile);
+                }
+                unprocessedTiles.Remove(tempTile);
+                if (tempList != null)
+                    unprocessedTiles.AddRange(tempList);
             }
-            unprocessedTiles.Remove(tempTile);
-            if (tempList != null)
-                unprocessedTiles.AddRange(tempList);
         }
-
         return processedTiles;
     }
 
@@ -382,7 +395,8 @@ public class PlayerMovement : MonoBehaviour {
         List<Tile> tiles = new List<Tile>();
         foreach (var tile in sourceTiles)
         {
-            if (tile.WalkThrough && tile.isFree)
+            //if (tile.WalkThrough && tile.isFree)
+            if(tile.myType == Tile.BlockType.BaseBlock && tile.CharCurrentlyOnTile == false)
             {
                 tiles.Add(tile);
             }
