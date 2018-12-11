@@ -48,6 +48,7 @@ public class SpellCast : MonoBehaviour {
         gridController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GridController>();
         abilities = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<Abilities>();
         turnManager.TurnChange += HandleTurnChange;
+        turnManager.TurnEnd += HandleTurnEnd;
         if (!gridController)
             Debug.LogWarning("Gridcontroller is null!");
         if (!turnManager)
@@ -63,7 +64,10 @@ public class SpellCast : MonoBehaviour {
     private void OnDestroy()
     {
         turnManager.TurnChange -= HandleTurnChange;
+        turnManager.TurnEnd -= HandleTurnEnd;
     }
+
+    #region EventHandlers
 
     private void HandleTurnChange(PlayerInfo player)
     {
@@ -93,6 +97,13 @@ public class SpellCast : MonoBehaviour {
         playerBehaviour.UpdateTabs();
         UpdateHpApMp();
     }
+
+    private void HandleTurnEnd(PlayerInfo player)
+    {
+        DisableButtonsIfNotAp();
+    }
+
+    #endregion
 
     public void UpdateHpApMp()
     {

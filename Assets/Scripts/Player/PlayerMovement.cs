@@ -97,7 +97,7 @@ public class PlayerMovement : MonoBehaviour {
         Invoke("SetStartingTile", 1f);
         if (movementSpeed == 0)
         {
-            movementSpeed = 5;
+            movementSpeed = 5;      //SAA MUUTTAA
         }
     }
 
