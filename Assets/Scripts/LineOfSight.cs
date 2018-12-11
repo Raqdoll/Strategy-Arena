@@ -55,7 +55,7 @@ public class LineOfSight : MonoBehaviour {
         while (n > 0 && clear)
         {
 
-            if (gridC.GetTile(x,y).myType == Tile.BlockType.BlockyBlock)
+            if (gridC.GetTile(x,y).myType == Tile.BlockType.BlockyBlock || gridC.GetTile(x,y).CharCurrentlyOnTile == true)
             {
                 clear = false;
             }

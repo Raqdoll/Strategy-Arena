@@ -386,15 +386,15 @@ public class SpellCast : MonoBehaviour {
         target.dead = true; //  muista korjata startissa
         foreach(var temp in bodyList)
         {
-            CharacterValues ego = temp.GetComponentInParent<PlayerInfo>().thisCharacter;
+            PlayerInfo info = temp.GetComponentInParent<PlayerInfo>();
+            CharacterValues ego = info.thisCharacter;
+            PlayerMovement kaikkiHajoaa = info.gameObject.GetComponent<PlayerMovement>();
+            kaikkiHajoaa.CurrentTile = null;
             if (ego == target)
             {
                 temp.SetActive(false);
             }
         }
-        target.currentTile = null;
-        // aseman poisto e toimi
-
     }
 
     public void ActivateBodies()
