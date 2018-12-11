@@ -318,20 +318,20 @@ public class SpellCast : MonoBehaviour {
         }
         if (spell.spellPull != 0)
         {
-            abilities.SpellPull(spell.mySpellPullType);
+            //abilities.SpellPull(spell.mySpellPullType);
         }
         if (spell.spellPushback != 0)
         {
-            abilities.SpellPush(spell.mySpellPushType);
+            //abilities.SpellPush(spell.mySpellPushType);
         }
 
         if (spell.moveCloserToTarget != 0)
         {
-            abilities.WalkTowardsTarget();
+            //abilities.WalkTowardsTarget();
         }
         if (spell.moveAwayFromTarget != 0)
         {
-            abilities.MoveAwayFromTarget();
+            //abilities.MoveAwayFromTarget();
         }
 
         if (spell.teleportToTarget == true)
@@ -508,6 +508,7 @@ public class SpellCast : MonoBehaviour {
             target.currentHP = target.currentMaxHP;
         }
         playerBehaviour.UpdateTabs();
+        hitText.DamageText(target, heal);
     }
 
 

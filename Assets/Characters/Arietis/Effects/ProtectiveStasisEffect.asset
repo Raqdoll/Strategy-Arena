@@ -17,7 +17,7 @@ MonoBehaviour:
   stacks: 1
   canBeSilenced: 0
   silenceTurns: 0
-  immune: 1
+  immune: 0
   heavyState: 0
   damageModifyPlus: 0
   dmPlusAllies: 0
@@ -28,8 +28,8 @@ MonoBehaviour:
   armorModifyPlus: 0
   amPlusAllies: 0
   amPlusEnemies: 0
-  armorModifyPercent: 0
-  amPerAllies: 0
+  armorModifyPercent: 1
+  amPerAllies: 1
   amPerEnemies: 0
   healModify: 0
   hmAllies: 0
