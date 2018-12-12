@@ -136,6 +136,11 @@ public class MouseController : MonoBehaviour
             }
         }
 
+        if (hitInfo.transform == null)
+        {
+            selected = null;
+        }
+
         // kun spell nappulaa on painettu
         if (spellCast.spellOpen == true)
         {
@@ -251,7 +256,7 @@ public class MouseController : MonoBehaviour
                 Debug.Log("Movement still not set!");
             }
 
-            if (!rangeTilesPainted)
+            if (!rangeTilesPainted || selected == null)
             {
                 ResetTileMaterials(tilesToBeReset);
                 tilesToBeReset.Clear();
@@ -311,12 +316,15 @@ public class MouseController : MonoBehaviour
 
     void ChangeTileMaterials(List<Tile> tileList, Material material)
     {
-        foreach (var tile in tileList)
+        if (tileList != null && tileList.Count > 0)
         {
-            if (Tile.BlockType.BaseBlock == tile.myType)
+            foreach (var tile in tileList)
             {
-                Renderer pr = tile.GetComponent<Renderer>();
-                pr.material = material;
+                if (Tile.BlockType.BaseBlock == tile.myType)
+                {
+                    Renderer pr = tile.GetComponent<Renderer>();
+                    pr.material = material;
+                }
             }
         }
     }

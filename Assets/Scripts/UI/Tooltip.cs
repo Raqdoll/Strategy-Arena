@@ -116,7 +116,14 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
             if (spell.spellDamageMin != 0)
             {
-                ui._text += "\n" + "Damage: " + spell.spellDamageMin + " - " + spell.spellDamageMax; 
+                if (spell.damageStealsHp == false)
+                {
+                    ui._text += "\n" + "Damage: " + spell.spellDamageMin + " - " + spell.spellDamageMax;  
+                }
+                else
+                {
+                    ui._text += "\n" + "Damage (Steal): " + spell.spellDamageMin + " - " + spell.spellDamageMax;
+                }
             }
             if (spell.spellHealMin != 0)
             {
@@ -287,7 +294,7 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             ui._text = "";
             ui._text += character.characterName;
             ui._text += "\n";
-            ui._text += "\nHP: " + character.currentHP + " / " + character.maxHP;
+            ui._text += "\nHP: " + character.currentHP + " / " + character.currentMaxHP;
             ui._text += "\nAP: " + character.currentAp;
             ui._text += "\nMP: " + character.currentMp;
             ui.ShowTooltip();

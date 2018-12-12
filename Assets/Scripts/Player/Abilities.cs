@@ -37,6 +37,10 @@ public class Abilities : MonoBehaviour {
     {
         int[][] dirList = new int[4][] { new int[]{0, 1}, new int[] { 0,-1}, new int[] {1, 0}, new int[] {-1, 0} };
         List<Tile> targetTiles = new List<Tile>();
+        if (mouseController.selected == null)
+        {
+            return targetTiles;
+        }
         switch (mySpellAreaType)
         {
 

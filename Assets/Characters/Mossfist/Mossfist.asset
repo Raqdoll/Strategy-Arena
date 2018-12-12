@@ -22,9 +22,9 @@ MonoBehaviour:
   spell_4: {fileID: 11400000, guid: 5500ab6ae744a6e4db90d68a2eb56b43, type: 2}
   spell_5: {fileID: 11400000, guid: df2ccb20247de2f4594ca39f5f7d9662, type: 2}
   spell_6: {fileID: 11400000, guid: 39af97e370f60334d826f0bdbe3bc55f, type: 2}
-  walkSoundLoop: {fileID: 0}
-  attackSound: {fileID: 0}
-  takeDamageSound: {fileID: 0}
+  walkSoundLoop: {fileID: 8300000, guid: d362e4e77b81a8f4da2ac546b3748d05, type: 3}
+  attackSound: {fileID: 8300000, guid: 51d85e7e459f3cc43a5d00eca17a8569, type: 3}
+  takeDamageSound: {fileID: 8300000, guid: ba8ae45511952c3469deeee0f9ffc633, type: 3}
   damagePlus: 0
   armorPlus: 0
   moving: 0
@@ -35,6 +35,6 @@ MonoBehaviour:
   currentAp: 12
   currentMp: 6
   damageChange: 0
-  armorChange: 0
+  armorChange: 0.25
   healsReceived: 0
   heavy: 0

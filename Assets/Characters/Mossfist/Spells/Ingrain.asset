@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mySpellName: INGRAIN
   spellIcon: {fileID: 21300000, guid: ed22e402a3b068d46a67f99a78ffbe8a, type: 3}
-  spellSound: {fileID: 0}
+  spellSound: {fileID: 8300000, guid: 0c741ff8d041f60438ecbd0917963675, type: 3}
   mySpellRangeType: 2
   spellRangeMin: 0
   spellRangeMax: 0
@@ -45,10 +45,11 @@ MonoBehaviour:
   spellCooldown: 0
   spellCastPerturn: 1
   castPerTarget: 0
+  spellInitialCooldowncounter: 0
+  spellCastPerturncounter: 0
+  castPerTargetcounter: 0
   description: 'Sends roots to pull everyone towards him
 
     the roots stay on enemies slowing them.'
   spellCooldownLeft: 0
   trueDamage: 0
-  spellLaunched: 0
-  inCooldown: 0

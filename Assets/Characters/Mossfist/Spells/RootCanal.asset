@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mySpellName: ROOT CANAL
   spellIcon: {fileID: 21300000, guid: 9f690256a87809042b0c9ae1661b6bd9, type: 3}
-  spellSound: {fileID: 0}
+  spellSound: {fileID: 8300000, guid: de12028a3476f844db1cc979c494553f, type: 3}
   mySpellRangeType: 0
   spellRangeMin: 1
   spellRangeMax: 6
@@ -45,8 +45,9 @@ MonoBehaviour:
   spellCooldown: 2
   spellCastPerturn: 0
   castPerTarget: 0
+  spellInitialCooldowncounter: 0
+  spellCastPerturncounter: 0
+  castPerTargetcounter: 0
   description: Digs to the target square
   spellCooldownLeft: 0
   trueDamage: 0
-  spellLaunched: 0
-  inCooldown: 0

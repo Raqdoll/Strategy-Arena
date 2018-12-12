@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mySpellName: ROOT BASH
   spellIcon: {fileID: 21300000, guid: f94f4e94e113e184e983d7c8e6f1a8b4, type: 3}
-  spellSound: {fileID: 0}
+  spellSound: {fileID: 8300000, guid: 7333e7b02a0cb554fa40618f2cb1a8ea, type: 3}
   mySpellRangeType: 0
   spellRangeMin: 1
   spellRangeMax: 1

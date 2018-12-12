@@ -84,9 +84,9 @@ public class TurnManager : MonoBehaviour {
 
     public void UpdateMaxHR()
     {
-        if(turnNumber >= 3 && maxHealthReduction < 1)
+        if(turnNumber >= 1/*3*/ && maxHealthReduction < 1)
         {
-            maxHealthReduction = (turnNumber - 2) * 0.05f;
+            maxHealthReduction = (turnNumber /*- 2*/) * /*0.05f*/ 0.1f;
         }
     }
 }
