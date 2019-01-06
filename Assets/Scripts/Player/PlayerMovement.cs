@@ -24,6 +24,11 @@ public class PlayerMovement : MonoBehaviour {
     public float movementSpeed;
     public bool unlimitedMovementPoints;
 
+    /// <summary>
+    /// Setting the CurrentTile property automatically subscribes the set tile to AnnounceTileChange event, and updates the playerInfo field in the said tile.
+    /// No further additional setting in the tile part necessary, as this property handles the cross referencing by itself.
+    /// </summary>
+
     public Tile CurrentTile
     {
         get
@@ -53,6 +58,10 @@ public class PlayerMovement : MonoBehaviour {
     public UnityEvent exampleEvents;
     public delegate void TileEvent(Tile tile);
     public event TileEvent ChangeTile;
+
+    /// <summary>
+    /// Used in a doubly linked list, to keep track of the tiles in the path and for calculating the optimal route.
+    /// </summary>
 
     public class PathTile
     {
@@ -102,7 +111,7 @@ public class PlayerMovement : MonoBehaviour {
         Invoke("SetStartingTile", 1f);
         if (movementSpeed == 0)
         {
-            movementSpeed = 3;      //SAA MUUTTAA
+            movementSpeed = 3;      //Default arvon SAA MUUTTAA
         }
     }
 
@@ -175,7 +184,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     /// <summary>
-    /// Returns the route by calculating back from destination. Starting tile should have null in variable _previousTile
+    /// Returns the route by calculating back from destination. Starting tile should have null in the variable _previousTile
     /// </summary>
 
     public static List<Tile> CalculateRouteBack(PathTile destinationTile)
@@ -188,6 +197,12 @@ public class PlayerMovement : MonoBehaviour {
         }
         return wishIHadMeatballs;
     }
+
+    /// <summary>
+    /// When first creating the doubly linked list, only the previous tile is recorded. This function links the nextTile as well as reorders the list to start from the path's first tile.
+    /// </summary>
+    /// <param name="destinationTile"></param>
+    /// <returns></returns>
 
     static List<PathTile> LinkListAndOrder(PathTile destinationTile)
     {
@@ -205,6 +220,14 @@ public class PlayerMovement : MonoBehaviour {
         List<PathTile> orderedRoute = route.OrderByDescending(x => x._movementPointsLeft).ToList();
         return orderedRoute;
     }
+
+    /// <summary>
+    /// The main method for moving! Walking will not work if the default value (null) for destinationPathTile is used, as the path is supplied with the said variable.
+    /// </summary>
+    /// <param name="destinationTile"></param>
+    /// <param name="method"></param>
+    /// <param name="destinationPathTile"></param>
+    /// <returns></returns>
 
     public bool MoveToTile(Tile destinationTile, MovementMethod method, PathTile destinationPathTile = null)
     {
@@ -241,11 +264,23 @@ public class PlayerMovement : MonoBehaviour {
         return true;
     }
 
+    /// <summary>
+    /// First method created for movement. For a more flashy teleporting method, add particle effects!
+    /// </summary>
+    /// <param name="destinationTile"></param>
+
     void Teleport(Tile destinationTile)
     {
         transform.localPosition = destinationTile.transform.localPosition;
         CurrentTile = destinationTile;
     }
+
+    /// <summary>
+    /// Iterates through the given list of PathTiles and lerps character's position between them. Slows down on the last trip.
+    /// Adjust the variable movementSpeed in the Start method (default value for all characters) or change it in unity editor for faster or slower characters.
+    /// </summary>
+    /// <param name="route"></param>
+    /// <returns></returns>
 
     IEnumerator Walk(List<PathTile> route)
     {
@@ -296,6 +331,14 @@ public class PlayerMovement : MonoBehaviour {
         mouseController.currentMovement = this;
     }
 
+    /// <summary>
+    /// Creates a list of reachable tiles using the starting point and current movement points. Each PathTile in the list is the final tile in a path.
+    /// Only the previous tile is recorded.
+    /// </summary>
+    /// <param name="startTile"></param>
+    /// <param name="movementPoints"></param>
+    /// <returns></returns>
+
     private List<PathTile> WithinWalkingDistance(Tile startTile, int movementPoints)
     {
         if (startTile == null)
@@ -326,7 +369,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     /// <summary>
-    /// Returns null if out of movement points. Astar might not be implemented at all!
+    /// Returns null if out of movement points. A* method not necessary for optimisation, as the map is small and no clear endpoint/target is presented.
     /// </summary>
     /// <param name="startTile"></param>
     /// <param name="dontUseAStar"></param>
@@ -347,7 +390,8 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     /// <summary>
-    /// Returns true if an existing tile was updated or a new one inserted instead of being rejected. Updates only if the new tile has a larger value in movementPointsLeft.
+    /// Used for route optimisation. Returns true if an existing tile was updated or a new one inserted instead of being rejected.
+    /// Updates only if the new tile has a larger value in movementPointsLeft.
     /// </summary>
     /// <param name="targetList"></param>
     /// <param name="addedTile"></param>
@@ -372,6 +416,11 @@ public class PlayerMovement : MonoBehaviour {
         return true;    //Added missing PathTile to list
     }
 
+    /// <summary>
+    /// Returns a list of neighbouring tiles as PathTiles, that has 1 movement subtracted when compared to the given currentTile parameter.
+    /// </summary>
+    /// <param name="currentTile"></param>
+    /// <returns></returns>
 
     private List<PathTile> CreatePathTileNeighbours(PathTile currentTile)
     {
@@ -384,6 +433,11 @@ public class PlayerMovement : MonoBehaviour {
         return pathTiles;
     }
 
+    /// <summary>
+    /// An event that is called, when a new currentTile is set.
+    /// </summary>
+    /// <param name="tile"></param>
+
     void AnnounceTileChange(Tile tile)
     {
         if (ChangeTile != null /*&& tile != null*/)
@@ -391,6 +445,10 @@ public class PlayerMovement : MonoBehaviour {
             ChangeTile(tile);
         }
     }
+
+    /// <summary>
+    /// The exampleEvents list set in unity editor is invoked when this method is called. Sometimes useful for debugging and testing.
+    /// </summary>
 
     public void ExampleEventsForEditor()
     {
