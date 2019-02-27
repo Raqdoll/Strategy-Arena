@@ -17,6 +17,8 @@ public class SpellCast : MonoBehaviour {
     public SpellValues currentSpell;
     public bool spellOpen = false;
     public List<GameObject> bodyList;
+    public EndTurnBlink endTurn;
+
     //Käytä spellin 
 
     //
@@ -112,6 +114,7 @@ public class SpellCast : MonoBehaviour {
         apText.text = "AP: " + cv.currentAp;
         mpText.text = "MP: " + cv.currentMp;
         DisableButtonsIfNotAp();
+        endTurn.CheckBlink(cv);
     }
 
     public void DisableButtonsIfNotAp()
@@ -119,131 +122,133 @@ public class SpellCast : MonoBehaviour {
         if(cv.spell_1.spellApCost > cv.currentAp || abilities.SpellCooldownCheck(cv.spell_1) == false)
         {
             spellButton1.interactable = false;
+            endTurn.s1 = false;
         }
         else
         {
             spellButton1.interactable = true;
+            endTurn.s1 = true;
         }
         if (cv.spell_2.spellApCost > cv.currentAp || abilities.SpellCooldownCheck(cv.spell_2) == false)
         {
             spellButton2.interactable = false;
-            
+            endTurn.s2 = false;
         }
         else
         {
             spellButton2.interactable = true;
-            
+            endTurn.s2 = true;
         }
         if (cv.spell_3.spellApCost > cv.currentAp || abilities.SpellCooldownCheck(cv.spell_3) == false)
         {
             spellButton3.interactable = false;
-           
+            endTurn.s3 = false;
         }
         else
         {
             spellButton3.interactable = true;
-            
+            endTurn.s3 = true;
         }
         if (cv.spell_4.spellApCost > cv.currentAp || abilities.SpellCooldownCheck(cv.spell_4) == false)
         {
             spellButton4.interactable = false;
-           
+            endTurn.s4 = false;
         }
         else
         {
             spellButton4.interactable = true;
-           
+            endTurn.s4 = true;
         }
         if (cv.spell_5.spellApCost > cv.currentAp || abilities.SpellCooldownCheck(cv.spell_5) == false)
         {
             spellButton5.interactable = false;
-           
+            endTurn.s5 = false;
         }
         else
         {
             spellButton5.interactable = true;
-           
+            endTurn.s5 = true;
         }
         if (cv.spell_6.spellApCost > cv.currentAp || abilities.SpellCooldownCheck(cv.spell_6) == false)
         {
             spellButton6.interactable = false;
-           
+            endTurn.s6 = false;
         }
         else
         {
             spellButton6.interactable = true;
-           
+            endTurn.s6 = true;
         }
         //Tabs
         if (playerBehaviour.GetTab(cv) != null && cv.spell_1.spellCooldownLeft > 1)
         {
-            playerBehaviour.GetTab(cv).spell1.GetComponent<Button>().interactable = false;
+            playerBehaviour.GetTab(cv).spell1.GetComponent<Image>().color = Color.gray;
         }
         else
         {
             if (playerBehaviour.GetTab(cv) != null)
             {
-                playerBehaviour.GetTab(cv).spell1.GetComponent<Button>().interactable = true;
+                playerBehaviour.GetTab(cv).spell1.GetComponent<Image>().color = Color.white;
             }
         }
 
         if (playerBehaviour.GetTab(cv) != null && cv.spell_2.spellCooldownLeft > 1)
         {
-            playerBehaviour.GetTab(cv).spell2.GetComponent<Button>().interactable = false;
+            playerBehaviour.GetTab(cv).spell2.GetComponent<Image>().color = Color.gray;
         }
         else
         {
             if (playerBehaviour.GetTab(cv) != null)
             {
-                playerBehaviour.GetTab(cv).spell2.GetComponent<Button>().interactable = true;
+                playerBehaviour.GetTab(cv).spell2.GetComponent<Image>().color = Color.white;
             }
         }
 
         if (playerBehaviour.GetTab(cv) != null && cv.spell_3.spellCooldownLeft > 1)
         {
-            playerBehaviour.GetTab(cv).spell3.GetComponent<Button>().interactable = false;
+            playerBehaviour.GetTab(cv).spell3.GetComponent<Image>().color = Color.gray;
         }
         else
         {
             if (playerBehaviour.GetTab(cv) != null)
             {
-                playerBehaviour.GetTab(cv).spell3.GetComponent<Button>().interactable = true;
+                playerBehaviour.GetTab(cv).spell3.GetComponent<Image>().color = Color.white;
             }
         }
 
         if (playerBehaviour.GetTab(cv) != null && cv.spell_4.spellCooldownLeft > 1)
         {
-            playerBehaviour.GetTab(cv).spell4.GetComponent<Button>().interactable = false;
+            playerBehaviour.GetTab(cv).spell4.GetComponent<Image>().color = Color.gray;
         }
         else
         {
             if (playerBehaviour.GetTab(cv) != null)
             {
-                playerBehaviour.GetTab(cv).spell4.GetComponent<Button>().interactable = true;
+                playerBehaviour.GetTab(cv).spell4.GetComponent<Image>().color = Color.white;
             }
         }
 
         if (playerBehaviour.GetTab(cv) != null && cv.spell_5.spellCooldownLeft > 1)
         {
-            playerBehaviour.GetTab(cv).spell5.GetComponent<Button>().interactable = false;
+            playerBehaviour.GetTab(cv).spell5.GetComponent<Image>().color = Color.gray;
         }
         else
         {
             if (playerBehaviour.GetTab(cv) != null)
             {
-                playerBehaviour.GetTab(cv).spell5.GetComponent<Button>().interactable = true;
+                playerBehaviour.GetTab(cv).spell5.GetComponent<Image>().color = Color.white;
             }
         }
 
         if (playerBehaviour.GetTab(cv) != null && cv.spell_6.spellCooldownLeft > 1)
         {
-            playerBehaviour.GetTab(cv).spell6.GetComponent<Button>().interactable = false;
+            playerBehaviour.GetTab(cv).spell6.GetComponent<Image>().color = Color.gray;
         }
         else
         {
             if (playerBehaviour.GetTab(cv) != null)
             {
-                playerBehaviour.GetTab(cv).spell6.GetComponent<Button>().interactable = true;
+                playerBehaviour.GetTab(cv).spell6.GetComponent<Image>().color = Color.white;
             }
         }
     }
