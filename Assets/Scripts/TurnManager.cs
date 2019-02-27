@@ -17,6 +17,9 @@ public class TurnManager : MonoBehaviour {
     public Text TurnNumberText;
     public Text MaxHrText;
 
+    public int maxHealthReductionStartTurn = 1;
+    public float maxHealthReductionAmount = 0.1f;
+
 
     public void AnnounceTurnChange(GameObject newPlayerGO)
     {
@@ -84,9 +87,9 @@ public class TurnManager : MonoBehaviour {
 
     public void UpdateMaxHR()
     {
-        if(turnNumber >= 1/*3*/ && maxHealthReduction < 1)
+        if(turnNumber >= maxHealthReductionStartTurn && maxHealthReduction < 1)
         {
-            maxHealthReduction = (turnNumber /*- 2*/) * /*0.05f*/ 0.1f;
+            maxHealthReduction = (turnNumber - (maxHealthReductionStartTurn - 1)) * maxHealthReductionAmount;
         }
     }
 }

@@ -301,6 +301,7 @@ public class MouseController : MonoBehaviour
                 ResetTileMaterials(tilesToBeReset);
                 tilesToBeReset.Clear();
                 rangeTilesPainted = false;
+                spellCast.UpdateHpApMp();
             }
         }
     }
