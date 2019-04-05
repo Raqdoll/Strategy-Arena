@@ -7,6 +7,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public static GameObject itemBeingDragged;
     public static Vector3 startPosition;
     public static Transform startParent;
+    public GameObject onTop; //< Aseta manuaalisesti kun teet uuden prefabin
 
     #region IBeginDragHandler implementation
 
@@ -15,6 +16,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         itemBeingDragged = gameObject;
         startPosition = transform.position;
         startParent = transform.parent;
+        transform.SetParent(onTop.transform);
         GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 
@@ -35,8 +37,9 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     {
         itemBeingDragged = null;
         GetComponent<CanvasGroup>().blocksRaycasts = true;
-        if (transform.parent == startParent)
+        if (transform.parent.gameObject == onTop)
         {
+            transform.SetParent(startParent);
             transform.position = startPosition;
         }
     }
