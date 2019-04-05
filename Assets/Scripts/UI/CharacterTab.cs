@@ -29,6 +29,8 @@ public class CharacterTab : MonoBehaviour {
 
     //Muokataan kaikkia PlayerBehaviourissa
 
+    //Highlightit turnTimelineControllerissa
+
     void Start()
     {
         //Subscribe();
